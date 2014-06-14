@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -9,17 +9,20 @@
 
 
     <title>Проект</title>
-
+    <link rel="stylesheet" href="/css/normalize.css">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="/css/font-awesome.css" rel="stylesheet">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
-
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/js/bootstrap-datetimepicker.js"></script>
+    <script src="/js/bootstrap-datetimepicker.ru.js"></script>
     <!-- Custom styles for this template -->
     <link href="/css/style.css" rel="stylesheet">
 
@@ -49,10 +52,10 @@
                 <li><a href="/">Главная</a></li>
                 <li><a href="/events">События</a></li>
                 <li><a href="/tickets">Билеты</a></li>
-             </ul>
-<!--            <form class="navbar-form navbar-right">-->
-<!--                <input type="text" class="form-control" placeholder="Поиск...">-->
-<!--            </form>-->
+            </ul>
+            <!-- <form class="navbar-form navbar-right">-->
+            <!-- <input type="text" class="form-control" placeholder="Поиск...">-->
+            <!-- </form>-->
         </div>
     </div>
 </div>
@@ -61,8 +64,11 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Overview</a></li>
-                <li><a href="#">Reports</a></li>
+               <? $uri_path = explode("/",$_SERVER['REQUEST_URI']);
+                $sec = (!empty($uri_path[0])) ? $uri_path[0]: 'events';
+
+               ?>
+                <li><a href="/<?=$sec?>/add">Создать мероприятие</a></li>
                 <li><a href="#">Analytics</a></li>
                 <li><a href="#">Export</a></li>
             </ul>
@@ -71,28 +77,6 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Dashboard</h1>
 
-            <div class="row placeholders">
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img style="width:200px;height:200px;background:#f00" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img style="width:200px;height:200px;background:#f00" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img style="width:200px;height:200px;background:#f00" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img style="width:200px;height:200px;background:#f00" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
-                </div>
-            </div>
 
 
             <?php include 'application/views/'.$content_view; ?>
@@ -101,11 +85,6 @@
         </div>
     </div>
 </div>
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 </body>
 </html>

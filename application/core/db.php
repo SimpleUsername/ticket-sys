@@ -1,17 +1,20 @@
 <?php
 class Db{
-  public  function  __construct(){
-      $this->cdn = DB_DRIVER.':host='.DB_HOST.';dbname='.DB_NAME;
-      $this->dbh = new PDO($this->cdn , DB_USER, DB_PASS);
-      $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  }
+    public  function  __construct(){
+        $this->cdn = DB_DRIVER.':host='.DB_HOST.';dbname='.DB_NAME;
+        $this->dbh = new PDO($this->cdn , DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
 
 
     public function sql($query, $params = null) {
         try {
             $result = null;
-            $stmt = $this->dbh->prepare($query);
-            return $stmt->execute($params);
+            $row = $this->dbh->query($query);
+            while($res = $row->fetch(PDO::FETCH_ASSOC)){
+                $result[] = $res;
+            }
+            return $result;
         } catch(Exception $e) {
             $this->report($e);
         }
@@ -45,7 +48,7 @@ class Db{
         }
     }
 
-    // Returns true/false
+
     public function update($table, $fields, $where, $params = null) {
         try {
             $sql = 'UPDATE ' . $table . ' SET ';
@@ -76,7 +79,7 @@ class Db{
     public function queryValues($query, $params = null) {
         try {
             $result = null;
-            $stmt = $this->db->prepare($query);
+            $stmt = $this->dbh->prepare($query);
             if ($stmt->execute($params)) {
                 $result = array();
                 while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
@@ -91,7 +94,7 @@ class Db{
     public function quoteArray($arr) {
         $result = array();
         foreach ($arr as $val) {
-            $result[] = $this->db->quote($val);
+            $result[] = $this->dbh->quote($val);
         }
         return $result;
     }
