@@ -1,20 +1,23 @@
-<form role="form" action="" method="post">
+<form role="form" action="/events/add" method="post">
     <div class="form-group">
-        <label for="name">Название события</label>
+        <label for="name">Название события*</label>
         <input type="text" class="form-control" id="name" name="event_name" placeholder="Введите название события" required="required">
     </div>
+    <div class="form-group">
+        <label for="event_status">Статус события</label>
+    </div>
     <div class="input-group">
+
         <div class="input-group-btn">
 
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="status_but"><?=$data[0]['estatus_name']?> <span class="caret"></span></button>
             <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-
+                <? foreach($data as $id => $value ){?>
+                <li><a href="#" data-status_id="<?=$value['estatus_id']?>" class="status"><?=$value['estatus_name']?></a></li>
+               <? }?>
             </ul>
         </div><!-- /btn-group -->
-        <input type="text" class="form-control" id="status" name="event_status" required="required">
+        <input type="hidden" class="form-control" id="status" name="event_status" value="1" required="required">
     </div><!-- /input-group -->
     <div class="form-group">
         <label for="desc">Описание события</label>
@@ -23,7 +26,7 @@
     <div class="form-group">
         <label for="date1">Дата события</label>
         <div class='input-group date' id='datetimepicker1'>
-            <input type='text' class="form-control" name="event_date"/>
+            <input type='text' class="form-control" name="event_date" data-date-format="YYYY-MM-DD hh:mm"/>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
         </div>
@@ -31,7 +34,7 @@
     <div class="form-group">
         <label for="date2">Дата старта бронирования</label>
         <div class='input-group date' id='datetimepicker2'>
-            <input type='text' class="form-control" name="event_booking"/>
+            <input type='text' class="form-control" name="event_booking" data-date-format="YYYY-MM-DD hh:mm"/>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
         </div>
@@ -39,7 +42,7 @@
     <div class="form-group">
         <label for="date3">Дата старта продаж</label>
         <div class='input-group date' id='datetimepicker3'>
-            <input type='text' class="form-control" name="event_sale"/>
+            <input type='text' class="form-control" name="event_sale" data-date-format="YYYY-MM-DD hh:mm"/>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
         </div>
@@ -61,4 +64,6 @@
         });
     });
 </script>
-<? print_r($status);?>
+<? print_r($_POST);?>
+<br/>
+<? print_r($data);?>

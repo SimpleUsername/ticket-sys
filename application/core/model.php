@@ -11,4 +11,9 @@ class Model
 	{
 		// todo
 	}
+
+    public function insert($table, $fields){
+        $result =$this->db->insert($table,$fields);
+        return $result;
+    }
 }

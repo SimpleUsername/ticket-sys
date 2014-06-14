@@ -1,5 +1,6 @@
 var result_ajax = "#result_ajax";
 var body = "body";
+var caret = ' <span class="caret"></span>';
 
 function show_popup(to_scroll){
     if (typeof to_scroll === 'undefined'){
@@ -30,3 +31,15 @@ function hide_popup(time_out){
 
     },time_out);
 }
+
+$(document).ready(function(){
+    $(body).on('click', '.status', function(){
+        var stat = $(this).html();
+        var stat_id = $(this).data('status_id');
+        $('#status_but').html(stat + caret);
+        $('#status').val(stat_id);
+        console.log(stat);
+        console.log(stat_id);
+
+    });
+});

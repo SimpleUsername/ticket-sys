@@ -25,6 +25,7 @@
     <script src="/js/bootstrap-datetimepicker.ru.js"></script>
     <!-- Custom styles for this template -->
     <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/my.js"></script>
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
