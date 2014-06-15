@@ -16,4 +16,8 @@ class Model
         $result =$this->db->insert($table,$fields);
         return $result;
     }
+    public function  update($table, $fields, $where, $params=null){
+        $result = $this->db->update($table, $fields, $where, $params);
+        return $result;
+    }
 }

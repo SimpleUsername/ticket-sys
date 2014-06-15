@@ -25,6 +25,7 @@
     <script src="/js/bootstrap-datetimepicker.ru.js"></script>
     <!-- Custom styles for this template -->
     <link href="/css/style.css" rel="stylesheet">
+    <script src="/libs/tinymce/js/tinymce/tinymce.min.js"></script>
     <script src="/js/my.js"></script>
 
 
@@ -53,6 +54,7 @@
                 <li><a href="/">Главная</a></li>
                 <li><a href="/events">События</a></li>
                 <li><a href="/tickets">Билеты</a></li>
+                <li><a href="/config">Цены</a></li>
             </ul>
             <!-- <form class="navbar-form navbar-right">-->
             <!-- <input type="text" class="form-control" placeholder="Поиск...">-->
@@ -76,13 +78,7 @@
 
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard</h1>
-
-
-
             <?php include 'application/views/'.$content_view; ?>
-
-
         </div>
     </div>
 </div>
