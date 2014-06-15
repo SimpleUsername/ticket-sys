@@ -1,4 +1,9 @@
-<form role="form" action="/events/add" method="post">
+<? if(!empty($data['error'])) {?>
+    <div class="form-group has-success has-feedback">
+        <label  class="control-label col-sm-3"><?=$data['error']?></label>
+    </div>
+<?}?>
+<form role="form" action="/events/add" method="post" enctype="multipart/form-data" >
     <div class="form-group">
         <label for="name">Название события*</label>
         <input type="text" class="form-control" id="name" name="event_name" placeholder="Введите название события" required="required">
@@ -22,6 +27,11 @@
     <div class="form-group">
         <label for="desc">Описание события</label>
         <textarea id="desc" name="event_desc" class="form-control" rows="3" placeholder="Введите название события"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputFile">Баннер мероприятия</label>
+        <input type="file" id="file" name="event_img">
+
     </div>
     <div class="form-group">
         <label for="date1">Дата события</label>
@@ -67,3 +77,5 @@
 <? print_r($_POST);?>
 <br/>
 <? print_r($data);?>
+    <br/>
+<? print_r($_FILES);?>
