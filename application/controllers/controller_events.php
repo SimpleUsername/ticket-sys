@@ -3,20 +3,20 @@
 class Controller_Events extends Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         $this->model = new Model_Events();
         $this->view = new View();
     }
 
-    function action_index()
+    public function action_index()
     {
         $data = $this->model->get_all_events(true);
         $this->view->generate('events_view.php', 'template_view.php', $data);
     }
 
 
-    function action_add(){
+    public function action_add(){
         if(!empty($_POST['event_name'])){
             $form_data =array('event_name' => $_POST['event_name'],
                 'event_status' => $_POST['event_status'],
@@ -33,16 +33,34 @@ class Controller_Events extends Controller
             }
             $res = $this->model->insert($this->model->table, $form_data);
             if(!$res){
-                $data = $this->model->get_all_events(false);
+                $data = $this->model->get_all_events(false);// получение статусов
                 $data['error'] = "Возникла ошибка";
                 $this->view->generate('events_add_view.php', 'template_view.php',$data);
             }
-            $data = $this->model->get_all_events(true);
-            $this->view->generate('events_view.php', 'template_view.php',$data);
+            header("Location: /events");
         }else{
-            $data = $this->model->get_all_events(false);
-            $this->view->generate('events_add_view.php', 'template_view.php',$data);
+            $data = $this->model->get_all_events(false); // получение статусов
+            $this->view->generate('events_edit_view.php', 'template_view.php',$data);
 
         }
+    }
+
+    public function action_edit($id){
+        $data = $this->model->get_event_by_id($id);
+        $data['statuses'] = $this->model->get_all_events(false);  // получение статусов
+        $this->view->generate('events_add_view.php', 'template_view.php',$data);
+    }
+
+    public function action_del(){
+
+        if(!empty($_POST['del_id'])){
+            $fields= array('event_status' => -1 );
+            $data['result'] = $this->model->update('events',$fields,' event_id=:event_id ', array(':event_id' => (int)$_POST['del_id']));
+            $data['msg'] = "Событие удалено";
+        }
+        else{
+            $data['msg'] = "Возникла ошибка при удалении";
+        }
+        exit(json_encode($data));
     }
 }

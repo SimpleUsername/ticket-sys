@@ -69,8 +69,8 @@ class Db{
             foreach ($fields as $name => $val) {
                 $params[':_' . $name] = $val;
             }
-            $result[] = $rs->execute($params);
-            $result[] = $sql;
+            $result = $rs->execute($params);
+          //  $result[] = $sql;
             return $result;
         } catch(Exception $e) {
             $this->report($e);

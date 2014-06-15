@@ -2,11 +2,429 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="685e137c-f6f9-4a73-a4c9-b01c872f26fc" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/events_edit_view.php" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\browse.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\config.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\core\.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\core\autoload.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\core\browser.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\core\types\type_img.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\core\types\type_mime.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\core\uploader.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\css.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\doc\.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\doc\Changelog" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\doc\LICENSE.GPL" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\doc\LICENSE.LGPL" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\doc\README" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\images\.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\images\.thumbs\image\medal_gold.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\images\image\medal_gold.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\integration\.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\integration\drupal.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\browser\0bject.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\browser\clipboard.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\browser\dropUpload.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\browser\files.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\browser\folders.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\browser\init.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\browser\joiner.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\browser\misc.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\browser\settings.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\browser\toolbar.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\helper.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\jquery.drag.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js\jquery.rightClick.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\js_localize.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\bg.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\ca.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\cs.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\da.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\de.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\el.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\en.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\es.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\fa.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\fr.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\hu.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\it.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\ja.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\lt.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\nl.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\no.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\pl.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\pt-br.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\pt.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\ru.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\sk.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\tr.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\vi.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lang\zh-cn.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lib\.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lib\class_gd.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lib\class_input.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lib\class_zipFolder.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lib\helper_dir.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lib\helper_file.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lib\helper_httpCache.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lib\helper_path.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\lib\helper_text.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\about.txt" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\bg_transparent.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\cross.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\..png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\.image.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\avi.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\bat.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\bmp.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\bz2.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\ccd.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\cgi.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\com.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\csh.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\cue.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\deb.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\dll.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\doc.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\docx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\exe.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\fla.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\flv.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\fon.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\gif.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\gz.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\htm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\html.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\ini.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\iso.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\jar.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\java.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\jpeg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\jpg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\js.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\mds.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\mdx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\mid.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\midi.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\mkv.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\mov.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\mp3.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\mpeg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\mpg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\nfo.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\nrg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\ogg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\pdf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\php.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\phps.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\pl.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\pm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\png.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\ppt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\pptx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\qt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\rpm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\rtf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\sh.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\srt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\sub.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\swf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\tgz.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\tif.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\tiff.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\torrent.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\ttf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\txt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\wav.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\wma.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\xls.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\xlsx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\big\zip.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\..png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\.image.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\avi.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\bat.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\bmp.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\bz2.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\ccd.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\cgi.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\com.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\csh.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\cue.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\deb.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\dll.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\doc.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\docx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\exe.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\fla.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\flv.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\fon.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\gif.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\gz.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\htm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\html.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\ini.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\iso.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\jar.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\java.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\jpeg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\jpg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\js.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\mds.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\mdx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\mid.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\midi.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\mkv.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\mov.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\mp3.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\mpeg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\mpg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\nfo.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\nrg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\ogg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\pdf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\php.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\phps.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\pl.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\pm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\png.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\ppt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\pptx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\qt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\rpm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\rtf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\sh.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\srt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\sub.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\swf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\tgz.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\tif.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\tiff.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\torrent.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\ttf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\txt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\wav.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\wma.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\xls.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\xlsx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\files\small\zip.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\about.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\clipboard-add.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\clipboard-clear.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\clipboard.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\close-clicked.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\close-hover.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\close.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\copy.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\delete.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\download.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\folder-new.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\maximize.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\move.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\refresh.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\rename.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\select.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\settings.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\upload.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\icons\view.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\kcf_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\question.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\tree\denied.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\tree\folder.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\tree\folder_current.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\tree\minus.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\img\tree\plus.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\init.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\dark\style.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\about.txt" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\alert.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\bg_transparent.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\confirm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\..png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\.image.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\avi.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\bat.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\bmp.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\bz2.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\ccd.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\cgi.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\com.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\csh.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\cue.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\deb.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\dll.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\doc.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\docx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\exe.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\fla.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\flv.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\fon.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\gif.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\gz.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\htm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\html.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\ini.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\iso.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\jar.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\java.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\jpeg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\jpg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\js.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\mds.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\mdx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\mid.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\midi.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\mkv.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\mov.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\mp3.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\mpeg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\mpg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\nfo.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\nrg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\ogg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\pdf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\php.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\phps.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\pl.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\pm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\png.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\ppt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\pptx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\psd.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\qt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\rar.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\rpm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\rtf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\sh.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\srt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\sub.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\swf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\tgz.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\tif.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\tiff.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\torrent.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\ttf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\txt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\wav.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\wma.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\xls.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\xlsx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\big\zip.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\..png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\.image.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\avi.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\bat.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\bmp.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\bz2.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\ccd.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\cgi.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\com.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\csh.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\cue.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\deb.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\dll.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\doc.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\docx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\exe.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\fla.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\flv.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\fon.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\gif.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\gz.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\htm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\html.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\ini.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\iso.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\jar.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\java.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\jpeg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\jpg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\js.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\mds.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\mdx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\mid.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\midi.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\mkv.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\mov.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\mp3.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\mpeg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\mpg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\nfo.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\nrg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\ogg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\pdf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\php.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\phps.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\pl.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\pm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\png.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\ppt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\pptx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\psd.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\qt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\rar.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\rpm.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\rtf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\sh.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\srt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\sub.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\swf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\tgz.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\tif.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\tiff.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\torrent.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\ttf.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\txt.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\wav.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\wma.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\xls.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\xlsx.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\files\small\zip.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\about.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\clipboard-add.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\clipboard-clear.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\clipboard.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\close-clicked.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\close-hover.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\close.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\copy.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\delete.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\download.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\folder-new.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\maximize.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\move.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\refresh.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\rename.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\select.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\settings.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\upload.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\icons\view.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\kcf_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\tree\denied.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\tree\folder.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\tree\folder_current.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\tree\minus.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\img\tree\plus.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\init.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\themes\oxygen\style.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\tpl\.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\tpl\tpl_browser.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\tpl\tpl_css.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\tpl\tpl_javascript.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\upload.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\xampp\htdocs\ticket-sys.loc\libs\kcfinder2\upload\.htaccess" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/access.log" afterPath="$PROJECT_DIR$/access.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/controller.php" afterPath="$PROJECT_DIR$/application/core/controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/controller_events.php" afterPath="$PROJECT_DIR$/application/controllers/controller_events.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/events_add_view.php" afterPath="$PROJECT_DIR$/application/views/events_add_view.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/db.php" afterPath="$PROJECT_DIR$/application/core/db.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/events_view.php" afterPath="$PROJECT_DIR$/application/views/events_view.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/model_events.php" afterPath="$PROJECT_DIR$/application/models/model_events.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/my.js" afterPath="$PROJECT_DIR$/js/my.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/route.php" afterPath="$PROJECT_DIR$/application/core/route.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
     </list>
     <ignored path="ticket-sys.loc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,100 +446,115 @@
     <favorites_list name="ticket-sys.loc" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="model_events.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/model_events.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="62" selection-start="607" selection-end="607" vertical-scroll-proportion="-16.923077" vertical-offset="0" max-vertical-offset="814">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libs/kcfinder/config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="0" selection-start="767" selection-end="767" vertical-scroll-proportion="-24.538462" vertical-offset="0" max-vertical-offset="2882">
-              <folding>
-                <element signature="e#7#401#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="controller_events.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/controllers/controller_events.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="0" selection-start="1757" selection-end="1757" vertical-scroll-proportion="0.9356725" vertical-offset="416" max-vertical-offset="1188">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="controller_config.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/controller_config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="66" selection-start="688" selection-end="688" vertical-scroll-proportion="-11.230769" vertical-offset="236" max-vertical-offset="946">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="model_config.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/model_config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="35" selection-start="77" selection-end="77" vertical-scroll-proportion="-3.3846154" vertical-offset="0" max-vertical-offset="484">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="events_add_view.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/events_add_view.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="81" selection-start="261" selection-end="261" vertical-scroll-proportion="-4.230769" vertical-offset="0" max-vertical-offset="1914">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="browse.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libs/kcfinder2/browse.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="308">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libs/kcfinder2/config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="57.46154" vertical-offset="1494" max-vertical-offset="2178">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="controller.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/core/controller.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="68" selection-start="2800" selection-end="2813" vertical-scroll-proportion="-16.076923" vertical-offset="1122" max-vertical-offset="2090">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="controller_main.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/controller_main.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="330">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="vertical" split-proportion="0.9">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="db.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/application/core/db.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="71" column="19" selection-start="2267" selection-end="2267" vertical-scroll-proportion="-2.5384614" vertical-offset="1496" max-vertical-offset="2486">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="model_events.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/application/models/model_events.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="28" column="35" selection-start="888" selection-end="903" vertical-scroll-proportion="-13.192307" vertical-offset="273" max-vertical-offset="1012">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="model.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/application/core/model.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="19" column="33" selection-start="365" selection-end="365" vertical-scroll-proportion="-4.076923" vertical-offset="312" max-vertical-offset="616">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="events_view.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/application/views/events_view.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="40" column="0" selection-start="2022" selection-end="2022" vertical-scroll-proportion="-13.192307" vertical-offset="537" max-vertical-offset="1144">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="controller_events.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/application/controllers/controller_events.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="35" column="81" selection-start="1330" selection-end="1330" vertical-scroll-proportion="4.230769" vertical-offset="880" max-vertical-offset="1584">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="events_edit_view.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/application/views/events_edit_view.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="5" column="61" selection-start="241" selection-end="241" vertical-scroll-proportion="46.03846" vertical-offset="1307" max-vertical-offset="1914">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="route.php" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/application/core/route.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="71" column="70" selection-start="1616" selection-end="1616" vertical-scroll-proportion="0.61614496" vertical-offset="1188" max-vertical-offset="2156">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="controller_config.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/application/controllers/controller_config.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="33" column="33" selection-start="441" selection-end="1001" vertical-scroll-proportion="-20.307692" vertical-offset="198" max-vertical-offset="946">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="events_add_view.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/application/views/events_add_view.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="7" column="50" selection-start="0" selection-end="3381" vertical-scroll-proportion="-5.923077" vertical-offset="0" max-vertical-offset="1892">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="my.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/my.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="124" column="27" selection-start="3759" selection-end="3759" vertical-scroll-proportion="0.0" vertical-offset="2530" max-vertical-offset="2992">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="my.js" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/js/my.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="125" column="24" selection-start="3786" selection-end="3786" vertical-scroll-proportion="0.3255814" vertical-offset="2758" max-vertical-offset="3014">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -139,22 +572,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/core/view.php" />
-        <option value="$PROJECT_DIR$/css/bootstrap-datetimepicker.css" />
-        <option value="$PROJECT_DIR$/css/normalize.css" />
-        <option value="$PROJECT_DIR$/application/models/model_config.php" />
         <option value="$PROJECT_DIR$/application/core/model.php" />
         <option value="$PROJECT_DIR$/application/views/config_view.php" />
-        <option value="$PROJECT_DIR$/application/core/db.php" />
         <option value="$PROJECT_DIR$/application/controllers/controller_config.php" />
         <option value="$PROJECT_DIR$/libs/kcfinder/js/browser/init.js" />
         <option value="$PROJECT_DIR$/application/views/template_view.php" />
-        <option value="$PROJECT_DIR$/js/my.js" />
         <option value="$PROJECT_DIR$/libs/kcfinder/config.php" />
-        <option value="$PROJECT_DIR$/application/models/model_events.php" />
         <option value="$PROJECT_DIR$/application/views/events_add_view.php" />
         <option value="$PROJECT_DIR$/application/core/controller.php" />
+        <option value="$PROJECT_DIR$/css/style.css" />
+        <option value="$PROJECT_DIR$/application/core/db.php" />
+        <option value="$PROJECT_DIR$/js/my.js" />
+        <option value="$PROJECT_DIR$/application/views/events_view.php" />
+        <option value="$PROJECT_DIR$/application/models/model_events.php" />
         <option value="$PROJECT_DIR$/application/controllers/controller_events.php" />
+        <option value="$PROJECT_DIR$/application/views/events_edit_view.php" />
+        <option value="$PROJECT_DIR$/application/core/route.php" />
       </list>
     </option>
   </component>
@@ -233,11 +666,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kcfinder2" />
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -251,65 +680,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kcfinder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ticket-sys.loc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ticket-sys.loc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kcfinder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ticket-sys.loc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ticket-sys.loc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ticket-sys.loc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ticket-sys.loc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="events" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -479,53 +850,9 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/404_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="710">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/template_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="18" selection-start="1201" selection-end="1201" vertical-scroll-proportion="-4.923077" vertical-offset="466" max-vertical-offset="2024">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/kcfinder/browse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="710">
-          <folding>
-            <element signature="e#7#400#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/kcfinder/upload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="710">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libs/kcfinder/js_localize.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="968">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/kcfinder2/css.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5544">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/kcfinder2/browse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="710">
           <folding />
         </state>
       </provider>
@@ -534,7 +861,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="0" selection-start="767" selection-end="767" vertical-scroll-proportion="-24.538462" vertical-offset="0" max-vertical-offset="2882">
           <folding>
-            <element signature="e#7#401#0" expanded="true" />
+            <element signature="e#7#401#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -546,37 +873,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/controller_config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="66" selection-start="688" selection-end="688" vertical-scroll-proportion="-11.230769" vertical-offset="236" max-vertical-offset="946">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/model_config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="35" selection-start="77" selection-end="77" vertical-scroll-proportion="-3.3846154" vertical-offset="0" max-vertical-offset="484">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/model_events.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="62" selection-start="607" selection-end="607" vertical-scroll-proportion="-16.923077" vertical-offset="0" max-vertical-offset="814">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/kcfinder2/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="57.46154" vertical-offset="1494" max-vertical-offset="2178">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/events_add_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="81" selection-start="261" selection-end="261" vertical-scroll-proportion="-4.230769" vertical-offset="0" max-vertical-offset="1914">
           <folding />
         </state>
       </provider>
@@ -588,9 +887,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/controller_config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="33" selection-start="441" selection-end="1001" vertical-scroll-proportion="-20.307692" vertical-offset="198" max-vertical-offset="946">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="21" selection-start="1156" selection-end="1156" vertical-scroll-proportion="0.8760563" vertical-offset="808" max-vertical-offset="1584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="33" selection-start="365" selection-end="365" vertical-scroll-proportion="-4.076923" vertical-offset="312" max-vertical-offset="616">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/db.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="19" selection-start="2267" selection-end="2267" vertical-scroll-proportion="-2.5384614" vertical-offset="1496" max-vertical-offset="2486">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/events_add_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="50" selection-start="0" selection-end="3381" vertical-scroll-proportion="-5.923077" vertical-offset="0" max-vertical-offset="1914">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/events_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="0" selection-start="2022" selection-end="2022" vertical-scroll-proportion="-13.192307" vertical-offset="537" max-vertical-offset="1144">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/model_events.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="35" selection-start="888" selection-end="903" vertical-scroll-proportion="-13.192307" vertical-offset="273" max-vertical-offset="1012">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/controller_events.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="0" selection-start="1757" selection-end="1757" vertical-scroll-proportion="0.9356725" vertical-offset="416" max-vertical-offset="1188">
+        <state line="35" column="81" selection-start="1330" selection-end="1330" vertical-scroll-proportion="4.230769" vertical-offset="880" max-vertical-offset="1584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/events_edit_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="61" selection-start="241" selection-end="241" vertical-scroll-proportion="46.03846" vertical-offset="1307" max-vertical-offset="1914">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/my.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="124" column="27" selection-start="3759" selection-end="3759" vertical-scroll-proportion="0.0" vertical-offset="2530" max-vertical-offset="2992">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/route.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="70" selection-start="1616" selection-end="1616" vertical-scroll-proportion="0.61614496" vertical-offset="1188" max-vertical-offset="2156">
           <folding />
         </state>
       </provider>

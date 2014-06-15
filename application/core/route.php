@@ -24,6 +24,10 @@ class Route
 			$action_name = $routes[2];
 		}
 
+        if( !empty($routes[3])){
+            $arg[] = $routes[3];
+        }
+
 		// добавляем префиксы
 		$model_name = 'Model_'.$controller_name;
 		$controller_name = 'Controller_'.$controller_name;
@@ -62,12 +66,16 @@ class Route
 		
 		if(method_exists($controller, $action))
 		{
-			// вызываем действие контроллера
-			$controller->$action();
+			if(empty($routes)){
+                $controller->$action();
+            }else{
+                call_user_func_array(array($controller,$action) , $arg);
+            }
+
 		}
 		else
 		{
-			// здесь также разумнее было бы кинуть исключение
+
 			Route::ErrorPage404();
 		}
 	

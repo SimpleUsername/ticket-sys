@@ -113,4 +113,19 @@ $(document).ready(function(){
             'json'
         );
     });
+
+    $(body).on('click','#del_ev', function(){
+        var del_id = $(this).data('event_id');
+        $.post(
+            '/events/del' ,
+            {
+                del_id : del_id
+            },
+            function(json){
+               //json['msg'];
+              ///  $(body).modal({show:true});
+            },
+            'json'
+        );
+    });
 });

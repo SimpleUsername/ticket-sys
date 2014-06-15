@@ -62,3 +62,6 @@
     border-radius: 50%;
     display: inline-block;
 }
+ .img_custom{
+     max-width: 150px;
+ }
