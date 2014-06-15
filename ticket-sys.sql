@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 15 2014 г., 02:06
+-- Время создания: Июн 15 2014 г., 23:26
 -- Версия сервера: 5.5.34
 -- Версия PHP: 5.4.22
 
@@ -31,21 +31,23 @@ CREATE TABLE IF NOT EXISTS `events` (
   `event_name` varchar(255) NOT NULL,
   `event_desc` text NOT NULL,
   `event_status` int(11) NOT NULL,
-  `event_date` datetime NOT NULL,
-  `event_booking` datetime NOT NULL,
-  `event_sale` datetime NOT NULL,
+  `event_date` varchar(255) NOT NULL,
+  `event_booking` varchar(255) NOT NULL,
+  `event_sale` varchar(255) NOT NULL,
+  `event_img_name` varchar(255) NOT NULL,
+  `event_img_md5` varchar(255) NOT NULL,
+  `event_img_path` varchar(255) NOT NULL,
   PRIMARY KEY (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Дамп данных таблицы `events`
 --
 
-INSERT INTO `events` (`event_id`, `event_name`, `event_desc`, `event_status`, `event_date`, `event_booking`, `event_sale`) VALUES
-(1, 'Матч', 'Матч описание, Матч описаниеМатч описаниеМатч описаниеМатч описаниеМатч описаниеМатч описание  Матч описание мМатч описание Матч описание Матч описание Матч описание ', 1, '2014-06-03 00:00:00', '2014-06-18 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Матч', 'Матч описание, Матч описаниеМатч описаниеМатч описаниеМатч описаниеМатч описаниеМатч описание  Матч описание мМатч описание Матч описание Матч описание Матч описание ', 1, '2014-06-03 00:00:00', '2014-06-18 00:00:00', '0000-00-00 00:00:00'),
-(3, 'Концерт', 'йцуйцу йцуй цуйц\r\nуй\r\nцу\r\nйуй', 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, '23123312', '123312312', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `events` (`event_id`, `event_name`, `event_desc`, `event_status`, `event_date`, `event_booking`, `event_sale`, `event_img_name`, `event_img_md5`, `event_img_path`) VALUES
+(6, 'йцуйуйуйуц', '<p>йуйуйу</p>', 3, '15.06.2014 20:48', '15.06.2014 20:48', '15.06.2014 20:48', '', '', ''),
+(7, 'hhhhhhhhhhhhhhh', '<p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>\r\n<p>&nbsp;</p>\r\n<p>h<img src="../images/image/302462452.jpg" alt="" width="443" height="277" /></p>', 3, '15.06.2014 21:11', '15.06.2014 21:11', '15.06.2014 21:11', 'Best-HD-Wallpaper1.jpg', '06d5c44222b18f0d0a57d0997160ad02.jpg', '/images/events/'),
+(8, 'vbxcbxcbxcb', '<p>xcbxcb</p>', 2, '15.06.2014 21:16', '15.06.2014 21:16', '15.06.2014 21:16', 'yin_yangwallpaper2560x1600.jpg', 'a9ad084fff522301d4aad1ae9dee9c43.jpg', '/images/events/');
 
 -- --------------------------------------------------------
 
@@ -185,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `sector` (
   `sector_name` varchar(30) NOT NULL,
   `sector_price` int(11) NOT NULL,
   PRIMARY KEY (`sector_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
 
 --
 -- Дамп данных таблицы `sector`
@@ -193,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `sector` (
 
 INSERT INTO `sector` (`sector_id`, `sector_name`, `sector_price`) VALUES
 (1, ' 1 Сектор', 110),
-(2, ' 2 Сектор', 80),
+(2, ' 2 Сектор', 800),
 (3, ' 3 Сектор', 55),
 (4, ' 4 Сектор', 50),
 (5, ' 5 Сектор', 45),
