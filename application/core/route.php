@@ -66,10 +66,11 @@ class Route
 		
 		if(method_exists($controller, $action))
 		{
-			if(empty($routes)){
-                $controller->$action();
-            }else{
+			if(!empty($routes[3])){
                 call_user_func_array(array($controller,$action) , $arg);
+
+            }else{
+                $controller->$action();
             }
 
 		}
