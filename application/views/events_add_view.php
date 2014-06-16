@@ -57,7 +57,7 @@
                     </span>
         </div>
     </div>
-    <button type="submit" class="btn btn-default">Добавить Событие</button>
+    <button type="submit" class="btn btn-primary">Добавить Событие</button>
 </form>
 
 

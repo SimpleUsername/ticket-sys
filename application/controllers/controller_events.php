@@ -36,30 +36,80 @@ class Controller_Events extends Controller
                 $data = $this->model->get_all_events(false);// получение статусов
                 $data['error'] = "Возникла ошибка";
                 $this->view->generate('events_add_view.php', 'template_view.php',$data);
+            }else{
+                $this->redirect('events');
             }
-            header("Location: /events");
+
         }else{
             $data = $this->model->get_all_events(false); // получение статусов
-            $this->view->generate('events_edit_view.php', 'template_view.php',$data);
+            $this->view->generate('events_add_view.php', 'template_view.php',$data);
 
         }
     }
 
     public function action_edit($id){
-        $data = $this->model->get_event_by_id($id);
-        $data['statuses'] = $this->model->get_all_events(false);  // получение статусов
-        $this->view->generate('events_add_view.php', 'template_view.php',$data);
+
+        if(!empty($_POST['event_id'])){
+            $form_data =array('event_name' => $_POST['event_name'],
+                'event_status' => $_POST['event_status'],
+                'event_desc' => $_POST['event_desc'],
+                'event_date' => $_POST['event_date'],
+                'event_booking' => $_POST['event_booking'],
+                'event_sale' => $_POST['event_sale']);
+            if(!empty($_FILES['event_img'])){
+                $file = $this->prepare_files($_FILES);
+                $form_data['event_img_name'] = $file['event_img']['event_img_name'] ;
+                $form_data['event_img_md5']  = $file['event_img']['event_img_md5'];
+                $form_data['event_img_path'] = $file['event_img']['event_img_path'];
+
+            }
+
+            $upd = $this->model->update('events',$form_data,' event_id=:event_id ', array(':event_id' => (int)$_POST['event_id']));
+            if(!$upd){
+                $res = $this->model->get_event_by_id($id);
+                // Убиваем  лишнюю вложенность массива
+                if(isset($res) && count($res) == 1){
+                    $data = $res[0];
+                }
+                $data['statuses'] = $this->model->get_all_events(false);  // получение статусов
+                $this->view->generate('events_edit_view.php', 'template_view.php',$data);$data = $this->model->get_all_events(false);
+                $data['error'] = "Возникла ошибка";
+                $this->view->generate('events_add_view.php', 'template_view.php',$data);
+            }else{
+                $this->redirect('events');
+            }
+
+        }else{
+            $res = $this->model->get_event_by_id($id);
+            // Убиваем  лишнюю вложенность массива
+            if(isset($res) && count($res) == 1){
+                $data = $res[0];
+            }
+            $data['statuses'] = $this->model->get_all_events(false);  // получение статусов
+            $this->view->generate('events_edit_view.php', 'template_view.php',$data);
+        }
+
     }
 
-    public function action_del(){
+    public function action_del($id){
+        $id = (int)$id;
+        $fields= array('event_status' => -1 );
+        $data['result'] = $this->model->update('events',$fields,' event_id=:event_id ', array(':event_id' => $id));
+        $this->redirect('events');
+    }
 
+    public function action_del_ajax(){
+        $data['msg'] = 'Не переданны данные дня удаления';
         if(!empty($_POST['del_id'])){
             $fields= array('event_status' => -1 );
             $data['result'] = $this->model->update('events',$fields,' event_id=:event_id ', array(':event_id' => (int)$_POST['del_id']));
-            $data['msg'] = "Событие удалено";
-        }
-        else{
-            $data['msg'] = "Возникла ошибка при удалении";
+            if($data['result']){
+                $data['msg'] = "Событие удалено";
+            }
+            else{
+                $data['msg'] = "Возникла ошибка при удалении";
+            }
+
         }
         exit(json_encode($data));
     }

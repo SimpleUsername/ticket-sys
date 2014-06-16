@@ -86,4 +86,18 @@ class Controller {
         return $result;
     }
 
+
+
+    public function redirect($section){
+        if(!empty($section)){
+            $url = "http://".$_SERVER['HTTP_HOST']."/".$section;
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: $url");
+        }
+        else{
+            Route::ErrorPage404();
+        }
+
+    }
+
 }

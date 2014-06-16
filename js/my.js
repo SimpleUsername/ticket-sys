@@ -19,6 +19,9 @@ tinymce.init({
     max_height: 200,
     min_height: 160,
     height : 180,
+    relative_urls : false,
+    remove_script_host : false,
+    convert_urls : true,
     file_browser_callback: function(field, url, type, win) {
         tinyMCE.activeEditor.windowManager.open({
             file: '/libs/kcfinder/browse.php?opener=tinymce4&field=' + field + '&type=' + type,
@@ -117,7 +120,7 @@ $(document).ready(function(){
     $(body).on('click','#del_ev', function(){
         var del_id = $(this).data('event_id');
         $.post(
-            '/events/del' ,
+            '/events/del_ajax' ,
             {
                 del_id : del_id
             },
