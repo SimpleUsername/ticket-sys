@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="685e137c-f6f9-4a73-a4c9-b01c872f26fc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/access.log" afterPath="$PROJECT_DIR$/access.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/controller.php" afterPath="$PROJECT_DIR$/application/core/controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/controller_events.php" afterPath="$PROJECT_DIR$/application/controllers/controller_events.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/events_add_view.php" afterPath="$PROJECT_DIR$/application/views/events_add_view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/events_edit_view.php" afterPath="$PROJECT_DIR$/application/views/events_edit_view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/my.js" afterPath="$PROJECT_DIR$/js/my.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/route.php" afterPath="$PROJECT_DIR$/application/core/route.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="685e137c-f6f9-4a73-a4c9-b01c872f26fc" name="Default" comment="" />
     <ignored path="ticket-sys.loc.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -74,10 +65,7 @@
             <entry file="file://$PROJECT_DIR$/application/controllers/controller_events.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="74" column="133" selection-start="3152" selection-end="3152" vertical-scroll-proportion="0.56013745" vertical-offset="1302" max-vertical-offset="2684">
-                  <folding>
-                    <marker date="1402955050265" expanded="true" signature="1248:1484" placeholder="..." />
-                    <marker date="1402955050265" expanded="true" signature="1824:3379" placeholder="..." />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -404,14 +392,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1448" height="878" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="359" y="75" width="360" height="757" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="359" y="75" width="360" height="757" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -540,10 +528,7 @@
     <entry file="file://$PROJECT_DIR$/application/controllers/controller_events.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="74" column="133" selection-start="3152" selection-end="3152" vertical-scroll-proportion="0.56013745" vertical-offset="1302" max-vertical-offset="2684">
-          <folding>
-            <marker date="1402955050265" expanded="true" signature="1248:1484" placeholder="..." />
-            <marker date="1402955050265" expanded="true" signature="1824:3379" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>

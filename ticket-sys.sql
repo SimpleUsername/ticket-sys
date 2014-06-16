@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 15 2014 г., 23:26
+-- Время создания: Июн 17 2014 г., 00:02
 -- Версия сервера: 5.5.34
 -- Версия PHP: 5.4.22
 
@@ -38,16 +38,18 @@ CREATE TABLE IF NOT EXISTS `events` (
   `event_img_md5` varchar(255) NOT NULL,
   `event_img_path` varchar(255) NOT NULL,
   PRIMARY KEY (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Дамп данных таблицы `events`
 --
 
 INSERT INTO `events` (`event_id`, `event_name`, `event_desc`, `event_status`, `event_date`, `event_booking`, `event_sale`, `event_img_name`, `event_img_md5`, `event_img_path`) VALUES
-(6, 'йцуйуйуйуц', '<p>йуйуйу</p>', 3, '15.06.2014 20:48', '15.06.2014 20:48', '15.06.2014 20:48', '', '', ''),
+(6, 'йцуйуйуйуц', '<p>йуйуйу</p>', 3, '15.06.2014 20:48', '15.06.2014 20:48', '15.06.2014 20:48', 'Best-HD-Wallpaper1.jpg', '06d5c44222b18f0d0a57d0997160ad02.jpg', '/images/events/'),
 (7, 'hhhhhhhhhhhhhhh', '<p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>\r\n<p>&nbsp;</p>\r\n<p>h<img src="../images/image/302462452.jpg" alt="" width="443" height="277" /></p>', 3, '15.06.2014 21:11', '15.06.2014 21:11', '15.06.2014 21:11', 'Best-HD-Wallpaper1.jpg', '06d5c44222b18f0d0a57d0997160ad02.jpg', '/images/events/'),
-(8, 'vbxcbxcbxcb', '<p>xcbxcb</p>', 2, '15.06.2014 21:16', '15.06.2014 21:16', '15.06.2014 21:16', 'yin_yangwallpaper2560x1600.jpg', 'a9ad084fff522301d4aad1ae9dee9c43.jpg', '/images/events/');
+(8, 'vbxcbxcbxcb12313', '<p>xcbxcb123</p>', 3, '11.06.2014 21:16', '30.06.2014 21:16', '05.07.2014 21:16', 'lightning_76.jpg', '87edd826582219b67a875eb8a25402a2.jpg', '/images/events/'),
+(9, 'Концерт Океан Ельзы ', '<p>PHP 5.6 is currently being tested, and the features and changes noted in this section are subject to change before the final 5.6.0 release. Please double check this migration guide before deploying a stable 5.6 release to production.</p>', 3, '16.06.2014 22:17', '16.06.2014 22:17', '16.06.2014 22:17', 'lightning_32.jpg', 'db7205fd1e6e950387e29cf18d156495.jpg', '/images/events/'),
+(10, 'nsbdgdbsdgbsgb', '<p>sdgbsd<img src="http://ticket-sys.loc/images/image/302462452.jpg" alt="" width="1920" height="1200" /></p>', -1, '16.06.2014 22:25', '16.06.2014 22:25', '16.06.2014 22:25', 'lightning_51.jpg', '9285dc0d94b7e36248c818ff435007ef.jpg', '/images/events/');
 
 -- --------------------------------------------------------
 
