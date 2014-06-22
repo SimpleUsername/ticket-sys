@@ -70,7 +70,22 @@ class Db{
                 $params[':_' . $name] = $val;
             }
             $result = $rs->execute($params);
-          //  $result[] = $sql;
+            //  $result[] = $sql;
+            return $result;
+        } catch(Exception $e) {
+            $this->report($e);
+        }
+    }
+
+    public function delete($table, $where, $params = null) {
+        try {
+            $sql = 'DELETE FROM ' . $table;
+            if (!is_array($params)) {
+                $params = array();
+            }
+            $sql .= ' WHERE ' . $where;
+            $rs = $this->dbh->prepare($sql);
+            $result = $rs->execute($params);
             return $result;
         } catch(Exception $e) {
             $this->report($e);

@@ -20,4 +20,8 @@ class Model
         $result = $this->db->update($table, $fields, $where, $params);
         return $result;
     }
+    public function  delete($table, $where, $params=null){
+        $result = $this->db->delete($table, $where, $params);
+        return $result;
+    }
 }

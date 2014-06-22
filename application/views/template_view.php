@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -55,10 +55,16 @@
                 <li><a href="/events">События</a></li>
                 <li><a href="/tickets">Билеты</a></li>
                 <li><a href="/config">Цены</a></li>
+                <li><a href="/users">Пользователи</a></li>
             </ul>
             <!-- <form class="navbar-form navbar-right">-->
             <!-- <input type="text" class="form-control" placeholder="Поиск...">-->
             <!-- </form>-->
+            <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1) { ?>
+            <div class="nav navbar-nav navbar-right">
+                <a href="/user/logout" class="btn btn-danger navbar-btn">Выйти <i class="icon-white glyphicon glyphicon-off"></i></a>&nbsp;
+            </div>
+            <? } ?>
         </div>
     </div>
 </div>

@@ -6,7 +6,7 @@ class Controller_Config extends Controller
     public  function __construct()
     {
         $this->model = new Model_Config();
-        $this->view = new View();
+        parent::__construct();
     }
 
     public function action_index()

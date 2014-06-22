@@ -229,24 +229,47 @@ INSERT INTO `sector` (`sector_id`, `sector_name`, `sector_price`) VALUES
 --
 -- Структура таблицы `users`
 --
-CREATE TABLE `users` ( 
-	`user_id` 		int(11) unsigned NOT NULL auto_increment, 
-	`user_login` 	varchar(30) NOT NULL, 
-	`user_password` varchar(32) NOT NULL, 
-	`user_type` 	int(10) unsigned NOT NULL, 
-	`user_hash` 	varchar(32) NOT NULL, 
-	`user_ip` 		int(10) unsigned NOT NULL default '0', 
-	PRIMARY KEY (`user_id`) 
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ; 
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_login` varchar(30) NOT NULL,
+  `user_password` varchar(32) NOT NULL,
+  `user_type_id` int(10) unsigned NOT NULL,
+  `user_hash` varchar(32) DEFAULT NULL,
+  `user_ip` varchar(30) NOT NULL DEFAULT '0.0.0.0',
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_login` (`user_login`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Дамп данных таблицы `users`
 --
--- passwds 1234
-INSERT INTO `users` (`user_id`, `user_login`, `user_password`, `user_type`, `user_hash`, `user_ip`) VALUES
-(1, 'admin', 			'ec6a6536ca304edf844d1d248a4f08dc', '1', '0e835840d48551b239ee53a7f114e516', '127.0.0.1'),	
-(2, 'vasya.pupkin', 	'ec6a6536ca304edf844d1d248a4f08dc', '2', '7795f644c48de9fca6238e646a658f71', '127.0.0.1'),
-(3, 'galina.petrovna', 	'ec6a6536ca304edf844d1d248a4f08dc', '3', 'a7ba15a2ed7df344939a04ae06249790', '127.0.0.1');
+
+INSERT INTO `users` (`user_id`, `user_login`, `user_password`, `user_type_id`, `user_hash`, `user_ip`) VALUES
+(1, 'admin', 'ec6a6536ca304edf844d1d248a4f08dc', 1, '0e835840d48551b239ee53a7f114e516', '127.0.0.1'),
+(2, 'vasya.pupkin', 'ec6a6536ca304edf844d1d248a4f08dc', 2, '7795f644c48de9fca6238e646a658f71', '127.0.0.1'),
+(3, 'galina.petrovna', 'ec6a6536ca304edf844d1d248a4f08dc', 3, 'a7ba15a2ed7df344939a04ae06249790', '127.0.0.1');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `user_types`
+--
+
+CREATE TABLE IF NOT EXISTS `user_types` (
+  `type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_type` varchar(30) NOT NULL,
+  PRIMARY KEY (`type_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Дамп данных таблицы `user_types`
+--
+
+INSERT INTO `user_types` (`type_id`, `user_type`) VALUES
+(1, 'Администратор'),
+(2, 'Менеджер'),
+(3, 'Продавец');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

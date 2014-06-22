@@ -6,7 +6,7 @@ class Controller_Events extends Controller
     public function __construct()
     {
         $this->model = new Model_Events();
-        $this->view = new View();
+        parent::__construct();
     }
 
     public function action_index()

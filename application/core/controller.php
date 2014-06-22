@@ -8,6 +8,12 @@ class Controller {
     public function __construct()
     {
         $this->view = new View();
+        session_start();
+        if (!isset($_SESSION['authorized']) || (isset($_SESSION['authorized']) && $_SESSION['authorized'] != 1)) {
+            if ($_SERVER['REQUEST_URI'] != '/user/login') {
+                $this->redirect('user/login');
+            }
+        }
     }
 
     // действие (action), вызываемое по умолчанию
