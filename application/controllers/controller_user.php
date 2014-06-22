@@ -44,8 +44,8 @@ class Controller_User extends Controller {
                 $this->model->set_user_login_data($user['user_id'], $user_hash, $user_ip);
                 $_SESSION['authorized'] = 1;
                 $_SESSION['user_id'] = $user['user_id'];
-                $_SESSION['user_login'] = $user['user_id'];
-                $_SESSION['user_type_id'] = $user['user_id'];
+                $_SESSION['user_login'] = $user['user_login'];
+                $_SESSION['user_type_id'] = $user['user_type_id'];
                 //setcookie("id", $user['user_id'], time()+60*60*24*30);
                 //setcookie("hash", $user_hash, time()+60*60*24*30);
                 $this->redirect("user/login");
@@ -61,7 +61,12 @@ class Controller_User extends Controller {
         $_SESSION['authorized'] = 0;
         $this->redirect("user/login");
     }
-    public function action_check() {
-
+    public function action_password() {
+        if (empty($_POST)) {
+            $this->view->generate('user_password_view.php', 'template_view.php');
+        } else {
+            $this->model->set_user_password($_SESSION['user_id'], md5(md5($_POST['new_password'])));
+            $this->redirect("user/logout");
+        }
     }
 }

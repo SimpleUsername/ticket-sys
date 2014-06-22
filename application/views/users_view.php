@@ -18,7 +18,8 @@
             <a class="btn btn-success"  href="/users/edit/<?=$user['user_id']?>">
                 <i class="glyphicon glyphicon-pencil"></i>
             </a>
-            <a class="btn btn-danger" onclick="confirm('Удалить ?')" href="/users/delete/<?=$user['user_id']?>">
+            <a class="btn btn-danger<?=$_SESSION['user_id'] == $user['user_id']?" disabled":""?>"
+               onclick="confirm('Удалить ?')" href="/users/delete/<?=$user['user_id']?>">
                 <i class="glyphicon glyphicon-remove"></i>
             </a>
         </td>

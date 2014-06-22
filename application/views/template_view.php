@@ -27,7 +27,9 @@
     <link href="/css/style.css" rel="stylesheet">
     <script src="/libs/tinymce/js/tinymce/tinymce.min.js"></script>
     <script src="/js/my.js"></script>
-
+    <!-- BootstrapValidator -->
+    <link rel="stylesheet"  href="/css/bootstrapValidator.min.css">
+    <script src="/js/bootstrapValidator.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -50,6 +52,7 @@
             <a class="navbar-brand" href="#">Проект "Бросок кобры"</a>
         </div>
         <div class="navbar-collapse collapse">
+            <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1) { ?>
             <ul class="nav navbar-nav navbar-left masthead-nav">
                 <li><a href="/">Главная</a></li>
                 <li><a href="/events">События</a></li>
@@ -60,9 +63,18 @@
             <!-- <form class="navbar-form navbar-right">-->
             <!-- <input type="text" class="form-control" placeholder="Поиск...">-->
             <!-- </form>-->
-            <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1) { ?>
             <div class="nav navbar-nav navbar-right">
-                <a href="/user/logout" class="btn btn-danger navbar-btn">Выйти <i class="icon-white glyphicon glyphicon-off"></i></a>&nbsp;
+                <!--  -->
+                <div class="btn-group">
+                    <a href="/user/password" class="btn btn-default navbar-btn"><i class="icon-white glyphicon glyphicon-cog"
+                            title="Сменить пароль"></i>&nbsp;</a>
+                    <a href="/user/logout" class="btn navbar-btn <? switch($_SESSION["user_type_id"]) {
+                        case 1 : ?>btn-warning<? break;
+                        case 2 : ?>btn-success<? break;
+                        case 3 : ?>btn-primary<? break;
+                        default : ?>btn-default<?
+                        }?>"><?=$_SESSION['user_login'] ?> <i class="icon-white glyphicon glyphicon-off"></i></a>
+                </div>&nbsp;
             </div>
             <? } ?>
         </div>
@@ -71,7 +83,9 @@
 
 <div class="container-fluid">
     <div class="row">
+        <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1) { ?>
         <div class="col-sm-3 col-md-2 sidebar">
+
             <ul class="nav nav-sidebar">
                <? $uri_path = explode("/",$_SERVER['REQUEST_URI']);
                 $sec = (!empty($uri_path[0])) ? $uri_path[0]: 'events';
@@ -83,6 +97,7 @@
             </ul>
 
         </div>
+        <? } ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <?php include 'application/views/'.$content_view; ?>
         </div>

@@ -27,17 +27,20 @@ class Controller_Users extends Controller {
         } else {
             $user_data = array(
                 "user_login" => $_POST['user_login'],
-                "user_type_id" => $_POST['user_type'],
-                "user_password" => md5(md5($_POST['password']))
+                "user_type_id" => $_POST['user_type']
             );
+            if (!empty($_POST['password'])) {
+                $user_data["user_password"] = md5(md5($_POST['password']));
+            }
             $this->model->edit_user($user_id, $user_data);
             $this->redirect('users');
         }
     }
     public function action_delete($user_id)
     {
-        //надо исключить суицид
-        $data = $this->model->delete_user($user_id);
+        if ($_SESSION['user_id'] != $user_id) {
+            $data = $this->model->delete_user($user_id);
+        }
         $this->redirect('users');
     }
     public function action_create() {

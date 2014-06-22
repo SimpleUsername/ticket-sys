@@ -3,14 +3,50 @@
         <?=htmlspecialchars($data['error']) ?>
     </div>
 <?php } ?>
-<form method="post">
-    <div class="form-group">
-        <input type="text" placeholder="login" class="form-control" name="login" >
+<div class="row">
+    <div class="panel panel-default col-sm-6 col-sm-offset-2">
+        <div class="panel-body">
+            <h2>Вход</h2>
+            <form method="post" id="login_form">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" placeholder="логин" class="form-control input-lg" name="login">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" placeholder="пароль" class="form-control input-lg" name="password">
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary btn-lg">Войти</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <input type="password" placeholder="password" class="form-control" name="password">
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Login</button>
-    </div>
-</form>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#login_form').bootstrapValidator({
+            fields: {
+                login: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Логин обязателен и не может быть пустым'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Пароль обязателен и не может быть пустым'
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+
