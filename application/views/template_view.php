@@ -73,7 +73,7 @@
                         case 2 : ?>btn-success<? break;
                         case 3 : ?>btn-primary<? break;
                         default : ?>btn-default<?
-                        }?>"><?=(isset($_SESSION['user_login'])) ? $_SESSION['user_login'] : '' ?> <i class="icon-white glyphicon glyphicon-off"></i></a>
+                        }?>"><?=$_SESSION['user_login']?> <i class="icon-white glyphicon glyphicon-off"></i></a>
                 </div>&nbsp;
             </div>
             <? } ?>
@@ -97,6 +97,7 @@
         <? } ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <?php include 'application/views/'.$content_view; ?>
+            <? echo "<pre>"; print_r($_SESSION); echo "</pre>";?>
         </div>
     </div>
 </div>
