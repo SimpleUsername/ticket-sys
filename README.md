@@ -17,10 +17,10 @@ mklink /j C:\xampp\htdocs\ticket-sys.loc C:\Users\User\Documents\GitHub\ticket-s
   ServerName ticket-sys.loc
   ServerAlias www.ticket-sys.loc
   ServerAdmin admin@asd.ru
-  DocumentRoot "C:\xampp\htdocs\ticket-sys.loc"
+  DocumentRoot "C:\xampp\htdocs\ticket-sys.loc/"
   ErrorLog "C:\xampp\htdocs\ticket-sys.loc\error.log"
   CustomLog "C:\xampp\htdocs\ticket-sys.loc\access.log" combined
-<Directory "C:\xampp\htdocs\ticket-sys.loc">
+<Directory "C:\xampp\htdocs\ticket-sys.loc/">
   AllowOverride All
   Order allow,deny
   Allow from all
