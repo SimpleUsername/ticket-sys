@@ -27,6 +27,7 @@ class Controller_Users extends Controller {
         } else {
             $user_data = array(
                 "user_login" => $_POST['user_login'],
+                "user_name" => $_POST['user_name'],
                 "user_type_id" => $_POST['user_type']
             );
             if (!empty($_POST['password'])) {
@@ -52,6 +53,7 @@ class Controller_Users extends Controller {
             $data["error"] = null;
             $user_data = array(
                 "user_login" => $_POST['user_login'],
+                "user_name" => $_POST['user_name'],
                 "user_type_id" => $_POST['user_type'],
                 "user_password" => md5(md5($_POST['password']))
             );
