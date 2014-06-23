@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="685e137c-f6f9-4a73-a4c9-b01c872f26fc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/access.log" afterPath="$PROJECT_DIR$/access.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/template_view.php" afterPath="$PROJECT_DIR$/application/views/template_view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ticket-sys.loc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,7 +91,7 @@
       <file leaf-file-name="template_view.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/template_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="55" selection-start="3677" selection-end="3677" vertical-scroll-proportion="0.7105263" vertical-offset="1164" max-vertical-offset="2442">
+            <state line="99" column="11" selection-start="4449" selection-end="4449" vertical-scroll-proportion="0.61403507" vertical-offset="1758" max-vertical-offset="2442">
               <folding />
             </state>
           </provider>
@@ -523,7 +521,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/template_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="55" selection-start="3677" selection-end="3677" vertical-scroll-proportion="0.7105263" vertical-offset="1164" max-vertical-offset="2442">
+        <state line="99" column="11" selection-start="4449" selection-end="4449" vertical-scroll-proportion="0.61403507" vertical-offset="1758" max-vertical-offset="2442">
           <folding />
         </state>
       </provider>
