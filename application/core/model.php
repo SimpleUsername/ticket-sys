@@ -11,7 +11,10 @@ class Model
 	{
 		// todo
 	}
-
+    public function select($table,$where = null , $params = null){
+        $result = $this->db->insert($table,$where , $params);
+        return $result;
+    }
     public function insert($table, $fields){
         $result =$this->db->insert($table,$fields);
         return $result;

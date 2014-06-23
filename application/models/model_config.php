@@ -9,7 +9,7 @@ class Model_Config extends Model
         $result = $this->db->sql("SELECT * FROM `{$this->table_section}` ");
 
         if(!$result){
-            $result = ['msg' => 'Сектора  не заполнены'];
+            $result['msg'] = 'Сектора  не заполнены';
         }
         return  $result;
     }

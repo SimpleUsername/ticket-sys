@@ -25,7 +25,7 @@ class Route
         }
 
         if( !empty($routes[3])){
-            $arg[] = $routes[3];
+            $arg[] = intval($routes[3]);
         }
 
         // добавляем префиксы

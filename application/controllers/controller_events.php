@@ -56,32 +56,38 @@ class Controller_Events extends Controller
                 'event_date' => $_POST['event_date'],
                 'event_booking' => $_POST['event_booking'],
                 'event_sale' => $_POST['event_sale']);
-            if(!empty($_FILES['event_img'])){
+            if(!empty($_FILES['event_img']) && $_FILES['event_img']['error'] != 4){
                 $file = $this->prepare_files($_FILES);
                 $form_data['event_img_name'] = $file['event_img']['event_img_name'] ;
                 $form_data['event_img_md5']  = $file['event_img']['event_img_md5'];
                 $form_data['event_img_path'] = $file['event_img']['event_img_path'];
 
             }
+            if(!empty($_FILES['event_img']) && $_FILES['event_img']['error'] == 4 && !empty($_POST['event_img_md5'])){
+                $form_data['event_img_name'] = $_POST['event_img_name'] ;
+                $form_data['event_img_md5']  = $_POST['event_img_md5'];
+                $form_data['event_img_path'] = $_POST['event_img_path'];
+            }
 
             $upd = $this->model->update('events',$form_data,' event_id=:event_id ', array(':event_id' => (int)$_POST['event_id']));
             if(!$upd){
+                $data['error'] = "Возникла ошибка";
                 $res = $this->model->get_event_by_id($id);
-                // Убиваем  лишнюю вложенность массива
+
                 if(isset($res) && count($res) == 1){
                     $data = $res[0];
                 }
                 $data['statuses'] = $this->model->get_all_events(false);  // получение статусов
-                $this->view->generate('events_edit_view.php', 'template_view.php',$data);$data = $this->model->get_all_events(false);
-                $data['error'] = "Возникла ошибка";
-                $this->view->generate('events_add_view.php', 'template_view.php',$data);
+                $this->view->generate('events_edit_view.php', 'template_view.php',$data);
+
             }else{
+//               print_r($_FILES);exit;
                 $this->redirect('events');
             }
 
         }else{
             $res = $this->model->get_event_by_id($id);
-            // Убиваем  лишнюю вложенность массива
+
             if(isset($res) && count($res) == 1){
                 $data = $res[0];
             }

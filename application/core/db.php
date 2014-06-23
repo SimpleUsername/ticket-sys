@@ -20,6 +20,30 @@ class Db{
         }
     }
 
+    // todo
+    public function select($table,$where = null , $params = null){
+        try{
+            $query = "SELECT * FROM ".$table ;
+
+            if(!is_null($where)){
+                $query .= " WHERE " . $where ;
+            }
+
+            if (!is_array($params)) {
+                $params = array();
+            }
+
+            $rs = $this->dbh->prepare($query);
+            $result = $rs->execute($params);
+
+            return $result;
+
+
+
+        }catch(Exception $e){
+            $this->report($e);
+        }
+    }
     public function insert($table, $fields) {
         try {
             $result = null;

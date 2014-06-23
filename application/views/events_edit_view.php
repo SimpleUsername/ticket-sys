@@ -33,6 +33,9 @@
             <label for="exampleInputFile">Баннер мероприятия</label>
             <input type="file" id="file" name="event_img">
             <div class="well"><p>Имя файла:  <?=$data['event_img_name'];?></p><img src="<?=$data['event_img_path'].$data['event_img_md5']?>" class="img-thumbnail img_custom" alt="<?=$data['event_img_name'];?>"/></div>
+            <input type="hidden" name="event_img_name" value="<?=$data['event_img_name'];?>"/>
+            <input type="hidden" name="event_img_path" value="<?=$data['event_img_path'];?>"/>
+            <input type="hidden" name="event_img_md5" value="<?=$data['event_img_md5'];?>"/>
         </div>
         <div class="form-group">
             <label for="date1">Дата события</label>

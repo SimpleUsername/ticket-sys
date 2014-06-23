@@ -73,7 +73,7 @@
                         case 2 : ?>btn-success<? break;
                         case 3 : ?>btn-primary<? break;
                         default : ?>btn-default<?
-                        }?>"><?=$_SESSION['user_login'] ?> <i class="icon-white glyphicon glyphicon-off"></i></a>
+                        }?>"><?=(isset($_SESSION['user_login'])) ? $_SESSION['user_login'] : '' ?> <i class="icon-white glyphicon glyphicon-off"></i></a>
                 </div>&nbsp;
             </div>
             <? } ?>
@@ -87,12 +87,9 @@
         <div class="col-sm-3 col-md-2 sidebar">
 
             <ul class="nav nav-sidebar">
-               <? $uri_path = explode("/",$_SERVER['REQUEST_URI']);
-                $sec = (!empty($uri_path[0])) ? $uri_path[0]: 'events';
 
-               ?>
-                <li><a href="/<?=$sec?>/add">Создать мероприятие</a></li>
-                <li><a href="#">Analytics</a></li>
+                <li><a href="/events/add">Создать мероприятие</a></li>
+                <li><a href="/tickets/add">Analytics</a></li>
                 <li><a href="#">Export</a></li>
             </ul>
 
