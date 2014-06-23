@@ -233,6 +233,7 @@ INSERT INTO `sector` (`sector_id`, `sector_name`, `sector_price`) VALUES
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_login` varchar(30) NOT NULL,
+  `user_name` varchar(64) NOT NULL,
   `user_password` varchar(32) NOT NULL,
   `user_type_id` int(10) unsigned NOT NULL,
   `user_hash` varchar(32) DEFAULT NULL,
