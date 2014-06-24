@@ -49,16 +49,20 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Проект "Бросок кобры"</a>
+            <a class="navbar-brand" href="/">Проект "Бросок кобры"</a>
         </div>
         <div class="navbar-collapse collapse">
             <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1) { ?>
             <ul class="nav navbar-nav navbar-left masthead-nav">
-                <li><a href="/">Главная</a></li>
-                <li><a href="/events">События</a></li>
-                <li><a href="/tickets">Билеты</a></li>
-                <li><a href="/config">Цены</a></li>
-                <li><a href="/users">Пользователи</a></li>
+                <? if ($_SESSION['user_type_id'] == 1) { ?>
+                    <li><a href="/users">Пользователи</a></li>
+                <? } else { ?>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/events">События</a></li>
+                    <li><a href="/tickets">Билеты</a></li>
+                    <li><a href="/config">Цены</a></li>
+                <? } ?>
+                    <li><a href="#">О программе</a></li>
             </ul>
             <!-- <form class="navbar-form navbar-right">-->
             <!-- <input type="text" class="form-control" placeholder="Поиск...">-->
@@ -66,14 +70,14 @@
             <div class="nav navbar-nav navbar-right">
                 <!--  -->
                 <div class="btn-group">
-                    <a href="/user/password" class="btn btn-default navbar-btn"><i class="icon-white glyphicon glyphicon-cog"
-                            title="Сменить пароль"></i>&nbsp;</a>
-                    <a href="/user/logout" class="btn navbar-btn <? switch($_SESSION["user_type_id"]) {
+                    <a href="/user/password" class="btn btn-default navbar-btn" title="Сменить пароль">
+                        <i class="icon-white glyphicon glyphicon-cog"></i>&nbsp;</a>
+                    <a href="/user/logout" title="Выйти" class="btn navbar-btn <? switch($_SESSION["user_type_id"]) {
                         case 1 : ?>btn-warning<? break;
                         case 2 : ?>btn-success<? break;
                         case 3 : ?>btn-primary<? break;
                         default : ?>btn-default<?
-                        }?>"><?=(isset($_SESSION['user_login'])) ? $_SESSION['user_login'] : '' ?> <i class="icon-white glyphicon glyphicon-off"></i></a>
+                        }?>"><?=$_SESSION['user_login'] ?> <i class="icon-white glyphicon glyphicon-off"></i></a>
                 </div>&nbsp;
             </div>
             <? } ?>
@@ -87,10 +91,16 @@
         <div class="col-sm-3 col-md-2 sidebar">
 
             <ul class="nav nav-sidebar">
-
+            <? if ($_SESSION['user_type_id'] == 1) { ?>
+                <!-- Admin sidebar menu -->
+                <li><a href="/users">Список пользователей</a></li>
+                <li><a href="/users/create">Добавить пользователя</a></li>
+            <? } else { ?>
                 <li><a href="/events/add">Создать мероприятие</a></li>
                 <li><a href="/tickets/add">Analytics</a></li>
                 <li><a href="#">Export</a></li>
+            <? } ?>
+                <li><a href="/user/password">Сменить свой пароль</a></li>
             </ul>
 
         </div>

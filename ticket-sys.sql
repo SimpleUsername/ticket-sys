@@ -246,10 +246,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_login`, `user_password`, `user_type_id`, `user_hash`, `user_ip`) VALUES
-(1, 'admin', 'ec6a6536ca304edf844d1d248a4f08dc', 1, '0e835840d48551b239ee53a7f114e516', '127.0.0.1'),
-(2, 'vasya.pupkin', 'ec6a6536ca304edf844d1d248a4f08dc', 2, '7795f644c48de9fca6238e646a658f71', '127.0.0.1'),
-(3, 'galina.petrovna', 'ec6a6536ca304edf844d1d248a4f08dc', 3, 'a7ba15a2ed7df344939a04ae06249790', '127.0.0.1');
+INSERT INTO `users` (`user_id`, `user_login`, `user_name`, `user_password`, `user_type_id`, `user_hash`, `user_ip`) VALUES
+(1, 'admin', 'Админко Админ Админович', 'ec6a6536ca304edf844d1d248a4f08dc', 1, '0e835840d48551b239ee53a7f114e516', '127.0.0.1'),
+(2, 'vasya.pupkin', 'Пупкин Василий Иванович', 'ec6a6536ca304edf844d1d248a4f08dc', 2, '7795f644c48de9fca6238e646a658f71', '127.0.0.1'),
+(3, 'galina.petrovna', 'Просто Галина Петровна', 'ec6a6536ca304edf844d1d248a4f08dc', 3, 'a7ba15a2ed7df344939a04ae06249790', '127.0.0.1');
 
 -- --------------------------------------------------------
 

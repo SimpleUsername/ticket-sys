@@ -45,7 +45,9 @@ class Controller_User extends Controller {
                 $_SESSION['authorized'] = 1;
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['user_login'] = $user['user_login'];
+                $_SESSION['user_name'] = $user['user_name'];
                 $_SESSION['user_type_id'] = $user['user_type_id'];
+                // todo
                 //setcookie("id", $user['user_id'], time()+60*60*24*30);
                 //setcookie("hash", $user_hash, time()+60*60*24*30);
                 $this->redirect("user/login");
@@ -57,6 +59,7 @@ class Controller_User extends Controller {
     public function action_logout() {
         unset($_SESSION['user_id']);
         unset($_SESSION['user_login']);
+        unset($_SESSION['user_name']);
         unset($_SESSION['user_type_id']);
         $_SESSION['authorized'] = 0;
         $this->redirect("user/login");

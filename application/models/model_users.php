@@ -4,31 +4,31 @@ class Model_Users extends Model {
     public $user_types_table = "user_types";
 
     public function get_user_types () {
-        $sql = "SELECT * FROM $this->user_types_table";
-        $query = $this->db->sql($sql);
-        return  $query;
+        $select = $this->db->select($this->user_types_table);
+        return  $select;
     }
     public function get_users($data = null) {
-        $sql = "SELECT user_id , user_login, user_password, user_type_id,
-                user_type, user_hash, user_ip
-        FROM $this->users_table u, $this->user_types_table t
-        WHERE u.user_type_id = t.type_id";
-
+        $where = $this->users_table.".user_type_id = ".$this->user_types_table.".type_id";
+        $params = array();
         if (!empty($data['user_login'])) {
-            $sql .= " AND user_login LIKE '".$data['user_login']."'";
+            $where .= " AND user_login LIKE ':user_login'";
+            $params[':user_login'] = $data['user_login'];
         }
         if (!empty($data['user_id'])) {
-            $sql .= " AND user_id = ".(int)$data['user_id'];
+            $where .= " AND user_id = :user_id";
+            $params[':user_id'] = $data['user_id'];
         }
         if (!empty($data['user_type_id'])) {
-            $sql .= " AND user_type_id = ".(int)$data['user_id'];
+            $where .= " AND user_type_id = :user_type_id";
+            $params[':user_type_id'] = $data['user_type_id'];
         }
 
-        $query = $this->db->sql($sql);
+        $select = $this->db->select($this->users_table.", ".$this->user_types_table, $where, $params);
+
         if ($data == null) {
-            return  $query;
+            return  $select;
         } else {
-            return $query[0];
+            return $select[0];
         }
     }
     public function get_user_by_id($user_id) {

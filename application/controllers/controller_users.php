@@ -10,6 +10,9 @@ class Controller_Users extends Controller {
     {
         $this->model = new Model_Users();
         parent::__construct();
+        if ($_SESSION['user_type_id'] != 1) {
+            $this->redirect('404');
+        }
     }
 
     public function action_index()

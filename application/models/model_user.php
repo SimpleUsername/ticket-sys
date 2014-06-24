@@ -7,10 +7,10 @@
  */
 class Model_User extends Model {
     public $users_table = "users";
-    public $user_types_table = "user_types";
 
     public function get_user($user_login, $user_password) {
-        $sql = "SELECT user_id, user_login, user_type_id FROM $this->users_table
+        //vulnerable!!!
+        $sql = "SELECT user_id, user_login, user_name, user_type_id FROM $this->users_table
             WHERE user_login LIKE '$user_login' AND user_password LIKE '$user_password'";
         return $this->db->sql($sql)[0];
     }
