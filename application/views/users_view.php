@@ -22,18 +22,18 @@
 <? foreach($data as $user){?>
     <tr>
         <td>
-            <b data-user-id="<?=$user['user_id']?>"><?=$user["user_login"]?></b>
+            <b class="user-<?=$user['user_id']?>-login"><?=$user["user_login"]?></b>
         </td>
         <td>
             <p><?=$user["user_name"]?></p>
         </td>
         <td>
-            <span class="label <? switch($user["user_type_id"]) {
+            <h5><span class="label <? switch($user["user_type_id"]) {
                 case 1 : ?>label-warning"><? break;
                 case 2 : ?>label-success"><? break;
                 case 3 : ?>label-primary"><? break;
                 default : ?>label-default"><?
-            }?><?=$user["user_type"]?></span>
+            }?><?=$user["user_type"]?></span></h5>
         </td>
         <td>
             <a class="btn btn-success"  href="/users/edit/<?=$user['user_id']?>" title="Редактировать">
@@ -54,8 +54,7 @@
 <script>
     $('a.btn-delete').on('click', function(e){
         var id = $(e.target).data('userId');
-        $('#confirm-modal-body').html('Удалить пользователя '+$('[data-user-id='+ id +']').first().html()+'?');
-        e.preventDefault();
+        $('#confirm-modal-body').html('Удалить пользователя '+$('.user-'+ id +'-login').html()+'?');
         $('#confirm').modal({ backdrop: 'static', keyboard: false })
             .one('click', '#delete', function (e) {
                 document.location = '/users/delete/'+id;
