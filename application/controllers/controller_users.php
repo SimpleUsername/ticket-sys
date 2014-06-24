@@ -14,7 +14,18 @@ class Controller_Users extends Controller {
             $this->redirect('404');
         }
     }
-
+    private function delete_user_session($user_id){
+        $current_session = session_id();
+        session_write_close();
+        $data = $this->model->get_users(array("user_id" => (int)$user_id));
+        session_id($data['user_hash']);
+        session_start();
+        $this->model->clear_user_session_data($user_id);
+        session_destroy();
+        session_write_close();
+        session_id($current_session);
+        session_start();
+    }
     public function action_index()
     {
         $data = $this->model->get_users();
@@ -43,8 +54,14 @@ class Controller_Users extends Controller {
     public function action_delete($user_id)
     {
         if ($_SESSION['user_id'] != $user_id) {
+            $this->delete_user_session($user_id);
             $data = $this->model->delete_user($user_id);
         }
+        $this->redirect('users');
+    }
+    public function action_logout($user_id)
+    {
+        $this->delete_user_session($user_id);
         $this->redirect('users');
     }
     public function action_create() {
@@ -70,6 +87,35 @@ class Controller_Users extends Controller {
                 $data["user_types"] = $this->model->get_user_types();
                 $this->view->generate('users_edit_view.php', 'template_view.php', $data);
             }
+        }
+    }
+
+    /**
+     * Checking if login available
+     * @internal param string $_GET ['old_login'] user current login, if it set
+     * @internal param string $_GET ['user_login'] login to check
+     * @return json
+     */
+    public function action_checkLoginAvailableAjax() {
+        if (isset($_POST['user_login'])) {
+            $new_login = $_POST['user_login'];
+            if (isset($_GET['old_login']) && $_GET['old_login'] == $new_login) {
+                echo json_encode(array(
+                    'user_login' => $new_login,
+                    'valid' => true,
+                ));
+            } else {
+                $user = $this->model->get_users(array("user_login" => $new_login));
+                $is_available = ($user == null);
+                echo json_encode(array(
+                    'user_login' => $new_login,
+                    'valid' => $is_available
+                ));
+            }
+        } else {
+            echo json_encode(array(
+                'error' => 'Undefined index: user_login'
+            ));
         }
     }
 }

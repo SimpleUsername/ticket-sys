@@ -11,7 +11,7 @@ class Model_Users extends Model {
         $where = $this->users_table.".user_type_id = ".$this->user_types_table.".type_id";
         $params = array();
         if (!empty($data['user_login'])) {
-            $where .= " AND user_login LIKE ':user_login'";
+            $where .= " AND user_login LIKE :user_login";
             $params[':user_login'] = $data['user_login'];
         }
         if (!empty($data['user_id'])) {
@@ -28,7 +28,11 @@ class Model_Users extends Model {
         if ($data == null) {
             return  $select;
         } else {
-            return $select[0];
+            if (!empty($select)) {
+                return $select[0];
+            } else {
+                return null;
+            }
         }
     }
     public function get_user_by_id($user_id) {
@@ -52,5 +56,10 @@ class Model_Users extends Model {
     public function delete_user($user_id) {
         $delete = $this->delete($this->users_table, ' user_id = :user_id ', array(':user_id' => (int)$user_id));
         return $delete;
+    }
+    public function clear_user_session_data($user_id) {
+        $update = $this->update($this->users_table, array("user_hash" => null, "user_ip" => '0.0.0.0'),
+            ' user_id = :user_id ', array(':user_id' => (int)$user_id));
+        return $update;
     }
 }
