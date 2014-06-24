@@ -69,7 +69,10 @@ function hide_popup(time_out){
 
     },time_out);
 }
-
+function click(){
+    $('.prices').removeAttr('disabled');
+    $('#send').click();
+}
 $(document).ready(function(){
     $('.prices').attr('disabled','disabled');
 

@@ -1,9 +1,13 @@
-<? if(!empty($data['error'])) {?>
-    <div class="form-group has-success has-feedback">
-        <label  class="control-label col-sm-3"><?=$data['error']?></label>
-    </div>
-<?}?>
-    <form role="form" action="/events/edit" method="post" enctype="multipart/form-data" >
+<form role="form" action="/events/edit" method="post" enctype="multipart/form-data" >
+
+    <div class="col-md-6">
+
+
+        <? if(!empty($data['error'])) {?>
+            <div class="form-group has-success has-feedback">
+                <label  class="control-label col-sm-3"><?=$data['error']?></label>
+            </div>
+        <?}?>
         <input type="hidden" name="event_id" value="<?=$data['event_id']?>"/>
         <div class="form-group">
             <label for="name">Название события*</label>
@@ -61,26 +65,47 @@
                     </span>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Сохранить Событие</button>
+        <button type="submit" onclick="click()" class="btn btn-primary" id="send">Сохранить Событие</button>
         <a class="btn btn-danger"   onclick="confirm('Удалить ?')" href="/events/del/<?=$data['event_id']?>">Удалить</a>
-    </form>
+    </div>
+    <div class="col-md-6">
+        <h1 class="page-header">Цена на билеты для данного события</h1>
+        <div class="well"> <button type="button" class="btn btn-primary btn-lg btn-block" id="prices" data-action="1">Редактировать цены</button></div>
+        <? $i = 0;
+        foreach($data['prices'] as $key => $value) {?>
+            <div class="row">
+                <div class="form-group form-inline prices-parent">
+                    <label for="name" class="col-xs-4"><?=$value['sector_name']?> , грн</label>
+                    <div class="col-xs-4">
+                        <input type="hidden" name="sector[<?=$i;?>][sector_name]" value="<?=$value['sector_name']?>"/>
+                        <input type="hidden" name="sector[<?=$i;?>][sector_id]" value="<?=$value['sector_id']?>"/>
+                        <input type="number" required="required" class="form-control col-sm-2 prices"   name="sector[<?=$i;?>][sector_price]"  placeholder="Цена"  value="<?=$value['sector_price']?>"  disabled="disabled" required="required">
+                    </div>
+            </div>
+        </div>
+        <?  $i++;
+        } ?>
+
+    </div>
+</form>
 
 
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker1').datetimepicker({
-                language: 'ru'
-            });
-            $('#datetimepicker2').datetimepicker({
-                language: 'ru'
-            });
-            $('#datetimepicker3').datetimepicker({
-                language: 'ru'
-            });
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            language: 'ru'
         });
-    </script>
+        $('#datetimepicker2').datetimepicker({
+            language: 'ru'
+        });
+        $('#datetimepicker3').datetimepicker({
+            language: 'ru'
+        });
+    });
+</script>
 <? print_r($_POST);?>
-    <br/>
+<br/>
 <? print_r($data);?>
-    <br/>
+<br/>
 <? print_r($_FILES);?>

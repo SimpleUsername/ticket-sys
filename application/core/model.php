@@ -2,7 +2,8 @@
 
 class Model
 {
-	
+    public $table_section = "sector";
+
 	public function __construct(){
         $this->db = new Db();
     }
@@ -15,6 +16,7 @@ class Model
         $result = $this->db->insert($table,$where , $params);
         return $result;
     }
+
     public function insert($table, $fields){
         $result =$this->db->insert($table,$fields);
         return $result;
@@ -26,5 +28,16 @@ class Model
     public function  delete($table, $where, $params=null){
         $result = $this->db->delete($table, $where, $params);
         return $result;
+    }
+
+
+    public function get_section_prices()
+    {
+        $result = $this->db->sql("SELECT * FROM `{$this->table_section}` ");
+
+        if(!$result){
+            $result['msg'] = 'Сектора  не заполнены';
+        }
+        return  $result;
     }
 }

@@ -20,8 +20,7 @@ class Db{
         }
     }
 
-    // todo
-    public function select($table,$where = null , $params = null){
+    public function select($table, $where = null , $params = null){
         try{
             $query = "SELECT * FROM ".$table ;
 
@@ -34,7 +33,12 @@ class Db{
             }
 
             $rs = $this->dbh->prepare($query);
-            $result = $rs->execute($params);
+            $result = array();
+            if ($rs->execute($params)) {
+                while ($row = $rs->fetch(PDO::FETCH_ASSOC)) {
+                    $result[] = $row;
+                }
+            };
 
             return $result;
 
