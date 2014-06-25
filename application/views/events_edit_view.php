@@ -104,8 +104,10 @@
         });
     });
 </script>
-<? print_r($_POST);?>
+<pre>
+<? //print_r($_POST);?>
 <br/>
 <? print_r($data);?>
 <br/>
 <? print_r($_FILES);?>
+    </pre>

@@ -59,24 +59,28 @@
                     </span>
             </div>
         </div>
-
+        <button type="submit" class="btn btn-primary" id="send">Добавить Событие</button>
     </div>
     <div class="col-md-6">
         <h1 class="page-header">Цена на билеты для данного события</h1>
         <div class="well"> <button  type="button" class="btn btn-primary btn-lg btn-block" id="prices" data-action="1">Редактировать цены</button></div>
-        <? foreach($data['prices'] as $key => $value) {?>
+        <? $i = 0;
+        foreach($data['prices'] as $key => $value) {?>
             <div class="row">
                 <div class="form-group form-inline prices-parent">
                     <label for="name" class="col-xs-4"><?=$value['sector_name']?> , грн</label>
-                    <div class="col-xs-4"> <input  type="number" required="required"  class="form-control col-sm-2 prices"   name="sector[]"  placeholder="Цена" value="<?=$value['sector_price']?>"  disabled="disabled" required="required"></div>
-
+                    <div class="col-xs-4">
+                        <input type="hidden" name="sector[<?=$i;?>][sector_name]" value="<?=$value['sector_name']?>"/>
+                        <input type="hidden" name="sector[<?=$i;?>][sector_id]" value="<?=$value['sector_id']?>"/>
+                        <input type="number" required="required" class="form-control col-sm-2 prices"   name="sector[<?=$i;?>][sector_price]"  placeholder="Цена"  value="<?=$value['sector_price']?>"  disabled="disabled" required="required">
+                    </div>
                 </div>
             </div>
-
-        <? } ?>
+            <?  $i++;
+        } ?>
 
     </div>
-    <button type="submit" class="btn btn-primary">Добавить Событие</button>
+
 </form>
 
 

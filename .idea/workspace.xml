@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="685e137c-f6f9-4a73-a4c9-b01c872f26fc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ticket-sys-database.mwb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ticket-sys-database.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/access.log" afterPath="$PROJECT_DIR$/access.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/controller_events.php" afterPath="$PROJECT_DIR$/application/controllers/controller_events.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/controller_user.php" afterPath="$PROJECT_DIR$/application/controllers/controller_user.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/events_add_view.php" afterPath="$PROJECT_DIR$/application/views/events_add_view.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/events_edit_view.php" afterPath="$PROJECT_DIR$/application/views/events_edit_view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/login_view.php" afterPath="$PROJECT_DIR$/application/views/login_view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/main_view.php" afterPath="$PROJECT_DIR$/application/views/main_view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/my.js" afterPath="$PROJECT_DIR$/js/my.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/users_view.php" afterPath="$PROJECT_DIR$/application/views/users_view.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ticket-sys.loc.iws" />
@@ -35,19 +29,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="events_add_view.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="events_add_view.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/events_add_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="22" selection-start="4459" selection-end="4459" vertical-scroll-proportion="-18.692308" vertical-offset="1714" max-vertical-offset="2398">
+            <state line="61" column="89" selection-start="3224" selection-end="3224" vertical-scroll-proportion="0.35672516" vertical-offset="1120" max-vertical-offset="2486">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controller_events.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="controller_events.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/controller_events.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="145" column="13" selection-start="5690" selection-end="5690" vertical-scroll-proportion="0.7426901" vertical-offset="2682" max-vertical-offset="3454">
+            <state line="44" column="69" selection-start="1632" selection-end="1632" vertical-scroll-proportion="-9.384615" vertical-offset="724" max-vertical-offset="3454">
               <folding />
             </state>
           </provider>
@@ -83,7 +77,7 @@
       <file leaf-file-name="events_edit_view.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/events_edit_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="110" column="22" selection-start="5715" selection-end="5715" vertical-scroll-proportion="-17.0" vertical-offset="1978" max-vertical-offset="2750">
+            <state line="67" column="55" selection-start="3978" selection-end="3987" vertical-scroll-proportion="-5.1538463" vertical-offset="1340" max-vertical-offset="2794">
               <folding />
             </state>
           </provider>
@@ -147,9 +141,9 @@
         <option value="$PROJECT_DIR$/application/views/template_view.php" />
         <option value="$PROJECT_DIR$/js/my.js" />
         <option value="$PROJECT_DIR$/application/views/main_view.php" />
-        <option value="$PROJECT_DIR$/application/views/events_add_view.php" />
         <option value="$PROJECT_DIR$/application/views/events_edit_view.php" />
         <option value="$PROJECT_DIR$/application/controllers/controller_events.php" />
+        <option value="$PROJECT_DIR$/application/views/events_add_view.php" />
       </list>
     </option>
   </component>
@@ -492,23 +486,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/events_add_view.php">
+    <entry file="file://$PROJECT_DIR$/application/controllers/controller_events.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="22" selection-start="4459" selection-end="4459" vertical-scroll-proportion="-18.692308" vertical-offset="1714" max-vertical-offset="2398">
+        <state line="44" column="69" selection-start="1632" selection-end="1632" vertical-scroll-proportion="-9.384615" vertical-offset="724" max-vertical-offset="3454">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/events_edit_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="22" selection-start="5715" selection-end="5715" vertical-scroll-proportion="-17.0" vertical-offset="1978" max-vertical-offset="2750">
+        <state line="67" column="55" selection-start="3978" selection-end="3987" vertical-scroll-proportion="-5.1538463" vertical-offset="1340" max-vertical-offset="2794">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/controller_events.php">
+    <entry file="file://$PROJECT_DIR$/application/views/events_add_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="13" selection-start="5690" selection-end="5690" vertical-scroll-proportion="0.7426901" vertical-offset="2682" max-vertical-offset="3454">
+        <state line="61" column="89" selection-start="3224" selection-end="3224" vertical-scroll-proportion="0.35672516" vertical-offset="1120" max-vertical-offset="2486">
           <folding />
         </state>
       </provider>

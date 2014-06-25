@@ -115,7 +115,7 @@ class Controller_Events extends Controller
             }
             $data['statuses'] = $this->model->get_all_events(false);  // получение статусов
 
-            if(is_array($data['event_prices'])){
+            if(!empty($data['event_prices'])){
                 $data['prices'] = unserialize($data['event_prices']);
             }else{
                 $data['prices'] = $this->model->get_section_prices();
