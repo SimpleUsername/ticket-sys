@@ -47,9 +47,11 @@ class Controller_User extends Controller {
                 $_SESSION['user_login'] = $user['user_login'];
                 $_SESSION['user_name'] = $user['user_name'];
                 $_SESSION['user_type_id'] = $user['user_type_id'];
-                $this->redirect("user/login");
-            } else {
                 $this->redirect("user");
+            } else {
+                $_SESSION['user_login'] = htmlspecialchars($_POST['login']);
+                $_SESSION['error'] = 'Неправильный логин либо пароль!';
+                $this->redirect("user/login");
             }
         }
     }

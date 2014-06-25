@@ -61,8 +61,7 @@ class Controller_Events extends Controller
     public function action_edit($id){
 
         if(!empty($_POST['event_id'])){
-//            print_r($_POST);
-//            exit;
+
             $form_data =array('event_name' => $_POST['event_name'],
                 'event_status' => $_POST['event_status'],
                 'event_desc' => $_POST['event_desc'],

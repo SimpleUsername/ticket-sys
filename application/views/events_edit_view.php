@@ -65,7 +65,7 @@
                     </span>
             </div>
         </div>
-        <button type="submit" onclick="click()" class="btn btn-primary" id="send">Сохранить Событие</button>
+        <button type="submit"  class="btn btn-primary" id="send">Сохранить Событие</button>
         <a class="btn btn-danger"   onclick="confirm('Удалить ?')" href="/events/del/<?=$data['event_id']?>">Удалить</a>
     </div>
     <div class="col-md-6">
@@ -81,9 +81,9 @@
                         <input type="hidden" name="sector[<?=$i;?>][sector_id]" value="<?=$value['sector_id']?>"/>
                         <input type="number" required="required" class="form-control col-sm-2 prices"   name="sector[<?=$i;?>][sector_price]"  placeholder="Цена"  value="<?=$value['sector_price']?>"  disabled="disabled" required="required">
                     </div>
+                </div>
             </div>
-        </div>
-        <?  $i++;
+            <?  $i++;
         } ?>
 
     </div>

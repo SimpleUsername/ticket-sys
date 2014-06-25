@@ -69,10 +69,7 @@ function hide_popup(time_out){
 
     },time_out);
 }
-function click(){
-    $('.prices').removeAttr('disabled');
-    $('#send').click();
-}
+
 $(document).ready(function(){
     $('.prices').attr('disabled','disabled');
 
@@ -84,6 +81,10 @@ $(document).ready(function(){
     });
 
 
+    $(body).on('click', '#send', function(){
+        $('.prices').removeAttr('disabled');
+        $(this).submit();
+    });
 
     $(body).on('click', "#prices", function(){
         var  action = $(this).data('action');
@@ -128,8 +129,8 @@ $(document).ready(function(){
                 del_id : del_id
             },
             function(json){
-               //json['msg'];
-              ///  $(body).modal({show:true});
+                //json['msg'];
+                ///  $(body).modal({show:true});
             },
             'json'
         );
