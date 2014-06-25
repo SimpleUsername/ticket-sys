@@ -81,6 +81,10 @@ $(document).ready(function(){
     });
 
 
+    $(body).on('click', '#send', function(){
+        $('.prices').removeAttr('disabled');
+        $(this).submit();
+    });
 
     $(body).on('click', "#prices", function(){
         var  action = $(this).data('action');

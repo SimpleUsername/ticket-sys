@@ -25,7 +25,7 @@ class Controller_Events extends Controller
                 'event_date' => $_POST['event_date'],
                 'event_booking' => $_POST['event_booking'],
                 'event_sale' => $_POST['event_sale']);
-            if(!empty($_FILES['event_img'])){
+            if(!empty($_FILES['event_img']) && $_FILES['event_img']['error'] != 4){
                 $file = $this->prepare_files($_FILES);
                 $form_data['event_img_name'] = $file['event_img']['event_img_name'] ;
                 $form_data['event_img_md5']  = $file['event_img']['event_img_md5'];
@@ -35,6 +35,9 @@ class Controller_Events extends Controller
             if(!empty($_POST['sector'])){
                 $form_data['event_prices']  = serialize($_POST['sector']);
             }
+//                        print_r($_POST);
+//            exit;
+
             $res = $this->model->insert($this->model->table, $form_data);
             if(!$res){
 
@@ -58,6 +61,7 @@ class Controller_Events extends Controller
     public function action_edit($id){
 
         if(!empty($_POST['event_id'])){
+
             $form_data =array('event_name' => $_POST['event_name'],
                 'event_status' => $_POST['event_status'],
                 'event_desc' => $_POST['event_desc'],
