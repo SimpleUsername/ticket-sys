@@ -6,6 +6,45 @@ class Db{
         $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    /**
+     * @param $table
+     * @param null $data array of conditions (' WHERE $key = $data[$key]'). accepts string and int values
+     * @return array of rows if select returns multiple rows
+     * @return array of row if select returns single row
+     * @return null if select returns nothing
+     */
+    public function get_records($table, $data = null) {
+        $params = array();
+        if ($data != null) {
+            $where = "";
+            $first_statement = true;
+            foreach($data as $key=>$value) {
+                if (!$first_statement) {
+                    $where.=' AND ';
+                    $first_statement = false;
+                }
+                if (is_string($value)) {
+                    $where .= "$key LIKE :$key";
+                    $params[":$key"] = $value;
+                } else {
+                    $where .= "$key = :$key";
+                    $params[":$key"] = (int)$value;
+                }
+            }
+        } else {
+            $where = null;
+        }
+        $select = $this->select($table, $where, $params);
+        if ($data == null) {
+            return  $select;
+        } else {
+            if (!empty($select)) {
+                return $select[0];
+            } else {
+                return null;
+            }
+        }
+    }
 
     public function sql($query, $params = null) {
         try {
@@ -148,4 +187,5 @@ class Db{
     private function report($e) {
         throw $e;
     }
+
 }
