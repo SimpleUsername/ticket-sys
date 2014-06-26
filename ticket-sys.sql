@@ -28,10 +28,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `customer` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT,
-  `customer_name` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `customer_description` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `customer_name` varchar(60) NOT NULL,
+  `customer_description` text NOT NULL,
   PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Дамп данных таблицы `customer`
@@ -9152,7 +9152,7 @@ CREATE TABLE IF NOT EXISTS `prices` (
   `event_id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   PRIMARY KEY (`sector_id`,`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
