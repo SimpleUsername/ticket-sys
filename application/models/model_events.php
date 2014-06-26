@@ -2,8 +2,9 @@
 
 class Model_Events extends Model
 {
-    public $table = "events";
-    public $sub_table = "event_status";
+    //todo Must be private
+    public  $table = "events";
+    private $sub_table = "event_status";
 
 	public function get_all_events($status = true)
 	{

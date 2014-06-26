@@ -6,7 +6,7 @@
  * Time: 12:20
  */
 class Model_User extends Model {
-    public $users_table = "users";
+    private $users_table = "users";
 
     public function get_user_by_login_data($user_login, $user_password) {
         $select = $this->db->select($this->users_table,

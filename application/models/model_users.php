@@ -1,7 +1,7 @@
 <?php
 class Model_Users extends Model {
-    public $users_table = "users";
-    public $user_types_table = "user_types";
+    private $users_table = "users";
+    private $user_types_table = "user_types";
 
     public function get_user_types () {
         $select = $this->db->select($this->user_types_table);

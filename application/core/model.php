@@ -2,7 +2,7 @@
 
 class Model
 {
-    public $table_section = "sector";
+    private $table_section = "sector";
 
 	public function __construct(){
         $this->db = new Db();
