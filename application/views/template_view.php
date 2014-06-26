@@ -54,14 +54,36 @@
         <div class="navbar-collapse collapse">
             <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1) { ?>
                 <ul class="nav navbar-nav navbar-left masthead-nav">
+                    <li><a href="/">Главная</a></li>
                     <? if ($_SESSION['user_type_id'] == 1) { ?>
+                        <!-- Admin nav -->
                         <li><a href="/users">Пользователи</a></li>
-                    <? } else { ?>
-                        <li><a href="/">Главная</a></li>
+                    <? } elseif ($_SESSION['user_type_id'] == 2) { ?>
+                        <!-- Manager nav -->
                         <li><a href="/events">События</a></li>
-                        <li><a href="/tickets">Билеты</a></li>
-                        <li><a href="/config">Цены</a></li>
+                        <li><a href="/config">Цены</a></li>s
+                    <? } elseif ($_SESSION['user_type_id'] == 3) { ?>
+                        <li><a href="/tickets">Продажа</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Билет <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Поиск</a></li>
+                                <li><a href="#">Продажа</a></li>
+                                <li><a href="#">Возврат</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Бронь <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Поиск по имени</a></li>
+                                <li><a href="#">Забронировать</a></li>
+                                <li><a href="#">Выкуп</a></li>
+                                <li><a href="#">Отмена брони</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/tickets">Проверка места</a></li>
                     <? } ?>
+                    <li><a href="#">Помощь</a></li>
                     <li><a href="#">О программе</a></li>
                 </ul>
                 <!-- <form class="navbar-form navbar-right">-->
@@ -95,11 +117,18 @@
                         <!-- Admin sidebar menu -->
                         <li><a href="/users">Список пользователей</a></li>
                         <li><a href="/users/create">Добавить пользователя</a></li>
-                    <? } else { ?>
+                    <? } elseif ($_SESSION['user_type_id'] == 2) { ?>
+                        <!-- Manager sidebar menu -->
                         <li><a href="/events/add">Создать мероприятие</a></li>
                         <li><a href="/tickets/add">Analytics</a></li>
                         <li><a href="#">Export</a></li>
+                    <? } elseif ($_SESSION['user_type_id'] == 3) { ?>
+                        <!-- Saler sidebar menu -->
+                        <li><a href="/sales/sale">Продать билет</a></li>
+                        <li><a href="/sales/reserve">Забронировать билет</a></li>
+                        <!--<li><a href="#">Выкуп брони</a></li>-->
                     <? } ?>
+                    <li><hr></li>
                     <li><a href="/user/password">Сменить свой пароль</a></li>
                 </ul>
 

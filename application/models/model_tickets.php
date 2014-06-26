@@ -5,7 +5,7 @@
  * Date: 26.06.14
  * Time: 0:32
  */
-class Model_Seller extends Model {
+class Model_Tickets extends Model {
 
     private $customers_table = "customer";
     private $events_table = "events";
@@ -20,6 +20,7 @@ class Model_Seller extends Model {
     public function get_customer_by_id($customer_id){
         return $this->db->get_records($this->customers_table, array('customer_id' => (int)$customer_id));
     }
+
     public function get_events($status_id = null) {
         if ($status_id == null){
             return $this->db->get_records($this->events_table);
@@ -27,6 +28,15 @@ class Model_Seller extends Model {
             return $this->db->get_records($this->events_table, array('event_status' => (int)$status_id));
         }
     }
+    public function get_events_by_name($event_name, $status_id = null) {
+        if ($status_id == null){
+            return $this->db->get_records($this->events_table, array('event_name' => '%'.$event_name.'%'));
+        } else {
+            return $this->db->get_records($this->events_table, array('event_name' => '%'.$event_name.'%',
+                'event_status' => (int)$status_id));
+        }
+    }
+
     public function get_event_statuses() {
         return $this->db->get_records($this->event_status_table);
     }

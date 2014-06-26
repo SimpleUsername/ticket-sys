@@ -35,15 +35,7 @@ class Db{
             $where = null;
         }
         $select = $this->select($table, $where, $params);
-        if ($data == null) {
-            return  $select;
-        } else {
-            if (!empty($select)) {
-                return $select[0];
-            } else {
-                return null;
-            }
-        }
+        return  $select;
     }
 
     public function sql($query, $params = null) {

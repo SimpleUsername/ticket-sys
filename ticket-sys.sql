@@ -9249,7 +9249,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`user_id`, `user_login`, `user_name`, `user_password`, `user_type_id`, `user_hash`, `user_ip`) VALUES
 (1, 'admin', 'Админко Админ Админович', 'ec6a6536ca304edf844d1d248a4f08dc', 1, NULL, '0.0.0.0'),
 (2, 'vasya.pupkin', 'Пупкин Василий Иванович', 'ec6a6536ca304edf844d1d248a4f08dc', 3, 'ed1a7ioq83tqd2d0gtt6omukc4', '127.0.0.1');
-
+(3, 'manager', 'Менеджер Менеджер', 'ec6a6536ca304edf844d1d248a4f08dc', 2, '', '0.0.0.0');
 -- --------------------------------------------------------
 
 --
