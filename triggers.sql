@@ -55,7 +55,8 @@ DROP TRIGGER IF EXISTS `counter_decrement`;
 DELIMITER //
 CREATE TRIGGER `counter_decrement` AFTER INSERT ON `tickets`
  FOR EACH ROW BEGIN
-	IF NEW.ticket_type = 'purchased' THEN
+	IF NEW.ticket_type = 'purchased' 
+    OR NEW.ticket_type = 'reserved' THEN
     	SELECT row_no
         	INTO @row_no
             FROM place
@@ -77,8 +78,8 @@ DROP TRIGGER IF EXISTS `counter_decrement_update`;
 DELIMITER //
 CREATE TRIGGER `counter_decrement_update` AFTER UPDATE ON `tickets`
  FOR EACH ROW BEGIN
-	IF NEW.ticket_type = 'purchased'
-    AND OLD.ticket_type != 'purchased' THEN
+	IF NOT NEW.ticket_type IS NULL
+    AND OLD.ticket_type IS NULL THEN
     	SELECT row_no
         	INTO @row_no
             FROM place
@@ -100,7 +101,7 @@ DROP TRIGGER IF EXISTS `increment_counter`;
 DELIMITER //
 CREATE TRIGGER `increment_counter` AFTER DELETE ON `tickets`
  FOR EACH ROW BEGIN
-	IF OLD.ticket_type = 'purchased' THEN
+	IF OLD.ticket_type IS NULL THEN
     	SELECT row_no
         	INTO @row_no
             FROM place
