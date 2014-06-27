@@ -23,17 +23,18 @@
 <script>
     var tickets = [];
     var prices = [];
+    var event_id = <?=$data['event_id']?>;
 
     $("#row").html('').hide();
     $("#place").html('').hide();
-    $("#btn-modal-confirm").addClass("disabled");
+    $("#btn-modal-confirm-sell").addClass("disabled");
 
     $("#sector").change(function() {
 
         $("#sector").prop("disabled", true);
         $("#row").html('').fadeOut();
         $("#place").html('').fadeOut();
-        $("#btn-modal-confirm").addClass("disabled");
+        $("#btn-modal-confirm-sell").addClass("disabled");
 
         $.post("/tickets/getRows", {
             event_id: <?=$data['event_id']?>,
@@ -54,7 +55,7 @@
 
         $("#row").prop("disabled", true);
         $("#place").html('').fadeOut();
-        $("#btn-modal-confirm").addClass("disabled");
+        $("#btn-modal-confirm-sell").addClass("disabled");
 
         $.post("/tickets/getPlaces", {
             event_id: <?=$data['event_id']?>,
@@ -93,7 +94,6 @@
         });
     });
     $("#tickets").on("click", "span.ticket", function (event) {
-        console.log(event);
         var placeId = $(event.target).data('placeId');
         var index = tickets.indexOf(placeId);
         $(event.target).remove();
@@ -102,9 +102,9 @@
         tickets.splice(index, 1);
         $("option[data-place-id="+ placeId +"]").attr("selected", false);
         if (tickets.length > 0) {
-            $("#btn-modal-confirm").removeClass("disabled");
+            $("#btn-modal-confirm-sell").removeClass("disabled");
         } else {
-            $("#btn-modal-confirm").addClass("disabled");
+            $("#btn-modal-confirm-sell").addClass("disabled");
         }
     });
     $("#place").change(function() {
@@ -132,9 +132,21 @@
         });
 
         if (tickets.length > 0) {
-            $("#btn-modal-confirm").removeClass("disabled");
+            $("#btn-modal-confirm-sell").removeClass("disabled");
         } else {
-            $("#btn-modal-confirm").addClass("disabled");
+            $("#btn-modal-confirm-sell").addClass("disabled");
         }
+    });
+
+    $('#btn-modal-confirm-sell').on("click", function() {
+        $.post("/tickets/sellTickets/<?=$data['event_id']?>", {
+            tickets: JSON.stringify(tickets)
+        }).done(function (response) {
+            $("#dialog-modal").children().first().modal("hide");
+            $('#dialog-modal').on('hidden.bs.modal', function () {
+                $('#dialog-modal').unbind();
+                $("#dialog-modal").html(response);
+            });
+        });
     });
 </script>

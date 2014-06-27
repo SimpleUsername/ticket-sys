@@ -106,6 +106,9 @@ class Model_Tickets extends Model {
         }
         return $this->db->select($from, $where, $params, $what);
     }
+    public function get_place($place_id) {
+        return $this->db->get_records($this->place_table, array('place_id' => $place_id));
+    }
     public function add_customer($customer_name, $customer_description) {
         $customer_data = array(
             'customer_name' => $customer_name,

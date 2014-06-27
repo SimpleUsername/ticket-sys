@@ -9,8 +9,17 @@
                 <?php include 'application/views/'.$content_view; ?>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btn-modal-confirm" class="btn btn-primary">Продать</button>
+                <? if ($data['role'] == 'sell') { ?>
+                <button type="button" id="btn-modal-confirm-<?=$data['role']?>" class="btn btn-primary">Продать</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <? } else { ?>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    <? switch($data['role']){
+                        case "confirm" : echo "Подтвердить"; break;
+                        case "success" : echo "ОК"; break;
+                    }?>
+                    </button>
+                <? } ?>
             </div>
         </div>
     </div>
