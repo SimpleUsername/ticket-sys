@@ -11,6 +11,7 @@ class Model_Tickets extends Model {
     private $events_table = "events";
     private $event_status_table = "event_status";
     private $tickets_table = "tickets";
+    private $tickets_count_table = "tickets_count";
     private $sector_table = "sector";
     private $place_table = "place";
 
@@ -36,6 +37,9 @@ class Model_Tickets extends Model {
                 'event_status' => (int)$status_id));
         }
     }
+    public function get_event_by_id($event_id) {
+        return $this->db->get_records($this->events_table, array('event_id' => $event_id))[0];
+    }
 
     public function get_event_statuses() {
         return $this->db->get_records($this->event_status_table);
@@ -57,32 +61,50 @@ class Model_Tickets extends Model {
             return $result;
         }
     }
-    public function get_places($filter = null) {
-        if($filter==null) {
-            return $this->db->get_records($this->place_table);
+    public function get_free_places_count($event_id=null, $sector_id=null) {
+        if ($event_id != null && $sector_id != null) {
+            //SELECT sector_id, sum(free_count) FROM tickets_count WHERE event_id = 21 GROUP BY sector_id;
+            //SELECT row_no, sum(free_count) FROM tickets_count WHERE event_id = 21 AND sector_id = 10 GROUP BY row_no;
+            $sql = "SELECT row_no, free_count FROM ".$this->tickets_count_table." WHERE event_id = ".(int)$event_id;
+            $sql .= " AND sector_id = ".(int)$sector_id;
+        } elseif ($event_id != null) {
+            $sql = "SELECT sector_id, sum(free_count) free_count FROM ".$this->tickets_count_table." WHERE event_id = ".(int)$event_id;
+            $sql .=" GROUP BY sector_id";
         } else {
-            /*
-             * possible sets
-             * event_id
-             * event_id, row_no
-             * event_id, row_no, ticket_type
-             */
-            $from = "$this->place_table AS p LEFT OUTER JOIN $this->tickets_table AS t ON p.place_id = t.place_id";
-            if (isset($filter['event_id']) && isset($filter['row_no']) && isset($filter['ticket_type'])) {
-                $where = '(event_id = :event_id OR event_id IS NULL) AND row_no = :row_no AND ticket_type = :ticket_type';
-                $params = array(":event_id" => $filter['event_id'], ":row_no" => $filter['row_no'],
-                    ":ticket_type" => $filter['ticket_type']);
-            } elseif (isset($filter['event_id']) && isset($filter['row_no'])) {
-                $where = '(event_id = :event_id OR event_id IS NULL) AND row_no = :row_no';
-                $params = array(":event_id" => $filter['event_id'], ":row_no" => $filter['row_no']);
-            } elseif (isset($filter['event_id'])) {
-                $where = 'event_id = :event_id OR event_id IS NULL';
-                $params = array(":event_id" => $filter['event_id']);
-            } else {
-                return null;
-            }
-            return $this->db->select($from, $where, $params);
+            $sql = "SELECT event_id, sum(free_count) FROM ".$this->tickets_count_table." WHERE event_id = ".(int)$event_id;
+            $sql .= $event_id != null?" AND event_id = ".(int)$event_id:"";
+            $sql .=" GROUP BY event_id";
         }
+        return $this->db->sql($sql);
+    }
+    public function get_places($filter = null) {
+        /*
+         * possible sets
+         * event_id, sector_id, row_no
+         * event_id, sector_id, row_no, ticket_type
+         */
+        $from = "$this->place_table AS p LEFT OUTER JOIN $this->tickets_table AS t ON p.place_id = t.place_id";
+        $what = "p.place_id place_id, place_no, row_no, sector_id, event_id, customer_id, ticket_type, price";
+        if (isset($filter['event_id'])
+            && isset($filter['sector_id'])
+            && isset($filter['row_no'])
+            && isset($filter['ticket_type'])) {
+            $where = '(event_id = :event_id OR event_id IS NULL) AND sector_id = :sector_id AND row_no = :row_no AND ticket_type = :ticket_type';
+            $params = array(":event_id" => $filter['event_id'],
+                ":sector_id" => $filter['sector_id'],
+                ":row_no" => $filter['row_no'],
+                ":ticket_type" => $filter['ticket_type']);
+        } elseif (isset($filter['event_id'])
+            && isset($filter['sector_id'])
+            && isset($filter['row_no'])) {
+            $where = '(event_id = :event_id OR event_id IS NULL) AND sector_id = :sector_id AND row_no = :row_no';
+            $params = array(":event_id" => $filter['event_id'],
+                ":sector_id" => $filter['sector_id'],
+                ":row_no" => $filter['row_no']);
+        } else {
+            return null;
+        }
+        return $this->db->select($from, $where, $params, $what);
     }
     public function add_customer($customer_name, $customer_description) {
         $customer_data = array(

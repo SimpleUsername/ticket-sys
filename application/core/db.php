@@ -51,9 +51,12 @@ class Db{
         }
     }
 
-    public function select($table, $where = null , $params = null){
+    public function select($table, $where = null , $params = null, $what = null){
         try{
-            $query = "SELECT * FROM ".$table ;
+
+            $query = "SELECT ";
+            $query.= $what!=null?$what:"*";
+            $query.= " FROM ".$table ;
 
             if(!is_null($where)){
                 $query .= " WHERE " . $where ;

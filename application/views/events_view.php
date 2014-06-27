@@ -1,42 +1,73 @@
 <h1>События</h1>
-
-
 <div class="table-responsive">
     <table class="table">
         <th>Превью</th>
         <th>Название</th>
         <th>Статус</th>
-
         <th>Дата события</th>
         <th>Старт бронирования</th>
         <th>Старт продаж</th>
+        <? if ($_SESSION['user_type_id'] == 2) { ?>
         <th>Редактировать</th>
         <th>Удалить</th>
+        <? } elseif ($_SESSION['user_type_id'] == 3) { ?>
+        <th>Продать</th>
+        <th>Забронировать</th>
+        <? } ?>
         <? foreach($data as $id => $value){?>
             <? if($id%2 == 0){?>
                 <tr class="success">
                     <td><img class="img-thumbnail img_custom" src="<?=$value['event_img_path'].$value['event_img_md5']?>" alt="<?=$value['event_img_name']?>" class="img-thumbnail"></td>
+            <? } else { ?>
+                <tr class="info">
+                    <td><img src="<?=$value['event_img_path'].$value['event_img_md5']?>" alt="<?=$value['event_img_name']?>" class="img-thumbnail img_custom"></td>
+            <? } ?>
                     <td><?=$value['event_name']?></td>
                     <td><?=$value['estatus_name']?></td>
                     <td><?=$value['event_date']?></td>
                     <td><?=$value['event_booking']?></td>
                     <td><?=$value['event_sale']?></td>
+                    <? if ($_SESSION['user_type_id'] == 2) { ?>
                     <td><a class="btn btn-success" href="/events/edit/<?=$value['event_id']?>">Редактировать</a></td>
                     <td><button class="btn btn-danger" id="del_ev" onclick="confirm('Удалить ?')" data-event_id="<?=$value['event_id']?>">Удалить</button></td>
+                    <? } elseif ($_SESSION['user_type_id'] == 3) { ?>
+                    <td>
+                        <a class="btn btn-primary btn-sell"
+                           data-event-id="<?=$value['event_id']?>">
+                            Продать
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-reserve"
+                           data-event-id="<?=$value['event_id']?>">
+                            Бронировать
+                        </a>
+                    </td>
+                    <? } ?>
                 </tr>
-            <? }else {?>
-                <tr class="info"><td><img src="<?=$value['event_img_path'].$value['event_img_md5']?>" alt="<?=$value['event_img_name']?>" class="img-thumbnail img_custom"></td>
-                    <td><?=$value['event_name']?></td>
-                    <td><?=$value['estatus_name']?></td>
-                    <td><?=$value['event_date']?></td>
-                    <td><?=$value['event_booking']?></td>
-                    <td><?=$value['event_sale']?></td>
-                    <td><a class="btn btn-success" href="/events/edit/<?=$value['event_id']?>">Редактировать</a></td>
-                    <td><button class="btn btn-danger" id="del_ev"  onclick="confirm('Удалить ?')" data-event_id="<?=$value['event_id']?>">Удалить</button></td>
-                </tr>
-            <? }?>
         <? }?>
     </table>
 </div>
+
+<? if ($_SESSION['user_type_id'] == 3) { ?>
+<div id="dialog-modal"></div>
+<script>
+    $(".btn-sell").on("click", function(e) {
+        var sender = $(e.target);
+        var eventId = sender.data('eventId');
+        sender.addClass("disabled");
+        $.ajax({ url: "/tickets/sell/"+eventId })
+            .done(function(html) {
+                $("#dialog-modal").html(html);
+                $("#dialog-modal").children().first().modal();
+                sender.removeClass("disabled");
+            });
+
+    });
+    $(".btn-reserve").on("click", function(e) {
+        var eventId = $(e.target).data('eventId');
+    });
+</script>
+<? } ?>
 
 <? //echo "<pre>"; print_r($data); echo "</pre>";?>
