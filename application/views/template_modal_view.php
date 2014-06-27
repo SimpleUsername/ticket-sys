@@ -9,7 +9,7 @@
                 <?php include 'application/views/'.$content_view; ?>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btn-modal-confirm" class="btn btn-primary disabled">Продать</button>
+                <button type="button" id="btn-modal-confirm" class="btn btn-primary">Продать</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
             </div>
         </div>

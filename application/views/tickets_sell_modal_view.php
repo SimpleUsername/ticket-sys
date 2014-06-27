@@ -13,7 +13,14 @@
 <select size="1" id="place" class="form-control" multiple>
     <option>Сначала выберите ряд</option>
 </select>
+<h4>Билетов: 0</h4>
+<h4>Итого: 0 грн.</h4>
 <script>
+
+    $("#row").html('').hide();
+    $("#place").html('').hide();
+    $("#btn-modal-confirm").addClass("disabled");
+
     $("#sector").change(function() {
 
         $("#sector").prop("disabled", true);
@@ -29,7 +36,8 @@
             $("#row").attr("size", arr.length).fadeIn();;
             for (var i=0; i<arr.length; i++) {
                 if (arr[i]['free_count'] != 0) {
-                    $("#row").append("<option data-row-no="+ arr[i]['row_no'] +">Ряд "+arr[i]['row_no']+" (Свободно мест - "+arr[i]['free_count']+")</option>");
+                    $("#row").append("<option data-row-no="+ arr[i]['row_no'] +">Ряд "+arr[i]['row_no']+
+                        " (Свободно мест - "+arr[i]['free_count']+")</option>");
                 }
             }
             $("#sector").removeAttr("disabled").attr("size", 1);
@@ -56,6 +64,7 @@
                     disabledAttr = "disabled";
                     color = "Snow";
                 } else if (arr[i]['ticket_type'] == 'reserved') {
+                    disabledAttr = "disabled";
                     color = "#d9edf7";
                 } else {
                     color = "#dff0d8";
