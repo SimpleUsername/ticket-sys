@@ -61,14 +61,14 @@
                     <? } elseif ($_SESSION['user_type_id'] == 2) { ?>
                         <!-- Manager nav -->
                         <li><a href="/events">События</a></li>
-                        <li><a href="/config">Цены</a></li>s
+                        <li><a href="/config">Цены</a></li>
                     <? } elseif ($_SESSION['user_type_id'] == 3) { ?>
-                        <li><a href="/tickets">Продажа</a></li>
+                        <!-- Seller nav -->
+                        <li><a href="/events">События</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Билет <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#">Поиск</a></li>
-                                <li><a href="#">Продажа</a></li>
                                 <li><a href="#">Возврат</a></li>
                             </ul>
                         </li>
@@ -76,12 +76,10 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Бронь <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#">Поиск по имени</a></li>
-                                <li><a href="#">Забронировать</a></li>
                                 <li><a href="#">Выкуп</a></li>
                                 <li><a href="#">Отмена брони</a></li>
                             </ul>
                         </li>
-                        <li><a href="/tickets">Проверка места</a></li>
                     <? } ?>
                     <li><a href="#">Помощь</a></li>
                     <li><a href="#">О программе</a></li>
@@ -123,10 +121,10 @@
                         <li><a href="/tickets/add">Analytics</a></li>
                         <li><a href="#">Export</a></li>
                     <? } elseif ($_SESSION['user_type_id'] == 3) { ?>
-                        <!-- Saler sidebar menu -->
-                        <li><a href="/sales/sale">Продать билет</a></li>
-                        <li><a href="/sales/reserve">Забронировать билет</a></li>
-                        <!--<li><a href="#">Выкуп брони</a></li>-->
+                        <!-- Seller sidebar menu -->
+                        <li><a href="#">Выкуп брони</a></li>
+                        <li><a href="#">Отмена брони</a></li>
+                        <li><a href="#">Возврат билета</a></li>
                     <? } ?>
                     <li><hr></li>
                     <li><a href="/user/password">Сменить свой пароль</a></li>
@@ -136,7 +134,6 @@
         <? } ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <?php include 'application/views/'.$content_view; ?>
-            <!--            --><?// echo "<pre>" ; print_r($_SESSION); echo "</pre>";?>
         </div>
     </div>
 </div>

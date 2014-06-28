@@ -14,9 +14,6 @@ class Controller_Tickets extends Controller {
             $this->redirect('404');
         }
     }
-    public function action_index() {
-        //TODO implement me :3
-    }
     public function action_sell($event_id) {
         if (empty($_POST)) {
             $data = $this->model->get_event_by_id($event_id);
@@ -44,42 +41,40 @@ class Controller_Tickets extends Controller {
         }
     }
     public function action_sellTickets($event_id) {
-        if (!empty($_POST)) {
-            $event = $this->model->get_event_by_id($event_id);
-            $prices =  unserialize($event['event_prices']);
-            $places = json_decode($_POST['tickets']);
-            $total = 0;
-            $data['tickets'] = array();
-            foreach ($places as $key=>$place_id) {
-                $place = $this->model->get_place($place_id)[0];
+        $event = $this->model->get_event_by_id($event_id);
+        $prices =  unserialize($event['event_prices']);
+        $places = json_decode($_POST['tickets']);
+        $total = 0;
+        $data['tickets'] = array();
+        foreach ($places as $key=>$place_id) {
+            $place = $this->model->get_place($place_id)[0];
 
-                foreach ($prices as $key=>$sector) {
-                    if ($sector['sector_id'] == $place['sector_id']) {
-                        try {
-                            $this->model->add_ticket($event_id, $place_id, 'purchased', null, $sector['sector_price']);
-                            $error = false;
-                            $total += $sector['sector_price'];
-                        } catch(Exception $e) {
-                            $error = true;
-                        }
-                        $data['tickets'][] = array(
-                            'ticket_id' => $event_id."-".$place_id,
-                            'event_name' => $event['event_name'],
-                            'event_date' => $event['event_date'],
-                            'place_id' => $place_id,
-                            'place_no' => $place['place_no'],
-                            'row_no' => $place['row_no'],
-                            'sector_id' => $place['sector_id'],
-                            'price'=> $sector['sector_price'],
-                            'error'=> $error);
+            foreach ($prices as $key=>$sector) {
+                if ($sector['sector_id'] == $place['sector_id']) {
+                    $error = false;
+                    try {
+                        $this->model->add_ticket($event_id, $place_id, 'purchased', null, $sector['sector_price']);
+                        $total += $sector['sector_price'];
+                    } catch(Exception $e) {
+                        $error = true;
                     }
+                    $data['tickets'][] = array(
+                        'ticket_id' => $event_id."-".$place_id,
+                        'event_name' => $event['event_name'],
+                        'event_date' => $event['event_date'],
+                        'place_id' => $place_id,
+                        'place_no' => $place['place_no'],
+                        'row_no' => $place['row_no'],
+                        'sector_id' => $place['sector_id'],
+                        'price'=> $sector['sector_price'],
+                        'error'=> $error);
                 }
             }
-            $data['total'] = $total;
-            $data['role'] = "success";
-            $data['title'] = "Продажа билета на ".$event['event_name']." (".$event['event_date'].")";
-            $this->view->generate('tickets_sell_success_modal_view.php', 'template_modal_view.php', $data);
         }
+        $data['total'] = $total;
+        $data['role'] = "success";
+        $data['title'] = "Продажа билета на ".$event['event_name']." (".$event['event_date'].")";
+        $this->view->generate('tickets_sell_success_modal_view.php', 'template_modal_view.php', $data);
     }
     /*ajax methods*/
     public function action_getRows() {
