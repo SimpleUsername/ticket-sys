@@ -6,6 +6,14 @@
  * Time: 12:46
  */
 class Controller_Users extends Controller {
+
+    /*===================params for action_dump=========================== */
+    private $_dump_dir = "/dump";
+    private $_dump_name;
+    private $_gzip = false; 		// sql or gzip
+    private $_stream = true;		// save in dump dir  and upload from browser
+
+
     public function __construct()
     {
         $this->model = new Model_Users();
@@ -116,6 +124,80 @@ class Controller_Users extends Controller {
             echo json_encode(array(
                 'error' => 'Undefined index: user_login'
             ));
+        }
+    }
+
+
+    public function action_dump(){
+        $this->_dump_name = date("Y-m-d_h_i").".sql";
+
+        $tables = $this->model->sql("SHOW TABLES");
+
+        $fp = fopen( $_SERVER['DOCUMENT_ROOT'].$this->_dump_dir."/".$this->_dump_name, "w" );
+
+        $count_res = count($tables);
+        for($k = 0; $k < $count_res ; $k++){
+
+            $query = "";
+            if($fp){
+                $res1 = $this->model->sql("SHOW CREATE TABLE ".$tables[$k]['Tables_in_'.DB_NAME]);
+                $query="\nDROP TABLE IF EXISTS `".$tables[$k]['Tables_in_'.DB_NAME]."`;\n".$res1[0]['Create Table'].";\n";
+                fwrite($fp, $query);
+                $query="";
+
+                $r_ins = $this->model->select($tables[$k]['Tables_in_'.DB_NAME]);
+
+                $count_r_ins = count($r_ins);
+                if($count_r_ins > 0){
+                    $query_ins = "\nINSERT INTO `".$tables[$k]['Tables_in_'.DB_NAME]."` VALUES ";
+                    fwrite($fp, $query_ins);
+
+                    for($j = 0 ; $j < $count_r_ins; $j++){
+                        $query="";
+                        foreach($r_ins[$j] as  $field){
+
+                            if ( is_null($field) )$field = "NULL";
+                            else $field = "'".$field."'";
+                            if ( $query == "" ) $query = $field;
+                            else $query = $query.', '.$field;
+                        }
+                        if($j ==0) {
+                            $q="(".$query.")";
+                        }
+                        else{
+                            $q=",(".$query.")";
+                        }
+                        fwrite($fp, $q);
+                    }
+
+                    fwrite($fp, ";\n");
+                }
+            }
+        }
+
+        fclose ($fp);
+
+
+        if($this->_gzip||$this->_stream){ $data=file_get_contents( $_SERVER['DOCUMENT_ROOT'].$this->_dump_dir."/".$this->_dump_name);
+            $ofdot="";
+            if($this->_gzip){
+                $data = gzencode($data, 9);
+                unlink( $_SERVER['DOCUMENT_ROOT'].$this->_dump_dir."/".$this->_dump_name);
+                $ofdot=".gz";
+            }
+
+            if($this->_stream){
+                header('Content-Disposition: attachment; filename='.$this->_dump_name.$ofdot);
+                if($this->_gzip) header('Content-type: application/x-gzip'); else header('Content-type: text/plain');
+                header("Expires: 0");
+                header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
+                header("Pragma: public");
+                echo $data;
+            }else{
+                $fp = fopen( $_SERVER['DOCUMENT_ROOT'].$this->_dump_dir."/".$this->_dump_name.$ofdot, "w");
+                fwrite($fp, $data);
+                fclose($fp);
+            }
         }
     }
 }
