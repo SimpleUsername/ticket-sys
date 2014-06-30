@@ -92,7 +92,7 @@
                     <!--  -->
                     <div class="btn-group">
                         <? if($_SESSION['user_type_id'] == 1){?>
-                        <a href="/user/dump" class="btn btn-default navbar-btn btn-primary" title="Дамп базы"> <i class="icon-white glyphicon  glyphicon-download"></i>&nbsp;Дамп базы</a>
+                        <a href="/users/dump" class="btn btn-default navbar-btn btn-primary" title="Дамп базы"> <i class="icon-white glyphicon  glyphicon-download"></i>&nbsp;Дамп базы</a>
                         <? } ?>
                         <a href="/user/password" class="btn btn-default navbar-btn" title="Сменить пароль">
                             <i class="icon-white glyphicon glyphicon-cog"></i>&nbsp;</a>

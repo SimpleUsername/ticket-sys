@@ -5551,3 +5551,4 @@
 127.0.0.1 - - [30/Jun/2014:23:28:46 +0300] "GET /events/edit HTTP/1.1" 200 1503 "http://ticket-sys.loc/events/edit/6" "Mozilla/5.0 (Windows NT 5.1; rv:30.0) Gecko/20100101 Firefox/30.0"
 127.0.0.1 - - [30/Jun/2014:23:28:47 +0300] "GET /events/edit HTTP/1.1" 200 1503 "http://ticket-sys.loc/events/edit/6" "Mozilla/5.0 (Windows NT 5.1; rv:30.0) Gecko/20100101 Firefox/30.0"
 127.0.0.1 - - [30/Jun/2014:23:29:10 +0300] "GET /tickets/sell/2 HTTP/1.1" 200 8546 "-" "Mozilla/5.0 (Windows NT 5.1; rv:30.0) Gecko/20100101 Firefox/30.0"
+127.0.0.1 - - [30/Jun/2014:23:30:10 +0300] "GET /tickets HTTP/1.1" 200 3 "-" "Mozilla/5.0 (Windows NT 5.1; rv:30.0) Gecko/20100101 Firefox/30.0"
