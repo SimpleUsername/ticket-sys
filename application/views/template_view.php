@@ -9,6 +9,7 @@
 
 
     <title>Проект</title>
+    <link href="/favicon_<?=$_SERVER['SERVER_ADDR'] == '127.0.0.1'?"debug":"release"?>.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" href="/css/normalize.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
