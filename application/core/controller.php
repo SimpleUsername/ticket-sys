@@ -93,7 +93,10 @@ class Controller {
     }
 
 
-
+    public  function simple_clear($str){
+        $str = preg_replace("/(<\?=|<\?php|<script|<\?xml)/", "", $str);
+        return $str;
+    }
     public function redirect($section){
         if(!empty($section)){
             $url = "http://".$_SERVER['HTTP_HOST']."/".$section;

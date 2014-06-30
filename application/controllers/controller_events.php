@@ -21,7 +21,7 @@ class Controller_Events extends Controller
         if(!empty($_POST['event_name'])){
             $form_data =array('event_name' => $_POST['event_name'],
                 'event_status' => $_POST['event_status'],
-                'event_desc' => $_POST['event_desc'],
+                'event_desc' => $this->simple_clear($_POST['event_desc']),
                 'event_date' => $_POST['event_date'],
                 'event_booking' => $_POST['event_booking'],
                 'event_sale' => $_POST['event_sale']);
@@ -64,7 +64,7 @@ class Controller_Events extends Controller
 
             $form_data =array('event_name' => $_POST['event_name'],
                 'event_status' => $_POST['event_status'],
-                'event_desc' => $_POST['event_desc'],
+                'event_desc' => $this->simple_clear($_POST['event_desc']),
                 'event_date' => $_POST['event_date'],
                 'event_booking' => $_POST['event_booking'],
                 'event_sale' => $_POST['event_sale']);

@@ -30,4 +30,7 @@ class Model_User extends Model {
             ' user_id = :user_id ', array(':user_id' => (int)$user_id));
         return $update;
     }
+
+
+
 }

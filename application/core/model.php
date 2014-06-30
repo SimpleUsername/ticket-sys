@@ -12,11 +12,14 @@ class Model
 	{
 		// todo
 	}
-    public function select($table,$where = null , $params = null){
-        $result = $this->db->insert($table,$where , $params);
+    public function select($table,$where = null , $params = null, $what= null){
+        $result = $this->db->select($table,$where , $params, $what);
         return $result;
     }
-
+    public function sql($query){
+        $result = $this->db->sql($query);
+        return $result;
+    }
     public function insert($table, $fields){
         $result =$this->db->insert($table,$fields);
         return $result;
