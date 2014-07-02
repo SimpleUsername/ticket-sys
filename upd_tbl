@@ -1,3 +1,0 @@
-ALTER TABLE `events`
-ADD `event_prices` text NOT NULL,
-COMMENT='';
