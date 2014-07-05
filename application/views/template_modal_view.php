@@ -8,10 +8,14 @@
             <div class="modal-body">
                 <?php include 'application/views/'.$content_view; ?>
             </div>
+            <? if (isset($data['role'])) { ?>
             <div class="modal-footer">
                 <? if ($data['role'] == 'sell') { ?>
-                <button type="button" id="btn-modal-confirm-<?=$data['role']?>" class="btn btn-primary">Продать</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                    <button type="button" id="btn-modal-confirm-sell" class="btn btn-primary">Продать</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <? } elseif ($data['role'] == 'reserve') { ?>
+                    <button type="button" id="btn-modal-confirm-reserve" class="btn btn-primary">Забронировать</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
                 <? } else { ?>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">
                     <? switch($data['role']){
@@ -21,6 +25,7 @@
                     </button>
                 <? } ?>
             </div>
+            <? } ?>
         </div>
     </div>
 </div>

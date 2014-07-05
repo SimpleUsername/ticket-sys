@@ -75,7 +75,16 @@ $current_date = time();
 
     });
     $(".btn-reserve").on("click", function(e) {
-        var eventId = $(e.target).data('eventId');
+        var sender = $(e.target);
+        var eventId = sender.data('eventId');
+        sender.addClass("disabled");
+        $.ajax({ url: "/tickets/reserve/"+eventId })
+            .done(function(html) {
+                $("#dialog-modal").html(html);
+                $("#dialog-modal").children().first().modal();
+                sender.removeClass("disabled");
+            });
+
     });
 </script>
 <? } ?>

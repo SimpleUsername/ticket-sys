@@ -83,13 +83,13 @@ class Model_Tickets extends Model {
          * event_id, sector_id, row_no
          * event_id, sector_id, row_no, ticket_type
          */
-        $from = "$this->place_table AS p LEFT OUTER JOIN $this->tickets_table AS t ON p.place_id = t.place_id";
+        $from = "$this->place_table AS p LEFT OUTER JOIN (select * from $this->tickets_table where event_id=:event_id) AS t ON p.place_id = t.place_id";
         $what = "p.place_id place_id, place_no, row_no, sector_id, event_id, customer_id, ticket_type, price";
         if (isset($filter['event_id'])
             && isset($filter['sector_id'])
             && isset($filter['row_no'])
             && isset($filter['ticket_type'])) {
-            $where = '(event_id = :event_id OR event_id IS NULL) AND sector_id = :sector_id AND row_no = :row_no AND ticket_type = :ticket_type';
+            $where = 'sector_id = :sector_id AND row_no = :row_no AND ticket_type = :ticket_type';
             $params = array(":event_id" => $filter['event_id'],
                 ":sector_id" => $filter['sector_id'],
                 ":row_no" => $filter['row_no'],
@@ -97,7 +97,7 @@ class Model_Tickets extends Model {
         } elseif (isset($filter['event_id'])
             && isset($filter['sector_id'])
             && isset($filter['row_no'])) {
-            $where = '(event_id = :event_id OR event_id IS NULL) AND sector_id = :sector_id AND row_no = :row_no';
+            $where = 'sector_id = :sector_id AND row_no = :row_no';
             $params = array(":event_id" => $filter['event_id'],
                 ":sector_id" => $filter['sector_id'],
                 ":row_no" => $filter['row_no']);

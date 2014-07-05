@@ -137,10 +137,10 @@
             $("#btn-modal-confirm-sell").addClass("disabled");
         }
     });
-
-    $('#btn-modal-confirm-sell').on("click", function() {
-        $.post("/tickets/sellTickets/<?=$data['event_id']?>", {
-            tickets: JSON.stringify(tickets)
+    $('#btn-modal-confirm-<?=$data['role']?>').on("click", function() {
+        $.post("/tickets/<?=$data['role']?>Tickets/<?=$data['event_id']?>", {
+            tickets: JSON.stringify(tickets)<? if ($data['role'] == 'reserve' ) { ?>,
+            customer_id: <? echo $data['customer_id']; } ?>
         }).done(function (response) {
             $("#dialog-modal").children().first().modal("hide");
             $('#dialog-modal').on('hidden.bs.modal', function () {
@@ -149,4 +149,7 @@
             });
         });
     });
+    <? if ($data['role'] == 'reserve' ) { ?>
+    $("#dialog-modal").children().first().modal();
+    <? } ?>
 </script>
