@@ -49,29 +49,34 @@
     </div>
 </div>
 <script>
+    var customersSearchTimeout;
     $("#loading-animation").hide();
     $("#customers-list").hide();
     $("#new-customer").hide();
     $("#customer-name").keyup(function() {
-        $("#customers-list").slideUp();
-        if ($("#customer-name").val().length > 0) {
-            $("#loading-animation").fadeIn();
-            $.post("/tickets/getCustomers", {customer_name : $("#customer-name").val()}, function(data) {
-                $("#loading-animation").hide();
-                $("#customers-list").slideDown().html("");
-                if (data.length == 0) {
-                    $("#customers-list").append('<a href="#" class="list-group-item disabled list-group-item-warning">Покупатели не найдены!</a>');
-                }
-                for (var i = 0; i < data.length; i++) {
-                    $("#customers-list").append(
-                        '<a href="#" onclick="return customerClick(' + data[i].customer_id+ ')" class="list-group-item customer">' +
-                        '<h4 class="list-group-item-heading">' +
-                        data[i].customer_name + '</h4>'+
-                        '<p class="list-group-item-text">'+
-                        data[i].customer_description + '</p></a>');
-                }
-            }, "json");
-        }
+        clearTimeout(customersSearchTimeout);
+        customersSearchTimeout = setTimeout(function () {
+            $("#customers-list").hide();
+            if ($("#customer-name").val().length > 0) {
+                $("#loading-animation").show();
+                $.post("/tickets/getCustomers", {customer_name : $("#customer-name").val()}, function(data) {
+                    $("#loading-animation").hide();
+                    $("#customers-list").html("");
+                    if (data.length == 0) {
+                        $("#customers-list").append('<a href="#" class="list-group-item disabled list-group-item-warning">Покупатели не найдены!</a>');
+                    }
+                    for (var i = 0; i < data.length; i++) {
+                        $("#customers-list").append(
+                            '<a href="#" onclick="return customerClick(' + data[i].customer_id+ ')" class="list-group-item customer">' +
+                            '<h4 class="list-group-item-heading">' +
+                            data[i].customer_name + '</h4>'+
+                            '<p class="list-group-item-text">'+
+                            data[i].customer_description + '</p></a>');
+                    }
+                    $("#customers-list").slideDown();
+                }, "json");
+            }
+        },750);
     });
     function customerClick(customerId) {
         $.post("/tickets/reserve/<?=$data['event_id']?>", {customer_id : customerId}, function(data) {
@@ -84,6 +89,7 @@
         return false;
     }
     $("#new-customer-create").on("click", function() {
+        $("#new-customer-name").val($("#customer-name").val());
         $("#customer-search").slideUp();
         $("#new-customer").slideDown();
     });
