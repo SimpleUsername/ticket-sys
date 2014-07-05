@@ -1,4 +1,4 @@
-<select size="<?=count($data['sectors'])?>" id="sector" class="form-control">
+<select size="<?=count($data['sectors'])>20?"20":count($data['sectors'])?>" id="sector" class="form-control">
     <? foreach ($data['sectors'] as $id => $sector) {
         if ($sector['sector_free_count'] > 0) { ?>
     <option data-sector-id="<?=$sector['sector_id']?>" data-sector-price="<?=$sector['sector_price']?>">
@@ -41,7 +41,8 @@
             sector_id: $('#sector option:selected').data('sectorId')
         }).done(function (response) {
             var arr = $.parseJSON(response);
-            $("#row").attr("size", arr.length).fadeIn();;
+            var selectSize = arr.length>20 ? 20 : arr.length;
+            $("#row").attr("size", selectSize).fadeIn();;
             for (var i=0; i<arr.length; i++) {
                 if (arr[i]['free_count'] != 0) {
                     $("#row").append("<option data-row-no="+ arr[i]['row_no'] +">Ряд "+arr[i]['row_no']+
@@ -63,7 +64,8 @@
             row_no: $('#row option:selected').data('rowNo')
         }).done(function (response) {
             var arr = $.parseJSON(response);
-            $("#place").fadeIn().attr("size", arr.length).html("");
+            var selectSize = arr.length>20 ? 20 : arr.length;
+            $("#place").fadeIn().attr("size", selectSize).html("");
             for (var i=0; i<arr.length; i++) {
                 var disabledAttr = '';
                 var selectedAttr = '';
@@ -138,6 +140,7 @@
         }
     });
     $('#btn-modal-confirm-<?=$data['role']?>').on("click", function() {
+        ('#btn-modal-confirm-<?=$data['role']?>').addClass('disabled');
         $.post("/tickets/<?=$data['role']?>Tickets/<?=$data['event_id']?>", {
             tickets: JSON.stringify(tickets)<? if ($data['role'] == 'reserve' ) { ?>,
             customer_id: <? echo $data['customer_id']; } ?>
