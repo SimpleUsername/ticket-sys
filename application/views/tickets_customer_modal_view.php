@@ -1,29 +1,57 @@
-<div class="form-inline row">
-    <div class="form-group col-sm-8">
-        <div class="input-group">
-            <span class="input-group-addon">Поиск</span>
-            <input class="form-control" style="width: 100%" placeholder="Имя покупателя" id="customer-name">
+<div id="customer-search">
+    <div class="form-inline row">
+        <div class="form-group col-sm-8">
+            <div class="input-group">
+                <span class="input-group-addon">Поиск</span>
+                <input class="form-control" style="width: 100%" placeholder="Имя покупателя" id="customer-name">
+            </div>
+        </div>
+        <div class="form-group col-sm-4">
+            <button class="btn btn-primary" id="new-customer-create">Добавить нового покупателя</button>
         </div>
     </div>
-    <div class="form-group col-sm-4">
-        <button class="btn btn-primary disabled">Добавить нового покупателя<!-- not implemented yet --></button>
+    <br>
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <img src="/images/ajax-loader.gif" id="loading-animation">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="list-group" id="customers-list">
+            </div>
+        </div>
     </div>
 </div>
-<br>
-<div class="row">
-    <div class="col-sm-12 text-center">
-        <img src="/images/ajax-loader.gif" id="loading-animation">
-    </div>
-</div>
-<div class="row">
+<div class="row" id="new-customer">
     <div class="col-sm-12">
-        <div class="list-group" id="customers-list">
+        <h3>Добавление нового покупателя</h3>
+        <div class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="new-customer-name" class="col-sm-2 control-label">Имя</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="new-customer-name" placeholder="Полное имя покупателя">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Примечания</label>
+                <div class="col-sm-10">
+                    <textarea id="new-customer-description" class="form-control" placeholder="Не обязательно"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-primary" id="new-customer-create-confirm">Создать</button>
+                    <button class="btn btn-default" id="new-customer-create-cancel">Отмена</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <script>
     $("#loading-animation").hide();
     $("#customers-list").hide();
+    $("#new-customer").hide();
     $("#customer-name").keyup(function() {
         $("#customers-list").slideUp();
         if ($("#customer-name").val().length > 0) {
@@ -46,7 +74,6 @@
         }
     });
     function customerClick(customerId) {
-        console.log(customerId);
         $.post("/tickets/reserve/<?=$data['event_id']?>", {customer_id : customerId}, function(data) {
             $("#dialog-modal").children().first().modal("hide");
             $('#dialog-modal').on('hidden.bs.modal', function () {
@@ -56,4 +83,28 @@
         });
         return false;
     }
+    $("#new-customer-create").on("click", function() {
+        $("#customer-search").slideUp();
+        $("#new-customer").slideDown();
+    });
+    $("#new-customer-create-cancel").on("click", function() {
+        $("#customer-search").slideDown();
+        $("#new-customer").slideUp();
+    });
+    $("#new-customer-create-confirm").on("click", function() {
+        $("#new-customer-create-confirm").addClass("disabled");
+        $.post("/tickets/addCustomer", {
+            customer_name: $("#new-customer-name").val(),
+            customer_description: $("#new-customer-description").val()
+        }).done(function (response) {
+            $("#new-customer-create-confirm").removeClass("disabled");
+            var customerName = $("#new-customer-name").val();
+            $("#new-customer-name").val("");
+            $("#new-customer-description").val("");
+            $("#customer-search").slideDown();
+            $("#new-customer").slideUp();
+            $("#customer-name").val(customerName);
+            $("#customer-name").trigger('keyup');
+        });
+    });
 </script>

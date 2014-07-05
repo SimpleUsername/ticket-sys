@@ -84,7 +84,6 @@ $current_date = time();
                 $("#dialog-modal").children().first().modal();
                 sender.removeClass("disabled");
             });
-
     });
 </script>
 <? } ?>

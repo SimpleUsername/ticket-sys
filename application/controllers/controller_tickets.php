@@ -132,6 +132,11 @@ class Controller_Tickets extends Controller {
         $rows = $this->model->get_customers_by_name($customer_name);
         echo json_encode($rows);
     }
+    public function action_addCustomer() {
+        $customer_name = $_POST['customer_name'];
+        $customer_description = $_POST['customer_description'];
+        $this->model->add_customer($customer_name, $customer_description);
+    }
 
     public function action_reserveTickets($event_id) {
         $event = $this->model->get_event_by_id($event_id);
