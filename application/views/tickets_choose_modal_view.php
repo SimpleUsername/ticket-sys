@@ -140,7 +140,7 @@
         }
     });
     $('#btn-modal-confirm-<?=$data['role']?>').on("click", function() {
-        ('#btn-modal-confirm-<?=$data['role']?>').addClass('disabled');
+        $('#btn-modal-confirm-<?=$data['role']?>').addClass('disabled');
         $.post("/tickets/<?=$data['role']?>Tickets/<?=$data['event_id']?>", {
             tickets: JSON.stringify(tickets)<? if ($data['role'] == 'reserve' ) { ?>,
             customer_id: <? echo $data['customer_id']; } ?>
