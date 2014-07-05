@@ -26,11 +26,11 @@
 <div class="row" id="new-customer">
     <div class="col-sm-12">
         <h3>Добавление нового покупателя</h3>
-        <div class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" onsubmit="return false" id="customer-create-form">
             <div class="form-group">
                 <label for="new-customer-name" class="col-sm-2 control-label">Имя</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="new-customer-name" placeholder="Полное имя покупателя">
+                    <input type="text" class="form-control" name="name" id="new-customer-name" placeholder="Полное имя покупателя">
                 </div>
             </div>
             <div class="form-group">
@@ -41,11 +41,11 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-primary" id="new-customer-create-confirm">Создать</button>
+                    <button type="submit" class="btn btn-primary" id="new-customer-create-confirm">Создать</button>
                     <button class="btn btn-default" id="new-customer-create-cancel">Отмена</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <script>
@@ -90,6 +90,8 @@
     }
     $("#new-customer-create").on("click", function() {
         $("#new-customer-name").val($("#customer-name").val());
+        $("#new-customer-create-confirm").removeClass("disabled");
+        $("#new-customer-create-confirm").removeAttr("disabled");
         $("#customer-search").slideUp();
         $("#new-customer").slideDown();
     });
@@ -98,19 +100,32 @@
         $("#new-customer").slideUp();
     });
     $("#new-customer-create-confirm").on("click", function() {
-        $("#new-customer-create-confirm").addClass("disabled");
-        $.post("/tickets/addCustomer", {
-            customer_name: $("#new-customer-name").val(),
-            customer_description: $("#new-customer-description").val()
-        }).done(function (response) {
-            $("#new-customer-create-confirm").removeClass("disabled");
-            var customerName = $("#new-customer-name").val();
-            $("#new-customer-name").val("");
-            $("#new-customer-description").val("");
-            $("#customer-search").slideDown();
-            $("#new-customer").slideUp();
-            $("#customer-name").val(customerName);
-            $("#customer-name").trigger('keyup');
-        });
+        if ($("#new-customer-name").val().length > 0) {
+            $("#new-customer-create-confirm").addClass("disabled");
+            $.post("/tickets/addCustomer", {
+                customer_name: $("#new-customer-name").val(),
+                customer_description: $("#new-customer-description").val()
+            }).done(function (response) {
+                $("#new-customer-create-confirm").removeClass("disabled");
+                var customerName = $("#new-customer-name").val();
+                $("#new-customer-name").val("");
+                $("#new-customer-description").val("");
+                $("#customer-search").slideDown();
+                $("#new-customer").slideUp();
+                $("#customer-name").val(customerName);
+                $("#customer-name").trigger('keyup');
+            });
+        }
+    });
+    $('#customer-create-form').bootstrapValidator({
+        fields: {
+            name: {
+                validators: {
+                    notEmpty: {
+                        message: 'Обязательно введите имя покупателя'
+                    }
+                }
+            }
+        }
     });
 </script>
