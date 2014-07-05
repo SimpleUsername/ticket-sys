@@ -126,7 +126,15 @@ class Controller_Tickets extends Controller {
             $this->view->generate('tickets_choose_modal_view.php', 'template_modal_view.php', $data);
         }
     }
-
+    public function action_search() {
+        $data['events'] = $this->model->get_events();
+        $data['sectors'] = $this->model->get_sectors();
+        $data['title'] = "Поиск билета";
+        $this->view->generate('tickets_search_modal_view.php', 'template_modal_view.php', $data);
+    }
+    public function action_getTicketsManual() {
+        echo json_encode($this->model->get_tickets($_POST['event_id'], $_POST['sector_id'], $_POST['row_no'], $_POST['place_no']));
+    }
     public function action_getCustomers() {
         $customer_name = $_POST['customer_name'];
         $rows = $this->model->get_customers_by_name($customer_name);

@@ -65,7 +65,6 @@ class Db{
             if (!is_array($params)) {
                 $params = array();
             }
-
             $rs = $this->dbh->prepare($query);
             $result = array();
             if ($rs->execute($params)) {

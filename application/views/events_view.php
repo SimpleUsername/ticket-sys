@@ -58,34 +58,5 @@ $current_date = time();
         <? }?>
     </table>
 </div>
-
-<? if ($_SESSION['user_type_id'] == 3) { ?>
-<div id="dialog-modal"></div>
-<script>
-    $(".btn-sell").on("click", function(e) {
-        var sender = $(e.target);
-        var eventId = sender.data('eventId');
-        sender.addClass("disabled");
-        $.ajax({ url: "/tickets/sell/"+eventId })
-            .done(function(html) {
-                $("#dialog-modal").html(html);
-                $("#dialog-modal").children().first().modal();
-                sender.removeClass("disabled");
-            });
-
-    });
-    $(".btn-reserve").on("click", function(e) {
-        var sender = $(e.target);
-        var eventId = sender.data('eventId');
-        sender.addClass("disabled");
-        $.ajax({ url: "/tickets/reserve/"+eventId })
-            .done(function(html) {
-                $("#dialog-modal").html(html);
-                $("#dialog-modal").children().first().modal();
-                sender.removeClass("disabled");
-            });
-    });
-</script>
-<? } ?>
 <? } ?>
 <? //echo "<pre>"; print_r($data); echo "</pre>";?>

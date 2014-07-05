@@ -69,7 +69,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Билет <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Поиск</a></li>
+                                <li><a href="#" id="btn-ticket-search">Поиск</a></li>
                                 <li><a href="#">Возврат</a></li>
                             </ul>
                         </li>
@@ -108,7 +108,7 @@
         </div>
     </div>
 </div>
-
+<div id="dialog-modal"></div>
 <div class="container-fluid">
     <div class="row">
         <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1) { ?>

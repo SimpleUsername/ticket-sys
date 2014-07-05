@@ -156,4 +156,23 @@ class Model_Tickets extends Model {
         $params = array(':event_id' => $event_id, ':place_id' => $place_id);
         return $this->db->delete($this->tickets_table, $where, $params);
     }
+    public function get_tickets($event_id, $sector_id, $row_no, $place_no) {
+        /*SELECT *
+            FROM place AS p
+                LEFT OUTER JOIN (select * from tickets where event_id=3) AS t ON p.place_id = t.place_id
+                LEFT OUTER JOIN customer AS c ON c.customer_id = t.customer_id
+            WHERE sector_id = '1' AND row_no = '1' AND place_no = '10'; */
+        $from = "$this->place_table AS p
+                LEFT OUTER JOIN (select * from $this->tickets_table where event_id=:event_id) AS t ON p.place_id = t.place_id
+                LEFT OUTER JOIN $this->customers_table AS c ON c.customer_id = t.customer_id";
+        $where = "sector_id = :sector_id AND row_no = :row_no AND place_no = :place_no";
+        $params = array(
+            ':event_id' => $event_id,
+            ':sector_id' => $sector_id,
+            ':row_no' => $row_no,
+            ':place_no' => $place_no
+        );
+        $result = $this->db->select($from, $where, $params)[0];
+        return $result;
+    }
 }
