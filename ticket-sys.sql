@@ -35266,7 +35266,7 @@ DROP TRIGGER IF EXISTS `increment_counter`;
 DELIMITER //
 CREATE TRIGGER `increment_counter` AFTER DELETE ON `tickets`
  FOR EACH ROW BEGIN
-	IF OLD.ticket_type IS NULL THEN
+	IF NOT OLD.ticket_type IS NULL THEN
     	SELECT row_no
         	INTO @row_no
             FROM place
