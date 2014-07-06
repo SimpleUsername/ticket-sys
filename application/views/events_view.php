@@ -15,6 +15,7 @@ $current_date = time();
             <th>Статус</th>
             <th>Дата события</th>
             <th>Старт бронирования</th>
+            <th>Конец бронирования</th>
             <th>Старт продаж</th>
             <? if ($_SESSION['user_type_id'] == 2) { ?>
             <th>Редактировать</th>
@@ -36,6 +37,7 @@ $current_date = time();
                     <td><?=$value['estatus_name']?></td>
                     <td><?=$value['event_date']?><? $event_date = strtotime($value['event_date']); ?></td>
                     <td><?=$value['event_booking']?><? $event_booking = strtotime($value['event_booking']); ?></td>
+                    <td><?=$value['event_booking_end']?><? $event_booking_end = strtotime($value['event_booking_end']); ?></td>
                     <td><?=$value['event_sale']?><? $event_sale = strtotime($value['event_sale']); ?></td>
                     <? if ($_SESSION['user_type_id'] == 2) { ?>
                     <td><a class="btn btn-success" href="/events/edit/<?=$value['event_id']?>">Редактировать</a></td>
@@ -48,7 +50,7 @@ $current_date = time();
                         </a>
                     </td>
                     <td>
-                        <a class="btn btn-primary btn-reserve <?=($event_date < $current_date || $event_booking > $current_date)?"disabled":""?>"
+                        <a class="btn btn-primary btn-reserve <?=($event_booking_end < $current_date || $event_date < $current_date || $event_booking > $current_date)?"disabled":""?>"
                            data-event-id="<?=$value['event_id']?>">
                             Бронировать
                         </a>

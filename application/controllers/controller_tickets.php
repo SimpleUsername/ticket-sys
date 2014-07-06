@@ -15,30 +15,32 @@ class Controller_Tickets extends Controller {
         }
     }
     public function action_sell($event_id) {
-        //if (empty($_POST)) {
-            $data = $this->model->get_event_by_id($event_id);
-            //achtung
-            $free_places = $this->model->get_free_places_count($event_id);
-            $prices = unserialize($data['event_prices']);
-            $sectors = array();
-            foreach ($prices as $price_key=>$price_value) {
-                foreach ($free_places as $place_key=>$place_value) {
-                    if ($price_value['sector_id'] == $place_value['sector_id']) {
-                        $sectors[] = array(
-                            'sector_id' => $price_value['sector_id'],
-                            'sector_name' => $price_value['sector_name'],
-                            'sector_price' => $price_value['sector_price'],
-                            'sector_free_count' => $place_value['free_count']
-                        );
-                    }
+        $data = $this->model->get_event_by_id($event_id);
+        date_default_timezone_set('Europe/Kiev');
+        $current_date = time();
+        $event_booking_end = strtotime($data['event_booking_end']);
+        if ($event_booking_end < $current_date) {
+            $this->model->delete_order($data['event_id'], null, 'reserved');
+        }
+        $free_places = $this->model->get_free_places_count($event_id);
+        $prices = unserialize($data['event_prices']);
+        $sectors = array();
+        foreach ($prices as $price_key=>$price_value) {
+            foreach ($free_places as $place_key=>$place_value) {
+                if ($price_value['sector_id'] == $place_value['sector_id']) {
+                    $sectors[] = array(
+                        'sector_id' => $price_value['sector_id'],
+                        'sector_name' => $price_value['sector_name'],
+                        'sector_price' => $price_value['sector_price'],
+                        'sector_free_count' => $place_value['free_count']
+                    );
                 }
             }
-            //
-            $data['role'] = "sell";
-            $data['sectors'] = $sectors;
-            $data['title'] = "Продажа билета на ".$data['event_name']." (".$data['event_date'].")";
-            $this->view->generate('tickets_choose_modal_view.php', 'template_modal_view.php', $data);
-        //}
+        }
+        $data['role'] = "sell";
+        $data['sectors'] = $sectors;
+        $data['title'] = "Продажа билета на ".$data['event_name']." (".$data['event_date'].")";
+        $this->view->generate('tickets_choose_modal_view.php', 'template_modal_view.php', $data);
     }
     public function action_sellTickets($event_id) {
         $event = $this->model->get_event_by_id($event_id);
@@ -48,7 +50,6 @@ class Controller_Tickets extends Controller {
         $data['tickets'] = array();
         foreach ($places as $key=>$place_id) {
             $place = $this->model->get_place($place_id)[0];
-
             foreach ($prices as $key=>$sector) {
                 if ($sector['sector_id'] == $place['sector_id']) {
                     $error = false;
@@ -76,7 +77,6 @@ class Controller_Tickets extends Controller {
         $data['title'] = "Продажа билета на ".$event['event_name']." (".$event['event_date'].")";
         $this->view->generate('tickets_success_modal_view.php', 'template_modal_view.php', $data);
     }
-    /*ajax methods*/
     public function action_getRows() {
         $event_id = (int)$_POST['event_id'];
         $sector_id = (int)$_POST['sector_id'];

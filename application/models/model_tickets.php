@@ -150,10 +150,18 @@ class Model_Tickets extends Model {
         $params = array(':event_id' => $event_id, ':place_id' => $place_id);
         return $this->db->update($this->tickets_table, $fields, $where, $params);
     }
-    public function delete_order($event_id, $place_id) {
+    public function delete_order($event_id, $place_id, $ticket_type = null) {
         //TODO Not delete and move order to trash_orders table
-        $where = 'event_id = :event_id AND place_id = :place_id';
-        $params = array(':event_id' => $event_id, ':place_id' => $place_id);
+        $where = 'event_id = :event_id';
+        $params = array(':event_id' => $event_id);
+        if ($place_id != null) {
+            $where.= " AND place_id = :place_id";
+            $params[':place_id'] = $place_id;
+        }
+        if ($ticket_type != null) {
+            $where.= " AND ticket_type = :ticket_type";
+            $params[':ticket_type'] = $ticket_type;
+        }
         return $this->db->delete($this->tickets_table, $where, $params);
     }
     public function get_tickets($event_id, $sector_id, $row_no, $place_no) {
