@@ -63,7 +63,7 @@
             sector_id: $('#sector option:selected').data('sectorId'),
             row_no: $('#row option:selected').data('rowNo')
         }).done(function (response) {
-            var arr = $.parseJSON(response);
+            var Inarr = $.parseJSON(response);
             var selectSize = arr.length>20 ? 20 : arr.length;
             $("#place").fadeIn().attr("size", selectSize).html("");
             for (var i=0; i<arr.length; i++) {
@@ -99,7 +99,7 @@
         var placeId = $(event.target).data('placeId');
         var index = tickets.indexOf(placeId);
         $(event.target).remove();
-        $("#total").html(parseInt($("#total").html())-prices[index]);
+        $("#total").html(parseFloat($("#total").html())-prices[index]);
         prices.splice(index, 1);
         tickets.splice(index, 1);
         $("option[data-place-id="+ placeId +"]").attr("selected", false);
@@ -115,7 +115,7 @@
                 if (tickets.indexOf($(option).data('placeId')) == -1) {
                     tickets.push($(option).data('placeId'));
                     prices.push($("#sector option:selected").data('sectorPrice'));
-                    $("#total").html(parseInt($("#total").html())+prices[prices.length-1]);
+                    $("#total").html(parseFloat($("#total").html())+prices[prices.length-1]);
                     $('#tickets').append("<span title='Удалить' style='cursor: pointer' class='label label-primary ticket'" +
                         " data-place-id="+$(option).data('placeId')+">С-"+$('#sector option:selected').data('sectorId')+
                         " Р-"+$("#row option:selected").data('rowNo')+
@@ -126,7 +126,7 @@
                     var placeId = $("span[data-place-id="+ $(option).data('placeId') +"]").data('placeId');
                     var i = tickets.indexOf(placeId);
                     $("span[data-place-id="+ $(option).data('placeId') +"]").remove();
-                    $("#total").html(parseInt($("#total").html())-prices[i]);
+                    $("#total").html(parseFloat($("#total").html())-prices[i]);
                     prices.splice(i, 1);
                     tickets.splice(i, 1);
                 }
