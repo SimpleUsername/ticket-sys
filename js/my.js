@@ -142,8 +142,7 @@ $(document).ready(function(){
         sender.addClass("disabled");
         $.ajax({ url: "/tickets/sell/"+eventId })
             .done(function(html) {
-                $("#dialog-modal").html(html);
-                $("#dialog-modal").children().first().modal();
+                $("#dialog-modal").html(html).children().first().modal();
                 sender.removeClass("disabled");
             });
 
@@ -154,16 +153,20 @@ $(document).ready(function(){
         sender.addClass("disabled");
         $.ajax({ url: "/tickets/reserve/"+eventId })
             .done(function(html) {
-                $("#dialog-modal").html(html);
-                $("#dialog-modal").children().first().modal();
+                $("#dialog-modal").html(html).children().first().modal();
                 sender.removeClass("disabled");
             });
     });
-    $("#btn-ticket-search").on("click", function(e) {
+    $(".btn-ticket-search").on("click", function(e) {
         $.ajax({ url: "/tickets/search" })
             .done(function(html) {
-                $("#dialog-modal").html(html);
-                $("#dialog-modal").children().first().modal();
+                $("#dialog-modal").html(html).children().first().modal();
+            });
+    });
+    $(".btn-reserve-search").on("click", function(e) {
+        $.ajax({ url: "/tickets/reserveSearch" })
+            .done(function(html) {
+                $("#dialog-modal").html(html).children().first().modal();
             });
     });
 });
