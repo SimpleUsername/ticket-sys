@@ -118,12 +118,23 @@ class Controller_Tickets extends Controller {
                     }
                 }
             }
-            //
             $data['role'] = "reserve";
             $data['sectors'] = $sectors;
             $data['customer_id'] = $_POST['customer_id'];
             $data['title'] = "Бронирование билетов на ".$data['event_name']." (".$data['event_date'].")";
             $this->view->generate('tickets_choose_modal_view.php', 'template_modal_view.php', $data);
+        }
+    }
+    public function action_reserveSearch($customer_id = null) {
+        if ($customer_id == null) {
+            $data['title'] = "Поиск забронированных билетов";
+            $this->view->generate('tickets_customer_modal_view.php', 'template_modal_view.php', $data);
+        } else {
+            $data['role'] = "unreserve";
+            $data['customer'] = end($this->model->get_customer_by_id((int)$customer_id));
+            $data['tickets'] = $this->model->get_reserved_tickets((int)$customer_id);
+            $data['title'] = "Билеты, забронированные на имя ".$data['customer']['customer_name'];
+            $this->view->generate('tickets_reserved_list_modal_view.php', 'template_modal_view.php', $data);
         }
     }
     public function action_search() {
@@ -141,8 +152,8 @@ class Controller_Tickets extends Controller {
         echo json_encode($rows);
     }
     public function action_addCustomer() {
-        $customer_name = $_POST['customer_name'];
-        $customer_description = $_POST['customer_description'];
+        $customer_name = htmlspecialchars($_POST['customer_name']);
+        $customer_description = htmlspecialchars($_POST['customer_description']);
         $this->model->add_customer($customer_name, $customer_description);
     }
 

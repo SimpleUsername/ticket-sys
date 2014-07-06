@@ -30,13 +30,13 @@
                 <div class="form-group">
                     <label for="row" class="col-sm-2 control-label">Ряд</label>
                     <div class="col-sm-10">
-                        <input placeholder="" class="form-control" id="search-row">
+                        <input type="number" placeholder="" class="form-control" id="search-row">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="place" class="col-sm-2 control-label">Место</label>
                     <div class="col-sm-10">
-                        <input placeholder="" class="form-control" id="search-place">
+                        <input type="number" placeholder="" class="form-control" id="search-place">
                     </div>
                 </div>
                 <div class="form-group">

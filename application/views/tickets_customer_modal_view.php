@@ -1,14 +1,17 @@
 <div id="customer-search">
     <div class="form-inline row">
-        <div class="form-group col-sm-8">
+        <? // if event_id set - so it's reserving. else it's reserve search ?>
+        <div class="form-group col-sm-<?=isset($data['event_id'])?"8":"12" ?>">
             <div class="input-group">
                 <span class="input-group-addon">Поиск</span>
                 <input class="form-control" style="width: 100%" placeholder="Имя покупателя" id="customer-name">
             </div>
         </div>
+        <? if (isset($data['event_id'])) { ?>
         <div class="form-group col-sm-4">
             <button class="btn btn-primary" id="new-customer-create">Добавить нового покупателя</button>
         </div>
+        <? } ?>
     </div>
     <br>
     <div class="row">
@@ -23,6 +26,7 @@
         </div>
     </div>
 </div>
+<? if (isset($data['event_id'])) { ?>
 <div class="row" id="new-customer">
     <div class="col-sm-12">
         <h3>Добавление нового покупателя</h3>
@@ -48,6 +52,7 @@
         </form>
     </div>
 </div>
+<? } ?>
 <script>
     var customersSearchTimeout;
     $("#loading-animation").hide();
@@ -79,19 +84,21 @@
         },750);
     });
     function customerClick(customerId) {
+        <? if (isset($data['event_id'])) { ?>
         $.post("/tickets/reserve/<?=$data['event_id']?>", {customer_id : customerId}, function(data) {
-            $("#dialog-modal").children().first().modal("hide");
-            $('#dialog-modal').on('hidden.bs.modal', function () {
-                $('#dialog-modal').unbind();
-                $("#dialog-modal").html(data);
+        <? } else { ?>
+        $.post("/tickets/reserveSearch/"+customerId+"/", function(data) {
+        <? } ?>
+            $("#dialog-modal").children().first().modal("hide").on('hidden.bs.modal', function () {
+                $('#dialog-modal').unbind().html(data);
             });
         });
         return false;
     }
+    <? if (isset($data['event_id'])) { ?>
     $("#new-customer-create").on("click", function() {
         $("#new-customer-name").val($("#customer-name").val());
-        $("#new-customer-create-confirm").removeClass("disabled");
-        $("#new-customer-create-confirm").removeAttr("disabled");
+        $("#new-customer-create-confirm").removeClass("disabled").removeAttr("disabled");
         $("#customer-search").slideUp();
         $("#new-customer").slideDown();
     });
@@ -112,8 +119,7 @@
                 $("#new-customer-description").val("");
                 $("#customer-search").slideDown();
                 $("#new-customer").slideUp();
-                $("#customer-name").val(customerName);
-                $("#customer-name").trigger('keyup');
+                $("#customer-name").val(customerName).trigger('keyup');
             });
         }
     });
@@ -128,4 +134,5 @@
             }
         }
     });
+    <? } ?>
 </script>
