@@ -55,7 +55,7 @@
         <div class="navbar-collapse collapse">
             <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1) { ?>
                 <ul class="nav navbar-nav navbar-left masthead-nav">
-                    <li><a href="/">Главная</a></li>
+                    <!--<li><a href="/">Главная</a></li>-->
                     <? if ($_SESSION['user_type_id'] == 1) { ?>
                         <!-- Admin nav -->
                         <li><a href="/users">Пользователи</a></li>
@@ -114,7 +114,7 @@
                     <? } elseif ($_SESSION['user_type_id'] == 3) { ?>
                         <!-- Seller sidebar menu -->
                         <li><a href="/events">Продажа и бронирование</a></li>
-                        <li><a href="#" class="btn-reserve-search">Выкуп и отмена брони</a></li>
+                        <li><a href="#" class="btn-reserve-search">Выкуп брони</a></li>
                         <li><a href="#" class="btn-ticket-search">Проверка места</a></li>
                     <? } ?>
                     <li><hr></li>

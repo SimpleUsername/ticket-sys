@@ -118,7 +118,6 @@ class Controller_Tickets extends Controller {
                     }
                 }
             }
-            //
             $data['role'] = "reserve";
             $data['sectors'] = $sectors;
             $data['customer_id'] = $_POST['customer_id'];
@@ -126,6 +125,57 @@ class Controller_Tickets extends Controller {
             $this->view->generate('tickets_choose_modal_view.php', 'template_modal_view.php', $data);
         }
     }
+    public function action_reserveSearch($customer_id = null) {
+        if ($customer_id == null) {
+            $data['title'] = "Поиск забронированных билетов";
+            $this->view->generate('tickets_customer_modal_view.php', 'template_modal_view.php', $data);
+        } else {
+            $data['role'] = "unreserve";
+            $data['customer'] = end($this->model->get_customer_by_id((int)$customer_id));
+            $data['tickets'] = $this->model->get_reserved_tickets((int)$customer_id);
+
+            date_default_timezone_set('Europe/Kiev');
+            $current_date = time();
+
+            foreach ($data['tickets'] as $key=>$ticket) {
+                $event_sale = strtotime($ticket['event_sale']);
+                if ($event_sale > $current_date) {
+                    $data['tickets'][$key]['sale_available'] = false;
+                } else {
+                    $data['tickets'][$key]['sale_available'] = true;
+                }
+            }
+            $data['title'] = "Билеты, забронированные на имя ".$data['customer']['customer_name'];
+            $this->view->generate('tickets_reserved_list_modal_view.php', 'template_modal_view.php', $data);
+        }
+    }
+    public function action_reserveSell() {
+        $tickets = json_decode($_POST['tickets']);
+        $total = 0;
+        foreach ($tickets as $key=>$ticket) {
+            $place = end($this->model->get_place((int)$ticket->placeId));
+            $event = $this->model->get_event_by_id((int)$ticket->eventId);
+
+            $this->model->set_ticket_type($ticket->eventId, $ticket->placeId, 'purchased');
+
+            $real_ticket = $this->model->get_ticket_by_ids($ticket->eventId, $ticket->placeId);
+            $data['tickets'][] = array(
+                'ticket_id' => $ticket->eventId."-".$ticket->placeId,
+                'event_name' => $event['event_name'],
+                'event_date' => $event['event_date'],
+                'place_id' => $ticket->placeId,
+                'place_no' => $place['place_no'],
+                'row_no' => $place['row_no'],
+                'sector_id' => $place['sector_id'],
+                'price'=> $real_ticket['price']
+            );
+        }
+        $data['total'] = $total;
+        $data['role'] = "success";
+        $data['title'] = "Выкуп брони билетов на ".$event['event_name']." (".$event['event_date'].")";
+        $this->view->generate('tickets_success_modal_view.php', 'template_modal_view.php', $data);
+    }
+
     public function action_search() {
         $data['events'] = $this->model->get_events();
         $data['sectors'] = $this->model->get_sectors();
@@ -141,8 +191,8 @@ class Controller_Tickets extends Controller {
         echo json_encode($rows);
     }
     public function action_addCustomer() {
-        $customer_name = $_POST['customer_name'];
-        $customer_description = $_POST['customer_description'];
+        $customer_name = htmlspecialchars($_POST['customer_name']);
+        $customer_description = htmlspecialchars($_POST['customer_description']);
         $this->model->add_customer($customer_name, $customer_description);
     }
     public function action_changeStatus(){
