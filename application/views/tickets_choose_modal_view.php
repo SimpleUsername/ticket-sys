@@ -42,7 +42,7 @@
         }).done(function (response) {
             var arr = $.parseJSON(response);
             var selectSize = arr.length>20 ? 20 : arr.length;
-            $("#row").attr("size", selectSize).fadeIn();;
+            $("#row").attr("size", selectSize).fadeIn();
             for (var i=0; i<arr.length; i++) {
                 if (arr[i]['free_count'] != 0) {
                     $("#row").append("<option data-row-no="+ arr[i]['row_no'] +">Ряд "+arr[i]['row_no']+
@@ -63,7 +63,7 @@
             sector_id: $('#sector option:selected').data('sectorId'),
             row_no: $('#row option:selected').data('rowNo')
         }).done(function (response) {
-            var Inarr = $.parseJSON(response);
+            var arr = $.parseJSON(response);
             var selectSize = arr.length>20 ? 20 : arr.length;
             $("#place").fadeIn().attr("size", selectSize).html("");
             for (var i=0; i<arr.length; i++) {

@@ -23,7 +23,7 @@
     <? } ?>
     <tr id="ticket-<?=$ticket['event_id']?>-<?=$ticket['place_id']?>">
         <td>
-            <input type="checkbox" class="checkbox-ticket" data-event-id="<?=$ticket['event_id']?>"
+            <input <?=$ticket['sale_available']?"":"disabled"?> type="checkbox" class="checkbox-ticket" data-event-id="<?=$ticket['event_id']?>"
                    data-place-id="<?=$ticket['place_id']?>" data-price="<?=$ticket['price']?>">
         </td>
         <td>
@@ -82,5 +82,12 @@
     });
     $('#btn-modal-sell-reserve').click(function () {
         $(this).addClass('disabled');
+        $.post("/tickets/reserveSell", {
+            tickets: JSON.stringify(tickets)
+        }).done(function (response) {
+            $("#dialog-modal").children().first().modal("hide").on('hidden.bs.modal', function () {
+                $('#dialog-modal').unbind().html(response);
+            });
+        });
     });
 </script>

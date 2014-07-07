@@ -183,6 +183,11 @@ class Model_Tickets extends Model {
         $result = $this->db->select($from, $where, $params)[0];
         return $result;
     }
+    public function get_ticket_by_ids($event_id, $place_id) {
+        $params = array('event_id' => (int)$event_id, 'place_id' => (int)$place_id);
+
+        return end($this->db->get_records($this->tickets_table, $params));
+    }
     public function get_reserved_tickets($customer_id) {
         /*SELECT e.event_id, e.event_name, e.event_date, p.place_id, p.sector_id, s.sector_name, p.row_no, p.place_no
         FROM tickets t, place p, sector s, events e, customer c
@@ -194,7 +199,7 @@ class Model_Tickets extends Model {
         $params = array(
             ':customer_id' => $customer_id
         );
-        $what = "e.event_id, e.event_name, e.event_date, p.place_id, p.sector_id, s.sector_name, p.row_no, p.place_no, t.price";
+        $what = "e.event_id, e.event_sale, e.event_name, e.event_date, p.place_id, p.sector_id, s.sector_name, p.row_no, p.place_no, t.price";
         $result = $this->db->select($from, $where, $params, $what);
         return $result;
     }

@@ -17,7 +17,7 @@
                     <button type="button" id="btn-modal-confirm-reserve" class="btn btn-primary">Забронировать</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
                 <? } elseif ($data['role'] == 'unreserve') { ?>
-                    <button type="button" id="btn-modal-delete-reserve" class="btn btn-danger">Удалить</button>
+                    <!--<button type="button" id="btn-modal-delete-reserve" class="btn btn-danger">Удалить</button>-->
                     <button type="button" id="btn-modal-sell-reserve" class="btn btn-primary">Выкупить</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
                 <? } else { ?>
