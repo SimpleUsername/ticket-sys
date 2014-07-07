@@ -48,8 +48,9 @@
                     $("#row").append("<option data-row-no="+ arr[i]['row_no'] +">Ряд "+arr[i]['row_no']+
                         " (Свободно мест - "+arr[i]['free_count']+")</option>");
                 }
-                $("#sector").removeAttr("disabled").attr("size", 1);
-            });
+            }
+            $("#sector").removeAttr("disabled").attr("size", 1);
+        });
     });
     $("#row").change(function() {
 
