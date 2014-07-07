@@ -17,11 +17,9 @@ class Db{
         $params = array();
         if ($data != null) {
             $where = "";
-            $first_statement = true;
             foreach($data as $key=>$value) {
-                if (!$first_statement) {
+                if (strlen($where) != 0) {
                     $where.=' AND ';
-                    $first_statement = false;
                 }
                 if (is_string($value)) {
                     $where .= "$key LIKE :$key";
