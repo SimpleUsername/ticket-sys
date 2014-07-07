@@ -58,6 +58,14 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="date4">Дата отмены бронирования</label>
+            <div class='input-group date' id='datetimepicker4'>
+                <input type='text' class="form-control" name="event_booking_end"  value="<?=$data['event_booking_end']?>"data-date-format="YYYY-MM-DD hh:mm"/>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="date3">Дата старта продаж</label>
             <div class='input-group date' id='datetimepicker3'>
                 <input type='text' class="form-control" name="event_sale" value="<?=$data['event_sale']?>" data-date-format="YYYY-MM-DD hh:mm"/>
@@ -100,6 +108,9 @@
             language: 'ru'
         });
         $('#datetimepicker3').datetimepicker({
+            language: 'ru'
+        });
+        $('#datetimepicker4').datetimepicker({
             language: 'ru'
         });
     });

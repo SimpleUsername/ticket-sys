@@ -135,4 +135,38 @@ $(document).ready(function(){
             'json'
         );
     });
+
+    $(".btn-sell").on("click", function(e) {
+        var sender = $(e.target);
+        var eventId = sender.data('eventId');
+        sender.addClass("disabled");
+        $.ajax({ url: "/tickets/sell/"+eventId })
+            .done(function(html) {
+                $("#dialog-modal").html(html).children().first().modal();
+                sender.removeClass("disabled");
+            });
+
+    });
+    $(".btn-reserve").on("click", function(e) {
+        var sender = $(e.target);
+        var eventId = sender.data('eventId');
+        sender.addClass("disabled");
+        $.ajax({ url: "/tickets/reserve/"+eventId })
+            .done(function(html) {
+                $("#dialog-modal").html(html).children().first().modal();
+                sender.removeClass("disabled");
+            });
+    });
+    $(".btn-ticket-search").on("click", function(e) {
+        $.ajax({ url: "/tickets/search" })
+            .done(function(html) {
+                $("#dialog-modal").html(html).children().first().modal();
+            });
+    });
+    $(".btn-reserve-search").on("click", function(e) {
+        $.ajax({ url: "/tickets/reserveSearch" })
+            .done(function(html) {
+                $("#dialog-modal").html(html).children().first().modal();
+            });
+    });
 });

@@ -150,11 +150,37 @@ class Model_Tickets extends Model {
         $params = array(':event_id' => $event_id, ':place_id' => $place_id);
         return $this->db->update($this->tickets_table, $fields, $where, $params);
     }
-
-    public function delete_order($event_id, $place_id) {
+    public function delete_order($event_id, $place_id, $ticket_type = null) {
         //TODO Not delete and move order to trash_orders table
-        $where = 'event_id = :event_id AND place_id = :place_id';
-        $params = array(':event_id' => $event_id, ':place_id' => $place_id);
+        $where = 'event_id = :event_id';
+        $params = array(':event_id' => $event_id);
+        if ($place_id != null) {
+            $where.= " AND place_id = :place_id";
+            $params[':place_id'] = $place_id;
+        }
+        if ($ticket_type != null) {
+            $where.= " AND ticket_type = :ticket_type";
+            $params[':ticket_type'] = $ticket_type;
+        }
         return $this->db->delete($this->tickets_table, $where, $params);
+    }
+    public function get_tickets($event_id, $sector_id, $row_no, $place_no) {
+        /*SELECT *
+            FROM place AS p
+                LEFT OUTER JOIN (select * from tickets where event_id=3) AS t ON p.place_id = t.place_id
+                LEFT OUTER JOIN customer AS c ON c.customer_id = t.customer_id
+            WHERE sector_id = '1' AND row_no = '1' AND place_no = '10'; */
+        $from = "$this->place_table AS p
+                LEFT OUTER JOIN (select * from $this->tickets_table where event_id=:event_id) AS t ON p.place_id = t.place_id
+                LEFT OUTER JOIN $this->customers_table AS c ON c.customer_id = t.customer_id";
+        $where = "sector_id = :sector_id AND row_no = :row_no AND place_no = :place_no";
+        $params = array(
+            ':event_id' => $event_id,
+            ':sector_id' => $sector_id,
+            ':row_no' => $row_no,
+            ':place_no' => $place_no
+        );
+        $result = $this->db->select($from, $where, $params)[0];
+        return $result;
     }
 }

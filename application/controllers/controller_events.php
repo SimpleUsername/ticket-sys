@@ -24,6 +24,7 @@ class Controller_Events extends Controller
                 'event_desc' => $this->simple_clear($_POST['event_desc']),
                 'event_date' => $_POST['event_date'],
                 'event_booking' => $_POST['event_booking'],
+                'event_booking_end' => $_POST['event_booking_end'],
                 'event_sale' => $_POST['event_sale']);
             if(!empty($_FILES['event_img']) && $_FILES['event_img']['error'] != 4){
                 $file = $this->prepare_files($_FILES);
@@ -38,7 +39,7 @@ class Controller_Events extends Controller
 //                        print_r($_POST);
 //            exit;
 
-            $res = $this->model->insert($this->model->table, $form_data);
+            $res = $this->model->insert('events', $form_data);
             if(!$res){
 
                 $data = $this->model->get_all_events(false);// получение статусов
@@ -67,6 +68,7 @@ class Controller_Events extends Controller
                 'event_desc' => $this->simple_clear($_POST['event_desc']),
                 'event_date' => $_POST['event_date'],
                 'event_booking' => $_POST['event_booking'],
+                'event_booking_end' => $_POST['event_booking_end'],
                 'event_sale' => $_POST['event_sale']);
             if(!empty($_FILES['event_img']) && $_FILES['event_img']['error'] != 4){
                 $file = $this->prepare_files($_FILES);
