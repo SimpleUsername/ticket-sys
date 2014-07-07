@@ -151,7 +151,7 @@ class Controller_Tickets extends Controller {
         $res = $this->model->delete_order($event_id, $place_id);
     exit(json_encode($res));
     }
-    
+
     public function action_reserveTickets($event_id) {
         $event = $this->model->get_event_by_id($event_id);
         $prices =  unserialize($event['event_prices']);
