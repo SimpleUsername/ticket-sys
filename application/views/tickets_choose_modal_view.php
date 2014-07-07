@@ -89,6 +89,10 @@
                     } else {
                         color = "#dff0d8";
                     }
+                    $("#place").append("<option "+disabledAttr+" "+selectedAttr+
+                        " style='background-color:"+color+"' data-place-id="+ arr[i]['place_id'] +
+                        " data-place-no="+ arr[i]['place_no'] +
+                        ">Место "+arr[i]['place_no']+"</option>");
                     $("#place_change").append("<p data-place-change-id="+ arr[i]['place_id'] + " class='place_change'>Место "+arr[i]['place_no']+"<span  data-place-data-id="+ arr[i]['place_id']+" class='label label-primary ticket change_ticket '>Разрешить продажу</span>&nbsp;</p>");
 
                     if (arr[i]['ticket_type'] == 'purchased') {
