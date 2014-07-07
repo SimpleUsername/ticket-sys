@@ -65,3 +65,14 @@
  .img_custom{
      max-width: 150px;
  }
+ .place_change{
+     color: #555;
+     font-size: 14px;
+     line-height: 1.16;
+     margin: 0;
+ }
+.change_ticket{
+    float:right;
+    cursor:pointer;
+
+}

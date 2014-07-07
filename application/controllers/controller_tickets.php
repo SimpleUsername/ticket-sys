@@ -132,6 +132,13 @@ class Controller_Tickets extends Controller {
         $rows = $this->model->get_customers_by_name($customer_name);
         echo json_encode($rows);
     }
+    public function action_changeStatus(){
+        $event_id = (int)$_POST['event_id'];
+        $place_id = (int)$_POST['place_id'];
+        $res = $this->model->delete_order($event_id, $place_id);
+        exit(json_encode($res));
+
+    }
 
     public function action_reserveTickets($event_id) {
         $event = $this->model->get_event_by_id($event_id);

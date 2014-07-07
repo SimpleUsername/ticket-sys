@@ -10,9 +10,16 @@
 <select size="1" id="row" class="form-control">
     <option>Сначала выберите cектор</option>
 </select>
-<select size="1" id="place" class="form-control" multiple>
-    <option>Сначала выберите ряд</option>
-</select>
+<div class="row">
+    <div class="col-xs-4 col-md-4">
+        <select size="1" id="place" class="form-control" multiple>
+            <option>Сначала выберите ряд</option>
+        </select>
+    </div>
+    <div class="col-xs-4 col-md-4">
+        <div id="place_change"></div>
+    </div>
+</div>
 <div class="text-right">
     <h4>Билеты: </h4>
     <div id="tickets">
@@ -27,6 +34,7 @@
 
     $("#row").html('').hide();
     $("#place").html('').hide();
+    $("#place_change").html('').hide();
     $("#btn-modal-confirm-sell").addClass("disabled");
 
     $("#sector").change(function() {
@@ -34,6 +42,7 @@
         $("#sector").prop("disabled", true);
         $("#row").html('').fadeOut();
         $("#place").html('').fadeOut();
+        $("#place_change").html('').fadeOut();
         $("#btn-modal-confirm-sell").addClass("disabled");
 
         $.post("/tickets/getRows", {
@@ -41,7 +50,7 @@
             sector_id: $('#sector option:selected').data('sectorId')
         }).done(function (response) {
             var arr = $.parseJSON(response);
-            $("#row").attr("size", arr.length).fadeIn();;
+            $("#row").attr("size", arr.length).fadeIn();
             for (var i=0; i<arr.length; i++) {
                 if (arr[i]['free_count'] != 0) {
                     $("#row").append("<option data-row-no="+ arr[i]['row_no'] +">Ряд "+arr[i]['row_no']+
@@ -64,6 +73,7 @@
         }).done(function (response) {
             var arr = $.parseJSON(response);
             $("#place").fadeIn().attr("size", arr.length).html("");
+                $("#place_change").css('display','block');
             for (var i=0; i<arr.length; i++) {
                 var disabledAttr = '';
                 var selectedAttr = '';
@@ -84,15 +94,40 @@
                     " style='background-color:"+color+"' data-place-id="+ arr[i]['place_id'] +
                     " data-place-no="+ arr[i]['place_no'] +
                     ">Место "+arr[i]['place_no']+"</option>");
+                $("#place_change").append("<p data-place-change-id="+ arr[i]['place_id'] + " class='place_change'>Место "+arr[i]['place_no']+"<span  data-place-data-id="+ arr[i]['place_id']+" class='label label-primary ticket change_ticket '>Разрешить продажу</span>&nbsp;</p>");
+
                 if (arr[i]['ticket_type'] == 'purchased') {
-                    $("[data-place-id="+ arr[i]['place_id']+"]").append(" - продано");
+                    $("[data-place-id="+ arr[i]['place_id']+"]").append("<span class='status'> - продано</span>");
                 } else if (arr[i]['ticket_type'] == 'reserved') {
-                    $("[data-place-id="+ arr[i]['place_id']+"]").append(" - забронировано");
+                    $("[data-place-id="+ arr[i]['place_id']+"]").append("<span class='status'> - забронировано</span>");
                 }
             }
             $("#row").removeAttr("disabled").attr("size", 1);
         });
     });
+    $('#place_change').on('click', '.change_ticket', function(){
+        var conf = confirm("Отправить в свободнужю продажу ?");
+        if(conf){
+            var place_change = $(this).data('place-data-id');
+            $.post(
+                '/tickets/changeStatus',
+                {
+                    event_id: <?=$data['event_id']?>,
+                    place_id : place_change
+
+                },
+                function(json){
+                    console.log(json);
+                    $('option[data-place-id="'+ place_change +'"] .status').remove();
+                    $('option[data-place-id="'+ place_change +'"] ').css({'background':'#dff0d8'});
+                },
+                'json'
+            );
+        }
+
+
+    });
+
     $("#tickets").on("click", "span.ticket", function (event) {
         var placeId = $(event.target).data('placeId');
         var index = tickets.indexOf(placeId);

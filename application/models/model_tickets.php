@@ -150,6 +150,7 @@ class Model_Tickets extends Model {
         $params = array(':event_id' => $event_id, ':place_id' => $place_id);
         return $this->db->update($this->tickets_table, $fields, $where, $params);
     }
+
     public function delete_order($event_id, $place_id) {
         //TODO Not delete and move order to trash_orders table
         $where = 'event_id = :event_id AND place_id = :place_id';
