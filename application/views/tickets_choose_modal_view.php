@@ -10,9 +10,16 @@
 <select size="1" id="row" class="form-control">
     <option>Сначала выберите cектор</option>
 </select>
-<select size="1" id="place" class="form-control" multiple>
-    <option>Сначала выберите ряд</option>
-</select>
+<div class="row">
+    <div class="col-xs-4 col-md-4">
+        <select size="1" id="place" class="form-control" multiple>
+            <option>Сначала выберите ряд</option>
+        </select>
+    </div>
+    <div class="col-xs-4 col-md-4">
+        <div id="place_change"></div>
+    </div>
+</div>
 <div class="text-right">
     <h4>Билеты: </h4>
     <div id="tickets">
