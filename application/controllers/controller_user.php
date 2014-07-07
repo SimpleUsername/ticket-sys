@@ -7,16 +7,12 @@ class Controller_User extends Controller {
         parent::__construct();
     }
 
-    public function action_index() {
-        $this->view->generate('main_view.php', 'template_view.php');
-    }
-
     public function action_login() {
         if (empty($_POST)) {
             if (!isset($_SESSION['authorized']) || (isset($_SESSION['authorized']) && $_SESSION['authorized'] != 1)) {
                 $this->view->generate('login_view.php', 'template_view.php');
             } else {
-                $this->redirect("user");
+                $this->redirect("main/index");
             }
         } else {
             if($user = $this->model->get_user($_POST['login'],md5(md5($_POST['password'])))) {
@@ -28,7 +24,7 @@ class Controller_User extends Controller {
                 $_SESSION['user_login'] = $user['user_login'];
                 $_SESSION['user_name'] = $user['user_name'];
                 $_SESSION['user_type_id'] = $user['user_type_id'];
-                $this->redirect("user");
+                $this->redirect("main/index");
             } else {
                 $_SESSION['user_login'] = htmlspecialchars($_POST['login']);
                 $_SESSION['error'] = 'Неправильный логин либо пароль!';
