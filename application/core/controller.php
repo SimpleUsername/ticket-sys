@@ -5,11 +5,17 @@ class Controller {
     public $model;
     public $view;
 
+    public function isAuthorized() {
+        return isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1;
+    }
+
     public function __construct()
     {
         $this->view = new View();
-        session_start();
-        if (!isset($_SESSION['authorized']) || (isset($_SESSION['authorized']) && $_SESSION['authorized'] != 1)) {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (!$this->isAuthorized()) {
             if ($_SERVER['REQUEST_URI'] != '/user/login') {
                 $this->redirect('user/login');
             }
