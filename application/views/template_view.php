@@ -55,22 +55,21 @@
         <div class="navbar-collapse collapse">
             <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1) { ?>
                 <ul class="nav navbar-nav navbar-left masthead-nav">
-                    <!--<li><a href="/">Главная</a></li>-->
-                    <? if ($_SESSION['user_type_id'] == 1) { ?>
-                        <!-- Admin nav -->
-                        <li><a href="/users">Пользователи</a></li>
-                    <? } elseif ($_SESSION['user_type_id'] == 2) { ?>
-                        <!-- Manager nav -->
-                        <li><a href="/events">События</a></li>
-                        <li><a href="/config">Цены</a></li>
-                    <? } elseif ($_SESSION['user_type_id'] == 3) { ?>
+                    <? if ($_SESSION['user_seller']) { ?>
                         <!-- Seller nav -->
                         <li><a href="/events">События</a></li>
                         <li><a href="#" class="btn-ticket-search">Поиск билета</a></li>
                         <li><a href="#" class="btn-reserve-search">Поиск брони</a></li>
                     <? } ?>
-                    <li><a href="#">Помощь</a></li>
-                    <li><a href="#">О программе</a></li>
+                    <? if ($_SESSION['user_manager']) { ?>
+                        <!-- Manager nav -->
+                        <?=!$_SESSION['user_seller']?'<li><a href="/events">События</a></li>':''?>
+                        <li><a href="/config">Цены</a></li>
+                    <? } ?>
+                    <? if ($_SESSION['user_admin']) { ?>
+                        <!-- Admin nav -->
+                        <li><a href="/users">Пользователи</a></li>
+                    <? } ?>
                 </ul>
                 <!-- <form class="navbar-form navbar-right">-->
                 <!-- <input type="text" class="form-control" placeholder="Поиск...">-->
@@ -78,16 +77,18 @@
                 <div class="nav navbar-nav navbar-right">
                     <!--  -->
                     <div class="btn-group">
-                        <? if($_SESSION['user_type_id'] == 1){?>
-                        <a href="/users/dump" class="btn btn-default navbar-btn btn-primary" title="Дамп базы"> <i class="icon-white glyphicon  glyphicon-download"></i>&nbsp;Дамп базы</a>
+                        <? if($_SESSION['user_admin']){?>
+                        <a href="/users/dump" class="btn btn-default navbar-btn btn-default" title="Дамп базы"> <i class="icon-white glyphicon  glyphicon-download"></i>&nbsp;Дамп базы</a>
                         <? } ?>
                         <a href="/user/password" class="btn btn-default navbar-btn" title="Сменить пароль">
                             <i class="icon-white glyphicon glyphicon-cog"></i>&nbsp;</a>
-                        <a href="/user/logout" title="Выйти" class="btn navbar-btn <? switch($_SESSION["user_type_id"]) {
-                            case 1 : ?>btn-warning<? break;
-                            case 2 : ?>btn-success<? break;
-                            case 3 : ?>btn-primary<? break;
-                            default : ?>btn-default<?
+                        <a href="/user/logout" title="Выйти" class="btn navbar-btn <?
+                        if ($_SESSION['user_admin']) {
+                            echo "btn-warning";
+                        } elseif ($_SESSION['user_manager']) {
+                            echo "btn-success";
+                        } elseif ($_SESSION['user_seller']) {
+                            echo "btn-primary";
                         }?>"><?=$_SESSION['user_login'] ?> <i class="icon-white glyphicon glyphicon-off"></i></a>
                     </div>&nbsp;
                 </div>
@@ -102,20 +103,24 @@
             <div class="col-sm-3 col-md-2 sidebar">
 
                 <ul class="nav nav-sidebar">
-                    <? if ($_SESSION['user_type_id'] == 1) { ?>
-                        <!-- Admin sidebar menu -->
-                        <li><a href="/users">Список пользователей</a></li>
-                        <li><a href="/users/create">Добавить пользователя</a></li>
-                    <? } elseif ($_SESSION['user_type_id'] == 2) { ?>
-                        <!-- Manager sidebar menu -->
-                        <li><a href="/events/add">Создать мероприятие</a></li>
-                        <li><a href="/tickets/add">Analytics</a></li>
-                        <li><a href="#">Export</a></li>
-                    <? } elseif ($_SESSION['user_type_id'] == 3) { ?>
+                    <? if ($_SESSION['user_seller']) { ?>
                         <!-- Seller sidebar menu -->
                         <li><a href="/events">Продажа и бронирование</a></li>
                         <li><a href="#" class="btn-reserve-search">Выкуп брони</a></li>
                         <li><a href="#" class="btn-ticket-search">Проверка места</a></li>
+                    <? } ?>
+                    <li><hr></li>
+                    <? if ($_SESSION['user_manager']) { ?>
+                        <!-- Manager sidebar menu -->
+                        <li><a href="/events/add">Создать мероприятие</a></li>
+                        <li><a href="/tickets/add">Analytics</a></li>
+                        <li><a href="#">Export</a></li>
+                    <? } ?>
+                    <li><hr></li>
+                    <? if ($_SESSION['user_admin']) { ?>
+                        <!-- Admin sidebar menu -->
+                        <li><a href="/users">Список пользователей</a></li>
+                        <li><a href="/users/create">Добавить пользователя</a></li>
                     <? } ?>
                     <li><hr></li>
                     <li><a href="/user/password">Сменить свой пароль</a></li>

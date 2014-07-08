@@ -5,10 +5,14 @@ class Controller_Main extends Controller
 
 	function action_index()
 	{
-        switch ($_SESSION['user_type_id']) {
-            case 1 : $this->redirect("users"); break;
-            case 2 : $this->redirect("events"); break;
-            case 3 : $this->redirect("events"); break;
+        if ($_SESSION['user_seller']) {
+            $this->redirect("events");
+        }
+        if ($_SESSION['user_manager']) {
+            $this->redirect("events");
+        }
+        if ($_SESSION['user_admin']) {
+            $this->redirect("users");
         }
 	}
 }

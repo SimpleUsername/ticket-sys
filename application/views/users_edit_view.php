@@ -30,16 +30,20 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-4 control-label">Тип пользователя</label>
+        <label class="col-sm-4 control-label">Роли пользователя</label>
         <div class="col-sm-8">
+            <? $user_type_value = 0; ?>
             <? foreach($data['user_types'] as $user_type){?>
-                <label><input type="radio" name="user_type" <?
-                        if (isset($data["user_type_id"]) && $data["user_type_id"] == $user_type["type_id"] ||
-                            !isset($data["user_type_id"]) && $user_type["type_id"] == 1) {
-                        ?> checked="checked" <? }?>" value="<?=$user_type["type_id"]?>">
+                <label><input type="checkbox" class="role" value="<?=1<<$user_type["type_id"]?>"<?
+                    if (isset($data["user_type"]) && ($data['user_type'] & (1<<$user_type["type_id"]))) {
+                        $user_type_value += 1<<$user_type["type_id"];
+                        ?> checked="checked"<?
+                    }?>>
                     <?=$user_type['user_type']?>
                 </label>
             <? } ?>
+            <p class='text-danger role-helper'>Требуется минимум одна активная роль</p>
+            <input type="hidden" name="user_type" value="<?=$user_type_value?>">
         </div>
     </div>
     <div class="form-group">
@@ -50,7 +54,31 @@
     </div>
 </form>
 <script>
+    $(".role").on("change", function () {
+        if ($(".role:checked").length == 1) {
+            $(".role:checked").attr("disabled", true);
+            $(".role-helper").show();
+        } else {
+            $(".role:checked").attr("disabled", false);
+            $(".role-helper").hide();
+        }
+        var user_type = 0;
+        $( ".role:checked" ).each(function( index ) {
+            user_type += parseInt($( this ).val());
+        });
+        $("input[name=user_type]").val(user_type);
+    });
     $(document).ready(function() {
+        if ($(".role:checked").length == 0) {
+            var user_type = $(".role").first().attr("checked", true).attr("disabled", true).val();
+            $(".role-helper").show();
+            $("input[name=user_type]").val(user_type);
+        } else if ($(".role:checked").length == 1) {
+            $(".role:checked").attr("disabled", true);
+            $(".role-helper").show();
+        } else {
+            $(".role-helper").hide();
+        }
         $('#user-<?=$data['action']?>-form').bootstrapValidator({
             fields: {
                 <? if($data['action']=="create") {?>

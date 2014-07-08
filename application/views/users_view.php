@@ -17,7 +17,6 @@
 </div>
 <h1>Пользователи</h1>
 
-<!--<a href="/users/create" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Добавить</a>-->
 <table class="table table-striped">
 <? foreach($data as $user){?>
     <tr>
@@ -28,23 +27,23 @@
             <p><?=$user["user_name"]?></p>
         </td>
         <td>
-            <h5><span class="label <? switch($user["user_type_id"]) {
-                case 1 : ?>label-warning"><? break;
-                case 2 : ?>label-success"><? break;
-                case 3 : ?>label-primary"><? break;
-                default : ?>label-default"><?
-            }?><?=$user["user_type"]?></span></h5>
+            <h5>
+                <?=$user['user_type'] & 0x04?'<span class="label label-warning">Администратор</span>':''?>
+                <?=$user['user_type'] & 0x02?'<span class="label label-success">Менеджер</span>':''?>
+                <?=$user['user_type'] & 0x01?'<span class="label label-primary">Продавец</span>':''?>
+            </h5>
         </td>
         <td>
             <a class="btn btn-success"  href="/users/edit/<?=$user['user_id']?>" title="Редактировать">
-                <i class="glyphicon glyphicon-pencil"></i>
+                <i class="glyphicon glyphicon-pencil"></i> Редактировать
             </a>
-            <a class="btn btn-warning<?=$user['user_hash'] == null?" disabled":""?>"  href="/users/logout/<?=$user['user_id']?>" title="Закрыть сессию">
-                <i class="glyphicon glyphicon-off"></i>
+            <a class="btn btn-warning<?=$user['user_hash'] == null?" disabled":""?>"
+               href="/users/logout/<?=$user['user_id']?>" title="Закрыть сессию">
+                <i class="glyphicon glyphicon-off"></i> Закрыть сессию
             </a>
             <a class="btn btn-delete btn-danger<?=$_SESSION['user_id'] == $user['user_id']?" disabled":""?>"
                data-user-id=<?=$user['user_id']?> title="Удалить">
-                <i data-user-id=<?=$user['user_id']?> class="glyphicon glyphicon-remove"></i>
+                <i data-user-id=<?=$user['user_id']?> class="glyphicon glyphicon-remove"></i> Удалить
             </a>
         </td>
     </tr>

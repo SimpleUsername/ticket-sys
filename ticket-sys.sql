@@ -39206,7 +39206,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_login` varchar(30) NOT NULL,
   `user_name` varchar(64) NOT NULL,
   `user_password` varchar(32) NOT NULL,
-  `user_type_id` int(10) unsigned NOT NULL,
+  `user_type` int(10) unsigned NOT NULL,
   `user_hash` varchar(32) DEFAULT NULL,
   `user_ip` varchar(30) NOT NULL DEFAULT '0.0.0.0',
   PRIMARY KEY (`user_id`),
@@ -39218,9 +39218,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_login`, `user_name`, `user_password`, `user_type_id`, `user_hash`, `user_ip`) VALUES
-(1, 'admin', 'Default Admin Name', 'ec6a6536ca304edf844d1d248a4f08dc', 1, NULL, '0.0.0.0'),
-(2, 'manager', 'Default Manager Name', 'ec6a6536ca304edf844d1d248a4f08dc', 2, NULL, '0.0.0.0'),
-(3, 'seller', 'Default Seller Name', 'ec6a6536ca304edf844d1d248a4f08dc', 3, NULL, '0.0.0.0');
+(1, 'admin', 'Default Admin Name', '0ea662093bebe7f633578406da7ff4b9', 7, NULL, '0.0.0.0'),
+(2, 'manager', 'Default Manager Name', '0ea662093bebe7f633578406da7ff4b9', 2, NULL, '0.0.0.0'),
+(3, 'seller', 'Default Seller Name', '0ea662093bebe7f633578406da7ff4b9', 1, NULL, '0.0.0.0');
 
 -- --------------------------------------------------------
 
@@ -39239,9 +39239,9 @@ CREATE TABLE IF NOT EXISTS `user_types` (
 --
 
 INSERT INTO `user_types` (`type_id`, `user_type`) VALUES
-(1, 'Администратор'),
-(2, 'Менеджер'),
-(3, 'Продавец');
+(0, 'Продавец'),
+(1, 'Менеджер'),
+(2, 'Администратор');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

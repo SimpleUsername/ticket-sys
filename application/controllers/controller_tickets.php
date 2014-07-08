@@ -10,7 +10,7 @@ class Controller_Tickets extends Controller {
     {
         $this->model = new Model_Tickets();
         parent::__construct();
-        if ($_SESSION['user_type_id'] != 3) {
+        if (!$_SESSION['user_seller']) {
             $this->redirect('404');
         }
     }

@@ -8,17 +8,15 @@
 class Model_User extends Model {
     private $users_table = "users";
 
-    public function get_user_by_login_data($user_login, $user_password) {
-        $select = $this->db->select($this->users_table,
-            'user_login LIKE :user_login AND user_password LIKE :user_password',
-            array(":user_login"=>$user_login, ":user_password"=>$user_password));
-        return $select[0];
+    public function get_user_by_login($user_login) {
+        $select = $this->db->select($this->users_table, 'user_login=:user_login', array(":user_login"=>$user_login));
+        return end($select);
     }
     public function get_user($user_login, $user_password) {
         $select = $this->db->select($this->users_table,
-            'user_login LIKE :user_login AND user_password LIKE :user_password',
+            'user_login=:user_login AND user_password=:user_password',
             array(":user_login"=>$user_login, ":user_password"=>$user_password));
-        return $select[0];
+        return end($select);
     }
     public function set_user_login_data($user_id, $user_hash=null, $user_ip='0.0.0.0') {
         $update = $this->update($this->users_table, array("user_hash" => $user_hash, "user_ip" => $user_ip),

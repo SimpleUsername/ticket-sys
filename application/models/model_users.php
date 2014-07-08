@@ -8,31 +8,11 @@ class Model_Users extends Model {
         return  $select;
     }
     public function get_users($data = null) {
-        $where = $this->users_table.".user_type_id = ".$this->user_types_table.".type_id";
-        $params = array();
-        if (!empty($data['user_login'])) {
-            $where .= " AND user_login LIKE :user_login";
-            $params[':user_login'] = $data['user_login'];
-        }
-        if (!empty($data['user_id'])) {
-            $where .= " AND user_id = :user_id";
-            $params[':user_id'] = $data['user_id'];
-        }
-        if (!empty($data['user_type_id'])) {
-            $where .= " AND user_type_id = :user_type_id";
-            $params[':user_type_id'] = $data['user_type_id'];
-        }
-
-        $select = $this->db->select($this->users_table.", ".$this->user_types_table, $where, $params);
-
+        $select = $this->db->get_records($this->users_table, $data);
         if ($data == null) {
             return  $select;
         } else {
-            if (!empty($select)) {
-                return $select[0];
-            } else {
-                return null;
-            }
+            return end($select);
         }
     }
     public function get_user_by_id($user_id) {

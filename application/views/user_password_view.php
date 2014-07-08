@@ -30,6 +30,10 @@
                         notEmpty: {
                             message: 'Пароль обязателен и не может быть пустым'
                         }
+                    },
+                    stringLength: {
+                        min: 8,
+                        message: 'Пароль должен быть длинее 8 символов'
                     }
                 },
                 new_password_confirm: {

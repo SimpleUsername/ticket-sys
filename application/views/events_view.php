@@ -17,14 +17,15 @@ $current_date = time();
             <th>Старт бронирования</th>
             <th>Конец бронирования</th>
             <th>Старт продаж</th>
-            <? if ($_SESSION['user_type_id'] == 2) { ?>
-            <th>Редактировать</th>
-            <th>Удалить</th>
-            <? } elseif ($_SESSION['user_type_id'] == 3) { ?>
+            <? if ($_SESSION['user_seller']) { ?>
             <th>Продать</th>
             <th>Забронировать</th>
+            <? } ?>
+            <? if ($_SESSION['user_manager']) { ?>
+            <th>Редактировать</th>
+            <th>Удалить</th>
+            <? } ?>
         </tr>
-        <? } ?>
         <? foreach($data as $id => $value){?>
             <? if($id%2 == 0){?>
                 <tr class="success">
@@ -39,22 +40,24 @@ $current_date = time();
                     <td><?=$value['event_booking']?><? $event_booking = strtotime($value['event_booking']); ?></td>
                     <td><?=$value['event_booking_end']?><? $event_booking_end = strtotime($value['event_booking_end']); ?></td>
                     <td><?=$value['event_sale']?><? $event_sale = strtotime($value['event_sale']); ?></td>
-                    <? if ($_SESSION['user_type_id'] == 2) { ?>
+
+                    <? if ($_SESSION['user_seller']) { ?>
+                        <td>
+                            <a class="btn btn-primary btn-sell <?=($event_date < $current_date || $event_sale > $current_date)?"disabled":""?>"
+                               data-event-id="<?=$value['event_id']?>">
+                                Продать
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-reserve <?=($event_booking_end < $current_date || $event_date < $current_date || $event_booking > $current_date)?"disabled":""?>"
+                               data-event-id="<?=$value['event_id']?>">
+                                Бронировать
+                            </a>
+                        </td>
+                    <? } ?>
+                    <? if ($_SESSION['user_manager']) { ?>
                     <td><a class="btn btn-success" href="/events/edit/<?=$value['event_id']?>">Редактировать</a></td>
                     <td><button class="btn btn-danger" id="del_ev" onclick="confirm('Удалить ?')" data-event_id="<?=$value['event_id']?>">Удалить</button></td>
-                    <? } elseif ($_SESSION['user_type_id'] == 3) { ?>
-                    <td>
-                        <a class="btn btn-primary btn-sell <?=($event_date < $current_date || $event_sale > $current_date)?"disabled":""?>"
-                           data-event-id="<?=$value['event_id']?>">
-                            Продать
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn btn-primary btn-reserve <?=($event_booking_end < $current_date || $event_date < $current_date || $event_booking > $current_date)?"disabled":""?>"
-                           data-event-id="<?=$value['event_id']?>">
-                            Бронировать
-                        </a>
-                    </td>
                     <? } ?>
                 </tr>
         <? }?>

@@ -18,8 +18,8 @@ class Controller_Users extends Controller {
     {
         $this->model = new Model_Users();
         parent::__construct();
-        if ($_SESSION['user_type_id'] != 1) {
-            $this->redirect('404');
+        if (!$_SESSION['user_admin']) {
+            Route::ErrorPage404();
         }
     }
     private function delete_user_session($user_id){
@@ -50,10 +50,10 @@ class Controller_Users extends Controller {
             $user_data = array(
                 "user_login" => $_POST['user_login'],
                 "user_name" => $_POST['user_name'],
-                "user_type_id" => $_POST['user_type']
+                "user_type" => $_POST['user_type']
             );
             if (!empty($_POST['password'])) {
-                $user_data["user_password"] = md5(md5($_POST['password']));
+                $user_data["user_password"] = md5(md5($_POST['password'].SECURE_SALT));
             }
             $this->model->edit_user($user_id, $user_data);
             $this->redirect('users');
@@ -82,8 +82,8 @@ class Controller_Users extends Controller {
             $user_data = array(
                 "user_login" => $_POST['user_login'],
                 "user_name" => $_POST['user_name'],
-                "user_type_id" => $_POST['user_type'],
-                "user_password" => md5(md5($_POST['password']))
+                "user_type" => $_POST['user_type'],
+                "user_password" => md5(md5($_POST['password'].SECURE_SALT))
             );
             if ($this->model->create_user($user_data)) {
                 $this->redirect('users');
