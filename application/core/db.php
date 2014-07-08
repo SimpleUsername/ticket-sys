@@ -35,7 +35,7 @@ class Db{
         $select = $this->select($table, $where, $params);
         return  $select;
     }
-
+    //no usages
     public function sql($query, $params = null) {
         try {
             $result = null;

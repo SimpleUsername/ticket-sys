@@ -15,7 +15,9 @@ class Controller_User extends Controller {
                 $this->redirect("main/index");
             }
         } else {
-            if($user = $this->model->get_user($_POST['login'],md5(md5($_POST['password'])))) {
+            if(preg_match("#^[a-z-/.]+$#", $_POST['login'])
+                && $user = $this->model->get_user($_POST['login'],md5(md5($_POST['password'])))
+            ) {
                 $user_hash = session_id();
                 $user_ip = $_SERVER['REMOTE_ADDR'];
                 $this->model->set_user_login_data($user['user_id'], $user_hash, $user_ip);

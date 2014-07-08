@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <button class="btn bg-primary" id="btn-search">Проверить</button>
+                        <button class="btn btn-primary" id="btn-search">Проверить</button>
                     </div>
                 </div>
             </div>
