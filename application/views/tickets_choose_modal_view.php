@@ -1,4 +1,6 @@
-<select size="<?=count($data['sectors'])>20?"20":count($data['sectors'])?>" id="sector" class="form-control">
+<? $select_size = 15 ?>
+<div class="form-group">
+<select size="<?=count($data['sectors'])>$select_size?$select_size:count($data['sectors'])?>" id="sector" class="form-control">
     <? foreach ($data['sectors'] as $id => $sector) {
         if ($sector['sector_free_count'] > 0) { ?>
             <option data-sector-id="<?=$sector['sector_id']?>" data-sector-price="<?=$sector['sector_price']?>">
@@ -7,14 +9,19 @@
         <? }
     } ?>
 </select>
+</div>
+<div class="form-group">
 <select size="1" id="row" class="form-control">
     <option>Сначала выберите cектор</option>
 </select>
+</div>
 <div class="row">
     <div class="col-xs-4 col-md-4">
+        <div class="form-group">
         <select size="1" id="place" class="form-control" multiple>
             <option>Сначала выберите ряд</option>
         </select>
+        </div>
     </div>
     <div class="col-xs-4 col-md-4">
         <div id="place_change"></div>
@@ -22,9 +29,10 @@
 </div>
 <div class="text-right">
     <h4>Билеты: </h4>
-    <div id="tickets">
-
-    </div>
+    <h4 id="tickets" style="line-height: 40px">
+        <p class="help-block tickets-add-helper">Выберите места, что бы добавить билеты</p>
+    </h4>
+    <p class="help-block tickets-delete-helper">Кликните по билету, что бы удалить его из списка</p>
     <h4>Итого: <b id="total">0</b> грн.</h4>
 </div>
 <script>
@@ -35,7 +43,7 @@
     $("#row").html('').hide();
     $("#place").html('').hide();
     $("#btn-modal-confirm-sell").addClass("disabled");
-
+    $(".tickets-delete-helper").hide();
     $("#sector").change(function() {
 
         $("#sector").prop("disabled", true);
@@ -48,7 +56,7 @@
             sector_id: $('#sector option:selected').data('sectorId')
         }).done(function (response) {
             var arr = $.parseJSON(response);
-            var selectSize = arr.length>20 ? 20 : arr.length;
+            var selectSize = arr.length><?=$select_size?> ? <?=$select_size?> : arr.length;
             $("#row").attr("size", selectSize).fadeIn();
             for (var i=0; i<arr.length; i++) {
                 if (arr[i]['free_count'] != 0) {
@@ -71,7 +79,7 @@
             row_no: $('#row option:selected').data('rowNo')
         }).done(function (response) {
                 var arr = $.parseJSON(response);
-                var selectSize = arr.length>20 ? 20 : arr.length;
+                var selectSize = arr.length><?=$select_size?> ? <?=$select_size?> : arr.length;
                 $("#place").fadeIn().attr("size", selectSize).html("");
                 for (var i=0; i<arr.length; i++) {
                     var disabledAttr = '';
@@ -128,17 +136,30 @@
 
     });
     $("#tickets").on("click", "span.ticket", function (event) {
-        var placeId = $(event.target).data('placeId');
+
+        var sender;
+        if ($(event.target).hasClass("ticket")) {
+            sender = event.target;
+        } else {
+            sender = event.target.parentNode;
+        }
+        var placeId = $(sender).data('placeId');
         var index = tickets.indexOf(placeId);
-        $(event.target).remove();
+        $(sender).remove();
         $("#total").html(parseFloat($("#total").html())-prices[index]);
         prices.splice(index, 1);
         tickets.splice(index, 1);
         $("option[data-place-id="+ placeId +"]").attr("selected", false);
         if (tickets.length > 0) {
             $("#btn-modal-confirm-sell").removeClass("disabled");
+            $("#btn-modal-confirm-reserve").removeClass("disabled");
+            $(".tickets-delete-helper").slideDown();
+            $(".tickets-add-helper").slideUp();
         } else {
             $("#btn-modal-confirm-sell").addClass("disabled");
+            $("#btn-modal-confirm-reserve").addClass("disabled")
+            $(".tickets-delete-helper").slideUp();
+            $(".tickets-add-helper").slideDown();
         }
     });
     $("#place").change(function() {
@@ -151,7 +172,7 @@
                     $('#tickets').append("<span title='Удалить' style='cursor: pointer' class='label label-primary ticket'" +
                         " data-place-id="+$(option).data('placeId')+">С-"+$('#sector option:selected').data('sectorId')+
                         " Р-"+$("#row option:selected").data('rowNo')+
-                        " М-"+$(option).data('placeNo')+" &times;</span> ");
+                        " М-"+$(option).data('placeNo')+" <span style='color: #bb6060'>&times;</span></span> ");
                 }
             } else {
                 if (tickets.indexOf($(option).data('placeId')) > -1) {
@@ -167,8 +188,14 @@
 
         if (tickets.length > 0) {
             $("#btn-modal-confirm-sell").removeClass("disabled");
+            $("#btn-modal-confirm-reserve").removeClass("disabled");
+            $(".tickets-delete-helper").slideDown();
+            $(".tickets-add-helper").slideUp();
         } else {
             $("#btn-modal-confirm-sell").addClass("disabled");
+            $("#btn-modal-confirm-reserve").addClass("disabled");
+            $(".tickets-delete-helper").slideUp();
+            $(".tickets-add-helper").slideDown();
         }
     });
     $('#btn-modal-confirm-<?=$data['role']?>').on("click", function() {
