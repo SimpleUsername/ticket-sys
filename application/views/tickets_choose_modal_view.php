@@ -198,18 +198,27 @@
             $(".tickets-add-helper").slideDown();
         }
     });
-    $('#btn-modal-confirm-<?=$data['role']?>').on("click", function() {
-        $('#btn-modal-confirm-<?=$data['role']?>').addClass('disabled');
-        $.post("/tickets/<?=$data['role']?>Tickets/<?=$data['event_id']?>", {
-            tickets: JSON.stringify(tickets)<? if ($data['role'] == 'reserve' ) { ?>,
-            customer_id: <? echo $data['customer_id']; } ?>
+    <? if ($data['role'] == 'reserve' ) { ?>
+    $('#btn-modal-confirm-reserve').on("click", function() {
+        $('#btn-modal-confirm-reserve').addClass('disabled');
+        $.post("/tickets/reserveTickets/<?=$data['event_id']?>", {
+            tickets: JSON.stringify(tickets),
+            customer_name: "<?=$data['customer_name']?>",
+            reserve_description: "<?=$data['reserve_description']?>"
+    <? } else { ?>
+    $('#btn-modal-confirm-sell').on("click", function() {
+        $('#btn-modal-confirm-sell').addClass('disabled');
+        $.post("/tickets/sellTickets/<?=$data['event_id']?>", {
+            tickets: JSON.stringify(tickets);
+    <? } ?>
         }).done(function (response) {
-                $("#dialog-modal").children().first().modal("hide");
-                $('#dialog-modal').on('hidden.bs.modal', function () {
-                    $('#dialog-modal').unbind();
-                    $("#dialog-modal").html(response);
-                });
+            $("#dialog-modal").children().first().modal("hide");
+            $('#dialog-modal').on('hidden.bs.modal', function () {
+                $('#dialog-modal').unbind();
+                $("#dialog-modal").html(response);
             });
+        });
+        //TODO .error
     });
     <? if ($data['role'] == 'reserve' ) { ?>
     $("#dialog-modal").children().first().modal();

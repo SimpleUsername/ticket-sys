@@ -7,7 +7,7 @@
  */
 class Model_Tickets extends Model {
 
-    private $customers_table = "customer";
+    private $reserve_table = "reserve";
     private $events_table = "events";
     private $event_status_table = "event_status";
     private $tickets_table = "tickets";
@@ -15,11 +15,8 @@ class Model_Tickets extends Model {
     private $sector_table = "sector";
     private $place_table = "place";
 
-    public function get_customers_by_name($customer_name){
-        return $this->db->get_records($this->customers_table, array('customer_name' => '%'.$customer_name.'%'));
-    }
-    public function get_customer_by_id($customer_id){
-        return $this->db->get_records($this->customers_table, array('customer_id' => (int)$customer_id));
+    public function get_reserve_by_id($reserve_id){
+        return $this->db->get_records($this->reserve_table, array('reserve_id' => (int)$reserve_id));
     }
 
     public function get_events($status_id = null) {
@@ -84,7 +81,7 @@ class Model_Tickets extends Model {
          * event_id, sector_id, row_no, ticket_type
          */
         $from = "$this->place_table AS p LEFT OUTER JOIN (select * from $this->tickets_table where event_id=:event_id) AS t ON p.place_id = t.place_id";
-        $what = "p.place_id place_id, place_no, row_no, sector_id, event_id, customer_id, ticket_type, price";
+        $what = "p.place_id place_id, place_no, row_no, sector_id, event_id, reserve_id, ticket_type, price";
         if (isset($filter['event_id'])
             && isset($filter['sector_id'])
             && isset($filter['row_no'])
@@ -109,31 +106,28 @@ class Model_Tickets extends Model {
     public function get_place($place_id) {
         return $this->db->get_records($this->place_table, array('place_id' => $place_id));
     }
-    public function add_customer($customer_name, $customer_description) {
-        $customer_data = array(
+    public function add_reserve($customer_name, $reserve_description, $reserve_created) {
+        $reserve_data = array(
             'customer_name' => $customer_name,
-            'customer_description' => $customer_description
+            'reserve_description' => $reserve_description,
+            'reserve_created' => $reserve_created
         );
-        if ($this->db->insert($this->customers_table, $customer_data)) {
-            return $this->get_customers_by_name($customer_name);
-        } else {
-            return null;
-        }
+        return $this->db->insert($this->reserve_table, $reserve_data);
     }
     /**
      * @param int $event_id
      * @param int $place_id
      * @param string ('reserved'|'purchased') $ticket_type
-     * @param int $customer_id
+     * @param int $reserve_id
      * @param float $price
      * @return null|string
      */
-    public function add_ticket($event_id, $place_id, $ticket_type='purchased', $customer_id = null, $price) {
+    public function add_ticket($event_id, $place_id, $ticket_type='purchased', $reserve_id = null, $price) {
         $ticket_data = array(
             'event_id' => $event_id,
             'place_id' => $place_id,
             'ticket_type' => $ticket_type,
-            'customer_id' => $customer_id,
+            'reserve_id' => $reserve_id,
             'price' => $price
         );
         return $this->db->insert($this->tickets_table, $ticket_data);
@@ -165,14 +159,9 @@ class Model_Tickets extends Model {
         return $this->db->delete($this->tickets_table, $where, $params);
     }
     public function get_tickets($event_id, $sector_id, $row_no, $place_no) {
-        /*SELECT *
-            FROM place AS p
-                LEFT OUTER JOIN (select * from tickets where event_id=3) AS t ON p.place_id = t.place_id
-                LEFT OUTER JOIN customer AS c ON c.customer_id = t.customer_id
-            WHERE sector_id = '1' AND row_no = '1' AND place_no = '10'; */
         $from = "$this->place_table AS p
                 LEFT OUTER JOIN (select * from $this->tickets_table where event_id=:event_id) AS t ON p.place_id = t.place_id
-                LEFT OUTER JOIN $this->customers_table AS c ON c.customer_id = t.customer_id";
+                LEFT OUTER JOIN $this->reserve_table AS c ON c.reserve_id = t.reserve_id";
         $where = "sector_id = :sector_id AND row_no = :row_no AND place_no = :place_no";
         $params = array(
             ':event_id' => $event_id,
@@ -188,18 +177,29 @@ class Model_Tickets extends Model {
 
         return end($this->db->get_records($this->tickets_table, $params));
     }
-    public function get_reserved_tickets($customer_id) {
-        /*SELECT e.event_id, e.event_name, e.event_date, p.place_id, p.sector_id, s.sector_name, p.row_no, p.place_no
-        FROM tickets t, place p, sector s, events e, customer c
-        WHERE t.customer_id = c.customer_id AND e.event_id = t.event_id AND s.sector_id = p.sector_id
-        AND p.place_id = t.place_id AND ticket_type = 'reserved' AND t.customer_id = 3; */
-        $from = "$this->tickets_table t, $this->place_table p, $this->sector_table s, $this->events_table e, $this->customers_table c ";
-        $where = "t.customer_id = c.customer_id AND e.event_id = t.event_id AND s.sector_id = p.sector_id ".
-        "AND p.place_id = t.place_id AND ticket_type = 'reserved' AND t.customer_id = :customer_id ORDER BY e.event_id DESC";
+    public function get_reserved_tickets($reserve_id) {
+        $from = "$this->tickets_table t, $this->place_table p, $this->sector_table s, $this->events_table e, $this->reserve_table c ";
+        $where = "t.reserve_id = c.reserve_id AND e.event_id = t.event_id AND s.sector_id = p.sector_id ".
+        "AND p.place_id = t.place_id AND ticket_type = 'reserved' AND t.reserve_id = :reserve_id ORDER BY e.event_id DESC";
         $params = array(
-            ':customer_id' => $customer_id
+            ':reserve_id' => $reserve_id
         );
         $what = "e.event_id, e.event_sale, e.event_name, e.event_date, p.place_id, p.sector_id, s.sector_name, p.row_no, p.place_no, t.price";
+        $result = $this->db->select($from, $where, $params, $what);
+        return $result;
+    }
+
+    public function get_reserve($customer_name, $reserve_date)
+    {
+        $what = "r.reserve_id, customer_name, reserve_description, reserve_created, count(*) tickets_reserved";
+        $from = "$this->reserve_table r, $this->tickets_table t";
+        $where = "r.reserve_id = t.reserve_id AND ticket_type = 'reserved' AND "
+            ."r.customer_name LIKE :customer_name1 AND r.reserve_created LIKE :reserve_created "
+            ."GROUP BY reserve_id UNION ";
+        $where .= "SELECT $what FROM $from WHERE r.reserve_id = t.reserve_id AND ticket_type = 'reserved' AND "
+            ."r.customer_name LIKE :customer_name2 AND r.reserve_created LIKE :reserve_created "
+            ."GROUP BY reserve_id";
+        $params = array('customer_name1' => $customer_name.'%', 'customer_name2' => '%'.$customer_name.'%', 'reserve_created' => '%'.$reserve_date.'%');
         $result = $this->db->select($from, $where, $params, $what);
         return $result;
     }

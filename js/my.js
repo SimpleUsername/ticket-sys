@@ -144,6 +144,10 @@ $(document).ready(function(){
             .done(function(html) {
                 $("#dialog-modal").html(html).children().first().modal();
                 sender.removeClass("disabled");
+            })
+            .fail(function( jqXHR, textStatus ) {
+                alert( "Request failed: " + textStatus );
+                sender.removeClass("disabled");
             });
 
     });
@@ -155,18 +159,28 @@ $(document).ready(function(){
             .done(function(html) {
                 $("#dialog-modal").html(html).children().first().modal();
                 sender.removeClass("disabled");
+            })
+            .fail(function( jqXHR, textStatus ) {
+                alert( "Request failed: " + textStatus );
+                sender.removeClass("disabled");
             });
     });
     $(".btn-ticket-search").on("click", function(e) {
         $.ajax({ url: "/tickets/search" })
             .done(function(html) {
                 $("#dialog-modal").html(html).children().first().modal();
+            })
+            .fail(function( jqXHR, textStatus ) {
+                alert( "Request failed: " + textStatus );
             });
     });
     $(".btn-reserve-search").on("click", function(e) {
         $.ajax({ url: "/tickets/reserveSearch" })
             .done(function(html) {
                 $("#dialog-modal").html(html).children().first().modal();
+            })
+            .fail(function( jqXHR, textStatus ) {
+                alert( "Request failed: " + textStatus );
             });
     });
 });

@@ -13,13 +13,18 @@
                 <? if ($data['role'] == 'sell') { ?>
                     <button type="button" id="btn-modal-confirm-sell" class="btn btn-primary">Продать</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <? } elseif ($data['role'] == 'new-reserve-info') { ?>
+                    <button type="button" id="btn-modal-confirm-new-reserve-info" class="btn btn-primary">Далее</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
                 <? } elseif ($data['role'] == 'reserve') { ?>
                     <button type="button" id="btn-modal-confirm-reserve" class="btn btn-primary">Забронировать</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                <? } elseif ($data['role'] == 'unreserve') { ?>
+                <? } elseif ($data['role'] == 'search_reserve') { ?>
                     <!--<button type="button" id="btn-modal-delete-reserve" class="btn btn-danger">Удалить</button>-->
                     <button type="button" id="btn-modal-sell-reserve" class="btn btn-primary">Выкупить</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <? } elseif ($data['role'] == 'error') { ?>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Ок</button>
                 <? } else { ?>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">
                     <? switch($data['role']){

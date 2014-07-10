@@ -23,15 +23,16 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `customer`
+-- Структура таблицы `reserve`
 --
 
-CREATE TABLE IF NOT EXISTS `customer` (
-  `customer_id` int(11) NOT NULL AUTO_INCREMENT,
-  `customer_name` varchar(60) NOT NULL,
-  `customer_description` text NOT NULL,
-  PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE TABLE IF NOT EXISTS `reserve` (
+  `reserve_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_name` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `reserve_description` text NOT NULL,
+  `reserve_created` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`reserve_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -35193,7 +35194,7 @@ INSERT INTO `sector` (`sector_id`, `sector_name`, `sector_price`) VALUES
 CREATE TABLE IF NOT EXISTS `tickets` (
   `event_id` int(11) NOT NULL,
   `place_id` int(11) NOT NULL,
-  `customer_id` int(11) DEFAULT NULL,
+  `reserve_id` int(11) DEFAULT NULL,
   `ticket_type` enum('purchased','reserved','','') NOT NULL DEFAULT 'purchased',
   `price` float NOT NULL,
   PRIMARY KEY (`event_id`,`place_id`)
@@ -35203,7 +35204,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 -- Дамп данных таблицы `tickets`
 --
 
-INSERT INTO `tickets` (`event_id`, `place_id`, `customer_id`, `ticket_type`, `price`) VALUES
+INSERT INTO `tickets` (`event_id`, `place_id`, `reserve_id`, `ticket_type`, `price`) VALUES
 (3, 28585, NULL, 'purchased', 550),
 (3, 28586, NULL, 'purchased', 550),
 (3, 28587, NULL, 'purchased', 550),

@@ -108,21 +108,21 @@
                         <li><a href="/events">Продажа и бронирование</a></li>
                         <li><a href="#" class="btn-reserve-search">Выкуп брони</a></li>
                         <li><a href="#" class="btn-ticket-search">Проверка места</a></li>
+                        <li><hr></li>
                     <? } ?>
-                    <li><hr></li>
                     <? if ($_SESSION['user_manager']) { ?>
                         <!-- Manager sidebar menu -->
                         <li><a href="/events/add">Создать мероприятие</a></li>
                         <li><a href="/tickets/add">Analytics</a></li>
                         <li><a href="#">Export</a></li>
+                        <li><hr></li>
                     <? } ?>
-                    <li><hr></li>
                     <? if ($_SESSION['user_admin']) { ?>
                         <!-- Admin sidebar menu -->
                         <li><a href="/users">Список пользователей</a></li>
                         <li><a href="/users/create">Добавить пользователя</a></li>
+                        <li><hr></li>
                     <? } ?>
-                    <li><hr></li>
                     <li><a href="/user/password">Сменить свой пароль</a></li>
                 </ul>
 
