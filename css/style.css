@@ -76,3 +76,12 @@
     cursor:pointer;
 
 }
+.red{
+    background-color: #f00;
+}
+.tic_mar{
+    margin-bottom: 10px;
+}
+.total_mar{
+    margin-top: 20px;
+}

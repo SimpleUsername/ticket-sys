@@ -240,12 +240,6 @@ class Controller_Tickets extends Controller {
         echo json_encode($this->model->get_tickets($_POST['event_id'], $_POST['sector_id'], $_POST['row_no'], $_POST['place_no']));
     }
 
-    public function action_addCustomer() {
-        $customer_name = htmlspecialchars($_POST['customer_name']);
-        $customer_description = htmlspecialchars($_POST['customer_description']);
-        $this->model->add_customer($customer_name, $customer_description);
-    }
-
     public function action_changeStatus(){
         $event_id = (int)$_POST['event_id'];
         $place_id = (int)$_POST['place_id'];

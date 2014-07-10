@@ -23,7 +23,7 @@ class Route
         {
             $action_name = $routes[2];
         }
-
+        // убираем грабли при передаче не числа в аргумент
         if( !empty($routes[3])){
             $arg[] = intval($routes[3]);
         }

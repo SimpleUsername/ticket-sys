@@ -113,9 +113,6 @@
                     <? if ($_SESSION['user_manager']) { ?>
                         <!-- Manager sidebar menu -->
                         <li><a href="/events/add">Создать мероприятие</a></li>
-                        <li><a href="/tickets/add">Analytics</a></li>
-                        <li><a href="#">Export</a></li>
-                        <li><hr></li>
                     <? } ?>
                     <? if ($_SESSION['user_admin']) { ?>
                         <!-- Admin sidebar menu -->

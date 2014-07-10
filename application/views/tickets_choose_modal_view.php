@@ -122,7 +122,6 @@
                 {
                     event_id: <?=$data['event_id']?>,
                     place_id : place_change
-
                 },
                 function(json){
                     console.log(json);
@@ -172,7 +171,7 @@
                     $('#tickets').append("<span title='Удалить' style='cursor: pointer' class='label label-primary ticket'" +
                         " data-place-id="+$(option).data('placeId')+">С-"+$('#sector option:selected').data('sectorId')+
                         " Р-"+$("#row option:selected").data('rowNo')+
-                        " М-"+$(option).data('placeNo')+" <span style='color: #bb6060'>&times;</span></span> ");
+                        " М-"+$(option).data('placeNo')+" <i class='glyphicon glyphicon-remove red'></i></span> ");
                 }
             } else {
                 if (tickets.indexOf($(option).data('placeId')) > -1) {
