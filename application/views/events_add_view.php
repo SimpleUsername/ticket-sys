@@ -20,8 +20,10 @@
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="status_but"><?=$data[0]['estatus_name']?> <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <? foreach($data as $id => $value ){?>
-                        <li><a href="#" data-status_id="<?=$value['estatus_id']?>" class="status"><?=$value['estatus_name']?></a></li>
-                    <? }?>
+                        <? if(!empty($value['estatus_name'])){?>
+                             <li><a href="#" data-status_id="<?=$value['estatus_id']?>" class="status"><?=$value['estatus_name']?></a></li>
+                         <? }?>
+                    <?  }?>
                 </ul>
             </div><!-- /btn-group -->
             <input type="hidden" class="form-control" id="status" name="event_status" value="1" required="required">
@@ -109,8 +111,3 @@
         });
     });
 </script>
-<? print_r($_POST);?>
-<br/>
-<? print_r($data);?>
-<br/>
-<? print_r($_FILES);?>

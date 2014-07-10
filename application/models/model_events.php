@@ -2,7 +2,7 @@
 
 class Model_Events extends Model
 {
-    //todo Must be private
+
     private  $_table = "events";
     private $_sub_table = "event_status";
 

@@ -36,8 +36,6 @@ class Controller_Events extends Controller
             if(!empty($_POST['sector'])){
                 $form_data['event_prices']  = serialize($_POST['sector']);
             }
-//                        print_r($_POST);
-//            exit;
 
             $res = $this->model->insert('events', $form_data);
             if(!$res){
