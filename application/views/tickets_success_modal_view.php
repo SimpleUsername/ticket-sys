@@ -39,9 +39,7 @@
         </tr>
     </table>
 </div>
-<pre>
-<? print_r($data) ?>
-</pre>
+
 <script>
     $("#dialog-modal").children().first().modal();
 </script>
