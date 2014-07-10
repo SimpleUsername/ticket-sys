@@ -39217,7 +39217,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_login`, `user_name`, `user_password`, `user_type_id`, `user_hash`, `user_ip`) VALUES
+INSERT INTO `users` (`user_id`, `user_login`, `user_name`, `user_password`, `user_type`, `user_hash`, `user_ip`) VALUES
 (1, 'admin', 'Default Admin Name', '0ea662093bebe7f633578406da7ff4b9', 7, NULL, '0.0.0.0'),
 (2, 'manager', 'Default Manager Name', '0ea662093bebe7f633578406da7ff4b9', 2, NULL, '0.0.0.0'),
 (3, 'seller', 'Default Seller Name', '0ea662093bebe7f633578406da7ff4b9', 1, NULL, '0.0.0.0');

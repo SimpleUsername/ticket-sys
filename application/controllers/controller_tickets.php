@@ -185,6 +185,9 @@ class Controller_Tickets extends Controller {
     public function action_getTicketsManual() {
         echo json_encode($this->model->get_tickets($_POST['event_id'], $_POST['sector_id'], $_POST['row_no'], $_POST['place_no']));
     }
+    public function action_getTicketsById() {
+        echo json_encode($this->model->get_ticket_by_ids($_POST['event_id'], $_POST['place_no']));
+    }
     public function action_getCustomers() {
         $customer_name = $_POST['customer_name'];
         $rows = $this->model->get_customers_by_name($customer_name);

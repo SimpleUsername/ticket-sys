@@ -60,10 +60,36 @@
         <div class="tab-pane" id="byId">
             <div class="form-horizontal" role="form">
                 <div class="form-group">
+                    <label for="event" class="col-sm-2 control-label">Событие</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="search-event-id">
+                            <? foreach($data['events'] as $key=>$event) { ?>
+                                <option value="<?=$event['event_id']?>"><?=$event['event_name']?></option>
+                            <? } ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="event" class="col-sm-2 control-label">Идентификатор</label>
                     <div class="col-sm-10">
-                        <input class="form-control" placeholder="not implemented yet" disabled>
+                        <input class="form-control" placeholder="ID" type="number" id="search-place-id" >
                     </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <button class="btn btn-primary" id="btn-search-id">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <img src="/images/ajax-loader.gif" id="loading-animation-id">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table" id="ticket-id">
+                    </table>
                 </div>
             </div>
         </div>
@@ -79,6 +105,7 @@
         $(this).tab('show');
     });
     $("#loading-animation").hide();
+    $("#loading-animation-id").hide();
     $('#btn-search').on("click", function(event) {
         $("#loading-animation").show();
         $("#btn-search").addClass("disabled");
@@ -95,6 +122,38 @@
             $("#ticket").show();
             var ticket = JSON.parse(data);
             var table = $("#ticket").html("");
+            console.log(ticket.ticket_type);
+            switch (ticket.ticket_type) {
+                case 'reserved' : state = 'Забронировано'; break;
+                case 'purchased' : state = 'Куплено'; break;
+                default : state = 'Свободно'; break;
+            }
+            table.append('<tr><td>Состояние</td><td>' + state + '</td></tr>' );
+            if (ticket.price != null) {
+                table.append('<tr><td>Стоимость</td><td>' + ticket.price + ' грн</td></tr>' );
+            }
+            if (ticket.customer_name != null) {
+                table.append('<tr><td>Покупатель</td><td>' + ticket.customer_name + '</td></tr>' );
+            }
+        });
+    });
+
+
+
+    $('#btn-search-id').on("click", function(event) {
+        $("#loading-animation-id").show();
+        $("#btn-search-id").addClass("disabled");
+        $("#ticket").hide();
+        $.post("/tickets/getTicketsById", {
+            event_id: $("#search-event-id").val(),
+            place_no: $("#search-place-id").val()
+        }, function (data) {
+            $("#btn-search-id").removeClass("disabled");
+            $("#loading-animation-id").hide();
+            var table = $("#ticket-id").html("<tr><td>Ошибка!</td><td>Место не найдено!</td></tr>");
+            $("#ticket-id").show();
+            var ticket = JSON.parse(data);
+            var table = $("#ticket-id").html("");
             console.log(ticket.ticket_type);
             switch (ticket.ticket_type) {
                 case 'reserved' : state = 'Забронировано'; break;
