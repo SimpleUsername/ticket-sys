@@ -15,18 +15,19 @@
     <option>Сначала выберите cектор</option>
 </select>
 </div>
+<!--
 <div class="row">
-    <div class="col-xs-4 col-md-4">
+    <div class="col-xs-4 col-md-4">-->
         <div class="form-group">
         <select size="1" id="place" class="form-control" multiple>
             <option>Сначала выберите ряд</option>
         </select>
         </div>
-    </div>
-    <div class="col-xs-4 col-md-4">
-        <div id="place_change"></div>
-    </div>
+<!--</div>
+<div class="col-xs-4 col-md-4">
+    <div id="place_change"></div>
 </div>
+</div>-->
 <div class="text-right">
     <h4>Билеты: </h4>
     <h4 id="tickets" style="line-height: 40px">

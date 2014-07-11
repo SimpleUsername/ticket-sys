@@ -174,8 +174,8 @@ class Model_Tickets extends Model {
     }
     public function get_ticket_by_ids($event_id, $place_id) {
         $params = array('event_id' => (int)$event_id, 'place_id' => (int)$place_id);
-
-        return end($this->db->get_records($this->tickets_table, $params));
+        $result = $this->db->get_records($this->tickets_table, $params);
+        return count($result)?end($result):null;
     }
     public function get_reserved_tickets($reserve_id) {
         $from = "$this->tickets_table t, $this->place_table p, $this->sector_table s, $this->events_table e, $this->reserve_table c ";
@@ -189,17 +189,20 @@ class Model_Tickets extends Model {
         return $result;
     }
 
-    public function get_reserve($customer_name, $reserve_date)
+    public function get_reserve($customer_name, $event_id, $reserve_date)
     {
         $what = "r.reserve_id, customer_name, reserve_description, reserve_created, count(*) tickets_reserved";
         $from = "$this->reserve_table r, $this->tickets_table t";
-        $where = "r.reserve_id = t.reserve_id AND ticket_type = 'reserved' AND "
-            ."r.customer_name LIKE :customer_name1 AND r.reserve_created LIKE :reserve_created "
+        $where = "r.reserve_id = t.reserve_id AND ticket_type = 'reserved' AND t.event_id = :event_id AND "
+            ."lower(r.customer_name) LIKE :customer_name1 AND r.reserve_created LIKE :reserve_created "
             ."GROUP BY reserve_id UNION ";
-        $where .= "SELECT $what FROM $from WHERE r.reserve_id = t.reserve_id AND ticket_type = 'reserved' AND "
-            ."r.customer_name LIKE :customer_name2 AND r.reserve_created LIKE :reserve_created "
+        $where .= "SELECT $what FROM $from WHERE r.reserve_id = t.reserve_id AND ticket_type = 'reserved' AND t.event_id = :event_id AND "
+            ."lower(r.customer_name) LIKE :customer_name2 AND r.reserve_created LIKE :reserve_created "
             ."GROUP BY reserve_id";
-        $params = array('customer_name1' => $customer_name.'%', 'customer_name2' => '%'.$customer_name.'%', 'reserve_created' => '%'.$reserve_date.'%');
+        $params = array('customer_name1' => strtolower($customer_name).'%',
+            'customer_name2' => '%'.strtolower($customer_name).'%',
+            'event_id' => $event_id,
+            'reserve_created' => '%'.$reserve_date.'%');
         $result = $this->db->select($from, $where, $params, $what);
         return $result;
     }

@@ -123,10 +123,10 @@ class Controller_Tickets extends Controller {
         //Check, if chosen places are free
         $all_places_is_free = true;
         foreach ($places as $place) {
-            if (!$this->model->get_ticket_by_ids($event_id, $place)) {
-                $all_places_is_free &= true;
+            if ($this->model->get_ticket_by_ids($event_id, $place)) {
+                $all_places_is_free &= false;
             } else {
-                $all_places_is_free = false;
+                $all_places_is_free &= true;
             }
         }
 
@@ -142,8 +142,13 @@ class Controller_Tickets extends Controller {
             $total = 0;
             $data['tickets'] = array();
             foreach ($places as $place_id) {
-                $place = end($this->model->get_place($place_id));
-                foreach ($prices as $sector) {
+                $place = $this->model->get_place($place_id);
+                if (!count($place)) {
+                    Route::ErrorPage404();
+                    exit();
+                }
+                $place = end($place);
+                foreach ($prices as $key=>$sector) {
                     if ($sector['sector_id'] == $place['sector_id']) {
                         $this->model->add_ticket($event_id, $place_id, 'reserved', $reserve_id, $sector['sector_price']);
                         $total += $sector['sector_price'];
@@ -173,15 +178,21 @@ class Controller_Tickets extends Controller {
     /* Modal */
     public function action_reserveSearch($reserve_id = null) {
         if ($reserve_id == null) {
+            //Step 1. Find reserve by customer name, reserve date etc
             date_default_timezone_set(TIME_ZONE);
             $data['current_date'] = date("d.m.Y");
+            $data['events'] = $this->model->get_events();
             $data['title'] = "Поиск забронированных билетов";
             $this->view->generate('tickets_reserve_search_modal_view.php', 'template_modal_view.php', $data);
         } else {
+            //Step 2. Show reserved tickets
             $data['role'] = "search_reserve";
-            $data['reserve'] = end($this->model->get_reserve_by_id((int)$reserve_id));
+            $data['reserve'] = $this->model->get_reserve_by_id((int)$reserve_id);
             $data['tickets'] = $this->model->get_reserved_tickets((int)$reserve_id);
-
+            if (!$data['reserve'] || !$data['tickets']) {
+                Route::ErrorPage404();
+                exit();
+            }
             date_default_timezone_set(TIME_ZONE);
             $current_date = time();
 
@@ -193,15 +204,17 @@ class Controller_Tickets extends Controller {
                     $data['tickets'][$key]['sale_available'] = true;
                 }
             }
-            $data['title'] = "Билеты, забронированные на имя ".$data['reserve']['customer_name'];
+            $data['title'] = "Билеты, забронированные на имя ".$data['reserve'][0]['customer_name'];
             $this->view->generate('tickets_reserved_list_modal_view.php', 'template_modal_view.php', $data);
         }
     }
     /* Ajax */
+    // Used by action_reserveSearch. Returns list of reserves, which satisfies the requirements
     public function action_getReserveInfo() {
         $custumer_name = $_POST['customer_name'];
+        $event_id = $_POST['event_id'];
         $reserve_date = $_POST['reserve_date'];
-        echo json_encode($this->model->get_reserve($custumer_name, $reserve_date));
+        echo json_encode($this->model->get_reserve($custumer_name, $event_id, $reserve_date));
     }
     public function action_reserveSell() {
         $tickets = json_decode($_POST['tickets']);

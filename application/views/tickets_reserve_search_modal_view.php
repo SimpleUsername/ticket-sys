@@ -7,6 +7,16 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="event" class="col-sm-4 control-label">Событие</label>
+            <div class="col-sm-7">
+                <select class="form-control" name="event_id" id="event-id">
+                    <? foreach ($data['events'] as $event) { ?>
+                        <option value="<?=$event['event_id']?>"><?=$event['event_name']?> (<?=$event['event_date']?>)</option>
+                    <? } ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="reserve-description" class="col-sm-4 control-label">Когда бронировались билеты</label>
             <div class="col-sm-8">
                 <div class="container">
@@ -43,7 +53,7 @@
     var customersSearchTimeout;
     $("#loading-animation").hide();
     $("#customers-list").hide();
-    $("#new-customer").hide()
+    $("#new-customer").hide();
 
     $('#reserve-datepicker').datetimepicker({
         pickTime: false,
@@ -52,38 +62,47 @@
     }).on("dp.hide", function () {
         requestReserveList();
     });
+    $("#event-id").change(function () {
+        requestReserveList();
+    });
 
     function requestReserveList() {
-        $("#customers-list").hide();
-        $("#loading-animation").show();
-        $.post("/tickets/getReserveInfo", {customer_name : $("#customer-name").val(), reserve_date: $("#reserve-date").val()}, function(data) {
-            $("#loading-animation").hide();
-            $("#customers-list").html("");
-            if (data.length == 0) {
-                $("#customers-list").append('<a href="#" class="list-group-item disabled list-group-item-warning">Покупатели не найдены!</a>');
-            }
-            for (var i = 0; i < data.length; i++) {
-                var additional = '';
-                if (data[i].reserve_description.length>0) {
-                    additional = '<p class="list-group-item-text">Дополнительно: '+
-                        data[i].reserve_description+'</p>';
+        if (!($("#customer-name").val().length == 0 && $("#reserve-date").val() == 0)) {
+            $("#customers-list").hide();
+            $("#loading-animation").show();
+            $.post("/tickets/getReserveInfo", {
+                customer_name : $("#customer-name").val(),
+                event_id: $("#event-id").val(),
+                reserve_date: $("#reserve-date").val()
+            }, function(data) {
+                $("#loading-animation").hide();
+                $("#customers-list").html("");
+                if (data.length == 0) {
+                    $("#customers-list").append('<a href="#" class="list-group-item disabled list-group-item-warning">Покупатели не найдены!</a>');
                 }
-                $("#customers-list").append(
-                    '<a href="#" onclick="return customerClick(' + data[i].reserve_id+ ')" class="list-group-item customer">' +
-                        '<h4 class="list-group-item-heading">' +
-                        data[i].customer_name + '</h4>' +
-                        '<p class="list-group-item-text">Дата бронирования: '+
-                        data[i].reserve_created + '</p>' +
-                        '<p class="list-group-item-text">Забронированно билетов: '+
-                        data[i].tickets_reserved+'</p>'+additional+'</a>');
-            }
-            $("#customers-list").slideDown();
-        }, "json");
+                for (var i = 0; i < data.length; i++) {
+                    var additional = '';
+                    if (data[i].reserve_description.length>0) {
+                        additional = '<p class="list-group-item-text">Дополнительно: '+
+                            data[i].reserve_description+'</p>';
+                    }
+                    $("#customers-list").append(
+                        '<a href="#" onclick="return customerClick(' + data[i].reserve_id+ ')" class="list-group-item customer">' +
+                            '<h4 class="list-group-item-heading">' +
+                            data[i].customer_name + '</h4>' +
+                            '<p class="list-group-item-text">Дата бронирования: '+
+                            data[i].reserve_created + '</p>' +
+                            '<p class="list-group-item-text">Забронированно билетов: '+
+                            data[i].tickets_reserved+'</p>'+additional+'</a>');
+                }
+                $("#customers-list").slideDown();
+            }, "json");
+        }
     }
 
     $(".reserve-info-search-inputs").keyup(function() {
         clearTimeout(customersSearchTimeout);
-        customersSearchTimeout = setTimeout(requestReserveList(), 1000);
+        customersSearchTimeout = setTimeout(function () {requestReserveList();}, 750);
     });
 
     function customerClick(resereveId) {

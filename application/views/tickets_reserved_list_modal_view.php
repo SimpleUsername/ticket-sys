@@ -111,6 +111,8 @@
                     $(".checkbox-ticket:checked[data-event-id="+sender.dataset.eventId+
                         "][data-place-id="+sender.dataset.placeId+"]").attr("checked", false).trigger("change");
                 }
+                $(".checkbox-ticket:checked[data-event-id="+sender.dataset.eventId+
+                    "][data-place-id="+sender.dataset.placeId+"]").attr("disabled", true);
                 $(sender).parent().parent().fadeOut();
             });
         }
