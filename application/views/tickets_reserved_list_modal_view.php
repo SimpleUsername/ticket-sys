@@ -19,6 +19,7 @@
         <th>Ряд</th>
         <th>Место</th>
         <th>Цена</th>
+        <th>Отменить бронь</th>
     </tr>
     <? } ?>
     <tr id="ticket-<?=$ticket['event_id']?>-<?=$ticket['place_id']?>">
@@ -37,6 +38,12 @@
         </td>
         <td>
             <?=$ticket['price']?> грн
+        </td>
+        <td>
+            <button class="btn btn-default reserve-delete" data-event-id="<?=$ticket['event_id']?>"
+                    data-place-id="<?=$ticket['place_id']?>">
+                <i class="glyphicon glyphicon-remove"></i>
+            </button>
         </td>
     </tr>
 <? } ?>
@@ -77,9 +84,6 @@
             }
         }
     });
-    $('#btn-modal-delete-reserve').click(function () {
-        $(this).addClass('disabled');
-    });
     $('#btn-modal-sell-reserve').click(function () {
         $(this).addClass('disabled');
         $.post("/tickets/reserveSell", {
@@ -89,5 +93,26 @@
                 $('#dialog-modal').unbind().html(response);
             });
         });
+    });
+    var sender;
+    $(".reserve-delete").click(function (event) {
+        if ($(event.target).hasClass("reserve-delete")) {
+            sender = event.target;
+        } else {
+            sender = event.target.parentNode;
+        }
+        if (confirm("are you seriously?")) {
+            $.post("/tickets/changeStatus", {
+                place_id : sender.dataset.placeId,
+                event_id : sender.dataset.eventId
+            }).done(function (response) {
+                if($(".checkbox-ticket:checked[data-event-id="+sender.dataset.eventId+
+                    "][data-place-id="+sender.dataset.placeId+"]").length) {
+                    $(".checkbox-ticket:checked[data-event-id="+sender.dataset.eventId+
+                        "][data-place-id="+sender.dataset.placeId+"]").attr("checked", false).trigger("change");
+                }
+                $(sender).parent().parent().fadeOut();
+            });
+        }
     });
 </script>

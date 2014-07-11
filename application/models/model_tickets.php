@@ -180,7 +180,7 @@ class Model_Tickets extends Model {
     public function get_reserved_tickets($reserve_id) {
         $from = "$this->tickets_table t, $this->place_table p, $this->sector_table s, $this->events_table e, $this->reserve_table c ";
         $where = "t.reserve_id = c.reserve_id AND e.event_id = t.event_id AND s.sector_id = p.sector_id ".
-        "AND p.place_id = t.place_id AND ticket_type = 'reserved' AND t.reserve_id = :reserve_id ORDER BY e.event_id DESC";
+        "AND p.place_id = t.place_id AND ticket_type = 'reserved' AND t.reserve_id = :reserve_id ORDER BY e.event_id DESC, sector_name, row_no, place_no ";
         $params = array(
             ':reserve_id' => $reserve_id
         );

@@ -182,7 +182,7 @@ class Controller_Tickets extends Controller {
             $data['reserve'] = end($this->model->get_reserve_by_id((int)$reserve_id));
             $data['tickets'] = $this->model->get_reserved_tickets((int)$reserve_id);
 
-            date_default_timezone_set('Europe/Kiev');
+            date_default_timezone_set(TIME_ZONE);
             $current_date = time();
 
             foreach ($data['tickets'] as $key=>$ticket) {
@@ -248,7 +248,7 @@ class Controller_Tickets extends Controller {
         $event_id = (int)$_POST['event_id'];
         $place_id = (int)$_POST['place_id'];
         $res = $this->model->delete_order($event_id, $place_id);
-    exit(json_encode($res));
+        exit(json_encode($res));
     }
 
 
