@@ -223,6 +223,7 @@ class Controller_Tickets extends Controller {
                 'sector_id' => $place['sector_id'],
                 'price'=> $real_ticket['price']
             );
+            $total += $real_ticket['price'];
         }
         $data['total'] = $total;
         $data['role'] = "success";
@@ -238,6 +239,9 @@ class Controller_Tickets extends Controller {
     }
     public function action_getTicketsManual() {
         echo json_encode($this->model->get_tickets($_POST['event_id'], $_POST['sector_id'], $_POST['row_no'], $_POST['place_no']));
+    }
+    public function action_getTicketsById() {
+        echo json_encode($this->model->get_ticket_by_ids($_POST['event_id'], $_POST['place_no']));
     }
 
     public function action_changeStatus(){

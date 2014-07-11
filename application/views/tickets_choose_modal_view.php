@@ -208,7 +208,7 @@
     $('#btn-modal-confirm-sell').on("click", function() {
         $('#btn-modal-confirm-sell').addClass('disabled');
         $.post("/tickets/sellTickets/<?=$data['event_id']?>", {
-            tickets: JSON.stringify(tickets);
+            tickets: JSON.stringify(tickets)
     <? } ?>
         }).done(function (response) {
             $("#dialog-modal").children().first().modal("hide");
