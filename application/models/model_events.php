@@ -6,21 +6,21 @@ class Model_Events extends Model
     private  $_table = "events";
     private $_sub_table = "event_status";
 
-	public function get_all_events($status = true)
-	{
+    public function get_all_events($status = true)
+    {
         if($status){
             $result = $this->db->sql("SELECT ev.*, evs.estatus_name,
-                        sum(case when t.ticket_type = 'reserved' then 1 else 0 end) reserved_count,
-                        sum(case when t.ticket_type = 'purchased' then 1 else 0 end) purchased_count,
-                        fc.free_count
-                        FROM `events` as ev
-                        LEFT JOIN `event_status` as evs
-                        ON ev.event_status = evs.estatus_id
-                        LEFT JOIN tickets as t
-                        ON ev.event_id = t.event_id
-                        JOIN (select event_id, sum(free_count) free_count from tickets_count group by event_id) fc
-                        ON ev.event_id = fc.event_id
-                        WHERE `event_status` > -1 GROUP BY ev.event_id");
+                                        sum(case when t.ticket_type = 'reserved' then 1 else 0 end) reserved_count,
+                                        sum(case when t.ticket_type = 'purchased' then 1 else 0 end) purchased_count,
+                                        fc.free_count
+                                        FROM `{$this->_table}` as ev
+                                        LEFT JOIN `event_status` as evs
+                                        ON ev.event_status = evs.estatus_id
+                                        LEFT JOIN tickets as t
+                                        ON ev.event_id = t.event_id
+                                        JOIN (select event_id, sum(free_count) free_count from tickets_count group by event_id) fc
+                                        ON ev.event_id = fc.event_id
+                                        WHERE `event_status` > -1 GROUP BY ev.event_id");
 
             if(!$result){
                 $result['msg'] = 'Событий  не существует';
