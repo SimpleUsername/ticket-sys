@@ -54,6 +54,7 @@ class Controller_Tickets extends Controller {
                     }
                     $data['tickets'][] = array(
                         'ticket_id' => $event_id."-".$place_id,
+                        'event_id'  => $event_id,
                         'event_name' => $event['event_name'],
                         'event_date' => $event['event_date'],
                         'place_id' => $place_id,
@@ -263,7 +264,58 @@ class Controller_Tickets extends Controller {
         $res = $this->model->delete_order($event_id, $place_id);
         exit(json_encode($res));
     }
+    public function action_pdf($place_id = null){
+        $place = end($this->model->get_place($place_id ));
+        if(!empty($_GET['event_id'])){
+            $event_id = (int)$_GET['event_id'];
+            $event = $this->model->get_event_by_id($event_id);
+            $real_ticket = $this->model->get_ticket_by_ids($event_id, $place_id);
+            $data = array(
+                'ticket_id' => $event_id."-".$place_id,
+                'event_name' => $event['event_name'],
+                'event_date' => $event['event_date'],
+                'place_id' => $place_id,
+                'place_no' => $place['place_no'],
+                'row_no' => $place['row_no'],
+                'sector_id' => $place['sector_id'],
+                'price'=> $real_ticket['price']
+            );
+            $html = '<table>
+                <tbody>
+                <tr>
+                    <td colspan="3"><strong>Название События</strong><br /><br /><br /></td>
+                    <td colspan="3"><strong>Дата События</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="3">'.$data['event_name'].'</td>
+                    <td colspan="3">'.$data['event_date'].'</td>
+                </tr>
+                <tr>
+                    <td><strong>Сектор:</strong></td>
+                    <td>'.$data['sector_id'].'</td>
+                    <td><strong>Ряд:</strong></td>
+                    <td>'.$data['row_no'].'</td>
+                    <td><strong>Место:</strong></td>
+                    <td>'.$data['place_no'].'</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Уникальный номер:</strong></td>
+                    <td>'.$data['place_id'].'</td>
 
+                    <td colspan="2"><strong>Цена билета:</strong></td>
+                    <td>'.$data['price'].'</td>
+                </tr>
+                </tbody>
+            </table>';
+            $mpdf = new mPDF();
+            $mpdf->WriteHTML($html);
+            $mpdf->Output();
+            exit;
+        }else{
+            $this->redirect('events');
+        }
+
+    }
 
 
     private function concatenateSectorAndCounters($prices, $free_places) {

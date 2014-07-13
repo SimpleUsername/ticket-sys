@@ -52,13 +52,6 @@
     <h4>Итого: <b id="total">0</b> грн.</h4>
 </div>
 <script>
-    /*
-        tickets = {
-            eventId,
-            placeId,
-            price
-        }
-         */
     var tickets = [];
 
     $('#btn-modal-delete-reserve').addClass('disabled');

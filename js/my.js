@@ -183,4 +183,25 @@ $(document).ready(function(){
                 alert( "Request failed: " + textStatus );
             });
     });
+//    $(".pdf-ticket").on('click', function(){
+//        var html = $(this).parent().html();
+//
+//        $.ajax({
+//            url: "/tickets/pdf",
+//            type: 'POST',
+//             data:{html: html}
+//        })
+//            .done(function(html) {
+//
+//            })
+//            .fail(function( jqXHR, textStatus ) {
+//                alert( "Request failed: " + textStatus );
+//            });
+//    });
+//    $('.pdf-ticket').click(function() {
+//        //event.preventDefault();
+//        var html = $(this).parent().parent().html();
+//         $('.pdf-ticket').parent().find('input[name=html_pdf]').val(html);
+//        $(this).submit();
+//    });
 });

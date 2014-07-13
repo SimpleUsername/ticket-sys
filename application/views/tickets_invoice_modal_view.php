@@ -23,10 +23,12 @@
                 <div class="col-md-3 col-xs-3 "><strong>Цена билета:</strong></div>
                 <div class="col-md-3 col-xs-3 "><?=$ticket['price']?> UAH</div>
             </div>
+
+            <? if(isset($ticket['event_id'])){?>
+            <a class="btn btn-success mce-btn-large pdf-ticket" target="_blank" href="/tickets/pdf/<?=$ticket['place_id']?>/?event_id=<?=$ticket['event_id']?>">Просмотреть в PDF</a>
+            <? } ?>
         </div>
-
-
-    <? }?>
+<? }?>
 <div class="row total_mar">
     <table class="table table-striped">
       <tr>
@@ -39,7 +41,6 @@
         </tr>
     </table>
 </div>
-
 <script>
     $("#dialog-modal").children().first().modal();
 </script>

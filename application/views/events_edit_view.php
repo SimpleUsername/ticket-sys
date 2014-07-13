@@ -2,7 +2,6 @@
 
     <div class="col-md-6">
 
-
         <? if(!empty($data['error'])) {?>
             <div class="form-group has-success has-feedback">
                 <label  class="control-label col-sm-3"><?=$data['error']?></label>
@@ -20,7 +19,7 @@
 
             <div class="input-group-btn">
 
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="status_but"><?=$data['statuses'][$data['event_status']-1]['estatus_name']?> <span class="caret"></span></button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="status_but"><?=$data['statuses'][$data['event_status']]['estatus_name']?> <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <? foreach($data['statuses'] as $id => $value ){?>
                         <li><a href="#" data-status_id="<?=$value['estatus_id']?>" class="status"><?=$value['estatus_name']?></a></li>
@@ -96,9 +95,6 @@
 
     </div>
 </form>
-
-
-
 <script type="text/javascript">
     $(function () {
         $('#datetimepicker1').datetimepicker({
@@ -115,10 +111,3 @@
         });
     });
 </script>
-<pre>
-<? //print_r($_POST);?>
-<br/>
-<? print_r($data);?>
-<br/>
-<? print_r($_FILES);?>
-    </pre>
