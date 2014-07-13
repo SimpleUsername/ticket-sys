@@ -24,7 +24,7 @@
                     <? }?>
                 </ul>
             </div><!-- /btn-group -->
-            <input type="hidden" class="form-control" id="status" name="event_status" value="1" required="required">
+            <input type="hidden" class="form-control" id="status" name="event_status" value="<?=isset($data['event_status'])?$data['event_status']:0 ?>" required="required">
         </div><!-- /input-group -->
         <div class="form-group">
             <label for="desc">Описание события</label>
@@ -111,3 +111,4 @@
         });
     });
 </script>
+<pre><? print_r($data) ?></pre>

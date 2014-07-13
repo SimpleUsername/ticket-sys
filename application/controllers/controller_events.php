@@ -13,11 +13,16 @@ class Controller_Events extends Controller
     public function action_index()
     {
         $data = $this->model->get_all_events(true);
+        foreach ($data as $key=>$event) {
+            $data[$key]['event_reserve_available'] = $this->event_reserve_available($event);
+            $data[$key]['event_purchase_available'] = $this->event_purchase_available($event);
+        }
         $this->view->generate('events_view.php', 'template_view.php', $data);
     }
 
 
     public function action_add(){
+
         if(!empty($_POST['event_name'])){
             $form_data =array('event_name' => $_POST['event_name'],
                 'event_status' => $_POST['event_status'],
@@ -39,24 +44,22 @@ class Controller_Events extends Controller
 
             $res = $this->model->insert('events', $form_data);
             if(!$res){
-
-                $data['statuses'] = $this->model->get_all_events(false);// получение статусов
-                $data['prices'] = $this->model->get_section_prices();
                 $data['error'] = "Возникла ошибка";
-                $data['action'] = 'add';
-                $this->view->generate('events_edit_view.php', 'template_view.php',$data);
             }else{
                 $this->redirect('events');
             }
 
-        }else{
-
-            $data['statuses'] = $this->model->get_all_events(false); // получение статусов
-            $data['prices'] = $this->model->get_section_prices();
-            $data['action'] = 'add';
-            $this->view->generate('events_edit_view.php', 'template_view.php',$data);
-
         }
+
+        $data['statuses'] = $this->model->get_all_events(false); // получение статусов
+        $data['prices'] = $this->model->get_section_prices();
+        $current_date = date("d.m.Y G:i:s");
+        $data['event_date'] = $current_date;
+        $data['event_booking'] = $current_date;
+        $data['event_booking_end'] = $current_date;
+        $data['event_sale'] = $current_date;
+        $data['action'] = 'add';
+        $this->view->generate('events_edit_view.php', 'template_view.php',$data);
     }
 
     public function action_edit($id){
@@ -149,5 +152,46 @@ class Controller_Events extends Controller
 
         }
         exit(json_encode($data));
+    }
+
+    private function event_purchase_available(array $event) {
+        $available = true;
+        //By event status
+        if ($event['event_status'] == 1 || $event['event_status'] == 2) {
+            $available = false;
+        }
+        //By date
+        $event_date = strtotime($event['event_date']);
+        $event_sale = strtotime($event['event_sale']);
+        if ($event_date < time()
+            || $event_sale > time() ) {
+            $available = false;
+        }
+        //By free places
+        if ($event['free_count'] == 0 ) {
+            $available = false;
+        }
+        return $available;
+    }
+    private function event_reserve_available(array $event) {
+        $available = true;
+        //By event status
+        if ($event['event_status'] == 1 || $event['event_status'] == 2) {
+            $available = false;
+        }
+        //By date
+        $event_date = strtotime($event['event_date']);
+        $event_booking = strtotime($event['event_booking']);
+        $event_booking_end = strtotime($event['event_booking_end']);
+        if ($event_date < time()
+            || $event_booking > time()
+            || $event_booking_end < time()) {
+            $available = false;
+        }
+        //By free places
+        if ($event['free_count'] == 0 ) {
+            $available = false;
+        }
+        return $available;
     }
 }

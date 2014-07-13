@@ -85,3 +85,10 @@
 .total_mar{
     margin-top: 20px;
 }
+.events-list-btns {
+    width: 160px;
+}
+.events-list-btns .btn-sell, .btn-reserve, .btn-delete, .btn-edit {
+    width: 155px;
+    margin: 1px;
+}

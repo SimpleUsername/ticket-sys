@@ -119,18 +119,21 @@ $(document).ready(function(){
     });
 
     $(body).on('click','#del_ev', function(){
-        var del_id = $(this).data('event_id');
-        $.post(
-            '/events/del_ajax' ,
-            {
-                del_id : del_id
-            },
-            function(json){
-                //json['msg'];
-                ///  $(body).modal({show:true});
-            },
-            'json'
-        );
+        if (confirm('Удалить ?')) {
+            var del_id = $(this).data('event_id');
+            $.post(
+                '/events/del_ajax' ,
+                {
+                    del_id : del_id
+                },
+                function(json){
+                    location.reload();
+                    //json['msg'];
+                    ///  $(body).modal({show:true});
+                },
+                'json'
+            );
+        }
     });
 
     $(".btn-sell").on("click", function(e) {

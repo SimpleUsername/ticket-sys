@@ -1,8 +1,4 @@
 <h1>События</h1>
-<?
-date_default_timezone_set('Europe/Kiev');
-$current_date = time();
-?>
 <? if(isset($data['msg'])) {
 ?>
     <p><?=$data['msg']?></p>
@@ -14,17 +10,11 @@ $current_date = time();
             <th>Название</th>
             <th>Статус</th>
             <th>Дата события</th>
-            <th>Старт бронирования</th>
+            <th>Места</th>
+            <!--<th>Старт бронирования</th>
             <th>Конец бронирования</th>
-            <th>Старт продаж</th>
-            <? if ($_SESSION['user_seller']) { ?>
-            <th>Продать</th>
-            <th>Забронировать</th>
-            <? } ?>
-            <? if ($_SESSION['user_manager']) { ?>
-            <th>Редактировать</th>
-            <th>Удалить</th>
-            <? } ?>
+            <th>Старт продаж</th>-->
+            <th></th>
         </tr>
         <? foreach($data as $id => $value){?>
             <? if($id%2 == 0){?>
@@ -36,29 +26,32 @@ $current_date = time();
             <? } ?>
                     <td><?=$value['event_name']?></td>
                     <td><?=$value['estatus_name']?></td>
-                    <td><?=$value['event_date']?><? $event_date = strtotime($value['event_date']); ?></td>
-                    <td><?=$value['event_booking']?><? $event_booking = strtotime($value['event_booking']); ?></td>
-                    <td><?=$value['event_booking_end']?><? $event_booking_end = strtotime($value['event_booking_end']); ?></td>
-                    <td><?=$value['event_sale']?><? $event_sale = strtotime($value['event_sale']); ?></td>
+                    <td><?=preg_replace('/\s/', '&nbsp', $value['event_date'])?></td>
+                    <th>
+                        <p><span class="label label-success">Продано:&nbsp;<?=$value['purchased_count']?></span></p>
+                        <p><span class="label label-info">Забронировано:&nbsp;<?=$value['reserved_count']?></span></p>
+                        <p><span class="label label-default">Свободно:&nbsp;<?=$value['free_count']?></span></p>
+                    </th>
+                    <!--<td><?=$value['event_booking']?></td>
+                    <td><?=$value['event_booking_end']?></td>
+                    <td><?=$value['event_sale']?></td>-->
 
+                    <td class="events-list-btns">
                     <? if ($_SESSION['user_seller']) { ?>
-                        <td>
-                            <a class="btn btn-primary btn-sell <?=($event_date < $current_date || $event_sale > $current_date)?"disabled":""?>"
-                               data-event-id="<?=$value['event_id']?>">
-                                Продать
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-primary btn-reserve <?=($event_booking_end < $current_date || $event_date < $current_date || $event_booking > $current_date)?"disabled":""?>"
-                               data-event-id="<?=$value['event_id']?>">
-                                Бронировать
-                            </a>
-                        </td>
+                        <a class="btn btn-primary btn-sell <?=$value['event_purchase_available']?"":"disabled"?>"
+                           data-event-id="<?=$value['event_id']?>">
+                            Продать билет
+                        </a>
+                        <a class="btn btn-primary btn-reserve <?=$value['event_reserve_available']?"":"disabled"?>"
+                           data-event-id="<?=$value['event_id']?>">
+                            Бронировать место
+                        </a>
                     <? } ?>
                     <? if ($_SESSION['user_manager']) { ?>
-                    <td><a class="btn btn-success" href="/events/edit/<?=$value['event_id']?>">Редактировать</a></td>
-                    <td><button class="btn btn-danger" id="del_ev" onclick="confirm('Удалить ?')" data-event_id="<?=$value['event_id']?>">Удалить</button></td>
+                        <a class="btn btn-success btn-edit" href="/events/edit/<?=$value['event_id']?>">Редактировать</a>
+                        <button class="btn btn-danger btn-delete" id="del_ev" data-event_id="<?=$value['event_id']?>">Удалить</button>
                     <? } ?>
+                    </td>
                 </tr>
         <? }?>
     </table>
