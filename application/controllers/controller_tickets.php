@@ -5,6 +5,7 @@
  * Date: 26.06.14
  * Time: 1:17
  */
+
 class Controller_Tickets extends Controller {
     public function __construct()
     {
@@ -17,9 +18,11 @@ class Controller_Tickets extends Controller {
 
     /* shows tickets sale dialog (place pick) */
     public function action_sell($event_id) {
-        $data = $this->model->get_event_by_id($event_id);
 
-        date_default_timezone_set('Europe/Kiev');
+        $data = $this->model->get_event_by_id($event_id);
+        if (!$this->event_purchase_available($data)) {
+            Route::ErrorPage404();
+        }
         $current_date = time();
         $event_booking_end = strtotime($data['event_booking_end']);
         if ($event_booking_end < $current_date) {
@@ -37,6 +40,10 @@ class Controller_Tickets extends Controller {
     /* Ajax. Perform ticket sale */
     public function action_sellTickets($event_id) {
         $event = $this->model->get_event_by_id($event_id);
+        $data = $this->model->get_event_by_id($event_id);
+        if (!$this->event_purchase_available($data)) {
+            Route::ErrorPage404();
+        }
         $prices =  unserialize($event['event_prices']);
         $places = json_decode($_POST['tickets']);
         $total = 0;
@@ -94,17 +101,19 @@ class Controller_Tickets extends Controller {
 
     /* Modal */
     public function action_reserve($event_id) {
+        $data = $this->model->get_event_by_id($event_id);
+        if (!$this->event_reserve_available($data)) {
+            Route::ErrorPage404();
+        }
         if (empty($_POST)) {
             //Step 1
             //Request customer name and reserve description
-            $data = $this->model->get_event_by_id($event_id);
             $data['title'] = "Бронирование билетов на ".$data['event_name']." (".$data['event_date'].")";
             $data['role'] = "new-reserve-info";
             $this->view->generate('tickets_new_reserve_modal_view.php', 'template_modal_view.php', $data);
         } else {
             //Step 2
             //Now we need to show place pick dialog
-            $data = $this->model->get_event_by_id($event_id);
             $sectors = $this->concatenateSectorAndCounters(unserialize($data['event_prices']),
                 $this->model->get_free_places_count($event_id));
             $data['role'] = "reserve";
@@ -118,22 +127,25 @@ class Controller_Tickets extends Controller {
     /* Modal */
     public function action_reserveTickets($event_id) {
         $event = $this->model->get_event_by_id($event_id);
+        if (!$this->event_reserve_available($event)) {
+            Route::ErrorPage404();
+        }
+
         $prices =  unserialize($event['event_prices']);
         $places = json_decode($_POST['tickets']);
 
         //Check, if chosen places are free
-        $all_places_is_free = true;
+        $selected_places_are_free = true;
         foreach ($places as $place) {
             if ($this->model->get_ticket_by_ids($event_id, $place)) {
-                $all_places_is_free &= false;
+                $selected_places_are_free &= false;
             } else {
-                $all_places_is_free &= true;
+                $selected_places_are_free &= true;
             }
         }
 
-        if ($all_places_is_free) {
+        if ($selected_places_are_free) {
             //Save reserve information
-            date_default_timezone_set(TIME_ZONE);
             $current_date = date("d.m.Y G:i:s");
             $customer_name = htmlspecialchars($_POST['customer_name']);
             $reserve_description = htmlspecialchars($_POST['reserve_description']);
@@ -180,7 +192,6 @@ class Controller_Tickets extends Controller {
     public function action_reserveSearch($reserve_id = null) {
         if ($reserve_id == null) {
             //Step 1. Find reserve by customer name, reserve date etc
-            date_default_timezone_set(TIME_ZONE);
             $data['current_date'] = date("d.m.Y");
             $data['events'] = $this->model->get_events();
             $data['title'] = "Поиск забронированных билетов";
@@ -194,7 +205,6 @@ class Controller_Tickets extends Controller {
                 Route::ErrorPage404();
                 exit();
             }
-            date_default_timezone_set(TIME_ZONE);
             $current_date = time();
 
             foreach ($data['tickets'] as $key=>$ticket) {
@@ -223,7 +233,9 @@ class Controller_Tickets extends Controller {
         foreach ($tickets as $key=>$ticket) {
             $place = end($this->model->get_place((int)$ticket->placeId));
             $event = $this->model->get_event_by_id((int)$ticket->eventId);
-
+            if (!$this->event_purchase_available($event)) {
+                Route::ErrorPage404();
+            }
             $this->model->set_ticket_type($ticket->eventId, $ticket->placeId, 'purchased');
 
             $real_ticket = $this->model->get_ticket_by_ids($ticket->eventId, $ticket->placeId);
@@ -333,5 +345,39 @@ class Controller_Tickets extends Controller {
             }
         }
         return $sectors;
+    }
+
+    private function event_purchase_available(array $event) {
+        $available = true;
+        //By event status
+        if ($event['event_status'] == 1 || $event['event_status'] == 2) {
+            $available = false;
+        }
+        //By date
+        $event_date = strtotime($event['event_date']);
+        $event_sale = strtotime($event['event_sale']);
+        if ($event_date < time()
+            || $event_sale > time() ) {
+            $available = false;
+        }
+        return $available;
+    }
+
+    private function event_reserve_available(array $event) {
+        $available = true;
+        //By event status
+        if ($event['event_status'] == 1 || $event['event_status'] == 2) {
+            $available = false;
+        }
+        //By date
+        $event_date = strtotime($event['event_date']);
+        $event_booking = strtotime($event['event_booking']);
+        $event_booking_end = strtotime($event['event_booking_end']);
+        if ($event_date < time()
+            || $event_booking > time()
+            || $event_booking_end < time()) {
+            $available = false;
+        }
+        return $available;
     }
 }
