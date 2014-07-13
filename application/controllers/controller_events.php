@@ -40,19 +40,21 @@ class Controller_Events extends Controller
             $res = $this->model->insert('events', $form_data);
             if(!$res){
 
-                $data = $this->model->get_all_events(false);// получение статусов
+                $data['statuses'] = $this->model->get_all_events(false);// получение статусов
                 $data['prices'] = $this->model->get_section_prices();
                 $data['error'] = "Возникла ошибка";
-                $this->view->generate('events_add_view.php', 'template_view.php',$data);
+                $data['action'] = 'add';
+                $this->view->generate('events_edit_view.php', 'template_view.php',$data);
             }else{
                 $this->redirect('events');
             }
 
         }else{
 
-            $data = $this->model->get_all_events(false); // получение статусов
+            $data['statuses'] = $this->model->get_all_events(false); // получение статусов
             $data['prices'] = $this->model->get_section_prices();
-            $this->view->generate('events_add_view.php', 'template_view.php',$data);
+            $data['action'] = 'add';
+            $this->view->generate('events_edit_view.php', 'template_view.php',$data);
 
         }
     }
@@ -120,7 +122,7 @@ class Controller_Events extends Controller
             }else{
                 $data['prices'] = $this->model->get_section_prices();
             }
-
+            $data['action'] = 'edit';
             $this->view->generate('events_edit_view.php', 'template_view.php',$data);
         }
 
