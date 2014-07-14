@@ -17,6 +17,11 @@ class Controller {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
+        if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
+            session_unset();
+            session_destroy();
+        }
+        $_SESSION['last_activity'] = time();
         if (!$this->isAuthorized()) {
             if ($_SERVER['REQUEST_URI'] != '/user/login') {
                 $this->redirect('user/login');
