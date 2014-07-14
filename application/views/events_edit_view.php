@@ -1,4 +1,4 @@
-<form role="form" action="/events/<?=$data['action']?>" method="post" enctype="multipart/form-data" >
+<form role="form" action="/events/<?=$data['action']?>" method="post" enctype="multipart/form-data" id="event-form">
 
     <div class="col-md-6">
         <h1 class="page-header"><?=$data['action']=='edit'?'Редактирование события':'Новое событие'?></h1>
@@ -42,15 +42,15 @@
         </div>
         <div class="form-group">
             <label for="date1">Дата события</label>
-            <div class='input-group date' id='datetimepicker1'>
-                <input type='text' class="form-control" name="event_date" value="<?=@$data['event_date']?>" data-date-format="YYYY-MM-DD hh:mm"/>
+            <div class='input-group date' id="event_date_datetimepicker">
+                <input type='text' class="form-control" name="event_date" value="<?=@$data['event_date']?>" data-date-format="YYYY-MM-DD hh:mm" required="required"/>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
             </div>
         </div>
         <div class="form-group">
             <label for="date2">Дата старта бронирования</label>
-            <div class='input-group date' id='datetimepicker2'>
+            <div class='input-group date' id="event_booking_datetimepicker">
                 <input type='text' class="form-control" name="event_booking"  value="<?=@$data['event_booking']?>"data-date-format="YYYY-MM-DD hh:mm"/>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -58,7 +58,7 @@
         </div>
         <div class="form-group">
             <label for="date4">Дата отмены бронирования</label>
-            <div class='input-group date' id='datetimepicker4'>
+            <div class='input-group date' id="event_booking_end_datetimepicker">
                 <input type='text' class="form-control" name="event_booking_end"  value="<?=@$data['event_booking_end']?>"data-date-format="YYYY-MM-DD hh:mm"/>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -66,7 +66,7 @@
         </div>
         <div class="form-group">
             <label for="date3">Дата старта продаж</label>
-            <div class='input-group date' id='datetimepicker3'>
+            <div class='input-group date' id="event_sale_datetimepicker">
                 <input type='text' class="form-control" name="event_sale" value="<?=@$data['event_sale']?>" data-date-format="YYYY-MM-DD hh:mm"/>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -96,19 +96,131 @@
     </div>
 </form>
 <script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker({
+
+    $(document).ready(function () {
+        $('#event-form').bootstrapValidator({
+            fields: {
+                event_date: {
+                    validators: {
+                        callback: {
+                            message: 'Неправильный диапазон',
+                            callback: function(value, validator) {
+                                var m = new moment(value, 'DD.MM.YYYY HH:mm', true);
+                                return m.isValid()
+                                    && m.isAfter()
+                                    && m.isAfter(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'));
+                            }
+                        }
+                    }
+                },
+                event_booking: {
+                    validators: {
+                        callback: {
+                            message: 'Неправильный диапазон',
+                            callback: function(value, validator) {
+                                var m = new moment(value, 'DD.MM.YYYY HH:mm', true);
+                                return m.isValid()
+                                    && m.isAfter(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'))
+                                    && m.isAfter()
+                                    && m.isBefore(moment($("input[name=event_date]").val(), 'DD.MM.YYYY HH:mm'));
+                            }
+                        }
+                    }
+                },
+                event_booking_end: {
+                    validators: {
+                        callback: {
+                            message: 'Неправильный диапазон',
+                            callback: function(value, validator) {
+                                var m = new moment(value, 'DD.MM.YYYY HH:mm', true);
+                                return m.isValid()
+                                    && m.isAfter(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'))
+                                    && m.isAfter()
+                                    && m.isBefore(moment($("input[name=event_date]").val(), 'DD.MM.YYYY HH:mm'))
+                                    && m.isAfter(moment($("input[name=event_booking]").val(), 'DD.MM.YYYY HH:mm'));
+                            }
+                        }
+                    }
+                },
+                event_sale: {
+                    validators: {
+                        callback: {
+                            message: 'Неправильный диапазон',
+                            callback: function(value, validator) {
+                                var m = new moment(value, 'DD.MM.YYYY HH:mm', true);
+                                return m.isValid()
+                                    && m.isAfter(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'))
+                                    && m.isAfter()
+                                    && m.isBefore(moment($("input[name=event_date]").val(), 'DD.MM.YYYY HH:mm'));
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        //event_date
+        $('#event_date_datetimepicker').datetimepicker({
             language: 'ru'
         });
-        $('#datetimepicker2').datetimepicker({
+        $('#event_date_datetimepicker').on("dp.change", function (e) {
+            $('#event-form')
+                .data('bootstrapValidator')
+                .updateStatus('event_date', 'NOT_VALIDATED')
+                .validateField('event_date');
+            $("input[name=event_date]").trigger("change");
+        });
+        $("input[name=event_date]").on("change", function () {
+            var event_date = moment($("input[name=event_date]").val(), 'DD.MM.YYYY HH:mm');
+            $('#event_booking_datetimepicker').data("DateTimePicker").setMaxDate(event_date);
+            $('#event_sale_datetimepicker').data("DateTimePicker").setMaxDate(event_date);
+            $('#event_booking_end_datetimepicker').data("DateTimePicker").setMaxDate(event_date);
+        });
+
+        //event_booking
+        $('#event_booking_datetimepicker').datetimepicker({
             language: 'ru'
         });
-        $('#datetimepicker3').datetimepicker({
+        $('#event_booking_datetimepicker').on("dp.change",function (e) {
+            $('#event-form')
+                .data('bootstrapValidator')
+                .updateStatus('event_booking', 'NOT_VALIDATED')
+                .validateField('event_booking');
+            $("input[name=event_booking]").trigger("change");
+        });
+        $("input[name=event_booking]").on("change", function () {
+            var event_booking = moment($("input[name=event_booking]").val(), 'DD.MM.YYYY HH:mm');
+            $('#event_booking_end_datetimepicker').data("DateTimePicker").setMinDate(event_booking);
+        });
+
+        //event_booking_end
+        $('#event_booking_end_datetimepicker').datetimepicker({
             language: 'ru'
         });
-        $('#datetimepicker4').datetimepicker({
+        $('#event_booking_end_datetimepicker').on("dp.change",function (e) {
+            $('#event-form')
+                .data('bootstrapValidator')
+                .updateStatus('event_booking_end', 'NOT_VALIDATED')
+                .validateField('event_booking_end');
+        });
+
+        //event_sale
+        $('#event_sale_datetimepicker').datetimepicker({
             language: 'ru'
         });
+        $('#event_sale_datetimepicker').on("dp.change",function (e) {
+            $('#event-form')
+                .data('bootstrapValidator')
+                .updateStatus('event_sale', 'NOT_VALIDATED')
+                .validateField('event_sale');
+        });
+
+        $('#event_date_datetimepicker').data("DateTimePicker").setMinDate(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'));
+        $('#event_booking_datetimepicker').data("DateTimePicker").setMinDate(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'));
+        $('#event_sale_datetimepicker').data("DateTimePicker").setMinDate(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'));
+        $('#event_booking_end_datetimepicker').data("DateTimePicker").setMinDate(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'));
+        $('#event_booking_datetimepicker').data("DateTimePicker").setMaxDate(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'));
+        $('#event_sale_datetimepicker').data("DateTimePicker").setMaxDate(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'));
+        $('#event_booking_end_datetimepicker').data("DateTimePicker").setMaxDate(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'));
     });
 </script>
-<pre><? print_r($data) ?></pre>

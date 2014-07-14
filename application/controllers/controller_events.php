@@ -53,7 +53,8 @@ class Controller_Events extends Controller
 
         $data['statuses'] = $this->model->get_all_events(false); // получение статусов
         $data['prices'] = $this->model->get_section_prices();
-        $current_date = date("d.m.Y G:i:s");
+        $current_date = date("d.m.Y G:i");
+        $data['now'] = $current_date;
         $data['event_date'] = $current_date;
         $data['event_booking'] = $current_date;
         $data['event_booking_end'] = $current_date;
@@ -125,6 +126,7 @@ class Controller_Events extends Controller
             }else{
                 $data['prices'] = $this->model->get_section_prices();
             }
+            $data['now'] = date("d.m.Y G:i");
             $data['action'] = 'edit';
             $this->view->generate('events_edit_view.php', 'template_view.php',$data);
         }
