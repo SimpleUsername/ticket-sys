@@ -26,23 +26,26 @@
             <? } ?>
                     <td><?=$value['event_name']?></td>
                     <td><?=$value['estatus_name']?></td>
-                    <td><?=preg_replace('/\s/', '&nbsp', $value['event_date'])?></td>
-                    <th>
-                        <p><span class="label label-success">Продано:&nbsp;<?=$value['purchased_count']?></span></p>
-                        <p><span class="label label-info">Забронировано:&nbsp;<?=$value['reserved_count']?></span></p>
-                        <p><span class="label label-default">Свободно:&nbsp;<?=$value['free_count']?></span></p>
-                    </th>
+                    <td>
+                        <?=preg_replace('/\s/', '&nbsp', $value['event_date'])?><span class="help-block">
+                        <script> document.write(moment('<?=$value['event_date']?>', 'DD.MM.YYYY HH:mm').fromNow()); </script></span>
+                    </td>
+                    <td>
+                        <p><span>Продано:&nbsp;<?=$value['purchased_count']?></span></p>
+                        <p><span>Забронировано:&nbsp;<?=$value['reserved_count']?></span></p>
+                        <p><span>Свободно:&nbsp;<?=$value['free_count']?></span></p>
+                    </td>
                     <!--<td><?=$value['event_booking']?></td>
                     <td><?=$value['event_booking_end']?></td>
                     <td><?=$value['event_sale']?></td>-->
 
                     <td class="events-list-btns">
                     <? if ($_SESSION['user_seller']) { ?>
-                        <a class="btn btn-primary btn-sell <?=$value['event_purchase_available']?"":"disabled"?>"
+                        <a class="btn btn-default btn-sell <?=$value['event_purchase_available']?"":"disabled"?>"
                            data-event-id="<?=$value['event_id']?>">
                             Продать билет
                         </a>
-                        <a class="btn btn-primary btn-reserve <?=$value['event_reserve_available']?"":"disabled"?>"
+                        <a class="btn btn-default btn-reserve <?=$value['event_reserve_available']?"":"disabled"?>"
                            data-event-id="<?=$value['event_id']?>">
                             Бронировать место
                         </a>

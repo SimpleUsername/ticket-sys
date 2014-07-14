@@ -9,7 +9,7 @@ class Model_Events extends Model
     public function get_all_events($status = true)
     {
         if($status){
-            $result = $this->db->sql("SELECT ev.*, evs.estatus_name,
+            $result = $this->db->sql("SELECT ev.*, STR_TO_DATE(ev.event_date, '%d.%m.%Y %H:%i') ev_date, evs.estatus_name,
                                         sum(case when t.ticket_type = 'reserved' then 1 else 0 end) reserved_count,
                                         sum(case when t.ticket_type = 'purchased' then 1 else 0 end) purchased_count,
                                         fc.free_count
@@ -20,7 +20,7 @@ class Model_Events extends Model
                                         ON ev.event_id = t.event_id
                                         JOIN (select event_id, sum(free_count) free_count from tickets_count group by event_id) fc
                                         ON ev.event_id = fc.event_id
-                                        WHERE `event_status` > -1 GROUP BY ev.event_id");
+                                        WHERE `event_status` > -1 GROUP BY ev.event_id ORDER BY ev_date DESC");
 
             if(!$result){
                 $result['msg'] = 'Событий  не существует';
