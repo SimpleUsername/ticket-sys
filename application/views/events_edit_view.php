@@ -45,7 +45,7 @@
                     </span>
             </div>
         </div>
-        <? if ($action == 'edit') { ?>
+        <? if ($data['action'] == 'edit') { ?>
         <div class="form-group">
             <label for="event_status">Статус события</label>
         </div>
