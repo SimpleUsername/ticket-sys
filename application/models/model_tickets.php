@@ -19,21 +19,14 @@ class Model_Tickets extends Model {
         return $this->db->get_records($this->reserve_table, array('reserve_id' => (int)$reserve_id));
     }
 
-    public function get_events($status_id = null) {
-        if ($status_id == null){
+    public function get_events(array $statuses = array(0,3)) {
+        if ($statuses == null){
             return $this->db->get_records($this->events_table);
         } else {
-            return $this->db->get_records($this->events_table, array('event_status' => (int)$status_id));
+            return $this->db->get_records($this->events_table, array('event_status' => $statuses));
         }
     }
-    public function get_events_by_name($event_name, $status_id = null) {
-        if ($status_id == null){
-            return $this->db->get_records($this->events_table, array('event_name' => '%'.$event_name.'%'));
-        } else {
-            return $this->db->get_records($this->events_table, array('event_name' => '%'.$event_name.'%',
-                'event_status' => (int)$status_id));
-        }
-    }
+
     public function get_event_by_id($event_id) {
         return $this->db->get_records($this->events_table, array('event_id' => $event_id))[0];
     }

@@ -24,6 +24,10 @@ class Db{
                 if (is_string($value)) {
                     $where .= "$key LIKE :$key";
                     $params[":$key"] = $value;
+                } elseif (is_array($value)) {
+                    $where .= "$key IN (";
+                    $where .= implode(', ', $value);
+                    $where .= ")";
                 } else {
                     $where .= "$key = :$key";
                     $params[":$key"] = (int)$value;
