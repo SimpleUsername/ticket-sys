@@ -12,14 +12,26 @@ class Controller_Events extends Controller
 
     public function action_index()
     {
-        $data = $this->model->get_all_events(true);
-        foreach ($data as $key=>$event) {
-            $data[$key]['event_reserve_available'] = $this->event_reserve_available($event);
-            $data[$key]['event_purchase_available'] = $this->event_purchase_available($event);
+        $data = $this->model->get_all_events(true, array(0,3));
+        if (!empty($data)) {
+            foreach ($data as $key=>$event) {
+                $data[$key]['event_reserve_available'] = $this->event_reserve_available($event);
+                $data[$key]['event_purchase_available'] = $this->event_purchase_available($event);
+            }
         }
         $this->view->generate('events_view.php', 'template_view.php', $data);
     }
 
+    public function action_archive()
+    {
+        $data = $this->model->get_all_events(true, array(-1,1,2));
+        $this->view->generate('events_archive_view.php', 'template_view.php', $data);
+    }
+    public function action_recovery($event_id)
+    {
+        $this->model->recovery_event((int)$event_id);
+        $this->redirect('events/archive');
+    }
 
     public function action_add(){
 

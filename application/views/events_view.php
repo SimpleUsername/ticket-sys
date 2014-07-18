@@ -11,12 +11,10 @@
             <th>Статус</th>
             <th>Дата события</th>
             <th>Места</th>
-            <!--<th>Старт бронирования</th>
-            <th>Конец бронирования</th>
-            <th>Старт продаж</th>-->
             <th></th>
         </tr>
-        <? foreach($data as $id => $value){?>
+        <? if (!empty($data)) {
+            foreach($data as $id => $value){?>
             <? if($id%2 == 0){?>
                 <tr class="success">
                     <td><img class="img-thumbnail img_custom" src="<?=$value['event_img_path'].$value['event_img_md5']?>" alt="<?=$value['event_img_name']?>" class="img-thumbnail"></td>
@@ -56,6 +54,9 @@
                     <? } ?>
                     </td>
                 </tr>
+        <?  }
+        } else { ?>
+           <tr><td colspan="5"><span class="help-block"> Пусто :(</span></td></tr>
         <? }?>
     </table>
 </div>

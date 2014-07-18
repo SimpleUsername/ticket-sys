@@ -64,7 +64,8 @@
                     <? if ($_SESSION['user_manager']) { ?>
                         <!-- Manager nav -->
                         <?=!$_SESSION['user_seller']?'<li><a href="/events">События</a></li>':''?>
-                        <li><a href="/config">Цены</a></li>
+                        <li><a href="/events/archive">Архив событий</a></li>
+                        <li><a href="/config">Цены по умолчанию</a></li>
                     <? } ?>
                     <? if ($_SESSION['user_admin']) { ?>
                         <!-- Admin nav -->
@@ -89,7 +90,7 @@
                             echo "btn-success";
                         } elseif ($_SESSION['user_seller']) {
                             echo "btn-primary";
-                        }?>"><?=$_SESSION['user_login'] ?> <i class="icon-white glyphicon glyphicon-off"></i></a>
+                        }?>"><?=$_SESSION['user_login'] ?> <i class="icon-white glyphicon glyphicon-log-out"></i></a>
                     </div>&nbsp;
                 </div>
             <? } ?>
