@@ -36,34 +36,31 @@ class Controller_Events extends Controller
     public function action_add(){
 
         if(!empty($_POST['event_name'])){
-            $form_data =array('event_name' => $_POST['event_name'],
+            $form_data =array('event_name' => htmlspecialchars($_POST['event_name']),
                 'event_status' => $_POST['event_status'],
-                'event_desc' => $this->simple_clear($_POST['event_desc']),
-                'event_date' => $_POST['event_date'],
-                'event_booking' => $_POST['event_booking'],
-                'event_booking_end' => $_POST['event_booking_end'],
-                'event_sale' => $_POST['event_sale']);
+                'event_desc' => htmlspecialchars($this->simple_clear($_POST['event_desc'])),
+                'event_date' => htmlspecialchars($_POST['event_date']),
+                'event_booking' => htmlspecialchars($_POST['event_booking']),
+                'event_booking_end' => htmlspecialchars($_POST['event_booking_end']),
+                'event_sale' => htmlspecialchars($_POST['event_sale']));
             if(!empty($_FILES['event_img']) && $_FILES['event_img']['error'] != 4){
                 $file = $this->prepare_files($_FILES);
                 $form_data['event_img_name'] = $file['event_img']['event_img_name'] ;
                 $form_data['event_img_md5']  = $file['event_img']['event_img_md5'];
                 $form_data['event_img_path'] = $file['event_img']['event_img_path'];
-
             }
             if(!empty($_POST['sector'])){
                 $form_data['event_prices']  = serialize($_POST['sector']);
             }
-
             $res = $this->model->insert('events', $form_data);
             if(!$res){
                 $data['error'] = "Возникла ошибка";
             }else{
                 $this->redirect('events');
             }
-
         }
 
-        $data['statuses'] = $this->model->get_all_events(false); // получение статусов
+        $data['statuses'] = $this->model->get_all_events(false);
         $data['prices'] = $this->model->get_section_prices();
         $current_date = date("d.m.Y G:i");
         $data['now'] = $current_date;
@@ -79,13 +76,13 @@ class Controller_Events extends Controller
 
         if(!empty($_POST['event_id'])){
 
-            $form_data =array('event_name' => $_POST['event_name'],
+            $form_data =array('event_name' => htmlspecialchars($_POST['event_name']),
                 'event_status' => $_POST['event_status'],
-                'event_desc' => $this->simple_clear($_POST['event_desc']),
-                'event_date' => $_POST['event_date'],
-                'event_booking' => $_POST['event_booking'],
-                'event_booking_end' => $_POST['event_booking_end'],
-                'event_sale' => $_POST['event_sale']);
+                'event_desc' => htmlspecialchars($this->simple_clear($_POST['event_desc'])),
+                'event_date' => htmlspecialchars($_POST['event_date']),
+                'event_booking' => htmlspecialchars($_POST['event_booking']),
+                'event_booking_end' => htmlspecialchars($_POST['event_booking_end']),
+                'event_sale' => htmlspecialchars($_POST['event_sale']));
             if(!empty($_FILES['event_img']) && $_FILES['event_img']['error'] != 4){
                 $file = $this->prepare_files($_FILES);
                 $form_data['event_img_name'] = $file['event_img']['event_img_name'] ;
@@ -101,8 +98,7 @@ class Controller_Events extends Controller
             if(!empty($_POST['sector'])){
                 $form_data['event_prices']  = serialize($_POST['sector']);
             }
-
-            $upd = $this->model->update('events',$form_data,' event_id=:event_id ', array(':event_id' => (int)$_POST['event_id']));
+           $upd = $this->model->update('events',$form_data,' event_id=:event_id ', array(':event_id' => (int)$_POST['event_id']));
             if(!$upd){
                 $data['error'] = "Возникла ошибка";
                 $res = $this->model->get_event_by_id($id);
@@ -118,16 +114,11 @@ class Controller_Events extends Controller
                     $data['prices'] = $this->model->get_section_prices();
                 }
                 $this->view->generate('events_edit_view.php', 'template_view.php',$data);
-
             }else{
-
                 $this->redirect('events');
             }
-
         }else{
-
             $res = $this->model->get_event_by_id($id);
-
             if(isset($res) && count($res) == 1){
                 $data = $res[0];
             }
@@ -142,7 +133,6 @@ class Controller_Events extends Controller
             $data['action'] = 'edit';
             $this->view->generate('events_edit_view.php', 'template_view.php',$data);
         }
-
     }
 
     public function action_del($id){
