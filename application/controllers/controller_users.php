@@ -127,10 +127,14 @@ class Controller_Users extends Controller {
         }
     }
 
-
-    public function action_dump(){
+    public function setGzip($gzip){
+        $this->_gzip = $gzip;
+    }
+    public function action_dump($gzip_param = null){
         $this->_dump_name = date("Y-m-d_h_i").".sql";
-
+        if($gzip_param == 1){
+            $this->setGzip(true);
+        }
         $tables = $this->model->sql("SHOW TABLES");
 
         $fp = fopen( $_SERVER['DOCUMENT_ROOT'].$this->_dump_dir."/".$this->_dump_name, "w" );
@@ -174,7 +178,6 @@ class Controller_Users extends Controller {
                 }
             }
         }
-
         fclose ($fp);
 
 

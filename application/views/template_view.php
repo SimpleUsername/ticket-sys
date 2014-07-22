@@ -72,14 +72,11 @@
                         <li><a href="/users">Пользователи</a></li>
                     <? } ?>
                 </ul>
-                <!-- <form class="navbar-form navbar-right">-->
-                <!-- <input type="text" class="form-control" placeholder="Поиск...">-->
-                <!-- </form>-->
                 <div class="nav navbar-nav navbar-right">
-                    <!--  -->
                     <div class="btn-group">
                         <? if($_SESSION['user_admin']){?>
-                        <a href="/users/dump" class="btn btn-default navbar-btn btn-default" title="Дамп базы"> <i class="icon-white glyphicon  glyphicon-download"></i>&nbsp;Дамп базы</a>
+                            <a href="/users/dump" class="btn btn-default navbar-btn btn-default" title="Дамп базы"> <i class="icon-white glyphicon  glyphicon-download"></i>&nbsp;Дамп базы sql</a>
+                            <a href="/users/dump/1" class="btn btn-default navbar-btn btn-default" title="Дамп базы"> &nbsp;gzip&nbsp;<i class="icon-white glyphicon glyphicon-compressed"></i></a>
                         <? } ?>
                         <a href="/user/password" class="btn btn-default navbar-btn" title="Сменить пароль">
                             <i class="icon-white glyphicon glyphicon-cog"></i>&nbsp;</a>
@@ -102,7 +99,6 @@
     <div class="row">
         <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1) { ?>
             <div class="col-sm-3 col-md-2 sidebar">
-
                 <ul class="nav nav-sidebar">
                     <? if ($_SESSION['user_seller']) { ?>
                         <!-- Seller sidebar menu -->
@@ -123,7 +119,6 @@
                     <? } ?>
                     <li><a href="/user/password">Сменить свой пароль</a></li>
                 </ul>
-
             </div>
         <? } ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -131,6 +126,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

@@ -65,7 +65,7 @@
         <? } ?>
         <div class="form-group">
             <label for="desc">Описание события</label>
-            <textarea id="desc" name="event_desc" class="form-control" rows="3" placeholder="Введите название события"><?=@$data['event_desc']?></textarea>
+            <textarea id="desc" name="event_desc" class="form-control" rows="3" placeholder="Введите название события"><?=$data['event_desc']?></textarea>
         </div>
         <div class="form-group">
             <label for="exampleInputFile">Баннер мероприятия</label>
