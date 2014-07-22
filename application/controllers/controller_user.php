@@ -39,11 +39,16 @@ class Controller_User extends Controller {
             }
         }
     }
+
     public function action_logout() {
-        $this->model->set_user_login_data($_SESSION['user_id']);
-        session_destroy();
+        $user = $this->model->get_user_by_id($_SESSION['user_id']);
+        if (session_id() == $user['user_hash']) {
+            $this->model->set_user_login_data($_SESSION['user_id']);
+        }
+        $_SESSION['authorized'] = 0;
         $this->redirect("user/login");
     }
+
     public function action_password() {
         if (empty($_POST)) {
             $this->view->generate('user_password_view.php', 'template_view.php');

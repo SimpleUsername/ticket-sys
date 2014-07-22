@@ -5,10 +5,6 @@ class Controller {
     public $model;
     public $view;
 
-    public function isAuthorized() {
-        return isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1;
-    }
-
     public function __construct()
     {
         date_default_timezone_set(TIME_ZONE);
@@ -17,23 +13,29 @@ class Controller {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
-            session_unset();
-            session_destroy();
-            $_SESSION['error'] = 'Истёк срок дейсвия сессии!';
-        }
-        $_SESSION['last_activity'] = time();
-        if (!$this->isAuthorized()) {
+
+        if ($this->isAuthorized()) {
+
+            require_once 'application/models/model_user.php';
+            $user_model = new Model_User();
+            $user = $user_model->get_user_by_id($_SESSION['user_id']);
+
+            if (time() - $_SESSION['last_activity'] > 30*60) {
+                $this->showLoginPage('Истёк срок дейсвия сессии!');
+            }
+            if (session_id() != $user['user_hash']) {
+                $this->showLoginPage('Не актуальная сессия!');
+            }
+            if ($_SERVER['REMOTE_ADDR'] != $user['user_ip']) {
+                $this->showLoginPage('Сменился IP адрес!');
+            }
+
+        } else {
             if ($_SERVER['REQUEST_URI'] != '/user/login') {
-                $this->redirect('user/login');
+                $this->showLoginPage();
             }
         }
-    }
-
-    // действие (action), вызываемое по умолчанию
-    public function action_index()
-    {
-        // todo
+        $_SESSION['last_activity'] = time();
     }
 
     public function prepare_files($files_arr){
@@ -121,6 +123,19 @@ class Controller {
             Route::ErrorPage404();
         }
 
+    }
+
+    protected function isAuthorized() {
+        return isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1;
+    }
+
+    private function showLoginPage($error = null) {
+        if ($error != null) {
+            $_SESSION['error'] = $error;
+        }
+        $_SESSION['authorized'] = 0;
+        $this->redirect('user/login');
+        exit();
     }
 
 }

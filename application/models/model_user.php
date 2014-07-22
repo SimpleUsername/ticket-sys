@@ -23,6 +23,10 @@ class Model_User extends Model {
             ' user_id = :user_id ', array(':user_id' => (int)$user_id));
         return $update;
     }
+    public function get_user_by_id($user_id) {
+        $select = $this->select($this->users_table, 'user_id=:user_id', array(':user_id' => (int)$user_id));
+        return end($select);
+    }
     public function set_user_password($user_id, $user_password) {
         $update = $this->update($this->users_table, array("user_password" => $user_password),
             ' user_id = :user_id ', array(':user_id' => (int)$user_id));
