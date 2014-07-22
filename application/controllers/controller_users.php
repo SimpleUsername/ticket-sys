@@ -48,9 +48,9 @@ class Controller_Users extends Controller {
             $this->view->generate('users_edit_view.php', 'template_view.php', $data);
         } else {
             $user_data = array(
-                "user_login" => $_POST['user_login'],
-                "user_name" => $_POST['user_name'],
-                "user_type" => $_POST['user_type']
+                "user_login" => htmlspecialchars($_POST['user_login']),
+                "user_name" => htmlspecialchars($_POST['user_name']),
+                "user_type" => (int)$_POST['user_type']
             );
             if (!empty($_POST['password'])) {
                 $user_data["user_password"] = md5(md5($_POST['password'].SECURE_SALT));
@@ -80,9 +80,9 @@ class Controller_Users extends Controller {
         } else {
             $data["error"] = null;
             $user_data = array(
-                "user_login" => $_POST['user_login'],
-                "user_name" => $_POST['user_name'],
-                "user_type" => $_POST['user_type'],
+                "user_login" => htmlspecialchars($_POST['user_login']),
+                "user_name" => htmlspecialchars($_POST['user_name']),
+                "user_type" => (int)$_POST['user_type'],
                 "user_password" => md5(md5($_POST['password'].SECURE_SALT))
             );
             if ($this->model->create_user($user_data)) {
@@ -90,8 +90,8 @@ class Controller_Users extends Controller {
             } else {
                 $data["error"] = "Ошибка добавления пользователя!";
                 $data["action"] = "create";
-                $data["user_login"] =  $_POST['user_login'];
-                $data["user_type"] =  $_POST['user_type'];
+                $data["user_login"] =  htmlspecialchars($_POST['user_login']);
+                $data["user_type"] =  (int)$_POST['user_type'];
                 $data["user_types"] = $this->model->get_user_types();
                 $this->view->generate('users_edit_view.php', 'template_view.php', $data);
             }
@@ -106,7 +106,7 @@ class Controller_Users extends Controller {
      */
     public function action_checkLoginAvailableAjax() {
         if (isset($_POST['user_login'])) {
-            $new_login = $_POST['user_login'];
+            $new_login = htmlspecialchars($_POST['user_login']);
             if (isset($_GET['old_login']) && $_GET['old_login'] == $new_login) {
                 echo json_encode(array(
                     'user_login' => $new_login,
