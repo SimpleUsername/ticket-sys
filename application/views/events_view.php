@@ -91,7 +91,7 @@
             });
         }).error(function() {
             clearInterval(checkingInterval);
-            console.log('error');
+            alert("Ошибка! Не удалось получить данные с сервера!");
         });
     }, 10*1000);
 
