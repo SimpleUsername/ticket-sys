@@ -73,7 +73,16 @@
 
     var checkingInterval = setInterval(function () {
         $.post("/events/getCountersAndEventStatuses").done(function (response) {
-            var eventsStats = $.parseJSON(response);
+            try {
+                var eventsStats = $.parseJSON(response);
+            } catch (err) {
+                clearInterval(checkingInterval);
+                $('#errorMessageModal').modal('show');
+            }
+            console.log(eventsStats);
+            if (eventsStats == null) {
+                throw true;
+            }
             $.each(eventsStats, function(eventId, eventStats) {
                 $("[data-event-id="+eventId+"].purchased-count").html(eventStats.purchased_count);
                 $("[data-event-id="+eventId+"].reserved-count").html(eventStats.reserved_count);
