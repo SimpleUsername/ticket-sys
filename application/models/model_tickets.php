@@ -192,8 +192,8 @@ class Model_Tickets extends Model {
         $where .= "SELECT $what FROM $from WHERE r.reserve_id = t.reserve_id AND ticket_type = 'reserved' AND t.event_id = :event_id AND "
             ."lower(r.customer_name) LIKE :customer_name2 AND r.reserve_created LIKE :reserve_created "
             ."GROUP BY reserve_id";
-        $params = array('customer_name1' => strtolower($customer_name).'%',
-            'customer_name2' => '%'.strtolower($customer_name).'%',
+        $params = array('customer_name1' => mb_strtolower($customer_name, 'UTF-8').'%',
+            'customer_name2' => '%'.mb_strtolower($customer_name, 'UTF-8').'%',
             'event_id' => $event_id,
             'reserve_created' => '%'.$reserve_date.'%');
         $result = $this->db->select($from, $where, $params, $what);
