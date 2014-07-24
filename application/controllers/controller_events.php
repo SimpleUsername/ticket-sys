@@ -65,7 +65,7 @@ class Controller_Events extends Controller
 
         $data['statuses'] = $this->model->get_all_events(false);
         $data['prices'] = $this->model->get_section_prices();
-        $current_date = date("d.m.Y G:i");
+        $current_date = date("d.m.Y H:i");
         $data['now'] = $current_date;
         $data['event_date'] = $current_date;
         $data['event_booking'] = $current_date;

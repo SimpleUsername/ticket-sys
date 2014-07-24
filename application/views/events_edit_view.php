@@ -126,6 +126,8 @@
                             message: 'Дата должна быть перед датой события',
                             callback: function(value, validator) {
                                 var m = new moment(value, 'DD.MM.YYYY HH:mm', true);
+                                console.log(m.isValid());
+                                console.log( m.isBefore(moment($("input[name=event_date]").val(), 'DD.MM.YYYY HH:mm')));
                                 return m.isValid()
                                     && m.isBefore(moment($("input[name=event_date]").val(), 'DD.MM.YYYY HH:mm'));
                             }
