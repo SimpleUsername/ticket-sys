@@ -53,9 +53,11 @@
             <div class="input-group-btn">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="status_but"><?=$data['statuses'][isset($data['event_status'])?$data['event_status']:0]['estatus_name']?> <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                    <? foreach($data['statuses'] as $id => $value ){?>
+                    <? foreach($data['statuses'] as $id => $value ){
+                        if ($value['estatus_id'] != 1) {?>
                         <li><a href="#" data-status_id="<?=$value['estatus_id']?>" class="status"><?=$value['estatus_name']?></a></li>
-                    <? }?>
+                    <? }
+                    }?>
                 </ul>
             </div><!-- /btn-group -->
             <input type="hidden" class="form-control" id="status" name="event_status" value="<?=$data['event_status'] ?>" required="required">
