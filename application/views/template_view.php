@@ -102,7 +102,7 @@
                 <ul class="nav nav-sidebar">
                     <? if ($_SESSION['user_seller']) { ?>
                         <!-- Seller sidebar menu -->
-                        <li><a href="/events">Продажа и бронирование</a></li>
+                        <!--li><a href="/events">Продажа и бронирование</a></li-->
                         <li><a href="#" class="btn-reserve-search">Выкуп брони</a></li>
                         <li><a href="#" class="btn-ticket-search">Проверка места</a></li>
                         <li><hr></li>
@@ -110,6 +110,7 @@
                     <? if ($_SESSION['user_manager']) { ?>
                         <!-- Manager sidebar menu -->
                         <li><a href="/events/add">Создать мероприятие</a></li>
+                        <li><hr></li>
                     <? } ?>
                     <? if ($_SESSION['user_admin']) { ?>
                         <!-- Admin sidebar menu -->
