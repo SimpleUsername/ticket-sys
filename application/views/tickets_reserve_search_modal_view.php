@@ -1,12 +1,6 @@
 <div id="reserve-search">
     <form class="form-horizontal" role="form" id="reserve-search-form">
         <div class="form-group">
-            <label for="customer-name" class="col-sm-4 control-label">Имя покупателя</label>
-            <div class="col-sm-7">
-                <input type="text" class="form-control reserve-info-search-inputs" name="customer_name" id="customer-name" placeholder="Полное имя покупателя">
-            </div>
-        </div>
-        <div class="form-group">
             <label for="event" class="col-sm-4 control-label">Событие</label>
             <div class="col-sm-7">
                 <select class="form-control" name="event_id" id="event-id">
@@ -14,6 +8,12 @@
                         <option value="<?=$event['event_id']?>"><?=$event['event_name']?> (<?=$event['event_date']?>)</option>
                     <? } ?>
                 </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="customer-name" class="col-sm-4 control-label">Имя покупателя</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control reserve-info-search-inputs" name="customer_name" id="customer-name" placeholder="Полное имя покупателя">
             </div>
         </div>
         <div class="form-group">
