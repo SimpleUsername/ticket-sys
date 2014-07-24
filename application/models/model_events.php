@@ -20,7 +20,7 @@ class Model_Events extends Model
                                         ON ev.event_id = t.event_id
                                         JOIN (select event_id, sum(free_count) free_count from tickets_count group by event_id) fc
                                         ON ev.event_id = fc.event_id
-                                        WHERE `event_status` IN (".implode(", ", $statuses).") GROUP BY ev.event_id ORDER BY ev_date DESC");
+                                        WHERE `event_status` IN (".implode(", ", $statuses).") GROUP BY ev.event_id ORDER BY ev_date");
 
             return  $result;
         }else{
