@@ -48,4 +48,8 @@ class Model_Events extends Model
         $where = 'event_id = :event_id  AND ticket_type = "reserved"';
         return $this->db->delete('tickets', $where, array(":event_id" => $event_id));
     }
+    public function set_event_status($event_id, $status) {
+        $where = 'event_id = :event_id';
+        return $this->update($this->_table, array("event_status" => $status), $where, array(':event_id' => (int)$event_id));
+    }
 }
