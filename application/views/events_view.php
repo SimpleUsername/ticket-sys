@@ -91,10 +91,24 @@
             });
         }).error(function() {
             clearInterval(checkingInterval);
-            alert("Ошибка! Не удалось получить данные с сервера!");
+            $('#errorMessageModal').modal('show');
+
         });
     }, 10*1000);
 
 </script>
+<div class="modal" id="errorMessageModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="errorMessageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content panel-danger">
+            <div class="modal-header panel-heading">
+                <h4 class="modal-title">Ошибка!</h4>
+            </div>
+            <div class="modal-body">
+                <p><strong>Не удалось получить данные с сервера!</strong></p>
+                <p>Перезагрузите страницу</p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <? } ?>
 

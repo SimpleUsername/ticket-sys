@@ -74,12 +74,20 @@
                 </ul>
                 <div class="nav navbar-nav navbar-right">
                     <div class="btn-group">
-                        <? if($_SESSION['user_admin']){?>
-                            <a href="/users/dump" class="btn btn-default navbar-btn btn-default" title="Дамп базы"> <i class="icon-white glyphicon  glyphicon-download"></i>&nbsp;Дамп базы sql</a>
-                            <a href="/users/dump/1" class="btn btn-default navbar-btn btn-default" title="Дамп базы"> &nbsp;gzip&nbsp;<i class="icon-white glyphicon glyphicon-compressed"></i></a>
-                        <? } ?>
-                        <a href="/user/password" class="btn btn-default navbar-btn" title="Сменить пароль">
-                            <i class="icon-white glyphicon glyphicon-cog"></i>&nbsp;</a>
+                        <div class="btn-group navbar-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span> <i class="icon-white glyphicon glyphicon-cog"></i>&nbsp;</a>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <? if($_SESSION['user_admin']){?>
+                                <li><a href="/users/dump"><i class="icon-white glyphicon  glyphicon-download"></i>&nbsp;Дамп базы</a></li>
+                                <li><a href="/users/dump/1"><i class="icon-white glyphicon glyphicon-compressed"></i>&nbsp;Дамп базы (gzip)</a></li>
+                                <li class="divider"></li>
+                                <? } ?>
+                                <li><a href="/user/password">Сменить пароль</a></li>
+                            </ul>
+                        </div>
+
                         <a href="/user/logout" title="Выйти" class="btn navbar-btn <?
                         if ($_SESSION['user_admin']) {
                             echo "btn-warning";
