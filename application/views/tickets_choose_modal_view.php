@@ -44,6 +44,7 @@
     $("#row").html('').hide();
     $("#place").html('').hide();
     $("#btn-modal-confirm-sell").addClass("disabled");
+    $("#btn-modal-confirm-reserve").addClass("disabled");
     $(".tickets-delete-helper").hide();
     $("#sector").change(function() {
 
@@ -51,6 +52,7 @@
         $("#row").html('').fadeOut();
         $("#place").html('').fadeOut();
         $("#btn-modal-confirm-sell").addClass("disabled");
+        $("#btn-modal-confirm-reserve").addClass("disabled");
 
         $.post("/tickets/getRows", {
             event_id: <?=$data['event_id']?>,
@@ -73,6 +75,7 @@
         $("#row").prop("disabled", true);
         $("#place").html('').fadeOut();
         $("#btn-modal-confirm-sell").addClass("disabled");
+        $("#btn-modal-confirm-reserve").addClass("disabled");
         $("#place_change").css('display','block');
         $.post("/tickets/getPlaces", {
             event_id: <?=$data['event_id']?>,
@@ -157,7 +160,7 @@
             $(".tickets-add-helper").slideUp();
         } else {
             $("#btn-modal-confirm-sell").addClass("disabled");
-            $("#btn-modal-confirm-reserve").addClass("disabled")
+            $("#btn-modal-confirm-reserve").addClass("disabled");
             $(".tickets-delete-helper").slideUp();
             $(".tickets-add-helper").slideDown();
         }
