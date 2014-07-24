@@ -158,6 +158,21 @@ class Controller_Events extends Controller
         exit(json_encode($data));
     }
 
+    public function action_getCountersAndEventStatuses(){
+        $events = $this->model->get_all_events();
+        $stats = array();
+        foreach ($events as $event) {
+            $event_stat = array();
+            $event_stat['event_reserve_available'] = $this->event_reserve_available($event);
+            $event_stat['event_purchase_available'] = $this->event_purchase_available($event);
+            $event_stat['free_count'] = (int)$event['free_count'];
+            $event_stat['reserved_count'] = (int)$event['reserved_count'];
+            $event_stat['purchased_count'] = (int)$event['purchased_count'];
+            $stats[$event['event_id']] = $event_stat;
+        }
+        echo json_encode($stats);
+    }
+
     private function event_purchase_available(array $event) {
         $available = true;
         //By event status

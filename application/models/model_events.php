@@ -6,12 +6,9 @@ class Model_Events extends Model
     private  $_table = "events";
     private $_sub_table = "event_status";
 
-    public function get_all_events($status = true, array $statuses = null)
+    public function get_all_events($status = true, array $statuses = array(0,1,2,3))
     {
         if($status){
-            if ($statuses == null) {
-                $statuses = array(0,1,2,3);
-            }
             $result = $this->db->sql("SELECT ev.*, STR_TO_DATE(ev.event_date, '%d.%m.%Y %H:%i') ev_date, evs.estatus_name,
                                         sum(case when t.ticket_type = 'reserved' then 1 else 0 end) reserved_count,
                                         sum(case when t.ticket_type = 'purchased' then 1 else 0 end) purchased_count,

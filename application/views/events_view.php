@@ -29,13 +29,22 @@
                         <script> document.write(moment('<?=$value['event_date']?>', 'DD.MM.YYYY HH:mm').fromNow()); </script></span>
                     </td>
                     <td>
-                        <p><span>Продано:&nbsp;<?=$value['purchased_count']?></span></p>
-                        <p><span>Забронировано:&nbsp;<?=$value['reserved_count']?></span></p>
-                        <p><span>Свободно:&nbsp;<?=$value['free_count']?></span></p>
+                        <p>
+                            <span>
+                                Продано:&nbsp;<span data-event-id="<?=$value['event_id']?>" class="purchased-count"><?=$value['purchased_count']?></span>
+                            </span>
+                        </p>
+                        <p>
+                            <span>
+                                Забронировано:&nbsp;<span data-event-id="<?=$value['event_id']?>" class="reserved-count"><?=$value['reserved_count']?></span>
+                            </span>
+                        </p>
+                        <p>
+                            <span>
+                                Свободно:&nbsp;<span data-event-id="<?=$value['event_id']?>" class="reserved-free"><?=$value['free_count']?></span>
+                            </span>
+                        </p>
                     </td>
-                    <!--<td><?=$value['event_booking']?></td>
-                    <td><?=$value['event_booking_end']?></td>
-                    <td><?=$value['event_sale']?></td>-->
 
                     <td class="events-list-btns">
                     <? if ($_SESSION['user_seller']) { ?>
@@ -60,5 +69,32 @@
         <? }?>
     </table>
 </div>
+<script>
+
+    var checkingInterval = setInterval(function () {
+        $.post("/events/getCountersAndEventStatuses").done(function (response) {
+            var eventsStats = $.parseJSON(response);
+            $.each(eventsStats, function(eventId, eventStats) {
+                $("[data-event-id="+eventId+"].purchased-count").html(eventStats.purchased_count);
+                $("[data-event-id="+eventId+"].reserved-count").html(eventStats.reserved_count);
+                $("[data-event-id="+eventId+"].free-count").html(eventStats.free_count);
+                if (eventStats.event_purchase_available) {
+                    $(".btn-sell[data-event-id="+eventId+"]").removeClass("disabled");
+                } else {
+                    $(".btn-sell[data-event-id="+eventId+"]").addClass("disabled");
+                }
+                if (eventStats.event_reserve_available) {
+                    $(".btn-reserve[data-event-id="+eventId+"]").removeClass("disabled");
+                } else {
+                    $(".btn-reserve[data-event-id="+eventId+"]").addClass("disabled");
+                }
+            });
+        }).error(function() {
+            clearInterval(checkingInterval);
+            console.log('error');
+        });
+    }, 10*1000);
+
+</script>
 <? } ?>
 
