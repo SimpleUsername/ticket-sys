@@ -43,4 +43,9 @@ class Model_Events extends Model
         $fields= array('event_status' => 0 );
         $data['result'] = $this->update('events',$fields,' event_status = -1 AND event_id=:event_id ', array(':event_id' => $event_id));
     }
+
+    public function clear_reserve($event_id) {
+        $where = 'event_id = :event_id  AND ticket_type = "reserved"';
+        return $this->db->delete('tickets', $where, array(":event_id" => $event_id));
+    }
 }

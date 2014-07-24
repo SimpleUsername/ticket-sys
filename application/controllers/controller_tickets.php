@@ -23,11 +23,7 @@ class Controller_Tickets extends Controller {
         if (!$this->event_purchase_available($data)) {
             Route::ErrorPage404();
         }
-        $current_date = time();
-        $event_booking_end = strtotime($data['event_booking_end']);
-        if ($event_booking_end < $current_date) {
-            $this->model->delete_order($data['event_id'], null, 'reserved');
-        }
+        $this->check_and_delete_reserve($data);
 
         $sectors = $this->concatenateSectorAndCounters(unserialize($data['event_prices']),
             $this->model->get_free_places_count($event_id));
@@ -379,5 +375,12 @@ class Controller_Tickets extends Controller {
             $available = false;
         }
         return $available;
+    }
+    private function check_and_delete_reserve($event) {
+        $current_date = time();
+        $event_booking_end = strtotime($event['event_booking_end']);
+        if ($event_booking_end < $current_date) {
+            $this->model->delete_order($event['event_id'], null, 'reserved');
+        }
     }
 }

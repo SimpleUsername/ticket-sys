@@ -8,6 +8,8 @@ class Controller_Events extends Controller
         $this->model = new Model_Events();
 
         parent::__construct();
+
+        $this->check_and_delete_not_sold_reserve();
     }
 
     public function action_index()
@@ -213,4 +215,16 @@ class Controller_Events extends Controller
         }
         return $available;
     }
+
+    private function check_and_delete_not_sold_reserve() {
+        $current_date = time();
+        $actual_events = $this->model->get_all_events(array(0,3));
+        foreach ($actual_events as $event) {
+            $event_booking_end = strtotime($event['event_booking_end']);
+            if ($event_booking_end < $current_date) {
+                $this->model->clear_reserve($event['event_id'], null, 'reserved');
+            }
+        }
+    }
+
 }
