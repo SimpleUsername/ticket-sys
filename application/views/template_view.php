@@ -103,6 +103,20 @@
     </div>
 </div>
 <div id="dialog-modal"></div>
+<div class="modal" id="errorMessageModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="errorMessageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content panel-danger">
+            <div class="modal-header panel-heading">
+                <h4 class="modal-title">Ошибка!</h4>
+            </div>
+            <div class="modal-body">
+                <p><strong>Не удалось получить данные с сервера!</strong></p>
+                <p>Перезагрузите страницу</p>
+                <p class="modal-error-message"></p>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
     <div class="row">
         <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1) { ?>

@@ -146,7 +146,8 @@ $(document).ready(function(){
                 sender.removeClass("disabled");
             })
             .fail(function( jqXHR, textStatus ) {
-                alert( "Request failed: " + textStatus );
+                $(".modal-error-message").html("Request failed: " + textStatus );
+                $('#errorMessageModal').modal('show');
                 sender.removeClass("disabled");
             });
 
@@ -161,8 +162,8 @@ $(document).ready(function(){
                 sender.removeClass("disabled");
             })
             .fail(function( jqXHR, textStatus ) {
-                alert( "Request failed: " + textStatus );
-                sender.removeClass("disabled");
+                $(".modal-error-message").html("Request failed: " + textStatus );
+                $('#errorMessageModal').modal('show');
             });
     });
     $(".btn-ticket-search").on("click", function(e) {
@@ -171,7 +172,8 @@ $(document).ready(function(){
                 $("#dialog-modal").html(html).children().first().modal();
             })
             .fail(function( jqXHR, textStatus ) {
-                alert( "Request failed: " + textStatus );
+                $(".modal-error-message").html("Request failed: " + textStatus );
+                $('#errorMessageModal').modal('show');
             });
     });
     $(".btn-reserve-search").on("click", function(e) {
@@ -180,7 +182,8 @@ $(document).ready(function(){
                 $("#dialog-modal").html(html).children().first().modal();
             })
             .fail(function( jqXHR, textStatus ) {
-                alert( "Request failed: " + textStatus );
+                $(".modal-error-message").html("Request failed: " + textStatus );
+                $('#errorMessageModal').modal('show');
             });
     });
 });
