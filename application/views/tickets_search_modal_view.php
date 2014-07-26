@@ -182,10 +182,17 @@ function printTicket(ticketJson) {
     }
     if (state == 'Забронировано') {
         table.append('<tr><td colspan="2"><button class="btn btn-warning" onclick="deleteReserve('+
-            ticket.reserve_id+')">Отправить в свободную продажу</button></td></tr>' );
+            ticket.event_id+', '+ ticket.place_id+')">Отправить в свободную продажу</button></td></tr>' );
     }
 }
-function deleteReserve(reserveID) {
-    alert(reserveID);
+function deleteReserve(eventID, placeID) {
+    if (confirm("are you seriously?")) {
+        $.post("/tickets/deleteReserve", {
+            place_id : placeID,
+            event_id : eventID
+        }).done(function (response) {
+            $("#btn-search").trigger("click");
+        });
+    }
 }
 </script>

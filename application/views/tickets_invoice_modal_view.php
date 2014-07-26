@@ -23,8 +23,7 @@
                 <div class="col-md-3 col-xs-3 "><strong>Цена билета:</strong></div>
                 <div class="col-md-3 col-xs-3 "><?=$ticket['price']?> UAH</div>
             </div>
-
-            <? if(isset($ticket['event_id'])){?>
+            <? if(!isset($data['noPDF'])){?>
             <a class="btn btn-success mce-btn-large pdf-ticket" target="_blank" href="/tickets/pdf/<?=$ticket['place_id']?>/?event_id=<?=$ticket['event_id']?>">Просмотреть в PDF</a>
             <? } ?>
         </div>
