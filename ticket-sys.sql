@@ -25623,20 +25623,6 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `tickets`
---
-
-INSERT INTO `tickets` (`event_id`, `place_id`, `reserve_id`, `ticket_type`, `price`) VALUES
-(3, 28585, NULL, 'purchased', 550),
-(3, 28586, NULL, 'purchased', 550),
-(3, 28587, NULL, 'purchased', 550),
-(3, 28588, NULL, 'purchased', 550),
-(3, 28589, NULL, 'purchased', 550),
-(3, 28620, NULL, 'purchased', 550),
-(3, 32475, NULL, 'purchased', 2500),
-(3, 32476, NULL, 'purchased', 2500);
-
---
 -- Триггеры `tickets`
 --
 DROP TRIGGER IF EXISTS `counter_decrement`;
