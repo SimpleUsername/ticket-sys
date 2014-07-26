@@ -89,11 +89,21 @@
                     $("#customers-list").append(
                         '<a href="#" onclick="return customerClick(' + data[i].reserve_id+ ')" class="list-group-item customer">' +
                             '<h4 class="list-group-item-heading">' +
-                            data[i].customer_name + '</h4>' +
+                            '<span class="customer-name" data-reserve-id='+data[i].reserve_id+'>'+
+                            data[i].customer_name +
+                            '</span>' +
+                            '<span class="pull-right">' +
+                            '<button class="btn btn-sm btn-success" onclick="reserveEditName(' +
+                            data[i].reserve_id + ', \'' + data[i].customer_name + '\'' +
+                            ')"><span class="glyphicon glyphicon-edit"></span> Редактировать имя</button>'+
+                            //'<button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>'+
+                            '</span>' +
+                            '</h4>' +
                             '<p class="list-group-item-text">Дата бронирования: '+
                             data[i].reserve_created + '</p>' +
                             '<p class="list-group-item-text">Забронированно билетов: '+
-                            data[i].tickets_reserved+'</p>'+additional+'</a>');
+                            data[i].tickets_reserved+'</p>'+additional +
+                            '</a>');
                 }
                 $("#customers-list").slideDown();
             }, "json");
@@ -105,7 +115,29 @@
         customersSearchTimeout = setTimeout(function () {requestReserveList();}, 750);
     });
 
+    var lock = false;
+    function reserveEditName(reserveId, defaultName) {
+        lock = true;
+        var newName = prompt('Имя покупателя', defaultName);
+        while(true){
+            if(newName && newName.length>5 || !newName){
+                if (newName) {
+                    $(".customer-name[data-reserve-id="+reserveId+"]").html(newName);
+                    $.post("/tickets/editCustomerName", {
+                        reserve_id : reserveId,
+                        customer_name: newName
+                    });
+                }
+                break;
+            }else{
+                newName = prompt('Имя покупателя. БОЛЕЕ 5 СИМВОЛОВ!', defaultName);
+            }
+        }
+    }
     function customerClick(resereveId) {
+        if (lock) {
+            return lock = false;
+        }
         <? if (isset($data['event_id'])) { ?>
         $.post("/tickets/reserve/<?=$data['event_id']?>", {reserve_id : resereveId}, function(data) {
         <? } else { ?>

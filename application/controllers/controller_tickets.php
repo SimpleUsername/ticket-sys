@@ -253,6 +253,10 @@ class Controller_Tickets extends Controller {
         $this->view->generate('tickets_invoice_modal_view.php', 'template_modal_view.php', $data);
     }
 
+    public function action_editCustomerName() {
+        $this->model->set_customer_name(htmlspecialchars($_POST['reserve_id']), htmlspecialchars($_POST['customer_name']));
+    }
+
     public function action_search() {
         $data['events'] = $this->model->get_events();
         $data['sectors'] = $this->model->get_sectors();

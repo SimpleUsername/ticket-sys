@@ -137,6 +137,12 @@ class Model_Tickets extends Model {
         $params = array(':event_id' => $event_id, ':place_id' => $place_id);
         return $this->db->update($this->tickets_table, $fields, $where, $params);
     }
+    public function set_customer_name($reserve_id, $customer_name) {
+        $where = 'reserve_id = :reserve_id';
+        $fields = array('customer_name' => $customer_name);
+        $params = array(':reserve_id' => $reserve_id);
+        return $this->db->update($this->reserve_table, $fields, $where, $params);
+    }
     public function delete_order($event_id, $place_id, $ticket_type = null) {
         //TODO Not delete and move order to trash_orders table
         $where = 'event_id = :event_id';
