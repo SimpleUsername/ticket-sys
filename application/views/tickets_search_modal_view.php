@@ -30,18 +30,28 @@
                 <div class="form-group">
                     <label for="row" class="col-sm-2 control-label">Ряд</label>
                     <div class="col-sm-10">
-                        <input type="number" placeholder="" class="form-control" id="search-row">
+                        <input type="number" placeholder="" class="form-control" id="search-row"
+                           onkeyup="if (this.value != 0) {
+                                $('#btn-search').removeAttr('disabled');
+                           } else {
+                                $('#btn-search').attr('disabled', 'disabled');
+                           }">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="place" class="col-sm-2 control-label">Место</label>
                     <div class="col-sm-10">
-                        <input type="number" placeholder="" class="form-control" id="search-place">
+                        <input type="number" placeholder="" class="form-control" id="search-place"
+                            onkeyup="if (this.value != 0) {
+                                $('#btn-search').removeClass('disabled');
+                            } else {
+                                $('#btn-search').addClass('disabled');
+                            }">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <button class="btn btn-primary" id="btn-search">Проверить</button>
+                        <button class="btn btn-primary disabled" id="btn-search" disabled="disabled">Проверить</button>
                     </div>
                 </div>
             </div>
@@ -77,7 +87,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <button class="btn btn-primary" id="btn-search-id">Проверить</button>
+                        <button class="btn btn-primary disabled" id="btn-search-id">Проверить</button>
                     </div>
                 </div>
             </div>
