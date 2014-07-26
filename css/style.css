@@ -92,3 +92,47 @@
     width: 155px;
     margin: 1px;
 }
+/***********************map *************************/
+ .map{
+     z-index: 1000;
+     height: 416px;
+     overflow: hidden;
+     margin: 0 auto;
+     width:500px;
+ }
+ #svg{
+     width: 100%;
+     height: 100%;
+     text-align: center
+ }
+ #svg_19, #svg_19 rect, #svg_19 path {fill: #daff00; cursor: pointer}
+ #svg_16, #svg_16 rect, #svg_16 path {fill: #00ff00; cursor: pointer}
+ #svg_117, #svg_117 rect, #svg_117 path {fill: #0055ff; cursor: pointer}
+ #svg_121, #svg_121 rect, #svg_121 path {fill: #ff00f8; cursor: pointer}
+ #svg_123, #svg_123 rect, #svg_123 path {fill: #f063c7; cursor: pointer}
+ #svg_126, #svg_126 rect, #svg_126 path {fill: #35dde3; cursor: pointer}
+ #svg_130, #svg_130 rect, #svg_130 path {fill: #daff00; cursor: pointer}
+ #svg_132, #svg_132 rect, #svg_132 path {fill: #00ff00; cursor: pointer}
+ #svg_134, #svg_134 rect, #svg_134 path {fill: #ff00f8; cursor: pointer}
+ #svg_95, #svg_95 rect, #svg_95 path {fill: #35dde3; cursor: pointer}
+ #svg_67, #svg_67 rect, #svg_67 path {fill: #00ff00; cursor: pointer}
+ #svg_51, #svg_51 rect, #svg_51 path {fill: #ff00f8; cursor: pointer}
+ #svg_50, #svg_50 rect, #svg_50 path {fill: #daff00; cursor: pointer}
+ #svg_143, #svg_143 rect, #svg_143 path {fill: #00ff00; cursor: pointer}
+ #svg_62, #svg_62 rect, #svg_62 path {fill: #f063c7; cursor: pointer}
+ #svg_74, #svg_74 rect, #svg_74 path {fill: #daff00; cursor: pointer}
+ #svg_58, #svg_58 rect, #svg_58 path {fill: #ff00f8; cursor: pointer}
+ #svg_144, #svg_144 rect, #svg_144 path {fill: #35dde3; cursor: pointer}
+ #svg_110, #svg_110 rect, #svg_110 path {fill: #00ff00; cursor: pointer}
+ #svg_112, #svg_112 rect, #svg_112 path {fill: #daff00; cursor: pointer}
+ #svg_113, #svg_113 rect, #svg_113 path {fill: #ff00f8; cursor: pointer}
+ #svg_114, #svg_114 rect, #svg_114 path {fill: #35dde3; cursor: pointer}
+ #svg_37, #svg_37 rect, #svg_37 path {fill: #0055ff; cursor: pointer}
+ #svg_23, #svg_23 rect, #svg_23 path {fill: #daff00; cursor: pointer}
+ #svg_5, #svg_5 rect, #svg_5 path {fill: #ff00f8; cursor: pointer}
+ #svg_8, #svg_8 rect, #svg_8 path {fill: #35dde3; cursor: pointer}
+ #svg_135, #svg_135 rect, #svg_135 path {fill: #0055ff; cursor: pointer}
+
+ .sec_info{
+     display:none
+ }
