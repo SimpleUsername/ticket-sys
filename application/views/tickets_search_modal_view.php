@@ -6,7 +6,7 @@
     <br>
     <div class="tab-content">
         <div class="tab-pane active" id="manual">
-            <div class="form-horizontal" role="form">
+            <div class="form-horizontal" role="form" id="search-manual">
                 <div class="form-group">
                     <label for="event" class="col-sm-2 control-label">Событие</label>
                     <div class="col-sm-10">
@@ -30,34 +30,26 @@
                 <div class="form-group">
                     <label for="row" class="col-sm-2 control-label">Ряд</label>
                     <div class="col-sm-10">
-                        <input type="number" placeholder="" class="form-control" id="search-row"
-                           onkeyup="if (this.value != 0) {
-                                $('#btn-search').removeAttr('disabled');
-                           } else {
-                                $('#btn-search').attr('disabled', 'disabled');
-                           }
+                        <input type="number" placeholder="" class="form-control" id="search-row" name="row"
+                           onkeyup="validateManualForm();
                            if (event.keyCode == 13) {
-                               $('#btn-search').trigger('click');
+                               $('#btn-search[disabled!=\'disabled\']').trigger('click');
                            }">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="place" class="col-sm-2 control-label">Место</label>
                     <div class="col-sm-10">
-                        <input type="number" placeholder="" class="form-control" id="search-place"
-                            onkeyup="if (this.value != 0) {
-                                $('#btn-search').removeClass('disabled');
-                            } else {
-                                $('#btn-search').addClass('disabled');
-                            }
+                        <input type="number" placeholder="" class="form-control" id="search-place" name="place"
+                            onkeyup="validateManualForm();
                             if (event.keyCode == 13) {
-                                $('#btn-search').trigger('click');
+                                $('#btn-search[disabled!=\'disabled\']').trigger('click');
                             }">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <button class="btn btn-primary disabled" id="btn-search" disabled="disabled">Проверить</button>
+                        <button class="btn btn-primary" id="btn-search" disabled="disabled">Проверить</button>
                     </div>
                 </div>
             </div>
@@ -93,7 +85,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <button class="btn btn-primary disabled" id="btn-search-id">Проверить</button>
+                        <button class="btn btn-primary" id="btn-search-id" disabled="disabled">Проверить</button>
                     </div>
                 </div>
             </div>
@@ -122,6 +114,19 @@
     });
     $("#loading-animation").hide();
     $("#loading-animation-id").hide();
+
+    function validateManualForm() {
+        if (isNumber($("input[name=place]").val()) && isNumber($("input[name=row]").val())) {
+            $('#btn-search').removeAttr("disabled");
+            console.log(1);
+        } else {
+            $('#btn-search').attr("disabled", "disabled");
+            console.log(0);
+        }
+    }
+    function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
     $('#btn-search').on("click", function(event) {
         $("#loading-animation").show();
         $("#btn-search").addClass("disabled");
