@@ -193,6 +193,7 @@ class Controller_Tickets extends Controller {
         if ($_POST['tickets_type'] == 'reserved') {
             $tickets_type = 'reserved';
             $reserve_id = $this->createReserve($_POST['customer_name'], $_POST['reserve_description']);
+            $data['noPDF'] = true;
             $data['title'] = "Бронирование билетов на ".$event['event_name']." (".$event['event_date'].")";
         } else {
             $tickets_type = 'purchased';
@@ -353,6 +354,7 @@ class Controller_Tickets extends Controller {
                     $tickets[] = array(
                         'ticket_id' => $event['event_id']."-".$place_id,
                         'event_name' => $event['event_name'],
+                        'event_id' => $event['event_id'],
                         'event_date' => $event['event_date'],
                         'place_id' => $place_id,
                         'place_no' => $place['place_no'],
