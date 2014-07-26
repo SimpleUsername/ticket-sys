@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"  data-backdrop="static" data-keyboard="false">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"  data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,8 +8,8 @@
             <div class="modal-body">
                 <?php include 'application/views/'.$content_view; ?>
             </div>
-            <? if (isset($data['role'])) { ?>
             <div class="modal-footer">
+                <? if (isset($data['role'])) { ?>
                 <? if ($data['role'] == 'sell') { ?>
                     <button type="button" id="btn-modal-confirm-sell" class="btn btn-primary">Продать</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
@@ -32,8 +32,10 @@
                     }?>
                     </button>
                 <? } ?>
+                <? } else { ?>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <? } ?>
             </div>
-            <? } ?>
         </div>
     </div>
 </div>
