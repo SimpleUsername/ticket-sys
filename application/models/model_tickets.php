@@ -161,20 +161,26 @@ class Model_Tickets extends Model {
         $from = "$this->place_table AS p
                 LEFT OUTER JOIN (select * from $this->tickets_table where event_id=:event_id) AS t ON p.place_id = t.place_id
                 LEFT OUTER JOIN $this->reserve_table AS c ON c.reserve_id = t.reserve_id";
-        $where = "sector_id = :sector_id AND row_no = :row_no AND place_no = :place_no";
+        $where = "(event_id = :event_id OR event_id IS NULL) AND row_no = :row_no AND place_no = :place_no AND sector_id = :sector_id";
         $params = array(
             ':event_id' => $event_id,
             ':sector_id' => $sector_id,
             ':row_no' => $row_no,
             ':place_no' => $place_no
         );
-        $result = $this->db->select($from, $where, $params)[0];
+        $what = "p.*, c.*, t.event_id, t.price, t.reserve_id, t.ticket_type";
+        $result = $this->db->select($from, $where, $params, $what)[0];
         return $result;
     }
     public function get_ticket_by_ids($event_id, $place_id) {
+        $from = "$this->place_table AS p
+                LEFT OUTER JOIN (select * from $this->tickets_table where event_id=:event_id) AS t ON p.place_id = t.place_id
+                LEFT OUTER JOIN $this->reserve_table AS c ON c.reserve_id = t.reserve_id";
+        $where = "(event_id = :event_id OR event_id IS NULL) AND p.place_id = :place_id";
         $params = array('event_id' => (int)$event_id, 'place_id' => (int)$place_id);
-        $result = $this->db->get_records($this->tickets_table, $params);
-        return count($result)?end($result):null;
+        $what = "p.*, c.*, t.event_id, t.price, t.reserve_id, t.ticket_type";
+        $result = $this->db->select($from, $where, $params, $what)[0];
+        return $result;
     }
     public function get_reserved_tickets($reserve_id) {
         $from = "$this->tickets_table t, $this->place_table p, $this->sector_table s, $this->events_table e, $this->reserve_table c ";
