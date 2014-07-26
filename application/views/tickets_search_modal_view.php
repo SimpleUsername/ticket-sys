@@ -35,6 +35,9 @@
                                 $('#btn-search').removeAttr('disabled');
                            } else {
                                 $('#btn-search').attr('disabled', 'disabled');
+                           }
+                           if (event.keyCode == 13) {
+                               $('#btn-search').trigger('click');
                            }">
                     </div>
                 </div>
@@ -46,6 +49,9 @@
                                 $('#btn-search').removeClass('disabled');
                             } else {
                                 $('#btn-search').addClass('disabled');
+                            }
+                            if (event.keyCode == 13) {
+                                $('#btn-search').trigger('click');
                             }">
                     </div>
                 </div>
