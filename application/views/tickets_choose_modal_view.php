@@ -122,7 +122,7 @@
         if(conf){
             var place_change = $(this).data('place-data-id');
             $.post(
-                '/tickets/changeStatus',
+                '/tickets/deleteReserve',
                 {
                     event_id: <?=$data['event_id']?>,
                     place_id : place_change
@@ -204,15 +204,17 @@
     <? if ($data['role'] == 'reserve' ) { ?>
     $('#btn-modal-confirm-reserve').on("click", function() {
         $('#btn-modal-confirm-reserve').addClass('disabled');
-        $.post("/tickets/reserveTickets/<?=$data['event_id']?>", {
+        $.post("/tickets/createTickets/<?=$data['event_id']?>", {
             tickets: JSON.stringify(tickets),
+            tickets_type: 'reserved',
             customer_name: "<?=$data['customer_name']?>",
             reserve_description: "<?=$data['reserve_description']?>"
     <? } else { ?>
     $('#btn-modal-confirm-sell').on("click", function() {
         $('#btn-modal-confirm-sell').addClass('disabled');
-        $.post("/tickets/sellTickets/<?=$data['event_id']?>", {
-            tickets: JSON.stringify(tickets)
+        $.post("/tickets/createTickets/<?=$data['event_id']?>", {
+            tickets: JSON.stringify(tickets),
+            tickets_type: 'purchased'
     <? } ?>
         }).done(function (response) {
             $("#dialog-modal").children().first().modal("hide");

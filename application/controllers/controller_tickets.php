@@ -33,67 +33,6 @@ class Controller_Tickets extends Controller {
         $data['title'] = "Продажа билета на ".$data['event_name']." (".$data['event_date'].")";
         $this->view->generate('tickets_choose_modal_view.php', 'template_modal_view.php', $data);
     }
-    /* Ajax. Perform ticket sale */
-    public function action_sellTickets($event_id) {
-        $event = $this->model->get_event_by_id($event_id);
-        $data = $this->model->get_event_by_id($event_id);
-        if (!$this->event_purchase_available($data)) {
-            Route::ErrorPage404();
-        }
-        $prices =  unserialize($event['event_prices']);
-        $places = json_decode($_POST['tickets']);
-        $total = 0;
-        $data['tickets'] = array();
-        foreach ($places as $key=>$place_id) {
-            $place = $this->model->get_place($place_id)[0];
-            foreach ($prices as $key=>$sector) {
-                if ($sector['sector_id'] == $place['sector_id']) {
-                    $error = false;
-                    try {
-                        $this->model->add_ticket($event_id, $place_id, 'purchased', null, $sector['sector_price']);
-                        $total += $sector['sector_price'];
-                    } catch(Exception $e) {
-                        $error = true;
-                    }
-                    $data['tickets'][] = array(
-                        'ticket_id' => $event_id."-".$place_id,
-                        'event_id'  => $event_id,
-                        'event_name' => $event['event_name'],
-                        'event_date' => $event['event_date'],
-                        'place_id' => $place_id,
-                        'place_no' => $place['place_no'],
-                        'row_no' => $place['row_no'],
-                        'sector_id' => $place['sector_id'],
-                        'price'=> $sector['sector_price'],
-                        'error'=> $error);
-                }
-            }
-        }
-        $data['total'] = $total;
-        $data['role'] = "success";
-        $data['title'] = "Продажа билета на ".$event['event_name']." (".$event['event_date'].")";
-        $this->view->generate('tickets_invoice_modal_view.php', 'template_modal_view.php', $data);
-    }
-    /* Ajax */
-    public function action_getRows() {
-        $event_id = (int)$_POST['event_id'];
-        $sector_id = (int)$_POST['sector_id'];
-        $rows = $this->model->get_free_places_count($event_id, $sector_id);
-        echo json_encode($rows);
-    }
-    /* Ajax */
-    public function action_getPlaces() {
-        $event_id = (int)$_POST['event_id'];
-        $sector_id = (int)$_POST['sector_id'];
-        $row_no = (int)$_POST['row_no'];
-        $filter = array(
-            'event_id' => $event_id,
-            'sector_id' => $sector_id,
-            'row_no' => $row_no
-        );
-        $rows = $this->model->get_places($filter);
-        echo json_encode($rows);
-    }
 
     /* Modal */
     public function action_reserve($event_id) {
@@ -120,70 +59,7 @@ class Controller_Tickets extends Controller {
             $this->view->generate('tickets_choose_modal_view.php', 'template_modal_view.php', $data);
         }
     }
-    /* Modal */
-    public function action_reserveTickets($event_id) {
-        $event = $this->model->get_event_by_id($event_id);
-        if (!$this->event_reserve_available($event)) {
-            Route::ErrorPage404();
-        }
 
-        $prices =  unserialize($event['event_prices']);
-        $places = json_decode($_POST['tickets']);
-
-        //Check, if chosen places are free
-        $selected_places_are_free = true;
-        foreach ($places as $place) {
-            if ($this->model->get_ticket_by_ids($event_id, $place)) {
-                $selected_places_are_free &= false;
-            } else {
-                $selected_places_are_free &= true;
-            }
-        }
-
-        if ($selected_places_are_free) {
-            //Save reserve information
-            $current_date = date("d.m.Y G:i:s");
-            $customer_name = htmlspecialchars($_POST['customer_name']);
-            $reserve_description = htmlspecialchars($_POST['reserve_description']);
-            $reserve_id = $this->model->add_reserve($customer_name, $reserve_description, $current_date);
-
-            //Create tickets and generate invoice data
-            $total = 0;
-            $data['tickets'] = array();
-            foreach ($places as $place_id) {
-                $place = $this->model->get_place($place_id);
-                if (!count($place)) {
-                    Route::ErrorPage404();
-                    exit();
-                }
-                $place = end($place);
-                foreach ($prices as $key=>$sector) {
-                    if ($sector['sector_id'] == $place['sector_id']) {
-                        $this->model->add_ticket($event_id, $place_id, 'reserved', $reserve_id, $sector['sector_price']);
-                        $total += $sector['sector_price'];
-                        $data['tickets'][] = array(
-                            'ticket_id' => $event_id."-".$place_id,
-                            'event_name' => $event['event_name'],
-                            'event_date' => $event['event_date'],
-                            'place_id' => $place_id,
-                            'place_no' => $place['place_no'],
-                            'row_no' => $place['row_no'],
-                            'sector_id' => $place['sector_id'],
-                            'price'=> $sector['sector_price']);
-                    }
-                }
-            }
-            $data['total'] = $total;
-            $data['role'] = "success";
-            $data['title'] = "Бронирование билетов на ".$event['event_name']." (".$event['event_date'].")";
-            $this->view->generate('tickets_invoice_modal_view.php', 'template_modal_view.php', $data);
-        } else {
-            $data['role'] = "error";
-            $data['title'] = "Бронирование билетов на ".$event['event_name']." (".$event['event_date'].")";
-            $data['message'] = "Возникла ошибка! Некоторые места уже заняты!";
-            $this->view->generate('error_modal_view.php', 'template_modal_view.php', $data);
-        }
-    }
     /* Modal */
     public function action_reserveSearch($reserve_id = null) {
         if ($reserve_id == null) {
@@ -215,14 +91,7 @@ class Controller_Tickets extends Controller {
             $this->view->generate('tickets_reserved_list_modal_view.php', 'template_modal_view.php', $data);
         }
     }
-    /* Ajax */
-    // Used by action_reserveSearch. Returns list of reserves, which satisfies the requirements
-    public function action_getReserveInfo() {
-        $custumer_name = $_POST['customer_name'];
-        $event_id = $_POST['event_id'];
-        $reserve_date = $_POST['reserve_date'];
-        echo json_encode($this->model->get_reserve($custumer_name, $event_id, $reserve_date));
-    }
+
     public function action_reserveSell() {
         $tickets = json_decode($_POST['tickets']);
         $total = 0;
@@ -253,29 +122,13 @@ class Controller_Tickets extends Controller {
         $this->view->generate('tickets_invoice_modal_view.php', 'template_modal_view.php', $data);
     }
 
-    public function action_editCustomerName() {
-        $this->model->set_customer_name(htmlspecialchars($_POST['reserve_id']), htmlspecialchars($_POST['customer_name']));
-    }
-
     public function action_search() {
         $data['events'] = $this->model->get_events();
         $data['sectors'] = $this->model->get_sectors();
         $data['title'] = "Поиск билета";
         $this->view->generate('tickets_search_modal_view.php', 'template_modal_view.php', $data);
     }
-    public function action_getTicketsManual() {
-        echo json_encode($this->model->get_tickets($_POST['event_id'], $_POST['sector_id'], $_POST['row_no'], $_POST['place_no']));
-    }
-    public function action_getTicketsById() {
-        echo json_encode($this->model->get_ticket_by_ids($_POST['event_id'], $_POST['place_no']));
-    }
 
-    public function action_changeStatus(){
-        $event_id = (int)$_POST['event_id'];
-        $place_id = (int)$_POST['place_id'];
-        $res = $this->model->delete_order($event_id, $place_id);
-        exit(json_encode($res));
-    }
     public function action_pdf($place_id = null){
         $place = end($this->model->get_place($place_id ));
         if(!empty($_GET['event_id'])){
@@ -329,7 +182,87 @@ class Controller_Tickets extends Controller {
 
     }
 
+    /* Ajax. Perform ticket sale */
+    public function action_createTickets($event_id) {
+        $event = $this->model->get_event_by_id($event_id);
+        if (!$this->event_reserve_available($event)) {
+            Route::ErrorPage404();
+        }
+        $places = json_decode($_POST['tickets']);
 
+        if ($_POST['tickets_type'] == 'reserved') {
+            $tickets_type = 'reserved';
+            $reserve_id = $this->createReserve($_POST['customer_name'], $_POST['reserve_description']);
+            $data['title'] = "Бронирование билетов на ".$event['event_name']." (".$event['event_date'].")";
+        } else {
+            $tickets_type = 'purchased';
+            $reserve_id = null;
+            $data['title'] = "Продажа билета на ".$event['event_name']." (".$event['event_date'].")";
+        }
+
+        if ($this->isPlacesFree($event_id, $places)) {
+            $data['tickets'] = array();
+            $data['total'] = $this->createTickets($event, $places, $data['tickets'], $tickets_type, $reserve_id);
+            $data['role'] = "success";
+            $this->view->generate('tickets_invoice_modal_view.php', 'template_modal_view.php', $data);
+        } else {
+            $data['role'] = "error";
+            $data['message'] = "Возникла ошибка! Некоторые места уже заняты!";
+            $this->view->generate('error_modal_view.php', 'template_modal_view.php', $data);
+        }
+    }
+
+    public function action_getTicketsManual() {
+        echo json_encode($this->model->get_tickets($_POST['event_id'], $_POST['sector_id'], $_POST['row_no'], $_POST['place_no']));
+    }
+
+    public function action_getTicketsById() {
+        echo json_encode($this->model->get_ticket_by_ids($_POST['event_id'], $_POST['place_no']));
+    }
+
+    public function action_editCustomerName() {
+        $this->model->set_customer_name(htmlspecialchars($_POST['reserve_id']), htmlspecialchars($_POST['customer_name']));
+    }
+
+    public function action_deleteReserve(){
+        $event_id = (int)$_POST['event_id'];
+        $place_id = (int)$_POST['place_id'];
+        $res = $this->model->delete_order($event_id, $place_id);
+        exit(json_encode($res));
+    }
+
+    public function action_getRows() {
+        $event_id = (int)$_POST['event_id'];
+        $sector_id = (int)$_POST['sector_id'];
+        $rows = $this->model->get_free_places_count($event_id, $sector_id);
+        echo json_encode($rows);
+    }
+
+    public function action_getPlaces() {
+        $event_id = (int)$_POST['event_id'];
+        $sector_id = (int)$_POST['sector_id'];
+        $row_no = (int)$_POST['row_no'];
+        $filter = array(
+            'event_id' => $event_id,
+            'sector_id' => $sector_id,
+            'row_no' => $row_no
+        );
+        $rows = $this->model->get_places($filter);
+        echo json_encode($rows);
+    }
+    /* Ajax */
+    // Used by action_reserveSearch. Returns list of reserves, which satisfies the requirements
+    public function action_getReserveInfo() {
+        $custumer_name = $_POST['customer_name'];
+        $event_id = $_POST['event_id'];
+        $reserve_date = $_POST['reserve_date'];
+        echo json_encode($this->model->get_reserve($custumer_name, $event_id, $reserve_date));
+    }
+
+    /*************************************************************************
+     *                        PRIVATE METHODS                                *
+     *************************************************************************/
+    
     private function concatenateSectorAndCounters($prices, $free_places) {
         $sectors = array();
         foreach ($prices as $price_key=>$price_value) {
@@ -386,5 +319,49 @@ class Controller_Tickets extends Controller {
         if ($event_booking_end < $current_date) {
             $this->model->delete_order($event['event_id'], null, 'reserved');
         }
+    }
+    private function isPlacesFree($event_id, array $places) {
+        $selected_places_are_free = true;
+        foreach ($places as $place) {
+            if ($this->model->get_ticket_by_ids($event_id, $place)['event_id']) {
+                $selected_places_are_free &= false;
+            } else {
+                $selected_places_are_free &= true;
+            }
+        }
+        return $selected_places_are_free;
+    }
+    private function createReserve($customer_name, $reserve_description) {
+        $current_date = date("d.m.Y G:i:s");
+        $reserve_id = $this->model->add_reserve(htmlspecialchars($customer_name), htmlspecialchars($reserve_description), $current_date);
+        return $reserve_id;
+    }
+    private function createTickets($event, $places, array &$tickets, $type='purchased', $reserve_id=null) {
+        $total = 0;
+        $prices =  unserialize($event['event_prices']);
+        foreach ($places as $place_id) {
+            $place = $this->model->get_place($place_id);
+            if (!count($place)) {
+                Route::ErrorPage404();
+                exit();
+            }
+            $place = end($place);
+            foreach ($prices as $key=>$sector) {
+                if ($sector['sector_id'] == $place['sector_id']) {
+                    $this->model->add_ticket($event['event_id'], $place_id, $type, $reserve_id, $sector['sector_price']);
+                    $total += $sector['sector_price'];
+                    $tickets[] = array(
+                        'ticket_id' => $event['event_id']."-".$place_id,
+                        'event_name' => $event['event_name'],
+                        'event_date' => $event['event_date'],
+                        'place_id' => $place_id,
+                        'place_no' => $place['place_no'],
+                        'row_no' => $place['row_no'],
+                        'sector_id' => $place['sector_id'],
+                        'price'=> $sector['sector_price']);
+                }
+            }
+        }
+        return $total;
     }
 }

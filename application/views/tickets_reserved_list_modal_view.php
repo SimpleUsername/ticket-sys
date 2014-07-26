@@ -95,7 +95,7 @@
             sender = event.target.parentNode;
         }
         if (confirm("are you seriously?")) {
-            $.post("/tickets/changeStatus", {
+            $.post("/tickets/deleteReserve", {
                 place_id : sender.dataset.placeId,
                 event_id : sender.dataset.eventId
             }).done(function (response) {
