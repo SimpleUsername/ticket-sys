@@ -105,7 +105,11 @@
         e.preventDefault();
         $(this).tab('show');
     });
+
     $("#loading-animation").hide();
+    
+    $("#search-row, #search-place").on("change", function () { validateManualForm() });
+    $("#search-place-id").on("change", function () {validateByIDForm()});
 
     function validateManualForm() {
         if (isNumber($("input[name=place]").val()) && isNumber($("input[name=row]").val())) {
@@ -114,6 +118,7 @@
             $('#btn-search').attr("disabled", "disabled");
         }
     }
+
     function validateByIDForm() {
         if (isNumber($("#search-place-id").val())) {
             $('#btn-search-id').removeAttr("disabled");
@@ -121,6 +126,7 @@
             $('#btn-search-id').attr("disabled", "disabled");
         }
     }
+
     function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
