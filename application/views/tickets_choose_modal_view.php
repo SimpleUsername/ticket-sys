@@ -332,7 +332,7 @@
                     prices.push($("#sector option:selected").data('sectorPrice'));
                     $("#total").html(parseFloat($("#total").html())+prices[prices.length-1]);
                     $('#tickets').append("<span title='Удалить' style='cursor: pointer' class='label label-primary ticket'" +
-                        " data-place-id="+$(option).data('placeId')+">С-"+$('#sector option:selected').data('sectorId')+
+                        " data-place-id="+$(option).data('placeId')+">С-"+$('#sector_id').val()+
                         " Р-"+$("#row option:selected").data('rowNo')+
                         " М-"+$(option).data('placeNo')+" <i class='glyphicon glyphicon-remove red'></i></span> ");
                 }
