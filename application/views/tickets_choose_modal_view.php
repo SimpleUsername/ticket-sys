@@ -222,6 +222,7 @@
     var tickets = [];
     var prices = [];
     var event_id = <?=$data['event_id']?>;
+    all_actions();  //map init
 
     $("#row").html('').hide();
     $("#place").html('').hide();

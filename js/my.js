@@ -144,6 +144,36 @@ function action_sector(id_elem , color){
             });
     });
 }
+function all_actions(){
+    $(".map").css('height','416px');
+    action_sector("svg_19", 'daff00'); // 1
+    action_sector("svg_16", '00ff00'); // 2
+    action_sector("svg_117", '0055ff'); // 3
+    action_sector("svg_121", 'ff00f8'); // 4
+    action_sector("svg_123", 'f063c7'); // 5
+    action_sector("svg_126", '35dde3'); // 6
+    action_sector("svg_130", 'daff00'); // 7
+    action_sector("svg_132", '00ff00'); // 8
+    action_sector("svg_134", 'ff00f8'); // 9
+    action_sector("svg_95", '35dde3'); // 10
+    action_sector("svg_67", '00ff00'); // 11
+    action_sector("svg_51", 'ff00f8'); // 12
+    action_sector("svg_50", 'daff00'); //13
+    action_sector('svg_143', '00ff00'); // 14
+    action_sector("svg_62", 'f063c7'); // 15
+    action_sector("svg_74", 'daff00'); // 16
+    action_sector("svg_58", 'ff00f8'); // 17
+    action_sector('svg_144', '35dde3'); // 18
+    action_sector("svg_110", '00ff00'); // 19
+    action_sector("svg_112", 'daff00'); // 20
+    action_sector("svg_113", 'ff00f8'); // 21
+    action_sector("svg_114", '35dde3'); // 22
+    action_sector("svg_37", '0055ff'); // 23
+    action_sector("svg_23", 'daff00'); // 24
+    action_sector("svg_5", 'ff00f8'); // 25
+    action_sector("svg_8", '35dde3'); // Vip A
+    action_sector("svg_135", '0055ff'); // Vip D
+}
 $(document).ready(function(){
     $('.prices').attr('disabled','disabled');
 
@@ -229,34 +259,7 @@ $(document).ready(function(){
             .done(function(html) {
                 $("#dialog-modal").html(html).children().first().modal();
                 sender.removeClass("disabled");
-                $(".map").css('height','416px');
-                action_sector("svg_19", 'daff00'); // 1
-                action_sector("svg_16", '00ff00'); // 2
-                action_sector("svg_117", '0055ff'); // 3
-                action_sector("svg_121", 'ff00f8'); // 4
-                action_sector("svg_123", 'f063c7'); // 5
-                action_sector("svg_126", '35dde3'); // 6
-                action_sector("svg_130", 'daff00'); // 7
-                action_sector("svg_132", '00ff00'); // 8
-                action_sector("svg_134", 'ff00f8'); // 9
-                action_sector("svg_95", '35dde3'); // 10
-                action_sector("svg_67", '00ff00'); // 11
-                action_sector("svg_51", 'ff00f8'); // 12
-                action_sector("svg_50", 'daff00'); //13
-                action_sector('svg_143', '00ff00'); // 14
-                action_sector("svg_62", 'f063c7'); // 15
-                action_sector("svg_74", 'daff00'); // 16
-                action_sector("svg_58", 'ff00f8'); // 17
-                action_sector('svg_144', '35dde3'); // 18
-                action_sector("svg_110", '00ff00'); // 19
-                action_sector("svg_112", 'daff00'); // 20
-                action_sector("svg_113", 'ff00f8'); // 21
-                action_sector("svg_114", '35dde3'); // 22
-                action_sector("svg_37", '0055ff'); // 23
-                action_sector("svg_23", 'daff00'); // 24
-                action_sector("svg_5", 'ff00f8'); // 25
-                action_sector("svg_8", '35dde3'); // Vip A
-                action_sector("svg_135", '0055ff'); // Vip D
+
             })
             .fail(function( jqXHR, textStatus ) {
                 $(".modal-error-message").html("Request failed: " + textStatus );
@@ -273,6 +276,7 @@ $(document).ready(function(){
             .done(function(html) {
                 $("#dialog-modal").html(html).children().first().modal();
                 sender.removeClass("disabled");
+
             })
             .fail(function( jqXHR, textStatus ) {
                 $(".modal-error-message").html("Request failed: " + textStatus );
