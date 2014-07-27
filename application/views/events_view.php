@@ -41,7 +41,7 @@
                         </p>
                         <p>
                             <span>
-                                Свободно:&nbsp;<span data-event-id="<?=$value['event_id']?>" class="reserved-free"><?=$value['free_count']?></span>
+                                Свободно:&nbsp;<span data-event-id="<?=$value['event_id']?>" class="free-count"><?=$value['free_count']?></span>
                             </span>
                         </p>
                     </td>
