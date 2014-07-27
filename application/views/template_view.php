@@ -103,6 +103,13 @@
     </div>
 </div>
 <div id="dialog-modal"></div>
+<script>
+    $('#dialog-modal').on('show.bs.modal', function () {
+        setTimeout(function () {
+            $('.modal-body').find ('input:visible:first, select:visible:first').first().focus();
+        }, 400);
+    });
+</script>
 <div class="modal" id="errorMessageModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="errorMessageModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content panel-danger">
