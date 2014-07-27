@@ -2,6 +2,7 @@ var result_ajax = "#result_ajax";
 var body = "body";
 var caret = " <span class='caret'></span>";
 var success = " <span class='glyphicon glyphicon-ok form-control-feedback'></span>";
+var error = " <span class='glyphicon glyphicon-remove form-control-feedback'></span>";
 
 tinymce.init({
     selector: "textarea",
@@ -177,21 +178,29 @@ $(document).ready(function(){
     });
 
     $(body).on('keyup', '.prices', function(){
-        var sector_id = $(this).data('sector_id');
-        var sector_price = $(this).val();
         var parent = $(this).parent();
-        $.post(
-            '/config/ajax',
-            {
-                sector_id : sector_id,
-                sector_price: sector_price
-            },
-            function(json){
-                parent.addClass('has-success').addClass('has-feedback');
-                parent.append(success);
-            },
-            'json'
-        );
+        parent.removeClass('has-success').removeClass('has-error');
+        parent.find('span').remove();
+        var sector_id = $(this).data('sector_id');
+        var sector_price = parseInt($(this).val());
+        console.log(sector_price);
+        if(sector_price <0 || isNaN(sector_price)){
+             parent.append(error);
+             parent.addClass('has-error').addClass('has-feedback');
+        }else{
+            $.post(
+                '/config/ajax',
+                {
+                    sector_id : sector_id,
+                    sector_price: sector_price
+                },
+                function(json){
+                    parent.addClass('has-success').addClass('has-feedback');
+                    parent.append(success);
+                },
+                'json'
+            );
+        }
     });
 
     $(body).on('click','#del_ev', function(){
