@@ -36,6 +36,8 @@
 </div>
 <script>
     $(document).ready(function() {
+
+        $('input[name=login]').focus();
         $('#login_form').bootstrapValidator({
             fields: {
                 login: {
