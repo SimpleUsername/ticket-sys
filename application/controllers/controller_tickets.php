@@ -15,12 +15,37 @@ class Controller_Tickets extends Controller {
             Route::ErrorPage404();
         }
     }
+    //temp
+    public function action_sell_all($event_id) {
+        if (!isset($_GET['chunk'])) {
+            $chunk_id = 0;
+        } else {
+            $chunk_id = $_GET['chunk'];
+        }
+
+        $event = $this->model->get_event_by_id($event_id);
+        $places = array();
+        for ($place_id = 10001; $place_id < 10101; $place_id++) {
+            $places[] = $place_id;
+        }
+        for ($place_id = 10150; $place_id <= 35400; $place_id++) {
+            $places[] = $place_id;
+        }
+        $places_chunks = array_chunk($places, 100);
+        echo "<html><body>";
+        echo $chunk_id+1 ."/".count($places_chunks);
+        $this->createTickets($event, $places_chunks[$chunk_id]);
+        if ($chunk_id < count($places_chunks)-1) {
+            echo "<script>document.location = '/tickets/sell_all/".$event_id."?chunk=";
+            echo $chunk_id+1 ."';</script>";
+        }
+    }
 
     /* shows tickets sale dialog (place pick) */
     public function action_sell($event_id) {
 
         $data = $this->model->get_event_by_id($event_id);
-        if (!$this->event_purchase_available($data)) {
+        if (!$this->isPurchaseAvailable($data)) {
             Route::ErrorPage404();
         }
         $this->check_and_delete_reserve($data);
@@ -37,7 +62,7 @@ class Controller_Tickets extends Controller {
     /* Modal */
     public function action_reserve($event_id) {
         $data = $this->model->get_event_by_id($event_id);
-        if (!$this->event_reserve_available($data)) {
+        if (!$this->isReserveAvailable($data)) {
             Route::ErrorPage404();
         }
         if (empty($_POST)) {
@@ -98,7 +123,7 @@ class Controller_Tickets extends Controller {
         foreach ($tickets as $key=>$ticket) {
             $place = end($this->model->get_place((int)$ticket->placeId));
             $event = $this->model->get_event_by_id((int)$ticket->eventId);
-            if (!$this->event_purchase_available($event)) {
+            if (!$this->isPurchaseAvailable($event)) {
                 Route::ErrorPage404();
             }
             $this->model->set_ticket_type($ticket->eventId, $ticket->placeId, 'purchased');
@@ -185,7 +210,7 @@ class Controller_Tickets extends Controller {
     /* Ajax. Perform ticket sale */
     public function action_createTickets($event_id) {
         $event = $this->model->get_event_by_id($event_id);
-        if (!$this->event_reserve_available($event)) {
+        if (!$this->isReserveAvailable($event)) {
             Route::ErrorPage404();
         }
         $places = json_decode($_POST['tickets']);
@@ -281,7 +306,7 @@ class Controller_Tickets extends Controller {
         return $sectors;
     }
 
-    private function event_purchase_available(array $event) {
+    private function isPurchaseAvailable(array $event) {
         $available = true;
         //By event status
         if ($event['event_status'] == 1 || $event['event_status'] == 2) {
@@ -297,7 +322,7 @@ class Controller_Tickets extends Controller {
         return $available;
     }
 
-    private function event_reserve_available(array $event) {
+    private function isReserveAvailable(array $event) {
         $available = true;
         //By event status
         if ($event['event_status'] == 1 || $event['event_status'] == 2) {
@@ -337,7 +362,7 @@ class Controller_Tickets extends Controller {
         $reserve_id = $this->model->add_reserve(htmlspecialchars($customer_name), htmlspecialchars($reserve_description), $current_date);
         return $reserve_id;
     }
-    private function createTickets($event, $places, array &$tickets, $type='purchased', $reserve_id=null) {
+    private function createTickets($event, $places, array &$tickets = array(), $type='purchased', $reserve_id=null) {
         $total = 0;
         $prices =  unserialize($event['event_prices']);
         foreach ($places as $place_id) {
