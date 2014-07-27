@@ -102,7 +102,7 @@
      z-index: 1000;
      height: 416px;
      /*overflow: hidden;*/
-     margin: 0 auto;
+     margin: -30px auto 0;
      width:500px;
      position:relative;
  }
