@@ -77,6 +77,7 @@ function h()
 }
 function sector_svg(id){
     var sector = $.trim(document.getElementById(id).textContent);
+    
     if(sector == 'VIP A'){
         sector = 26;
     }else if(sector == 'VIP D'){
@@ -123,6 +124,8 @@ function action_sector(id_elem , color){
     $("#"+id_elem).click(function() {
         var event = $('#event_id').val();
         var sec_res = sector_svg(id_elem);
+        var sector = $.trim(document.getElementById(id_elem).textContent);
+        $('.map_title').html(sector+" Сектор");
         $("#row").html('').fadeOut();
         $("#place").html('').fadeOut();
         $("#btn-modal-confirm-sell").addClass("disabled");

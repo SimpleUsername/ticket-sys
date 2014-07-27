@@ -101,9 +101,18 @@
  .map{
      z-index: 1000;
      height: 416px;
-     overflow: hidden;
+     /*overflow: hidden;*/
      margin: 0 auto;
      width:500px;
+     position:relative;
+ }
+ .map_title{
+    position: absolute;
+    z-index: 10001;
+    bottom: 0px;
+    left:-165px;
+    font-size: 20px;
+    color: #000;
  }
  #svg{
      width: 100%;

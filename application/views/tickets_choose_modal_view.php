@@ -4,6 +4,7 @@
 <div class="form-group">
 
     <div class="map" >
+    <div class="map_title"></div>
         <div id="svg" >
             <svg id="svg" width="518" height="436" xmlns="http://www.w3.org/2000/svg">
                 <g display="inline">
