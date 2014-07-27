@@ -61,14 +61,11 @@ class Controller_Tickets extends Controller {
 
     /* Modal */
     public function action_reserve($event_id) {
-        $data = $this->model->get_event_by_id($event_id);
-        if (!$this->isReserveAvailable($data)) {
-            Route::ErrorPage404();
-        }
+        $data = $this->getEventByID($event_id);
+        $data['title'] = "Бронирование билетов на ".$data['event_name']." (".$data['event_date'].")";
         if (empty($_POST)) {
             //Step 1
             //Request customer name and reserve description
-            $data['title'] = "Бронирование билетов на ".$data['event_name']." (".$data['event_date'].")";
             $data['role'] = "new-reserve-info";
             $this->view->generate('tickets_new_reserve_modal_view.php', 'template_modal_view.php', $data);
         } else {
@@ -80,7 +77,6 @@ class Controller_Tickets extends Controller {
             $data['sectors'] = $sectors;
             $data['customer_name'] = htmlspecialchars($_POST['customer_name']);
             $data['reserve_description'] = htmlspecialchars($_POST['reserve_description']);
-            $data['title'] = "Бронирование билетов на ".$data['event_name']." (".$data['event_date'].")";
             $this->view->generate('tickets_choose_modal_view.php', 'template_modal_view.php', $data);
         }
     }
@@ -120,7 +116,7 @@ class Controller_Tickets extends Controller {
     public function action_reserveSell() {
         $tickets = json_decode($_POST['tickets']);
         $total = 0;
-        foreach ($tickets as $key=>$ticket) {
+        foreach ($tickets as $ticket) {
             $place = end($this->model->get_place((int)$ticket->placeId));
             $event = $this->model->get_event_by_id((int)$ticket->eventId);
             if (!$this->isPurchaseAvailable($event)) {
@@ -209,10 +205,7 @@ class Controller_Tickets extends Controller {
 
     /* Ajax. Perform ticket sale */
     public function action_createTickets($event_id) {
-        $event = $this->model->get_event_by_id($event_id);
-        if (!$this->isReserveAvailable($event)) {
-            Route::ErrorPage404();
-        }
+        $event = $this->getEventByID($event_id);
         $places = json_decode($_POST['tickets']);
 
         if ($_POST['tickets_type'] == 'reserved') {
@@ -279,20 +272,30 @@ class Controller_Tickets extends Controller {
     /* Ajax */
     // Used by action_reserveSearch. Returns list of reserves, which satisfies the requirements
     public function action_getReserveInfo() {
-        $custumer_name = $_POST['customer_name'];
+        $customer_name = $_POST['customer_name'];
         $event_id = $_POST['event_id'];
         $reserve_date = $_POST['reserve_date'];
-        echo json_encode($this->model->get_reserve($custumer_name, $event_id, $reserve_date));
+        echo json_encode($this->model->get_reserve($customer_name, $event_id, $reserve_date));
     }
 
     /*************************************************************************
      *                        PRIVATE METHODS                                *
      *************************************************************************/
-    
+
+    private function getEventByID($eventID) {
+        $event = $this->model->get_event_by_id($eventID);
+        if (!$this->isReserveAvailable($event)) {
+            Route::ErrorPage404();
+            exit();
+        } else {
+            return $event;
+        }
+    }
+
     private function concatenateSectorAndCounters($prices, $free_places) {
         $sectors = array();
-        foreach ($prices as $price_key=>$price_value) {
-            foreach ($free_places as $place_key=>$place_value) {
+        foreach ($prices as $price_value) {
+            foreach ($free_places as $place_value) {
                 if ($price_value['sector_id'] == $place_value['sector_id']) {
                     $sectors[] = array(
                         'sector_id' => $price_value['sector_id'],
@@ -372,7 +375,7 @@ class Controller_Tickets extends Controller {
                 exit();
             }
             $place = end($place);
-            foreach ($prices as $key=>$sector) {
+            foreach ($prices as $sector) {
                 if ($sector['sector_id'] == $place['sector_id']) {
                     $this->model->add_ticket($event['event_id'], $place_id, $type, $reserve_id, $sector['sector_price']);
                     $total += $sector['sector_price'];

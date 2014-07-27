@@ -63,7 +63,7 @@ class Controller_Users extends Controller {
     {
         if ($_SESSION['user_id'] != $user_id) {
             $this->delete_user_session($user_id);
-            $data = $this->model->delete_user($user_id);
+            $this->model->delete_user($user_id);
         }
         $this->redirect('users');
     }
