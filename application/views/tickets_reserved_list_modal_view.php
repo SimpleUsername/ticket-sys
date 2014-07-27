@@ -57,8 +57,6 @@
         $("#total").html(parseFloat($("#total").html())+parseFloat(ticket.price));
     });
 
-    $('#btn-modal-delete-reserve').addClass('disabled');
-    $('#btn-modal-sell-reserve').addClass('disabled');
     $("#dialog-modal").children().first().modal();
 
     $(".checkbox-ticket").on("change",  function (event) {
