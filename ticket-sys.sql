@@ -71,19 +71,34 @@ INSERT INTO `events` (`event_id`, `event_name`, `event_desc`, `event_status`, `e
 --
 -- Триггеры `events`
 --
-DROP TRIGGER IF EXISTS `count_create`;
+DROP TRIGGER IF EXISTS `count_create_after`;
 DELIMITER //
-CREATE TRIGGER `count_create` BEFORE INSERT ON `events`
+CREATE TRIGGER `count_create_after` AFTER INSERT ON `events`
  FOR EACH ROW BEGIN
-	DECLARE places_count INT;
-    SELECT COUNT(*) INTO places_count FROM place;
 	INSERT INTO tickets_count
     (event_id, sector_id, row_no, free_count)
     SELECT NEW.event_id, sector_id, row_no, count(place_no)
     	FROM place GROUP BY sector_id, row_no;
+END
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `count_create_before`;
+DELIMITER //
+CREATE TRIGGER `count_create_before` BEFORE INSERT ON `events`
+ FOR EACH ROW BEGIN
+	DECLARE places_count INT;
+    SELECT COUNT(*) INTO places_count FROM place;
     SET NEW.reserved_count = 0;
     SET NEW.purchased_count = 0;
     SET NEW.free_count = places_count;
+END
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `count_delete`;
+DELIMITER //
+CREATE TRIGGER `count_delete` AFTER DELETE ON `events`
+ FOR EACH ROW BEGIN
+	DELETE FROM tickets_count WHERE event_id = OLD.event_id;
 END
 //
 DELIMITER ;
