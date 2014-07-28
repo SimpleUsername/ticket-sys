@@ -50,7 +50,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Проект "Бросок кобры"</a>
+            <a class="navbar-brand" href="/">LISAART</a>
         </div>
         <div class="navbar-collapse collapse">
             <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1) { ?>
