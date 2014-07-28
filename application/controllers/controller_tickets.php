@@ -70,7 +70,7 @@ class Controller_Tickets extends Controller {
             $this->view->generate('tickets_new_reserve_modal_view.php', 'template_modal_view.php', $data);
         } else {
             //Step 2
-            //Now we need to show place pick dialog
+            //Show place pick dialog
             $sectors = $this->concatenateSectorAndCounters(unserialize($data['event_prices']),
                 $this->model->get_free_places_count($event_id));
             $data['role'] = "reserve";
@@ -98,16 +98,11 @@ class Controller_Tickets extends Controller {
                 Route::ErrorPage404();
                 exit();
             }
+            $event = $this->model->get_event_by_id($data['tickets'][0]['event_id']);
+            $data['event'] = $event;
             $current_date = time();
-
-            foreach ($data['tickets'] as $key=>$ticket) {
-                $event_sale = strtotime($ticket['event_sale']);
-                if ($event_sale > $current_date) {
-                    $data['tickets'][$key]['sale_available'] = false;
-                } else {
-                    $data['tickets'][$key]['sale_available'] = true;
-                }
-            }
+            $event_sale = strtotime($event['event_sale']);
+            $data['sale_available'] = $event_sale < $current_date;
             $data['title'] = "Билеты, забронированные на имя ".$data['reserve'][0]['customer_name'];
             $this->view->generate('tickets_reserved_list_modal_view.php', 'template_modal_view.php', $data);
         }
@@ -117,16 +112,16 @@ class Controller_Tickets extends Controller {
         $tickets = json_decode($_POST['tickets']);
         $total = 0;
         foreach ($tickets as $ticket) {
-            $place = end($this->model->get_place((int)$ticket->placeId));
-            $event = $this->model->get_event_by_id((int)$ticket->eventId);
+            $place = end($this->model->get_place((int)$ticket->placeID));
+            $event = $this->model->get_event_by_id((int)$ticket->eventID);
             if (!$this->isPurchaseAvailable($event)) {
                 Route::ErrorPage404();
             }
-            $this->model->set_ticket_type($ticket->eventId, $ticket->placeId, 'purchased');
+            $this->model->set_ticket_type($ticket->eventID, $ticket->placeID, 'purchased');
 
-            $real_ticket = $this->model->get_ticket_by_ids($ticket->eventId, $ticket->placeId);
+            $real_ticket = $this->model->get_ticket_by_ids($ticket->eventID, $ticket->placeID);
             $data['tickets'][] = array(
-                'ticket_id' => $ticket->eventId."-".$ticket->placeId,
+                'ticket_id' => $ticket->eventID."-".$ticket->placeID,
                 'event_name' => $event['event_name'],
                 'event_date' => $event['event_date'],
                 'place_id' => $ticket->placeId,

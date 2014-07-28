@@ -1,29 +1,21 @@
 <table class="table">
-<? $previous_event_id = -1 ?>
-<? foreach($data['tickets'] as $key=>$ticket) { ?>
-    <? if ($ticket['event_id'] != $previous_event_id) { ?>
-    <? $previous_event_id = $ticket['event_id']; ?>
     <tr>
         <th colspan="6">
             <h4>
-                <?=$ticket['event_name']?> <?=$ticket['event_date']?>
+                <?=$data['event']['event_name']?> <?=$data['event']['event_date']?>
             </h4>
         </th>
     </tr>
     <tr>
-        <th></th>
         <th>Сектор</th>
         <th>Ряд</th>
         <th>Место</th>
         <th>Цена</th>
         <th>Отменить бронь</th>
     </tr>
-    <? } ?>
-    <tr id="ticket-<?=$ticket['event_id']?>-<?=$ticket['place_id']?>" class="success">
-        <td>
-            <input <?=$ticket['sale_available']?"":"disabled"?> type="checkbox" class="checkbox-ticket" data-event-id="<?=$ticket['event_id']?>"
-                   data-place-id="<?=$ticket['place_id']?>" data-price="<?=$ticket['price']?>" checked="checked">
-        </td>
+    <? $total = 0; ?>
+    <? foreach($data['tickets'] as $ticket) { ?>
+    <tr id="ticket-<?=$ticket['event_id']?>-<?=$ticket['place_id']?>">
         <td>
             <?=$ticket['sector_name']?>
         </td>
@@ -37,47 +29,29 @@
             <?=$ticket['price']?> грн
         </td>
         <td>
-            <button class="btn btn-default reserve-delete" data-event-id="<?=$ticket['event_id']?>"
-                    data-place-id="<?=$ticket['place_id']?>">
+            <button class="btn btn-default reserve-delete"
+                    onclick="deleteReserve(<?=$ticket['event_id']?>, <?=$ticket['place_id']?>, <?=$ticket['price']?>)">
                 <i class="glyphicon glyphicon-remove"></i>
             </button>
         </td>
     </tr>
+    <? $total+=$ticket['price']; ?>
 <? } ?>
 </table>
 <div class="text-right">
-    <h4>Итого: <b id="total">0</b> грн.</h4>
+    <h4>Итого: <b id="total"><?=$total?></b> грн.</h4>
 </div>
 <script>
-    var tickets = [];
-
-    $.each($("input[type='checkbox']"), function (i, checkbox) {
-        ticket = $(checkbox).data();
-        tickets.push(ticket);
-        $("#total").html(parseFloat($("#total").html())+parseFloat(ticket.price));
-    });
+    var tickets =
+    [<? for ($ticket = $data['tickets'][$i = 0]; $i < count($data['tickets']); $ticket = $data['tickets'][++$i]) {?>
+        {placeID:<?=$ticket['place_id']?>, eventID:<?=$ticket['event_id']?>}<?=($i != count($data['tickets'])-1)?','.PHP_EOL:''?>
+    <? } ?>];
 
     $("#dialog-modal").children().first().modal();
 
-    $(".checkbox-ticket").on("change",  function (event) {
-        var sender = event.target;
-        var ticket = $(event.target).data();
-        if (sender.checked) {
-            $("#ticket-"+ticket.eventId+"-"+ticket.placeId).addClass("success");
-            tickets.push(ticket);
-            $("#total").html(parseFloat($("#total").html())+parseFloat(ticket.price));
-            $('#btn-modal-delete-reserve').removeClass('disabled');
-            $('#btn-modal-sell-reserve').removeClass('disabled');
-        } else {
-            $("#ticket-"+ticket.eventId+"-"+ticket.placeId).removeClass("success");
-            tickets.splice(tickets.indexOf(ticket), 1);
-            $("#total").html(parseFloat($("#total").html())-parseFloat(ticket.price));
-            if (tickets.length == 0) {
-                $('#btn-modal-delete-reserve').addClass('disabled');
-                $('#btn-modal-sell-reserve').addClass('disabled');
-            }
-        }
-    });
+    <? if (!$data['sale_available']) { ?>
+    $('#btn-modal-sell-reserve').attr("disabled", "disabled");
+    <? } ?>
     $('#btn-modal-sell-reserve').click(function () {
         $(this).addClass('disabled');
         $.post("/tickets/reserveSell", {
@@ -88,29 +62,18 @@
             });
         });
     });
-    var sender;
-    $(".reserve-delete").click(function (event) {
-        if ($(event.target).hasClass("reserve-delete")) {
-            sender = event.target;
-        } else {
-            sender = event.target.parentNode;
-        }
-        if (confirm("are you seriously?")) {
+
+    function deleteReserve(eventID, placeID, price) {
+        if (confirm("Отправить билет в свободную продажу?")) {
             $.post("/tickets/deleteReserve", {
-                place_id : sender.dataset.placeId,
-                event_id : sender.dataset.eventId
+                place_id : placeID,
+                event_id : eventID
             }).done(function (response) {
-                if($(".checkbox-ticket:checked[data-event-id="+sender.dataset.eventId+
-                    "][data-place-id="+sender.dataset.placeId+"]").length) {
-                    $(".checkbox-ticket:checked[data-event-id="+sender.dataset.eventId+
-                        "][data-place-id="+sender.dataset.placeId+"]").attr("checked", false).trigger("change");
-                }
-                $(".checkbox-ticket:checked[data-event-id="+sender.dataset.eventId+
-                    "][data-place-id="+sender.dataset.placeId+"]").attr("disabled", true);
-                $(sender).parent().parent().fadeOut();
+                tickets.splice(tickets.indexOf({placeID:placeID, eventID:eventID}), 1);
+                $("#total").html(parseFloat($("#total").html())-parseFloat(price));
+                $('#ticket-'+eventID+'-'+placeID).fadeOut();
             });
         }
-    });
-
+    }
 
 </script>
