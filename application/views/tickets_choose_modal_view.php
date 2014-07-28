@@ -331,7 +331,7 @@
             if ($(option).is(':selected') == true) {
                 if (tickets.indexOf($(option).data('placeId')) == -1) {
                     tickets.push($(option).data('placeId'));
-                    prices.push($("#sector option:selected").data('sectorPrice'));
+                    prices.push($('#sec-'+$('#sector_id').val()).data('sectorPrice'));
                     $("#total").html(parseFloat($("#total").html())+prices[prices.length-1]);
                     $('#tickets').append("<span title='Удалить' style='cursor: pointer' class='label label-primary ticket'" +
                         " data-place-id="+$(option).data('placeId')+">С-"+$('#sector_id').val()+
