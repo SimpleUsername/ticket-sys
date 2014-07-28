@@ -53,6 +53,9 @@ class Controller_Events extends Controller
                 $form_data['event_img_path'] = $file['event_img']['event_img_path'];
             }
             if(!empty($_POST['sector'])){
+                foreach ($_POST['sector'] as $key => $sector) {
+                    $_POST['sector'][$key]['sector_price'] = (int)$sector['sector_price'];
+                }
                 $form_data['event_prices']  = serialize($_POST['sector']);
             }
             $res = $this->model->insert('events', $form_data);
@@ -99,6 +102,9 @@ class Controller_Events extends Controller
                 $form_data['event_img_path'] = $_POST['event_img_path'];
             }
             if(!empty($_POST['sector'])){
+                foreach ($_POST['sector'] as $key => $sector) {
+                    $_POST['sector'][$key]['sector_price'] = (int)$sector['sector_price'];
+                }
                 $form_data['event_prices']  = serialize($_POST['sector']);
             }
            $upd = $this->model->update('events',$form_data,' event_id=:event_id ', array(':event_id' => (int)$_POST['event_id']));
