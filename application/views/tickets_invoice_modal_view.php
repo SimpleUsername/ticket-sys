@@ -29,7 +29,6 @@
         </div>
 
     <? endforeach; ?>
-<pre><? print_r($data); ?></pre>
 <div class="row total_mar">
     <table class="table table-striped">
       <tr>
