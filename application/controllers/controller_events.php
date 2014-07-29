@@ -66,6 +66,13 @@ class Controller_Events extends Controller
             }
         }
 
+        $data['disabled_dates'] = array();
+        $events = $this->model->get_all_events(array(0,3));
+        foreach ($events as $event) {
+            preg_match("#\d\d\.\d\d\.\d\d\d\d#", $event['event_date'], $match);
+            $data['disabled_dates'][] = 'moment("'.$match[0].'", "DD.MM.YYYY")';
+        }
+
         $data['statuses'] = $this->model->get_all_events(false);
         $data['prices'] = $this->model->get_section_prices();
         $current_date = date("d.m.Y H:i");
@@ -131,6 +138,16 @@ class Controller_Events extends Controller
             if(isset($res) && count($res) == 1){
                 $data = $res[0];
             }
+
+            $data['disabled_dates'] = array();
+            $events = $this->model->get_all_events(array(0,3));
+            foreach ($events as $event) {
+                if ($event['event_id'] != $id) {
+                    preg_match("#\d\d\.\d\d\.\d\d\d\d#", $event['event_date'], $match);
+                    $data['disabled_dates'][] = 'moment("'.$match[0].'", "DD.MM.YYYY")';
+                }
+            }
+
             $data['statuses'] = $this->model->get_all_events(false);  // получение статусов
 
             if(!empty($data['event_prices'])){

@@ -110,12 +110,16 @@
                 event_date: {
                     validators: {
                         callback: {
-                            message: 'Нельзя указать прошедшее время',
+                            message: 'Нельзя указать прошедшее время и дату, пересекающуюся с другими событиями',
                             callback: function(value, validator) {
                                 var m = new moment(value, 'DD.MM.YYYY HH:mm', true);
                                 return m.isValid()
                                     && !m.isBefore()
-                                    && !m.isBefore(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'));
+                                    && !m.isBefore(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'))
+                                    <? foreach ($data['disabled_dates'] as $disabled_date): ?>
+                                    && Math.abs(m - <?=$disabled_date?>) >= 86400000
+                                    <? endforeach; ?>
+                                    ;
                             }
                         }
                     }
@@ -165,7 +169,10 @@
 
         //event_date
         $('#event_date_datetimepicker').datetimepicker({
-            language: 'ru'
+            language: 'ru',
+            disabledDates: [
+                <?=implode(",", $data['disabled_dates']) ?>
+            ]
         });
         $('#event_date_datetimepicker').on("dp.change", function (e) {
             $('#event-form')
