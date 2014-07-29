@@ -117,7 +117,7 @@
                                     && !m.isBefore()
                                     && !m.isBefore(moment('<?=$data['now']?>', 'DD.MM.YYYY HH:mm'))
                                     <? foreach ($data['disabled_dates'] as $disabled_date): ?>
-                                    && Math.abs(m - <?=$disabled_date?>) >= 86400000
+                                    && Math.abs(m - <?=$disabled_date?>) >= 24*60*60*1000
                                     <? endforeach; ?>
                                     ;
                             }
