@@ -33,15 +33,15 @@
         <label class="col-sm-4 control-label">Роли пользователя</label>
         <div class="col-sm-8">
             <? $user_type_value = 0; ?>
-            <? foreach($data['user_types'] as $user_type){?>
+            <? foreach($data['user_types'] as $user_type):?>
                 <label><input type="checkbox" class="role" value="<?=1<<$user_type["type_id"]?>"<?
-                    if (isset($data["user_type"]) && ($data['user_type'] & (1<<$user_type["type_id"]))) {
+                    if (isset($data["user_type"]) && ($data['user_type'] & (1<<$user_type["type_id"]))) :
                         $user_type_value += 1<<$user_type["type_id"];
                         ?> checked="checked"<?
-                    }?>>
+                    endif;?>>
                     <?=$user_type['user_type']?>
                 </label>
-            <? } ?>
+            <? endforeach; ?>
             <p class='text-danger role-helper'>Требуется минимум одна активная роль</p>
             <input type="hidden" name="user_type" value="<?=$user_type_value?>">
         </div>

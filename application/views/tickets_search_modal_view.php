@@ -21,9 +21,9 @@
                     <label for="sector" class="col-sm-2 control-label">Сектор</label>
                     <div class="col-sm-10">
                         <select class="form-control" id="search-sector">
-                            <? foreach($data['sectors'] as $key=>$sector) { ?>
+                            <? foreach($data['sectors'] as $key=>$sector): ?>
                                 <option value="<?=$sector['sector_id']?>"><?=$sector['sector_name']?></option>
-                            <? } ?>
+                            <? endforeach; ?>
                         </select>
                     </div>
                 </div>
@@ -60,9 +60,9 @@
                     <label for="event" class="col-sm-2 control-label">Событие</label>
                     <div class="col-sm-10">
                         <select class="form-control" id="search-event-id">
-                            <? foreach($data['events'] as $key=>$event) { ?>
+                            <? foreach($data['events'] as $key=>$event): ?>
                                 <option value="<?=$event['event_id']?>"><?=$event['event_name']?></option>
-                            <? } ?>
+                            <? endforeach; ?>
                         </select>
                     </div>
                 </div>

@@ -14,7 +14,7 @@
         <th>Отменить бронь</th>
     </tr>
     <? $total = 0; ?>
-    <? foreach($data['tickets'] as $ticket) { ?>
+    <? foreach($data['tickets'] as $ticket): ?>
     <tr id="ticket-<?=$ticket['event_id']?>-<?=$ticket['place_id']?>">
         <td>
             <?=$ticket['sector_name']?>
@@ -36,7 +36,7 @@
         </td>
     </tr>
     <? $total+=$ticket['price']; ?>
-<? } ?>
+<? endforeach; ?>
 </table>
 <div class="text-right">
     <h4>Итого: <b id="total"><?=$total?></b> грн.</h4>

@@ -18,7 +18,7 @@
 <h1>Пользователи</h1>
 
 <table class="table table-striped">
-<? foreach($data as $user){?>
+<? foreach($data as $user):?>
     <tr>
         <td>
             <b class="user-<?=$user['user_id']?>-login"><?=$user["user_login"]?></b>
@@ -47,7 +47,7 @@
             </a>
         </td>
     </tr>
-<? } ?>
+<? endforeach; ?>
 </table>
 
 <script>

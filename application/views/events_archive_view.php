@@ -1,8 +1,8 @@
 <h1>Архив событий</h1>
-<? if(isset($data['msg'])) {
+<? if(isset($data['msg'])) :
 ?>
     <p><?=$data['msg']?></p>
-<? } else { ?>
+<? else :?>
     <table class="table">
         <tr>
             <th>Превью</th>
@@ -12,8 +12,8 @@
             <th>Места</th>
             <th></th>
         </tr>
-        <? if (!empty($data)) {
-            foreach($data as $id => $value){?>
+        <? if (!empty($data)):
+            foreach($data as $id => $value):?>
             <tr>
                 <td><img src="<?=$value['event_img_path'].$value['event_img_md5']?>" alt="<?=$value['event_img_name']?>" class="img-thumbnail img_custom"></td>
                 <td><?=$value['event_name']?></td>
@@ -27,15 +27,15 @@
                     <p><span>Не продано:&nbsp;<?=$value['free_count']?></span></p>
                 </td>
                 <td>
-                    <? if (!isset($value['estatus_name'])) { ?>
+                    <? if (!isset($value['estatus_name'])): ?>
                         <a href="/events/recovery/<?=$value['event_id']?>" class="btn btn-success">Восстановить</a>
-                    <? } ?>
+                    <? endif; ?>
                 </td>
             </tr>
-        <?  }
-        } else { ?>
+        <?  endforeach;
+        else: ?>
             <tr><td colspan="5"><span class="help-block"> Пусто :(</span></td></tr>
-        <? }?>
+        <? endif;?>
     </table>
-<? } ?>
+<? endif; ?>
 

@@ -2,7 +2,7 @@
 <div class="well"> <button class="btn btn-primary btn-lg btn-block" id="prices" data-action="1">Редактировать цены</button></div>
 
 
-<? foreach($data as $key => $value) {?>
+<? foreach($data as $key => $value) :?>
     <div class="row">
         <div class="form-group form-inline prices-parent">
             <label for="name" class="col-sm-2"><?=$value['sector_name']?> , грн</label>
@@ -10,5 +10,5 @@
 
         </div>
     </div>
-<? } ?>
+<? endforeach; ?>
 

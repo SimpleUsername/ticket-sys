@@ -1,6 +1,6 @@
 <h1>Изменение пароля</h1>
 <form role="form" id="password_edit" autocomplete="off"  class="form-horizontal col-sm-8" method="POST">
-    <? if(isset($data['error'])) { ?><div class="alert alert-danger"><?=$data['error']?></div><? } ?>
+    <? if(isset($data['error'])): ?><div class="alert alert-danger"><?=$data['error']?></div><? endif; ?>
 
     <div class="form-group">
         <label for="new_password" class="col-sm-4 control-label">Новый пароль</label>
