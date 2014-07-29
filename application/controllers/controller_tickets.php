@@ -121,10 +121,10 @@ class Controller_Tickets extends Controller {
 
             $real_ticket = $this->model->get_ticket_by_ids($ticket->eventID, $ticket->placeID);
             $data['tickets'][] = array(
-                'ticket_id' => $ticket->eventID."-".$ticket->placeID,
                 'event_name' => $event['event_name'],
                 'event_date' => $event['event_date'],
-                'place_id' => $ticket->placeId,
+                'place_id' => $real_ticket['place_id'],
+                'event_id' => $real_ticket['event_id'],
                 'place_no' => $place['place_no'],
                 'row_no' => $place['row_no'],
                 'sector_id' => $place['sector_id'],
@@ -152,7 +152,6 @@ class Controller_Tickets extends Controller {
             $event = $this->model->get_event_by_id($event_id);
             $real_ticket = $this->model->get_ticket_by_ids($event_id, $place_id);
             $data = array(
-                'ticket_id' => $event_id."-".$place_id,
                 'event_name' => $event['event_name'],
                 'event_date' => $event['event_date'],
                 'place_id' => $place_id,

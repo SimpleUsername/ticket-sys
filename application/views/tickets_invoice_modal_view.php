@@ -1,5 +1,5 @@
 <h1>Билеты</h1>
-    <? foreach($data['tickets'] as $key => $ticket){?>
+    <? foreach($data['tickets'] as $key => $ticket):?>
         <div class="well">
             <div class="row tic_mar">
                 <div class=" col-md-6 col-xs-6"><strong>Название События</strong></div>
@@ -23,11 +23,13 @@
                 <div class="col-md-3 col-xs-3 "><strong>Цена билета:</strong></div>
                 <div class="col-md-3 col-xs-3 "><?=$ticket['price']?> UAH</div>
             </div>
-            <? if(!isset($data['noPDF'])){?>
+            <? if(!isset($data['noPDF'])):?>
             <a class="btn btn-success mce-btn-large pdf-ticket" target="_blank" href="/tickets/pdf/<?=$ticket['place_id']?>/?event_id=<?=$ticket['event_id']?>">Просмотреть в PDF</a>
-            <? } ?>
+            <? endif; ?>
         </div>
-<? }?>
+
+    <? endforeach; ?>
+<pre><? print_r($data); ?></pre>
 <div class="row total_mar">
     <table class="table table-striped">
       <tr>
