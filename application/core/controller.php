@@ -7,7 +7,7 @@ class Controller {
 
     public function __construct()
     {
-        date_default_timezone_set(TIME_ZONE);
+        date_default_timezone_set(Config::TIME_ZONE);
         $this->view = new View();
 
         if (session_status() == PHP_SESSION_NONE) {

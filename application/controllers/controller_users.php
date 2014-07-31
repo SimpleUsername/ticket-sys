@@ -53,7 +53,7 @@ class Controller_Users extends Controller {
                 "user_type" => (int)$_POST['user_type']
             );
             if (!empty($_POST['password'])) {
-                $user_data["user_password"] = md5(md5($_POST['password'].SECURE_SALT));
+                $user_data["user_password"] = md5(md5($_POST['password'].Config::SECURE_SALT));
             }
             $this->model->edit_user($user_id, $user_data);
             $this->redirect('users');
@@ -83,7 +83,7 @@ class Controller_Users extends Controller {
                 "user_login" => htmlspecialchars($_POST['user_login']),
                 "user_name" => htmlspecialchars($_POST['user_name']),
                 "user_type" => (int)$_POST['user_type'],
-                "user_password" => md5(md5($_POST['password'].SECURE_SALT))
+                "user_password" => md5(md5($_POST['password'].Config::SECURE_SALT))
             );
             if ($this->model->create_user($user_data)) {
                 $this->redirect('users');

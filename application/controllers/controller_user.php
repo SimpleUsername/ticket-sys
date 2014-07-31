@@ -15,7 +15,7 @@ class Controller_User extends Controller {
                 $this->redirect("main/index");
             }
         } else {
-            if($user = $this->model->get_user($_POST['login'],md5(md5($_POST['password'].SECURE_SALT)))
+            if($user = $this->model->get_user($_POST['login'],md5(md5($_POST['password'].Config::SECURE_SALT)))
             ) {
                 $user_hash = session_id();
                 $user_ip = $_SERVER['REMOTE_ADDR'];
@@ -53,7 +53,7 @@ class Controller_User extends Controller {
         if (empty($_POST)) {
             $this->view->generate('user_password_view.php', 'template_view.php');
         } else {
-            $this->model->set_user_password($_SESSION['user_id'], md5(md5($_POST['new_password'].SECURE_SALT)));
+            $this->model->set_user_password($_SESSION['user_id'], md5(md5($_POST['new_password'].Config::SECURE_SALT)));
             $this->redirect("user/logout");
         }
     }

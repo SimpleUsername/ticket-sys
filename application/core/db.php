@@ -1,8 +1,8 @@
 <?php
 class Db{
     public  function  __construct(){
-        $this->cdn = DB_DRIVER.':host='.DB_HOST.';dbname='.DB_NAME;
-        $this->dbh = new PDO($this->cdn , DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $this->cdn = Config::DB_DRIVER.':host='.Config::DB_HOST.';dbname='.Config::DB_NAME;
+        $this->dbh = new PDO($this->cdn , Config::DB_USER, Config::DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 

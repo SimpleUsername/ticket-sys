@@ -1,9 +1,12 @@
 <?php
 
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'ticket-sys');
-define('DB_DRIVER', 'mysql');
-define('SECURE_SALT', 'dataart');
-define('TIME_ZONE', 'Europe/Kiev');
+class Config
+{
+    const DB_USER = 'root';
+    const DB_PASS = '';
+    const DB_HOST = '127.0.0.1';
+    const DB_DRIVER = 'mysql';
+    const DB_NAME = 'ticket-sys';
+    const SECURE_SALT = 'dataart';
+    const TIME_ZONE = 'Europe/Kiev';
+}
