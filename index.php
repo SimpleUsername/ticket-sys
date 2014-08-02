@@ -9,6 +9,7 @@ require_once 'application/bootstrap.php';
 
 if (extension_loaded("xhprof")) {
     $xhprof_data = xhprof_disable();
+    include_once "/xhprof_lib/config.php";
     include_once "/xhprof_lib/utils/xhprof_lib.php";
     include_once "/xhprof_lib/utils/xhprof_runs.php";
     $xhprof_runs = new XHProfRuns_Default();
