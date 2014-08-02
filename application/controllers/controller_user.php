@@ -1,9 +1,11 @@
 <?php
 class Controller_User extends Controller {
 
+    /* @var $model Model_User */
+    private $model;
 
-    public function __construct() {
-        $this->model = new Model_User();
+    public function __construct(Model $model) {
+        $this->model = $model;
         parent::__construct();
     }
 

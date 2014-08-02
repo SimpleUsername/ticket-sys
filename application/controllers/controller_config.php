@@ -2,10 +2,12 @@
 
 class Controller_Config extends Controller
 {
+    /* @var $model Model_Config */
+    private $model;
 
-    public  function __construct()
+    public  function __construct(Model $model)
     {
-        $this->model = new Model_Config();
+        $this->model = $model;
         parent::__construct();
     }
 

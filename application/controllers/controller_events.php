@@ -2,10 +2,11 @@
 
 class Controller_Events extends Controller
 {
-
-    public function __construct()
+    /* @var $model Model_Events */
+    private $model;
+    public function __construct(Model $model)
     {
-        $this->model = new Model_Events();
+        $this->model = $model;
 
         parent::__construct();
 

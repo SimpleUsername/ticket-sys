@@ -15,7 +15,7 @@ class Route
         // получаем имя контроллера
         if ( !empty($routes[1]) )
         {
-            $controller_name = $routes[1];
+            $controller_name = ucfirst($routes[1]);
         }
 
         // получаем имя экшена
@@ -33,11 +33,11 @@ class Route
         $controller_name = 'Controller_'.$controller_name;
         $action_name = 'action_'.$action_name;
 
-        /*
-        echo "Model: $model_name <br>";
-        echo "Controller: $controller_name <br>";
-        echo "Action: $action_name <br>";
-        */
+        if (0) {
+            echo "Model: $model_name <br>";
+            echo "Controller: $controller_name <br>";
+            echo "Action: $action_name <br>";
+        }
 
         // подцепляем файл с классом модели (файла модели может и не быть)
 
@@ -45,7 +45,8 @@ class Route
         $model_path = "application/models/".$model_file;
         if(file_exists($model_path))
         {
-            include "application/models/".$model_file;
+            include $model_path;
+            $model = new $model_name(new Db());
         }
 
         // подцепляем файл с классом контроллера
@@ -61,7 +62,7 @@ class Route
         }
 
         // создаем контроллер
-        $controller = new $controller_name;
+        $controller = new $controller_name($model);
         $action = $action_name;
 
         if(method_exists($controller, $action))

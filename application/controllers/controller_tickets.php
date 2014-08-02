@@ -6,10 +6,14 @@
  * Time: 1:17
  */
 
-class Controller_Tickets extends Controller {
-    public function __construct()
+class Controller_Tickets extends Controller
+{
+    /* @var $model Model_Tickets */
+    private $model;
+
+    public function __construct(Model $model)
     {
-        $this->model = new Model_Tickets();
+        $this->model = $model;
         parent::__construct();
         if (!$_SESSION['user_seller']) {
             Route::ErrorPage404();

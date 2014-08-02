@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ilia
- * Date: 19.06.14
- * Time: 12:46
- */
+
 class Controller_Users extends Controller {
 
     /*===================params for action_dump=========================== */
@@ -13,10 +8,12 @@ class Controller_Users extends Controller {
     private $_gzip = false; 		// sql or gzip
     private $_stream = true;		// save in dump dir  and upload from browser
 
+    /* @var $model Model_Users */
+    private $model;
 
-    public function __construct()
+    public function __construct(Model $model)
     {
-        $this->model = new Model_Users();
+        $this->model = $model;
         parent::__construct();
         if (!$_SESSION['user_admin']) {
             Route::ErrorPage404();

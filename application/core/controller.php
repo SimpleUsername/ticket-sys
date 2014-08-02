@@ -2,7 +2,6 @@
 
 class Controller {
 
-    public $model;
     public $view;
 
     public function __construct()
@@ -17,7 +16,7 @@ class Controller {
         if ($this->isAuthorized()) {
 
             require_once 'application/models/model_user.php';
-            $user_model = new Model_User();
+            $user_model = new Model_User(new Db());
             $user = $user_model->get_user_by_id($_SESSION['user_id']);
 
             if (time() - $_SESSION['last_activity'] > 30*60) {

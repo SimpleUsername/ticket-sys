@@ -3,9 +3,10 @@
 class Model
 {
     private $table_section = "sector";
+    protected $db;
 
-	public function __construct(){
-        $this->db = new Db();
+	public function __construct(Db $db){
+        $this->db = $db;
     }
 
 	public function get_data()

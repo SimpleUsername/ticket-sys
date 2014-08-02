@@ -4,6 +4,9 @@
 require_once 'conf.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/libs/MPDF56/mpdf.php';
 spl_autoload_register(function ($class) {
-    require_once 'core/' . strtolower($class) . '.php';
+    $filename = 'core/' . strtolower($class) . '.php';
+    if(file_exists('application/'.$filename)) {
+        require_once $filename;
+    }
 });
 Route::start(); // запускаем маршрутизатор
