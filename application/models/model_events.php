@@ -1,4 +1,7 @@
 <?php
+namespace application\models;
+
+use application\core\Model;
 
 class Model_Events extends Model
 {

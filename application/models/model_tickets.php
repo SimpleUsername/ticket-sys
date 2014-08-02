@@ -1,10 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ilia
- * Date: 26.06.14
- * Time: 0:32
- */
+namespace application\models;
+
+use application\core\Model;
+
 class Model_Tickets extends Model {
 
     private $reserve_table = "reserve";

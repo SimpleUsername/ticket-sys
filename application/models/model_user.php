@@ -1,10 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ilia
- * Date: 22.06.14
- * Time: 12:20
- */
+namespace application\models;
+
+use application\core\Model;
+
 class Model_User extends Model {
     private $users_table = "users";
 

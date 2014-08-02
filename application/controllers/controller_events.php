@@ -1,4 +1,9 @@
 <?php
+namespace application\controllers;
+
+use application\core\Controller;
+use application\core\Model;
+use application\models\Model_Events;
 
 class Controller_Events extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-class Config
+class Conf
 {
     const DB_USER = 'root';
     const DB_PASS = '';

@@ -1,8 +1,13 @@
 <?php
+namespace application\core;
+
+use Conf;
+use PDO;
+
 class Db{
     public  function  __construct(){
-        $this->cdn = Config::DB_DRIVER.':host='.Config::DB_HOST.';dbname='.Config::DB_NAME;
-        $this->dbh = new PDO($this->cdn , Config::DB_USER, Config::DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $this->cdn = Conf::DB_DRIVER.':host='.Conf::DB_HOST.';dbname='.Conf::DB_NAME;
+        $this->dbh = new PDO($this->cdn , Conf::DB_USER, Conf::DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 

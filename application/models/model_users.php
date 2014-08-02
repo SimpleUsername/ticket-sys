@@ -1,4 +1,8 @@
 <?php
+namespace application\models;
+
+use application\core\Model;
+
 class Model_Users extends Model {
     private $users_table = "users";
     private $user_types_table = "user_types";

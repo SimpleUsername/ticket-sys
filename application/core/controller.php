@@ -1,4 +1,8 @@
 <?php
+namespace application\core;
+
+use Conf;
+use application\models\Model_User;
 
 class Controller {
 
@@ -6,7 +10,7 @@ class Controller {
 
     public function __construct()
     {
-        date_default_timezone_set(Config::TIME_ZONE);
+        date_default_timezone_set(Conf::TIME_ZONE);
         $this->view = new View();
 
         if (session_status() == PHP_SESSION_NONE) {
@@ -15,7 +19,6 @@ class Controller {
 
         if ($this->isAuthorized()) {
 
-            require_once 'application/models/model_user.php';
             $user_model = new Model_User(new Db());
             $user = $user_model->get_user_by_id($_SESSION['user_id']);
 

@@ -1,10 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ilia
- * Date: 26.06.14
- * Time: 1:17
- */
+namespace application\controllers;
+
+use application\core\Route;
+use application\core\Controller;
+use application\core\Model;
+use application\models\Model_Tickets;
 
 class Controller_Tickets extends Controller
 {
@@ -150,6 +150,7 @@ class Controller_Tickets extends Controller
     }
 
     public function action_pdf($place_id = null){
+        require_once "/libs/MPDF56/mpdf.php";
         $place = end($this->model->get_place($place_id ));
         if(!empty($_GET['event_id'])){
             $event_id = (int)$_GET['event_id'];
@@ -191,7 +192,7 @@ class Controller_Tickets extends Controller
                 </tr>
                 </tbody>
             </table>';
-            $mpdf = new mPDF();
+            $mpdf = new \mPDF();
             $mpdf->WriteHTML($html);
             $mpdf->Output();
             exit;

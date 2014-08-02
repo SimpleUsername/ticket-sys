@@ -1,5 +1,5 @@
 <?php
-
+namespace application\core;
 
 class Route
 {
@@ -29,40 +29,29 @@ class Route
         }
 
         // добавляем префиксы
-        $model_name = 'Model_'.$controller_name;
-        $controller_name = 'Controller_'.$controller_name;
+        $model_name = '\application\models\Model_'.$controller_name;
+        $controller_name = '\application\controllers\Controller_'.$controller_name;
         $action_name = 'action_'.$action_name;
 
         if (0) {
-            echo "Model: $model_name <br>";
-            echo "Controller: $controller_name <br>";
-            echo "Action: $action_name <br>";
+            echo "Model: $model_name <br>".PHP_EOL;
+            echo "Controller: $controller_name <br>".PHP_EOL;
+            echo "Action: $action_name <br>".PHP_EOL;
         }
 
-        // подцепляем файл с классом модели (файла модели может и не быть)
-
-        $model_file = strtolower($model_name).'.php';
-        $model_path = "application/models/".$model_file;
-        if(file_exists($model_path))
+        if(class_exists($model_name))
         {
-            include $model_path;
             $model = new $model_name(new Db());
         }
-
-        // подцепляем файл с классом контроллера
-        $controller_file = strtolower($controller_name).'.php';
-        $controller_path = "application/controllers/".$controller_file;
-        if(file_exists($controller_path))
+        if(class_exists($controller_name))
         {
-            include "application/controllers/".$controller_file;
+            $controller = new $controller_name($model);
         }
         else
         {
             Route::ErrorPage404();
         }
 
-        // создаем контроллер
-        $controller = new $controller_name($model);
         $action = $action_name;
 
         if(method_exists($controller, $action))
@@ -73,11 +62,9 @@ class Route
             }else{
                 $controller->$action();
             }
-
         }
         else
         {
-
             Route::ErrorPage404();
         }
 
@@ -85,14 +72,10 @@ class Route
 
     public static function ErrorPage404()
     {
-        //$host = 'http://'.$_SERVER['HTTP_HOST'].'/';
         header('HTTP/1.1 404 Not Found');
-        include "application/controllers/controller_404.php";
-        $controller = new Controller_404();
+        $controller = new \application\controllers\Controller_404();
         $controller->action_index();
         exit();
-        //header("Status: 404 Not Found");
-        //header('Location:'.$host.'404');
     }
 
 }

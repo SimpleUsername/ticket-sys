@@ -1,4 +1,11 @@
 <?php
+namespace application\controllers;
+
+use Conf;
+use application\core\Controller;
+use application\core\Model;
+use application\models\Model_User;
+
 class Controller_User extends Controller {
 
     /* @var $model Model_User */
@@ -17,7 +24,7 @@ class Controller_User extends Controller {
                 $this->redirect("main/index");
             }
         } else {
-            if($user = $this->model->get_user($_POST['login'],md5(md5($_POST['password'].Config::SECURE_SALT)))
+            if($user = $this->model->get_user($_POST['login'],md5(md5($_POST['password'].Conf::SECURE_SALT)))
             ) {
                 $user_hash = session_id();
                 $user_ip = $_SERVER['REMOTE_ADDR'];
@@ -55,7 +62,7 @@ class Controller_User extends Controller {
         if (empty($_POST)) {
             $this->view->generate('user_password_view.php', 'template_view.php');
         } else {
-            $this->model->set_user_password($_SESSION['user_id'], md5(md5($_POST['new_password'].Config::SECURE_SALT)));
+            $this->model->set_user_password($_SESSION['user_id'], md5(md5($_POST['new_password'].Conf::SECURE_SALT)));
             $this->redirect("user/logout");
         }
     }

@@ -1,4 +1,11 @@
 <?php
+namespace application\controllers;
+
+use Conf;
+use application\core\Controller;
+use application\core\Model;
+use application\core\Route;
+use application\models\Model_Users;
 
 class Controller_Users extends Controller {
 
@@ -50,7 +57,7 @@ class Controller_Users extends Controller {
                 "user_type" => (int)$_POST['user_type']
             );
             if (!empty($_POST['password'])) {
-                $user_data["user_password"] = md5(md5($_POST['password'].Config::SECURE_SALT));
+                $user_data["user_password"] = md5(md5($_POST['password'].Conf::SECURE_SALT));
             }
             $this->model->edit_user($user_id, $user_data);
             $this->redirect('users');
@@ -80,7 +87,7 @@ class Controller_Users extends Controller {
                 "user_login" => htmlspecialchars($_POST['user_login']),
                 "user_name" => htmlspecialchars($_POST['user_name']),
                 "user_type" => (int)$_POST['user_type'],
-                "user_password" => md5(md5($_POST['password'].Config::SECURE_SALT))
+                "user_password" => md5(md5($_POST['password'].Conf::SECURE_SALT))
             );
             if ($this->model->create_user($user_data)) {
                 $this->redirect('users');
@@ -141,16 +148,16 @@ class Controller_Users extends Controller {
 
             $query = "";
             if($fp){
-                $res1 = $this->model->sql("SHOW CREATE TABLE ".$tables[$k]['Tables_in_'.DB_NAME]);
-                $query="\nDROP TABLE IF EXISTS `".$tables[$k]['Tables_in_'.DB_NAME]."`;\n".$res1[0]['Create Table'].";\n";
+                $res1 = $this->model->sql("SHOW CREATE TABLE ".$tables[$k]['Tables_in_'.Conf::DB_NAME]);
+                $query="\nDROP TABLE IF EXISTS `".$tables[$k]['Tables_in_'.Conf::DB_NAME]."`;\n".$res1[0]['Create Table'].";\n";
                 fwrite($fp, $query);
                 $query="";
 
-                $r_ins = $this->model->select($tables[$k]['Tables_in_'.DB_NAME]);
+                $r_ins = $this->model->select($tables[$k]['Tables_in_'.Conf::DB_NAME]);
 
                 $count_r_ins = count($r_ins);
                 if($count_r_ins > 0){
-                    $query_ins = "\nINSERT INTO `".$tables[$k]['Tables_in_'.DB_NAME]."` VALUES ";
+                    $query_ins = "\nINSERT INTO `".$tables[$k]['Tables_in_'.Conf::DB_NAME]."` VALUES ";
                     fwrite($fp, $query_ins);
 
                     for($j = 0 ; $j < $count_r_ins; $j++){
