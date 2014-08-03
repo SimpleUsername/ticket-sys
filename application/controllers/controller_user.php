@@ -1,7 +1,10 @@
 <?php
 namespace application\controllers;
 
+use application\core\ModelException;
 use Conf;
+use application\entity\User;
+use application\entity\UserType;
 use application\core\Controller;
 use application\core\Model;
 use application\models\Model_User;
@@ -17,42 +20,45 @@ class Controller_User extends Controller {
     }
 
     public function action_login() {
-        if (empty($_POST)) {
+
+        if (!isset($_POST['login']) && !isset($_POST['password'])) {
             if (!$this->isAuthorized()) {
                 $this->view->generate('login_view.php', 'template_view.php');
             } else {
                 $this->redirect("main/index");
             }
         } else {
-            if($user = $this->model->get_user($_POST['login'],md5(md5($_POST['password'].Conf::SECURE_SALT)))
-            ) {
-                $user_hash = session_id();
-                $user_ip = $_SERVER['REMOTE_ADDR'];
-                $this->model->set_user_login_data($user['user_id'], $user_hash, $user_ip);
-                $_SESSION['authorized'] = 1;
-                $_SESSION['user_id'] = $user['user_id'];
-                $_SESSION['user_login'] = $user['user_login'];
-                $_SESSION['user_name'] = $user['user_name'];
-                $_SESSION['user_admin'] = $user['user_type'] & 0x04;
-                $_SESSION['user_manager'] = $user['user_type'] & 0x02;
-                $_SESSION['user_seller'] = $user['user_type'] & 0x01;
-                $this->redirect("main/index");
-            } else {
-                if ($this->model->get_user_by_login($_POST['login'])) {
-                    $_SESSION['user_login'] = htmlspecialchars($_POST['login']);
-                    $_SESSION['error'] = 'Неправильный пароль!';
+            try {
+                $user = $this->model->getUserByLogin($_POST['login']);
+                if ($user->getPassword() == md5(md5($_POST['password'] . Conf::SECURE_SALT))) {
+                    $user->setSessionID(session_id());
+                    $user->setIP($_SERVER['REMOTE_ADDR']);
+                    $this->model->setUser($user->getID(), $user);
+                    $_SESSION['authorized'] = 1;
+                    $_SESSION['user_id'] = $user->getID();
+                    $_SESSION['user_login'] = $user->getLogin();
+                    $_SESSION['user_name'] = $user->getLogin();
+                    $_SESSION['user_admin'] = $user->getType() & UserType::ADMIN;
+                    $_SESSION['user_manager'] = $user->getType() & UserType::MANAGER;
+                    $_SESSION['user_seller'] = $user->getType() & UserType::SELLER;
+                    $this->redirect("main/index");
                 } else {
-                    $_SESSION['error'] = 'Неправильный логин!';
+                    $_SESSION['user_login'] = htmlspecialchars($_POST['login']);
+                    $_SESSION['error'] = 'Неправильный пароль';
+                    $this->redirect("user/login");
                 }
+            } catch (ModelException $e) {
+                $_SESSION['error'] = $e->getMessage();
                 $this->redirect("user/login");
             }
         }
     }
 
     public function action_logout() {
-        $user = $this->model->get_user_by_id($_SESSION['user_id']);
-        if (session_id() == $user['user_hash']) {
-            $this->model->set_user_login_data($_SESSION['user_id']);
+        $user = $this->model->getUser($_SESSION['user_id']);
+        if ($user->getSessionID() == session_id()) {
+            $user->setSessionID('');
+            $this->model->setUser($user->getID(), $user);
         }
         $_SESSION['authorized'] = 0;
         $this->redirect("user/login");
@@ -62,7 +68,9 @@ class Controller_User extends Controller {
         if (empty($_POST)) {
             $this->view->generate('user_password_view.php', 'template_view.php');
         } else {
-            $this->model->set_user_password($_SESSION['user_id'], md5(md5($_POST['new_password'].Conf::SECURE_SALT)));
+            $user = $this->model->getUser($_SESSION['user_id']);
+            $user->setPassword(md5(md5($_POST['new_password'].Conf::SECURE_SALT)));
+            $this->model->setUser($user->getID(), $user);
             $this->redirect("user/logout");
         }
     }

@@ -1,6 +1,10 @@
 <?php
 namespace application\core;
 
+use Exception;
+
+class ModelException extends Exception{}
+
 class Model
 {
     private $table_section = "sector";
