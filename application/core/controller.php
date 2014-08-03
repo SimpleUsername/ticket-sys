@@ -20,15 +20,15 @@ class Controller {
         if ($this->isAuthorized()) {
 
             $user_model = new Model_User(new Db());
-            $user = $user_model->get_user_by_id($_SESSION['user_id']);
+            $user = $user_model->getUser($_SESSION['user_id']);
 
             if (time() - $_SESSION['last_activity'] > 30*60) {
                 $this->showLoginPage('Истёк срок дейсвия сессии!');
             }
-            if (session_id() != $user['user_hash']) {
+            if (session_id() != $user->getSessionID()) {
                 $this->showLoginPage('Не актуальная сессия!');
             }
-            if ($_SERVER['REMOTE_ADDR'] != $user['user_ip']) {
+            if ($_SERVER['REMOTE_ADDR'] != $user->getIP()) {
                 $this->showLoginPage('Сменился IP адрес!');
             }
 

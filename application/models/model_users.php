@@ -1,9 +1,13 @@
 <?php
 namespace application\models;
 
+use PDOException;
+use application\core\ModelException;
+use application\entity\User;
 use application\core\Model;
+use application\models\Model_User;
 
-class Model_Users extends Model {
+class Model_Users extends Model_User {
     private $users_table = "users";
     private $user_types_table = "user_types";
 
@@ -11,39 +15,34 @@ class Model_Users extends Model {
         $select = $this->db->select($this->user_types_table);
         return  $select;
     }
-    public function get_users($data = null) {
-        $select = $this->db->get_records($this->users_table, $data);
-        if ($data == null) {
-            return  $select;
-        } else {
-            return end($select);
+    public function getAllUsers()
+    {
+        $usersRows = $this->db->get_records($this->users_table);
+        $users = array();
+        foreach ($usersRows as $userRow) {
+            $users[] = $this->getUserFromArray($userRow);
+        }
+        return $users;
+    }
+    public function addUser(User $user)
+    {
+        try {
+            $insert = $this->insert($this->users_table,
+                array(
+                    'user_login' => $user->getLogin(),
+                    'user_name' => $user->getName(),
+                    'user_type' => $user->getType(),
+                    'user_password' => $user->getPassword()
+                ));
+            return $insert;
+        } catch (PDOException $e) {
+            //TODO: explain
+            throw new ModelException('Ошибка добавления пользователя');
         }
     }
-    public function get_user_by_id($user_id) {
-        return $this->get_users(array("user_id" => $user_id));
-    }
-    public function get_user_by_login($user_login) {
-        return $this->get_users(array("user_login" => $user_login));
-    }
-    public function create_user($data) {
-        if (!$this->get_user_by_login($data['user_login'])) {
-            $insert = $this->insert($this->users_table, $data);
-            return  $insert;
-        } else {
-            return null;
-        }
-    }
-    public function edit_user($user_id, $data) {
-        $update = $this->update($this->users_table, $data,' user_id = :user_id ', array(':user_id' => (int)$user_id));
-        return $update;
-    }
-    public function delete_user($user_id) {
-        $delete = $this->delete($this->users_table, ' user_id = :user_id ', array(':user_id' => (int)$user_id));
+    public function deleteUser($ID)
+    {
+        $delete = $this->delete($this->users_table, ' user_id = :user_id ', array(':user_id' => $ID));
         return $delete;
-    }
-    public function clear_user_session_data($user_id) {
-        $update = $this->update($this->users_table, array("user_hash" => null, "user_ip" => '0.0.0.0'),
-            ' user_id = :user_id ', array(':user_id' => (int)$user_id));
-        return $update;
     }
 }

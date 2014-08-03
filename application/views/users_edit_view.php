@@ -1,7 +1,18 @@
-<? switch($data['action']) {
+<?
+use application\entity\User;
+
+/**
+ * @var $data array
+ * @var $user User;
+ */
+if (isset($data['user'])) {
+    $user = $data['user'];
+}
+switch($data['action']) {
     case "create" : ?><h1>Добавление пользователя</h1><? break;
     case "edit" : ?><h1>Изменение данных пользователя</h1><? break;
-}?>
+}
+?>
 <form role="form" autocomplete="off"  class="form-horizontal col-sm-8" method="POST" id="user-<?=$data['action']?>-form">
     <? if(isset($data['error'])) { ?><div class="alert alert-danger"><?=$data['error']?></div><? } ?>
     <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
@@ -12,14 +23,14 @@
         <label for="user_name" class="col-sm-4 control-label">Полное имя</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" placeholder="фамилия, имя и отчество" name="user_name"
-                   id="user_name" value="<?=isset($data['user_name'])?$data['user_name']:"" ?>">
+                   id="user_name" value="<?=isset($user)?$user->getName():"" ?>">
         </div>
     </div>
     <div class="form-group">
         <label for="user_login" class="col-sm-4 control-label">Логин</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" placeholder="логин" name="user_login"
-                   id="user_login" value="<?=isset($data['user_login'])?$data['user_login']:"" ?>">
+                   id="user_login" value="<?=isset($user)?$user->getLogin():"" ?>">
         </div>
     </div>
     <div class="form-group">
@@ -35,7 +46,7 @@
             <? $user_type_value = 0; ?>
             <? foreach($data['user_types'] as $user_type):?>
                 <label><input type="checkbox" class="role" value="<?=1<<$user_type["type_id"]?>"<?
-                    if (isset($data["user_type"]) && ($data['user_type'] & (1<<$user_type["type_id"]))) :
+                    if (isset($user) && $user->getType() & (1<<$user_type["type_id"])) :
                         $user_type_value += 1<<$user_type["type_id"];
                         ?> checked="checked"<?
                     endif;?>>
@@ -126,7 +137,7 @@
                         },
                         remote: {
                             message: 'Этот логин уже используется другим пользователем',
-                            url: '/users/checkLoginAvailableAjax/<?=isset($data['user_login'])?"?old_login=".$data['user_login']:"" ?>'
+                            url: '/users/checkLoginAvailableAjax/<?=isset($user)?"?old_login=".$user->getLogin():"" ?>'
                         }
                     }
                 }

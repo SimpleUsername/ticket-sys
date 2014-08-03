@@ -1,6 +1,9 @@
 <?php
 namespace application\controllers;
 
+use application\core\ModelException;
+use application\entity\User;
+use application\entity\UserType;
 use Conf;
 use application\core\Controller;
 use application\core\Model;
@@ -29,10 +32,11 @@ class Controller_Users extends Controller {
     private function delete_user_session($user_id){
         $current_session = session_id();
         session_write_close();
-        $data = $this->model->get_users(array("user_id" => (int)$user_id));
-        session_id($data['user_hash']);
+        $user = $this->model->getUser($user_id);
+        session_id($user->getSessionID());
         session_start();
-        $this->model->clear_user_session_data($user_id);
+        $user->setSessionID('');
+        $this->model->setUser($user->getID(), $user);
         session_destroy();
         session_write_close();
         session_id($current_session);
@@ -40,34 +44,32 @@ class Controller_Users extends Controller {
     }
     public function action_index()
     {
-        $data = $this->model->get_users();
+        $data = $this->model->getAllUsers();
         $this->view->generate('users_view.php', 'template_view.php', $data);
     }
     public function action_edit($user_id)
     {
         if(empty($_POST)){
-            $data = $this->model->get_users(array("user_id" => (int)$user_id));
+            $data["user"] = $this->model->getUser($user_id);
             $data["action"] = "edit";
             $data["user_types"] = $this->model->get_user_types();
             $this->view->generate('users_edit_view.php', 'template_view.php', $data);
         } else {
-            $user_data = array(
-                "user_login" => htmlspecialchars($_POST['user_login']),
-                "user_name" => htmlspecialchars($_POST['user_name']),
-                "user_type" => (int)$_POST['user_type']
-            );
+            $user = $this->model->getUser($user_id);
+            $user->setLogin(htmlspecialchars($_POST['user_login']));
+            $user->setName(htmlspecialchars($_POST['user_name']));
+            $user->setType($_POST['user_type']);
             if (!empty($_POST['password'])) {
-                $user_data["user_password"] = md5(md5($_POST['password'].Conf::SECURE_SALT));
+                $user->setPassword(md5(md5($_POST['password'].Conf::SECURE_SALT)));
             }
-            $this->model->edit_user($user_id, $user_data);
+            $this->model->setUser($user_id, $user);
             $this->redirect('users');
         }
     }
     public function action_delete($user_id)
     {
         if ($_SESSION['user_id'] != $user_id) {
-            $this->delete_user_session($user_id);
-            $this->model->delete_user($user_id);
+            $this->model->deleteUser($user_id);
         }
         $this->redirect('users');
     }
@@ -83,19 +85,18 @@ class Controller_Users extends Controller {
             $this->view->generate('users_edit_view.php', 'template_view.php', $data);
         } else {
             $data["error"] = null;
-            $user_data = array(
-                "user_login" => htmlspecialchars($_POST['user_login']),
-                "user_name" => htmlspecialchars($_POST['user_name']),
-                "user_type" => (int)$_POST['user_type'],
-                "user_password" => md5(md5($_POST['password'].Conf::SECURE_SALT))
-            );
-            if ($this->model->create_user($user_data)) {
+            $user = new User();
+            $user->setLogin(htmlspecialchars($_POST['user_login']));
+            $user->setName(htmlspecialchars($_POST['user_name']));
+            $user->setType($_POST['user_type']);
+            $user->setPassword(md5(md5($_POST['password'].Conf::SECURE_SALT)));
+            try {
+                $this->model->addUser($user);
                 $this->redirect('users');
-            } else {
-                $data["error"] = "Ошибка добавления пользователя!";
+            } catch (ModelException $e) {
+                $data["error"] = $e->getMessage();
                 $data["action"] = "create";
-                $data["user_login"] =  htmlspecialchars($_POST['user_login']);
-                $data["user_type"] =  (int)$_POST['user_type'];
+                $data["user"] = $user;
                 $data["user_types"] = $this->model->get_user_types();
                 $this->view->generate('users_edit_view.php', 'template_view.php', $data);
             }
@@ -117,8 +118,12 @@ class Controller_Users extends Controller {
                     'valid' => true,
                 ));
             } else {
-                $user = $this->model->get_users(array("user_login" => $new_login));
-                $is_available = ($user == null);
+                try {
+                    $this->model->getUserByLogin($new_login);
+                    $is_available = false;
+                } catch (ModelException $e) {
+                    $is_available = true;
+                }
                 echo json_encode(array(
                     'user_login' => $new_login,
                     'valid' => $is_available

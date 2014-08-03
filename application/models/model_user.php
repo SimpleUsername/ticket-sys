@@ -86,7 +86,7 @@ class Model_User extends Model {
             ' user_id = :user_id ', array(':user_id' => (int)$ID));
         return $update;
     }
-    private function getUserFromArray(array $userRow)
+    protected function getUserFromArray(array $userRow)
     {
         $user = new User();
         $user->setID($userRow['user_id']);
