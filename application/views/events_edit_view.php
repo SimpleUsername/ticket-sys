@@ -2,12 +2,12 @@
 
     <div class="col-md-6">
         <h1 class="page-header"><?=$data['action']=='edit'?'Редактирование события':'Новое событие'?></h1>
-        <? if(!empty($data['error'])) {?>
+        <? if(!empty($data['error'])):?>
             <div class="form-group has-success has-feedback">
                 <label  class="control-label col-sm-3"><?=$data['error']?></label>
             </div>
-        <?}?>
-        <? if (isset($data['event_id'])) { ?><input type="hidden" name="event_id" value="<?=$data['event_id']?>"/><? } ?>
+        <? endif;?>
+        <? if (isset($data['event_id'])): ?><input type="hidden" name="event_id" value="<?=$data['event_id']?>"/><? endif; ?>
         <div class="form-group">
             <label for="name">Название события*</label>
             <input type="text" class="form-control" id="name" name="event_name" value="<?=@$data['event_name'] ?>" placeholder="Введите название события" required="required">
@@ -45,26 +45,26 @@
                     </span>
             </div>
         </div>
-        <? if ($data['action'] == 'edit') { ?>
-        <div class="form-group">
-            <label for="event_status">Статус события</label>
-        </div>
-        <div class="input-group">
-            <div class="input-group-btn">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="status_but"><?=$data['statuses'][isset($data['event_status'])?$data['event_status']:0]['estatus_name']?> <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <? foreach($data['statuses'] as $id => $value ){
-                        if ($value['estatus_id'] != 1) {?>
-                        <li><a href="#" data-status_id="<?=$value['estatus_id']?>" class="status"><?=$value['estatus_name']?></a></li>
-                    <? }
-                    }?>
-                </ul>
-            </div><!-- /btn-group -->
-            <input type="hidden" class="form-control" id="status" name="event_status" value="<?=$data['event_status'] ?>" required="required">
-        </div><!-- /input-group -->
-        <? }  else { ?>
+        <? if ($data['action'] == 'edit') : ?>
+            <div class="form-group">
+                <label for="event_status">Статус события</label>
+            </div>
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="status_but"><?=$data['statuses'][isset($data['event_status'])?$data['event_status']:0]['estatus_name']?> <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <? foreach($data['statuses'] as $id => $value ):
+                            if ($value['estatus_id'] != 1) :?>
+                                <li><a href="#" data-status_id="<?=$value['estatus_id']?>" class="status"><?=$value['estatus_name']?></a></li>
+                            <? endif;
+                        endforeach; ?>
+                    </ul>
+                </div><!-- /btn-group -->
+                <input type="hidden" class="form-control" id="status" name="event_status" value="<?=$data['event_status'] ?>" required="required">
+            </div><!-- /input-group -->
+        <?  else: ?>
             <input type="hidden" class="form-control" id="status" name="event_status" value="0" required="required">
-        <? } ?>
+        <? endif; ?>
         <div class="form-group">
             <label for="desc">Описание события</label>
             <textarea id="desc" name="event_desc" class="form-control" rows="3" placeholder="Введите название события"><?=$data['event_desc']?></textarea>
@@ -72,21 +72,21 @@
         <div class="form-group">
             <label for="exampleInputFile">Баннер мероприятия</label>
             <input type="file" id="file" name="event_img">
-            <? if ($action == 'edit') { ?>
-            <div class="well"><p>Имя файла:  <?=$data['event_img_name'];?></p><img src="<?=$data['event_img_path'].$data['event_img_md5']?>" class="img-thumbnail img_custom" alt="<?=$data['event_img_name'];?>"/></div>
-            <input type="hidden" name="event_img_name" value="<?=$data['event_img_name'];?>"/>
-            <input type="hidden" name="event_img_path" value="<?=$data['event_img_path'];?>"/>
-            <input type="hidden" name="event_img_md5" value="<?=$data['event_img_md5'];?>"/>
-            <? } ?>
+            <? if ($action == 'edit') : ?>
+                <div class="well"><p>Имя файла:  <?=$data['event_img_name'];?></p><img src="<?=$data['event_img_path'].$data['event_img_md5']?>" class="img-thumbnail img_custom" alt="<?=$data['event_img_name'];?>"/></div>
+                <input type="hidden" name="event_img_name" value="<?=$data['event_img_name'];?>"/>
+                <input type="hidden" name="event_img_path" value="<?=$data['event_img_path'];?>"/>
+                <input type="hidden" name="event_img_md5" value="<?=$data['event_img_md5'];?>"/>
+            <? endif; ?>
         </div>
         <button type="submit" class="btn btn-primary" id="send"><?=$data['action']=='edit'?'Сохранить Событие':'Добавить Событие'?></button>
-        <? if ($data['action'] == 'edit') { ?><a class="btn btn-danger" onclick="confirm('Удалить ?')" href="/events/del/<?=$data['event_id']?>">Удалить</a><? } ?>
+        <? if ($data['action'] == 'edit') : ?><a class="btn btn-danger" onclick="confirm('Удалить ?')" href="/events/del/<?=$data['event_id']?>">Удалить</a><?endif; ?>
     </div>
     <div class="col-md-6">
         <h3 class="page-header">Цена на билеты для данного события</h3>
         <div class="well"> <button type="button" class="btn btn-primary btn-lg btn-block" id="prices" data-action="1">Редактировать цены</button></div>
         <? $i = 0;
-        foreach($data['prices'] as $key => $value) {?>
+        foreach($data['prices'] as $key => $value) :?>
             <div class="row">
                 <div class="form-group form-inline prices-parent">
                     <label for="name" class="col-xs-4"><?=$value['sector_name']?> , грн</label>
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <?  $i++;
-        } ?>
+        endforeach; ?>
 
     </div>
 </form>

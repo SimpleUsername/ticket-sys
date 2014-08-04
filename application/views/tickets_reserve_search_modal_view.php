@@ -4,9 +4,9 @@
             <label for="event" class="col-sm-4 control-label">Событие</label>
             <div class="col-sm-7">
                 <select class="form-control" name="event_id" id="event-id">
-                    <? foreach ($data['events'] as $event) { ?>
+                    <? foreach ($data['events'] as $event) : ?>
                         <option value="<?=$event['event_id']?>"><?=$event['event_name']?> (<?=$event['event_date']?>)</option>
-                    <? } ?>
+                    <? endforeach; ?>
                 </select>
             </div>
         </div>

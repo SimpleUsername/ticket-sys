@@ -1,18 +1,18 @@
-<?php if (isset($data['error'])) { ?>
+<?php if (isset($data['error'])): ?>
     <div class="alert alert-danger">
         <?=htmlspecialchars($data['error']) ?>
     </div>
-<?php } ?>
+<?php endif; ?>
 <div class="row">
     <div class="panel panel-default col-sm-6 col-sm-offset-2">
         <div class="panel-body">
             <h2>Вход</h2>
-            <? if(isset($_SESSION['error'])) { ?>
-            <div class="alert alert-danger">
+            <? if(isset($_SESSION['error'])) : ?>
+                <div class="alert alert-danger">
                 <?=$_SESSION["error"]?>
-            </div><?
+                </div><?
                 unset($_SESSION["error"]);
-            } ?>
+            endif; ?>
             <form method="post" id="login_form">
                 <div class="form-group">
                     <div class="input-group">

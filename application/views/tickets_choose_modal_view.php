@@ -180,13 +180,13 @@
                     </g>
                     <rect id="tooltip_rect" x="-200" y="-200" width="100" height="47" fill="whitesmoke" stroke="gray" stroke-width="2" rx="3" ry="3"></rect>
                     <svg id="tooltip" x="-200" y="-200" width="100" height="47">
-                        <? foreach ($data['sectors'] as $id => $sector) { ?>
+                        <? foreach ($data['sectors'] as $id => $sector) : ?>
                         <g class="sec_info" id="sec-<?=$sector['sector_id']?>"  data-sector-id="<?=$sector['sector_id']?>" data-sector-price="<?=$sector['sector_price']?>">
                             <text id="tooltip_name" x="50" y="13" text-anchor="middle" font-size="12"><?=$sector['sector_name']?></text>
                             <text id="tooltip_price" x="50" y="28" text-anchor="middle" font-size="12">Цена: <?=$sector['sector_price']?></text>
                             <text id="tooltip_free_place" x="50" y="43" text-anchor="middle" font-size="12">Свободно: <?=$sector['sector_free_count']?></text>
                         </g>
-                        <? } ?>
+                        <? endforeach; ?>
                     </svg>
                 </g>
             </svg>
