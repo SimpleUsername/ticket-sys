@@ -49,8 +49,6 @@ class Route
             Route::ErrorPage404();
         }
 
-        $action_name;
-
         if(method_exists($controller, $action_name))
         {
             if(!empty($routes[3])){
