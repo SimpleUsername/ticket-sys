@@ -7,7 +7,7 @@
                 <label  class="control-label col-sm-3"><?=$data['error']?></label>
             </div>
         <? endif;?>
-        <? if (isset($data['event_id'])): ?><input type="hidden" name="event_id" value="<?=$data['event_id']?>"/><? endif; ?>
+        <? if (isset($data['event_id'])): ?><input type="hidden" name="event_id" value="<?=@$data['event_id']?>"/><? endif; ?>
         <div class="form-group">
             <label for="name">Название события*</label>
             <input type="text" class="form-control" id="name" name="event_name" value="<?=@$data['event_name'] ?>" placeholder="Введите название события" required="required">
@@ -72,7 +72,7 @@
         <div class="form-group">
             <label for="exampleInputFile">Баннер мероприятия</label>
             <input type="file" id="file" name="event_img">
-            <? if ($action == 'edit') : ?>
+            <? if ($data['action'] == 'edit') : ?>
                 <div class="well"><p>Имя файла:  <?=$data['event_img_name'];?></p><img src="<?=$data['event_img_path'].$data['event_img_md5']?>" class="img-thumbnail img_custom" alt="<?=$data['event_img_name'];?>"/></div>
                 <input type="hidden" name="event_img_name" value="<?=$data['event_img_name'];?>"/>
                 <input type="hidden" name="event_img_path" value="<?=$data['event_img_path'];?>"/>

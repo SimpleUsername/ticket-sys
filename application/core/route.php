@@ -12,29 +12,24 @@ class Route
 
     static function start()
     {
-        // контроллер и действие по умолчанию
         $controller_name = 'Main';
         $action_name = 'index';
-
         $routes = explode('/', $_SERVER['REQUEST_URI']);
 
-        // получаем имя контроллера
         if ( !empty($routes[1]) )
         {
             $controller_name = ucfirst($routes[1]);
         }
 
-        // получаем имя экшена
         if ( !empty($routes[2]) )
         {
             $action_name = $routes[2];
         }
-        // убираем грабли при передаче не числа в аргумент
+
         if( !empty($routes[3])){
             $arg[] = intval($routes[3]);
         }
 
-        // добавляем префиксы
         $model_name = '\application\models\Model_'.$controller_name;
         $controller_name = '\application\controllers\Controller_'.$controller_name;
         $action_name = 'action_'.$action_name;
@@ -61,22 +56,19 @@ class Route
             Route::ErrorPage404();
         }
 
-        $action = $action_name;
-
-        if(method_exists($controller, $action))
+        if(method_exists($controller, $action_name))
         {
             if(!empty($routes[3])){
-                call_user_func_array(array($controller,$action) , $arg);
+                call_user_func_array(array($controller,$action_name) , $arg);
 
             }else{
-                $controller->$action();
+                $controller->$action_name();
             }
         }
         else
         {
             Route::ErrorPage404();
         }
-
     }
 
     public static function redirect($section){
@@ -99,7 +91,6 @@ class Route
         $controller->action_index();
         exit();
     }
-
 
     private function checkAuthority(Controller $controller)
     {

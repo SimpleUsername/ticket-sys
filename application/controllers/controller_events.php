@@ -7,6 +7,7 @@ use application\core\View;
 use application\core\Route;
 use application\core\Session;
 use application\entity\User;
+use application\entity\Event;
 use application\models\Model_Events;
 
 class Controller_Events extends Controller
