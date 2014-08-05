@@ -8,8 +8,31 @@ use application\core\Model;
 use application\models\Model_User;
 
 class Model_Users extends Model_User {
+
     private $user_types_table = "user_types";
 
+    public function setUser($ID, User $user)
+    {
+        $update = $this->update(
+            $this->users_table,
+            array(
+                'user_id' => $user->getID(),
+                'user_login' => $user->getLogin(),
+                'user_name' => $user->getName(),
+                'user_password' => $user->getPassword(),
+                'user_type' => $user->getType(),
+                'user_hash' => $user->getSessionID(),
+                'user_ip' => $user->getIP()
+            ),
+            ' user_id = :user_id ', array(':user_id' => (int)$ID
+            )
+        );
+        if ($update == '1') {
+            return $user;
+        } else {
+            throw new ModelException('Пользователь не найден');
+        }
+    }
     public function get_user_types () {
         $select = $this->db->select($this->user_types_table);
         return  $select;
