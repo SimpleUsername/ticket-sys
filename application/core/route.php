@@ -1,6 +1,8 @@
 <?php
 namespace application\core;
 
+use Conf;
+
 class Route
 {
 

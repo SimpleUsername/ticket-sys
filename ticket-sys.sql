@@ -27865,7 +27865,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_name` varchar(64) NOT NULL,
   `user_password` varchar(32) NOT NULL,
   `user_type` int(10) unsigned NOT NULL,
-  `user_hash` varchar(32) DEFAULT NULL,
+  `user_hash` varchar(32) NOT NULL,
   `user_ip` varchar(30) NOT NULL DEFAULT '0.0.0.0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_login` (`user_login`)

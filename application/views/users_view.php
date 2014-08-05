@@ -1,6 +1,5 @@
 <?
 use application\entity\User;
-use application\entity\UserType;
 /**
  * @var $data array
  * @var $user User
@@ -36,9 +35,9 @@ use application\entity\UserType;
         </td>
         <td>
             <h5>
-                <?=$user->getType() & UserType::ADMIN ? '<span class="label label-warning">Администратор</span>' : ''?>
-                <?=$user->getType() & UserType::MANAGER ? '<span class="label label-success">Менеджер</span>' : ''?>
-                <?=$user->getType() & UserType::SELLER ? '<span class="label label-primary">Продавец</span>' : ''?>
+                <?=$user->getType() & User::ADMIN ? '<span class="label label-warning">Администратор</span>' : ''?>
+                <?=$user->getType() & User::MANAGER ? '<span class="label label-success">Менеджер</span>' : ''?>
+                <?=$user->getType() & User::SELLER ? '<span class="label label-primary">Продавец</span>' : ''?>
             </h5>
         </td>
         <td>

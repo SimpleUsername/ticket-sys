@@ -4,7 +4,6 @@ namespace application\controllers;
 use application\core\ModelException;
 use Conf;
 use application\entity\User;
-use application\entity\UserType;
 use application\core\Controller;
 use application\core\Model;
 use application\models\Model_User;
@@ -38,9 +37,9 @@ class Controller_User extends Controller {
                     $_SESSION['user_id'] = $user->getID();
                     $_SESSION['user_login'] = $user->getLogin();
                     $_SESSION['user_name'] = $user->getLogin();
-                    $_SESSION['user_admin'] = $user->getType() & UserType::ADMIN;
-                    $_SESSION['user_manager'] = $user->getType() & UserType::MANAGER;
-                    $_SESSION['user_seller'] = $user->getType() & UserType::SELLER;
+                    $_SESSION['user_admin'] = $user->getType() & User::ADMIN;
+                    $_SESSION['user_manager'] = $user->getType() & User::MANAGER;
+                    $_SESSION['user_seller'] = $user->getType() & User::SELLER;
                     $this->redirect("main/index");
                 } else {
                     $_SESSION['user_login'] = htmlspecialchars($_POST['login']);

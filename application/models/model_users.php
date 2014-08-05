@@ -8,7 +8,6 @@ use application\core\Model;
 use application\models\Model_User;
 
 class Model_Users extends Model_User {
-    private $users_table = "users";
     private $user_types_table = "user_types";
 
     public function get_user_types () {

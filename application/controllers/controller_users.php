@@ -3,7 +3,6 @@ namespace application\controllers;
 
 use application\core\ModelException;
 use application\entity\User;
-use application\entity\UserType;
 use Conf;
 use application\core\Controller;
 use application\core\Model;
@@ -58,7 +57,7 @@ class Controller_Users extends Controller {
             $user = $this->model->getUser($user_id);
             $user->setLogin(htmlspecialchars($_POST['user_login']));
             $user->setName(htmlspecialchars($_POST['user_name']));
-            $user->setType($_POST['user_type']);
+            $user->setType((int)$_POST['user_type']);
             if (!empty($_POST['password'])) {
                 $user->setPassword(md5(md5($_POST['password'].Conf::SECURE_SALT)));
             }
@@ -88,7 +87,7 @@ class Controller_Users extends Controller {
             $user = new User();
             $user->setLogin(htmlspecialchars($_POST['user_login']));
             $user->setName(htmlspecialchars($_POST['user_name']));
-            $user->setType($_POST['user_type']);
+            $user->setType((int)$_POST['user_type']);
             $user->setPassword(md5(md5($_POST['password'].Conf::SECURE_SALT)));
             try {
                 $this->model->addUser($user);
