@@ -27,6 +27,7 @@ class View
 		внутри которого будет встраиваться вид
 		для отображения контента конкретной страницы.
 		*/
+        $session = Session::getInstance();
 		include 'application/views/'.$template_view;
 	}
 

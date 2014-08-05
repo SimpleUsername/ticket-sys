@@ -2,6 +2,7 @@
 namespace application\controllers;
 
 use application\core\ModelException;
+use application\core\Session;
 use application\core\View;
 use application\entity\User;
 use Conf;
@@ -10,7 +11,14 @@ use application\core\Model;
 use application\core\Route;
 use application\models\Model_Users;
 
-class Controller_Users extends Controller {
+class Controller_Users extends Controller
+{
+    /* @var $model Model_Users */
+    protected $model;
+    /* @var $view View */
+    protected $view;
+    /* @var $session Session */
+    protected $session;
 
     /*===================params for action_dump=========================== */
     private $_dump_dir = "/dump";
@@ -18,19 +26,11 @@ class Controller_Users extends Controller {
     private $_gzip = false; 		// sql or gzip
     private $_stream = true;		// save in dump dir  and upload from browser
 
-    /* @var $model Model_Users */
-    private $model;
-    private $view;
-
-    public function __construct(Model $model, View $view)
+    public function getAcceptedUserType()
     {
-        $this->model = $model;
-        $this->view = $view;
-        parent::__construct();
-        if (!$_SESSION['user_admin']) {
-            Route::ErrorPage404();
-        }
+        return User::ADMIN;
     }
+
     private function delete_user_session($user_id){
         $current_session = session_id();
         session_write_close();
@@ -65,20 +65,20 @@ class Controller_Users extends Controller {
                 $user->setPassword(md5(md5($_POST['password'].Conf::SECURE_SALT)));
             }
             $this->model->setUser($user_id, $user);
-            $this->redirect('users');
+            Route::redirect('users');
         }
     }
     public function action_delete($user_id)
     {
-        if ($_SESSION['user_id'] != $user_id) {
+        if ($this->session['user_id'] != $user_id) {
             $this->model->deleteUser($user_id);
         }
-        $this->redirect('users');
+        Route::redirect('users');
     }
     public function action_logout($user_id)
     {
         $this->delete_user_session($user_id);
-        $this->redirect('users');
+        Route::redirect('users');
     }
     public function action_create() {
         if(empty($_POST)){
@@ -94,7 +94,7 @@ class Controller_Users extends Controller {
             $user->setPassword(md5(md5($_POST['password'].Conf::SECURE_SALT)));
             try {
                 $this->model->addUser($user);
-                $this->redirect('users');
+                Route::redirect('users');
             } catch (ModelException $e) {
                 $data["error"] = $e->getMessage();
                 $data["action"] = "create";

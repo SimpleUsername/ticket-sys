@@ -5,37 +5,14 @@ use Conf;
 use application\models\Model_User;
 
 class Controller {
-
-    public function __construct()
-    {
-        date_default_timezone_set(Conf::TIME_ZONE);
-
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        if ($this->isAuthorized()) {
-
-            $user_model = new Model_User(new Db());
-            $user = $user_model->getUser($_SESSION['user_id']);
-
-            if (time() - $_SESSION['last_activity'] > 30*60) {
-                $this->showLoginPage('Истёк срок дейсвия сессии!');
-            }
-            if (session_id() != $user->getSessionID()) {
-                $this->showLoginPage('Не актуальная сессия!');
-            }
-            if ($_SERVER['REMOTE_ADDR'] != $user->getIP()) {
-                $this->showLoginPage('Сменился IP адрес!');
-            }
-
-        } else {
-            if ($_SERVER['REQUEST_URI'] != '/user/login') {
-                $this->showLoginPage();
-            }
-        }
-        $_SESSION['last_activity'] = time();
-    }
+    /**
+     * @var $model Model
+     * @var $view View
+     * @var $session Session
+     */
+    protected $model;
+    protected $view;
+    protected $session;
 
     public function prepare_files($files_arr){
 
@@ -106,8 +83,6 @@ class Controller {
         }
         return $result;
     }
-
-
     public  function simple_clear($str){
         $str = preg_replace("/(<\?=|<\?php|<script|<\?xml)/", "", $str);
         return $str;
@@ -124,17 +99,22 @@ class Controller {
 
     }
 
-    protected function isAuthorized() {
-        return isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1;
+    public function setModel(Model $model)
+    {
+        $this->model = $model;
     }
 
-    private function showLoginPage($error = null) {
-        if ($error != null) {
-            $_SESSION['error'] = $error;
-        }
-        $_SESSION['authorized'] = 0;
-        $this->redirect('user/login');
-        exit();
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
     }
 
+    public function setView(View $view)
+    {
+        $this->view = $view;
+    }
+    public function getAcceptedUserType()
+    {
+        return 0;
+    }
 }

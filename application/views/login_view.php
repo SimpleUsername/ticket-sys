@@ -7,18 +7,18 @@
     <div class="panel panel-default col-sm-6 col-sm-offset-2">
         <div class="panel-body">
             <h2>Вход</h2>
-            <? if(isset($_SESSION['error'])) : ?>
+            <? if(isset($session['error'])) : ?>
                 <div class="alert alert-danger">
-                <?=$_SESSION["error"]?>
+                <?=$session["error"]?>
                 </div><?
-                unset($_SESSION["error"]);
+                unset($session["error"]);
             endif; ?>
             <form method="post" id="login_form">
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input type="text" placeholder="логин" class="form-control input-lg" name="login"
-                            <?=isset($_SESSION['user_login'])?"value='".$_SESSION["user_login"]."'":""?>>
+                            <?=isset($session['user_login'])?"value='".$session["user_login"]."'":""?>>
                     </div>
                 </div>
                 <div class="form-group">

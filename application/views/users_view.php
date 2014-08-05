@@ -48,7 +48,7 @@ use application\entity\User;
                href="/users/logout/<?=$user->getID()?>" title="Закрыть сессию">
                 <i class="glyphicon glyphicon-off"></i> Закрыть сессию
             </a>
-            <a class="btn btn-delete btn-danger<?=$_SESSION['user_id'] == $user->getID()?" disabled":""?>"
+            <a class="btn btn-delete btn-danger<?=$session['user_id'] == $user->getID()?" disabled":""?>"
                data-user-id=<?=$user->getID()?> title="Удалить">
                 <i data-user-id=<?=$user->getID()?> class="glyphicon glyphicon-remove"></i> Удалить
             </a>

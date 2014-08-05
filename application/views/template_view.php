@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<? use application\entity\User; ?>
+<? use application\core\Authority; ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -53,21 +55,21 @@
             <a class="navbar-brand" href="/">LISAART</a>
         </div>
         <div class="navbar-collapse collapse">
-            <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1): ?>
+            <? if (Authority::isLoggedIn()): ?>
                 <ul class="nav navbar-nav navbar-left masthead-nav">
-                    <? if ($_SESSION['user_seller']): ?>
+                    <? if (Authority::isA(User::SELLER)): ?>
                         <!-- Seller nav -->
                         <li><a href="/events">События</a></li>
                         <li><a href="#" class="btn-ticket-search">Поиск билета</a></li>
                         <li><a href="#" class="btn-reserve-search">Поиск брони</a></li>
                     <? endif;
-                    if ($_SESSION['user_manager']): ?>
+                    if (Authority::isA(User::MANAGER)): ?>
                         <!-- Manager nav -->
-                        <?=!$_SESSION['user_seller']?'<li><a href="/events">События</a></li>':''?>
+                        <?=!Authority::isA(User::SELLER)?'<li><a href="/events">События</a></li>':''?>
                         <li><a href="/events/archive">Архив событий</a></li>
                         <li><a href="/config">Цены по умолчанию</a></li>
                     <? endif;
-                    if ($_SESSION['user_admin']): ?>
+                    if (Authority::isA(User::ADMIN)): ?>
                         <!-- Admin nav -->
                         <li><a href="/users">Пользователи</a></li>
                     <? endif; ?>
@@ -79,7 +81,7 @@
                                 <span class="caret"></span> <i class="icon-white glyphicon glyphicon-cog"></i>&nbsp;</a>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <? if($_SESSION['user_admin']): ?>
+                                <? if(Authority::isA(User::ADMIN)): ?>
                                 <li><a href="/users/dump"><i class="icon-white glyphicon  glyphicon-download"></i>&nbsp;Дамп базы</a></li>
                                 <li><a href="/users/dump/1"><i class="icon-white glyphicon glyphicon-compressed"></i>&nbsp;Дамп базы (gzip)</a></li>
                                 <li class="divider"></li>
@@ -89,13 +91,13 @@
                         </div>
 
                         <a href="/user/logout" title="Выйти" class="btn navbar-btn <?
-                        if ($_SESSION['user_admin']) :
+                        if (Authority::isA(User::ADMIN)) :
                             echo "btn-warning";
-                        elseif ($_SESSION['user_manager']) :
+                        elseif (Authority::isA(User::MANAGER)) :
                             echo "btn-success";
-                        elseif ($_SESSION['user_seller']) :
+                        elseif (Authority::isA(User::SELLER)) :
                             echo "btn-primary";
-                        endif; ?>"><?=$_SESSION['user_login'] ?> <i class="icon-white glyphicon glyphicon-log-out"></i></a>
+                        endif; ?>"><?=$session['user_login'] ?> <i class="icon-white glyphicon glyphicon-log-out"></i></a>
                     </div>&nbsp;
                 </div>
             <? endif; ?>
@@ -126,22 +128,22 @@
 </div>
 <div class="container-fluid">
     <div class="row">
-        <? if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == 1): ?>
+        <? if (Authority::isLoggedIn()): ?>
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <? if ($_SESSION['user_seller']): ?>
+                    <? if (Authority::isA(User::SELLER)): ?>
                         <!-- Seller sidebar menu -->
                         <!--li><a href="/events">Продажа и бронирование</a></li-->
                         <li><a href="#" class="btn-reserve-search">Выкуп брони</a></li>
                         <li><a href="#" class="btn-ticket-search">Проверка места</a></li>
                         <li><hr></li>
                     <? endif;
-                    if ($_SESSION['user_manager']): ?>
+                    if (Authority::isA(User::MANAGER)): ?>
                         <!-- Manager sidebar menu -->
                         <li><a href="/events/add">Создать мероприятие</a></li>
                         <li><hr></li>
                     <? endif;
-                    if ($_SESSION['user_admin']): ?>
+                    if (Authority::isA(User::ADMIN)): ?>
                         <!-- Admin sidebar menu -->
                         <li><a href="/users">Список пользователей</a></li>
                         <li><a href="/users/create">Добавить пользователя</a></li>

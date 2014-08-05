@@ -2,16 +2,11 @@
 
 namespace test\model;
 
+require_once '../../autoloader.php';
+
 use application\core\Db;
 use application\entity\User;
 use application\models\Model_User;
-
-spl_autoload_register(function ($class) {
-    $filename = '../../'.strtolower($class) . '.php';
-    if(file_exists($filename)) {
-        require_once $filename;
-    }
-});
 
 class Model_UserTest extends \PHPUnit_Framework_TestCase {
 

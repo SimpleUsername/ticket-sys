@@ -5,28 +5,28 @@ use application\core\Controller;
 use application\core\Model;
 use application\core\View;
 use application\core\Route;
+use application\core\Session;
 use application\entity\User;
 use application\models\Model_Events;
 
 class Controller_Events extends Controller
 {
     /* @var $model Model_Events */
-    private $model;
-    private $view;
-
-    public function __construct(Model $model, View $view)
+    protected $model;
+    /* @var $view View */
+    protected $view;
+    /* @var $session Session */
+    protected $session;
+/*
+    public function __construct()
     {
-        $this->model = $model;
-        $this->view = $view;
-
-        parent::__construct();
-
-        if (!($_SESSION['user_type'] & (User::MANAGER | User::SELLER))) {
-            Route::ErrorPage404();
-        }
-
         $this->check_and_delete_not_sold_reserve();
         $this->check_for_old_events();
+    }
+*/
+    public function getAcceptedUserType()
+    {
+        return User::SELLER | User::MANAGER;
     }
 
     public function action_index()
@@ -49,7 +49,7 @@ class Controller_Events extends Controller
     public function action_recovery($event_id)
     {
         $this->model->recovery_event((int)$event_id);
-        $this->redirect('events/archive');
+        Route::redirect('events/archive');
     }
 
     public function action_add(){
@@ -78,7 +78,7 @@ class Controller_Events extends Controller
             if(!$res){
                 $data['error'] = "Возникла ошибка";
             }else{
-                $this->redirect('events');
+                Route::redirect('events');
             }
         }
 
@@ -146,7 +146,7 @@ class Controller_Events extends Controller
                 }
                 $this->view->generate('events_edit_view.php', 'template_view.php',$data);
             }else{
-                $this->redirect('events');
+                Route::redirect('events');
             }
         }else{
             $res = $this->model->get_event_by_id($id);
@@ -179,7 +179,7 @@ class Controller_Events extends Controller
         $id = (int)$id;
         $fields= array('event_status' => -1 );
         $data['result'] = $this->model->update('events',$fields,' event_id=:event_id ', array(':event_id' => $id));
-        $this->redirect('events');
+        Route::redirect('events');
     }
 
     public function action_del_ajax(){

@@ -2,21 +2,20 @@
 namespace application\controllers;
 
 use application\core\Controller;
-use application\core\Model;
 use application\core\View;
+use application\entity\User;
 use application\models\Model_Config;
 
 class Controller_Config extends Controller
 {
     /* @var $model Model_Config */
-    private $model;
-    private $view;
+    protected $model;
+    /* @var $view View */
+    protected $view;
 
-    public  function __construct(Model $model, View $view)
+    public function getAcceptedUserType()
     {
-        $this->model = $model;
-        $this->view = $view;
-        parent::__construct();
+        return User::MANAGER;
     }
 
     public function action_index()

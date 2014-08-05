@@ -1,3 +1,5 @@
+<? use application\entity\User; ?>
+<? use application\core\Authority; ?>
 <h1>События</h1>
 <? if(isset($data['msg'])) :
     ?>
@@ -47,7 +49,7 @@
                     </td>
 
                     <td class="events-list-btns">
-                        <? if ($_SESSION['user_seller']) : ?>
+                        <? if (Authority::isA(User::SELLER)) : ?>
                             <a class="btn btn-default btn-sell <?=$value['event_purchase_available']?"":"disabled"?>"
                                data-event-id="<?=$value['event_id']?>">
                                 Продать билет
@@ -57,7 +59,7 @@
                                 Бронировать место
                             </a>
                         <? endif; ?>
-                        <? if ($_SESSION['user_manager']) : ?>
+                        <? if (Authority::isA(User::MANAGER)) : ?>
                             <a class="btn btn-success btn-edit" href="/events/edit/<?=$value['event_id']?>">Редактировать</a>
                             <button class="btn btn-danger btn-delete" id="del_ev" data-event_id="<?=$value['event_id']?>">Удалить</button>
                         <? endif; ?>

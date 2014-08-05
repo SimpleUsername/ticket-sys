@@ -5,6 +5,8 @@ if (extension_loaded("xhprof")) {
 
 //error_reporting(E_ALL);
 ini_set('display_errors', 1);
+require_once 'autoloader.php';
+date_default_timezone_set(Conf::TIME_ZONE);
 require_once 'application/bootstrap.php';
 
 if (extension_loaded("xhprof")) {

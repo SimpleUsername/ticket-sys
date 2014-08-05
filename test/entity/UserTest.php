@@ -1,23 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ilia
- * Date: 04.08.14
- * Time: 15:17
- */
-
 namespace test\entity;
 
-spl_autoload_register(function ($class) {
-    $filename = '../../'.strtolower($class) . '.php';
-    if(file_exists($filename)) {
-        require_once $filename;
-    }
-});
-
+require_once '../../autoloader.php';
 
 use application\entity\User;
-use application\entity\UserException;
 
 class UserTest extends \PHPUnit_Framework_TestCase {
     /**

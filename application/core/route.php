@@ -1,11 +1,14 @@
 <?php
 namespace application\core;
 
+use application\controllers\Controller_404;
+use application\models\Model_Users;
 use Conf;
 use application\core\View;
 
 class Route
 {
+    private static $_DB;
 
     static function start()
     {
@@ -36,19 +39,22 @@ class Route
         $controller_name = '\application\controllers\Controller_'.$controller_name;
         $action_name = 'action_'.$action_name;
 
-        if (0) {
-            echo "Model: $model_name <br>".PHP_EOL;
-            echo "Controller: $controller_name <br>".PHP_EOL;
-            echo "Action: $action_name <br>".PHP_EOL;
-        }
+        self::$_DB = new DB();
 
         if(class_exists($model_name))
         {
-            $model = new $model_name(new Db());
+            $model = new $model_name(self::$_DB);
         }
         if(class_exists($controller_name))
         {
-            $controller = new $controller_name($model, new View());
+            /* @var $controller \application\core\Controller */
+            $controller = new $controller_name();
+            if (isset($model)) {
+                $controller->setModel($model);
+            }
+            $controller->setView(new View());
+            $controller->setSession(Session::getInstance());
+            self::checkAuthority($controller);
         }
         else
         {
@@ -73,12 +79,34 @@ class Route
 
     }
 
+    public static function redirect($section){
+        if(!empty($section)) {
+            $url = "http://".$_SERVER['HTTP_HOST']."/".$section;
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: $url");
+            exit();
+        } else {
+            self::ErrorPage404();
+        }
+
+    }
+
     public static function ErrorPage404()
     {
         header('HTTP/1.1 404 Not Found');
-        $controller = new \application\controllers\Controller_404();
+        $controller = new Controller_404();
+        $controller->setView(new View());
         $controller->action_index();
         exit();
     }
 
+
+    private function checkAuthority(Controller $controller)
+    {
+        $authority = new Authority();
+        $authority->setSession(Session::getInstance());
+        $authority->setModel(new Model_Users(self::$_DB));
+        $authority->setAcceptedUserType($controller->getAcceptedUserType());
+        $authority->checkAuthority();
+    }
 }

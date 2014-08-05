@@ -1,53 +1,25 @@
 <?php
 namespace application\controllers;
 
+use application\core\Session;
+use application\entity\User;
 use application\core\Route;
 use application\core\Controller;
-use application\core\Model;
 use application\core\View;
 use application\models\Model_Tickets;
 
 class Controller_Tickets extends Controller
 {
     /* @var $model Model_Tickets */
-    private $model;
-    private $view;
+    protected $model;
+    /* @var $view View */
+    protected $view;
+    /* @var $session Session */
+    protected $session;
 
-    public function __construct(Model $model, View $view)
+    public function getAcceptedUserType()
     {
-        $this->model = $model;
-        $this->view = $view;
-
-        parent::__construct();
-
-        if (!$_SESSION['user_seller']) {
-            Route::ErrorPage404();
-        }
-    }
-    //temp
-    public function action_sell_all($event_id) {
-        if (!isset($_GET['chunk'])) {
-            $chunk_id = 0;
-        } else {
-            $chunk_id = $_GET['chunk'];
-        }
-
-        $event = $this->model->get_event_by_id($event_id);
-        $places = array();
-        for ($place_id = 10001; $place_id < 10101; $place_id++) {
-            $places[] = $place_id;
-        }
-        for ($place_id = 10150; $place_id <= 35400; $place_id++) {
-            $places[] = $place_id;
-        }
-        $places_chunks = array_chunk($places, 100);
-        echo "<html><body>";
-        echo $chunk_id+1 ."/".count($places_chunks);
-        $this->createTickets($event, $places_chunks[$chunk_id]);
-        if ($chunk_id < count($places_chunks)-1) {
-            echo "<script>document.location = '/tickets/sell_all/".$event_id."?chunk=";
-            echo $chunk_id+1 ."';</script>";
-        }
+        return User::SELLER;
     }
 
     /* shows tickets sale dialog (place pick) */
@@ -202,7 +174,7 @@ class Controller_Tickets extends Controller
             $mpdf->Output();
             exit;
         }else{
-            $this->redirect('events');
+            Route::redirect('events');
         }
 
     }
