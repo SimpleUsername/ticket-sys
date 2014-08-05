@@ -139,7 +139,7 @@ class Db{
             }
             $result = $rs->execute($params);
             //  $result[] = $sql;
-            return $result;
+            return $rs->rowCount();
         } catch(Exception $e) {
             $this->report($e);
         }

@@ -3,16 +3,19 @@ namespace application\controllers;
 
 use application\core\Controller;
 use application\core\Model;
+use application\core\View;
 use application\models\Model_Config;
 
 class Controller_Config extends Controller
 {
     /* @var $model Model_Config */
     private $model;
+    private $view;
 
-    public  function __construct(Model $model)
+    public  function __construct(Model $model, View $view)
     {
         $this->model = $model;
+        $this->view = $view;
         parent::__construct();
     }
 
