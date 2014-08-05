@@ -2,6 +2,7 @@
 namespace application\controllers;
 
 use application\core\ModelException;
+use application\core\View;
 use Conf;
 use application\entity\User;
 use application\core\Controller;
@@ -12,9 +13,12 @@ class Controller_User extends Controller {
 
     /* @var $model Model_User */
     private $model;
+    private $view;
 
-    public function __construct(Model $model) {
+    public function __construct(Model $model, View $view) {
         $this->model = $model;
+        $this->view = $view;
+
         parent::__construct();
     }
 
@@ -37,6 +41,7 @@ class Controller_User extends Controller {
                     $_SESSION['user_id'] = $user->getID();
                     $_SESSION['user_login'] = $user->getLogin();
                     $_SESSION['user_name'] = $user->getLogin();
+                    $_SESSION['user_type'] = $user->getType();
                     $_SESSION['user_admin'] = $user->getType() & User::ADMIN;
                     $_SESSION['user_manager'] = $user->getType() & User::MANAGER;
                     $_SESSION['user_seller'] = $user->getType() & User::SELLER;

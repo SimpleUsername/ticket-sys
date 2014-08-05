@@ -2,6 +2,7 @@
 namespace application\controllers;
 
 use application\core\ModelException;
+use application\core\View;
 use application\entity\User;
 use Conf;
 use application\core\Controller;
@@ -19,10 +20,12 @@ class Controller_Users extends Controller {
 
     /* @var $model Model_Users */
     private $model;
+    private $view;
 
-    public function __construct(Model $model)
+    public function __construct(Model $model, View $view)
     {
         $this->model = $model;
+        $this->view = $view;
         parent::__construct();
         if (!$_SESSION['user_admin']) {
             Route::ErrorPage404();

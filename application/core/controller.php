@@ -6,12 +6,9 @@ use application\models\Model_User;
 
 class Controller {
 
-    public $view;
-
     public function __construct()
     {
         date_default_timezone_set(Conf::TIME_ZONE);
-        $this->view = new View();
 
         if (session_status() == PHP_SESSION_NONE) {
             session_start();

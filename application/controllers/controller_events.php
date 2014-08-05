@@ -3,17 +3,27 @@ namespace application\controllers;
 
 use application\core\Controller;
 use application\core\Model;
+use application\core\View;
+use application\core\Route;
+use application\entity\User;
 use application\models\Model_Events;
 
 class Controller_Events extends Controller
 {
     /* @var $model Model_Events */
     private $model;
-    public function __construct(Model $model)
+    private $view;
+
+    public function __construct(Model $model, View $view)
     {
         $this->model = $model;
+        $this->view = $view;
 
         parent::__construct();
+
+        if (!($_SESSION['user_type'] & (User::MANAGER | User::SELLER))) {
+            Route::ErrorPage404();
+        }
 
         $this->check_and_delete_not_sold_reserve();
         $this->check_for_old_events();

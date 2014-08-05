@@ -2,6 +2,7 @@
 namespace application\core;
 
 use Conf;
+use application\core\View;
 
 class Route
 {
@@ -47,7 +48,7 @@ class Route
         }
         if(class_exists($controller_name))
         {
-            $controller = new $controller_name($model);
+            $controller = new $controller_name($model, new View());
         }
         else
         {
