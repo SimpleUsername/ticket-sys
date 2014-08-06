@@ -30,13 +30,13 @@ class Controller_User extends Controller
             if (!Authority::isLoggedIn()) {
                 $this->view->generate('login_view.php', 'template_view.php');
             } else {
-                Route::redirect("main/index");
+                $this->redirect("main/index");
             }
         } else {
             try {
                 $user = $this->model->getUserByLogin($_POST['login']);
                 if ($user->getPassword() == md5(md5($_POST['password'] . Conf::SECURE_SALT))) {
-                    $user->setSessionID(session_id());
+                    $user->setSessionID($this->session->getID());
                     $user->setIP($_SERVER['REMOTE_ADDR']);
                     $this->model->setUser($user->getID(), $user);
                     $this->session['authorized'] = 1;
@@ -47,27 +47,27 @@ class Controller_User extends Controller
                     $this->session['user_admin'] = $user->getType() & User::ADMIN;
                     $this->session['user_manager'] = $user->getType() & User::MANAGER;
                     $this->session['user_seller'] = $user->getType() & User::SELLER;
-                    Route::redirect("main/index");
+                    $this->redirect("main/index");
                 } else {
                     $this->session['user_login'] = htmlspecialchars($_POST['login']);
                     $this->session['error'] = 'Неправильный пароль';
-                    Route::redirect("user/login");
+                    $this->redirect("user/login");
                 }
             } catch (ModelException $e) {
                 $this->session['error'] = $e->getMessage();
-                Route::redirect("user/login");
+                $this->redirect("user/login");
             }
         }
     }
 
     public function action_logout() {
         $user = $this->model->getUser($this->session['user_id']);
-        if ($user->getSessionID() == session_id()) {
+        if ($user->getSessionID() == $this->session->getID()) {
             $user->setSessionID('');
             $this->model->setUser($user->getID(), $user);
         }
         $this->session['authorized'] = 0;
-        Route::redirect("user/login");
+        $this->redirect("user/login");
     }
 
     public function action_password() {
@@ -77,10 +77,7 @@ class Controller_User extends Controller
             $user = $this->model->getUser($this->session['user_id']);
             $user->setPassword(md5(md5($_POST['new_password'].Conf::SECURE_SALT)));
             $this->model->setUser($user->getID(), $user);
-            Route::redirect("user/logout");
+            $this->redirect("user/logout");
         }
     }
-
-
-
 }

@@ -1,11 +1,19 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Ilia
+ * Date: 06.08.14
+ * Time: 3:16
+ */
 
-namespace application\core;
+namespace test\fake;
 
-use ArrayAccess;
 
-class Session implements ArrayAccess {
+use application\core\Session;
 
+class FakeSession extends Session {
+
+    public static $arr;
     private static $_instance;
     private $_session_id;
 
@@ -18,43 +26,40 @@ class Session implements ArrayAccess {
     }
     private function __construct()
     {
-        if (!headers_sent()) {
-            session_start();
-            $this->_session_id = session_id();
-        }
+        $this->_session_id = 'aaaaaaaaaaa';
     }
     public function __set ($name , $value)
     {
         if (null !== static::$_instance) {
-            $_SESSION[$name] = $value;
+            self::$arr[$name] = $value;
         }
     }
     private function __clone() {}
     private function __wakeup() {}
 
-    public function getID()
-    {
-        return $this->_session_id;
-    }
-
     public function offsetExists($offset)
     {
         if (null !== static::$_instance) {
-            return isset($_SESSION[$offset]);
+            return isset(self::$arr[$offset]);
         } else {
             return false;
         }
     }
     public function offsetGet($offset)
     {
-        return $_SESSION[$offset];
+        return self::$arr[$offset];
     }
     public function offsetSet($offset, $value)
     {
-        $_SESSION[$offset] = $value;
+        self::$arr[$offset] = $value;
     }
     public function offsetUnset($offset)
     {
-        unset($_SESSION[$offset]);
+        unset(self::$arr[$offset]);
     }
-}
+    public function getID()
+    {
+        return '11111111111';
+    }
+
+} 

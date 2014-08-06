@@ -13,6 +13,7 @@ class Controller {
     protected $model;
     protected $view;
     protected $session;
+    protected $router = 'application\core\Route::redirect';
 
     public function prepare_files($files_arr){
 
@@ -87,17 +88,6 @@ class Controller {
         $str = preg_replace("/(<\?=|<\?php|<script|<\?xml)/", "", $str);
         return $str;
     }
-    public function redirect($section){
-        if(!empty($section)){
-            $url = "http://".$_SERVER['HTTP_HOST']."/".$section;
-            header("HTTP/1.1 301 Moved Permanently");
-            header("Location: $url");
-        }
-        else{
-            Route::ErrorPage404();
-        }
-
-    }
 
     public function setModel(Model $model)
     {
@@ -113,8 +103,16 @@ class Controller {
     {
         $this->view = $view;
     }
+    public function setRouter($router)
+    {
+        $this->router = $router;
+    }
     public function getAcceptedUserType()
     {
         return 0;
+    }
+    public function redirect($section)
+    {
+        call_user_func($this->router, $section);
     }
 }
