@@ -27,12 +27,12 @@ class Authority {
                 //TODO error message
                 Route::ErrorPage404();
             }
-            $this->_session['last_activity'] = time();
         } else {
             if ($_SERVER['REQUEST_URI'] != '/user/login') {
                 Route::redirect('user/login');
             }
         }
+        $this->_session['last_activity'] = time();
     }
     public function setModel(Model_Users $model)
     {
