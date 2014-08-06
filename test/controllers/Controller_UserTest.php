@@ -14,30 +14,31 @@ use test\fake\FakeView;
 use test\fake\FakeRoute;
 
 class Controller_UserTest extends \PHPUnit_Framework_TestCase {
-    private $_db;
-    private $_userID;
-    private $_userLogin;
-    private $_userName;
-    private $_userPassword;
-    private $_userType;
-    private $_userSessionID;
-    private $_userIP;
+    private static $_db;
+    private static $_userID;
+    private static $_userLogin;
+    private static $_userName;
+    private static $_userPassword;
+    private static $_userType;
+    private static $_userSessionID;
+    private static $_userIP;
 
-    public function setUp()
+    public static function setUpBeforeClass()
     {
-        $this->_db = new Db();
-        $this->_db->insert('users', array(
-            'user_id' => $this->_userID = 1000,
-            'user_login' => $this->_userLogin = $this->generateRandomString(30),
-            'user_name' => $this->_userName = $this->generateRandomString(64),
-            'user_password' => md5(md5(($this->_userPassword = $this->generateRandomString(10)).\Conf::SECURE_SALT)),
-            'user_type' => $this->_userType = 3,
-            'user_hash' => $this->_userSessionID = $this->generateRandomString(32),
-            'user_ip' => $this->_userIP = '123.123.123.123'
+        self::$_db = new Db();
+        self::$_db->delete('users', 'user_id = ?', array(self::$_userID = 1000));
+        self::$_db->insert('users', array(
+            'user_id' => self::$_userID,
+            'user_login' => self::$_userLogin = 'test-login',
+            'user_name' => self::$_userName = 'Simple Test Name',
+            'user_password' => md5(md5((self::$_userPassword = 'qwerty1234567890').\Conf::SECURE_SALT)),
+            'user_type' => self::$_userType = 3,
+            'user_hash' => self::$_userSessionID = '22g95kobbvdik3ml2b1ef88ge0',
+            'user_ip' => self::$_userIP = '123.243.234.100'
         ));
     }
 
-    public function testAllActions()
+    public function testActionLogin()
     {
         $db = new Db();
         $model = new Model_User($db);
@@ -51,26 +52,61 @@ class Controller_UserTest extends \PHPUnit_Framework_TestCase {
         $controller->action_login();
         $this->assertEquals('login_view.php', $view->getLastContentView());
         $this->assertEquals(null, FakeRoute::getLastSection());
-        $_SERVER['REMOTE_ADDR'] = $this->_userIP;
-        
-        $_POST['login'] = $this->_userLogin;
-        $_POST['password'] = $this->_userPassword;
+        assert(!isset($session::$arr));
+
+        $_SERVER['REMOTE_ADDR'] = self::$_userIP;
+        $_POST['login'] = self::$_userLogin;
+        $_POST['password'] = self::$_userPassword;
+
         $controller->action_login();
         $this->assertArrayNotHasKey('error', $session);
         $this->assertEquals('login_view.php', $view->getLastContentView());
         $this->assertEquals('main/index', FakeRoute::getLastSection());
-        $this->assertArrayHasKey('authorized', $session);
+        $this->assertEquals(1, $session['authorized']);
+        $this->assertEquals(self::$_userID, $session['user_id']);
+        $this->assertEquals(self::$_userLogin, $session['user_login']);
+        $this->assertEquals(self::$_userType, $session['user_type']);
 
-        $_POST['new_password'] = '1234567890';
-        $_POST['new_password_confirm'] = '1234567890';
+        return $controller;
+    }
+    /**
+     * @depends testActionLogin
+     */
+    public function testPasswordChange(Controller_User $controller)
+    {
+        $session = FakeSession::getInstance();
+        unset($_POST);
+        $_POST['new_password'] = self::$_userPassword = $this->generateRandomString(10);
+        $_POST['new_password_confirm'] = self::$_userPassword;
         $controller->action_password();
         $this->assertEquals('user/logout', FakeRoute::getLastSection());
+        $controller->action_logout();
+        $this->assertEquals(0, $session['authorized']);
 
-        $_POST['password'] = '1234567890';
+        unset($_POST);
+        $_SERVER['REMOTE_ADDR'] = self::$_userIP;
+        $_POST['login'] = self::$_userLogin;
+        $_POST['password'] = self::$_userPassword;
+
         $controller->action_login();
-        $this->assertEquals('main/index', FakeRoute::getLastSection());
-    }
+        $this->assertArrayNotHasKey('error', $session);
+        $this->assertEquals(1, $session['authorized']);
 
+        return $controller;
+    }
+    /**
+     * @depends testPasswordChange
+     */
+    public function testLogout(Controller_User $controller)
+    {
+        $session = FakeSession::getInstance();
+        unset($_POST);
+        $controller->action_logout();
+        $this->assertEquals(0, $session['authorized']);
+        $this->assertEquals(self::$_userLogin, $session['user_login']);
+        $this->assertEquals(2, count($session::$arr));
+        return $controller;
+    }
     private function generateRandomString($length = 10) {
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
@@ -79,9 +115,9 @@ class Controller_UserTest extends \PHPUnit_Framework_TestCase {
         }
         return $randomString;
     }
-    public function tearDown()
+    public static function tearDownAfterClass()
     {
-        $this->_db->delete('users', 'user_id = ?', array($this->_userID));
+        self::$_db->delete('users', 'user_id = ?', array(self::$_userID));
     }
 }
  

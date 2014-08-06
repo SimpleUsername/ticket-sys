@@ -39,11 +39,7 @@ class FakeSession extends Session {
 
     public function offsetExists($offset)
     {
-        if (null !== static::$_instance) {
-            return isset(self::$arr[$offset]);
-        } else {
-            return false;
-        }
+        return array_key_exists($offset, self::$arr);
     }
     public function offsetGet($offset)
     {
