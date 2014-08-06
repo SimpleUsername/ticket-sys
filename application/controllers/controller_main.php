@@ -1,6 +1,7 @@
 <?php
 namespace application\controllers;
 
+use application\core\Authority;
 use application\core\Controller;
 use application\core\Route;
 use application\entity\User;
@@ -14,9 +15,9 @@ class Controller_Main extends Controller
     }
 	function action_index()
 	{
-        if ($this->session['user_type'] & (User::MANAGER | User::SELLER)) {
+        if (Authority::isA(User::MANAGER | User::SELLER)) {
             Route::redirect("events");
-        } elseif ($this->session['user_type'] & (User::ADMIN)) {
+        } elseif (Authority::isA(User::ADMIN)) {
             Route::redirect("users");
         }
 	}
