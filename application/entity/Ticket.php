@@ -2,34 +2,9 @@
 
 namespace application\entity;
 
-class TicketType
-{
-    const PURCHASED = 'purchased';
-    const RESERVED = 'reserved';
+use Exception;
 
-    private $_type;
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-
-    /**
-     * @param string $type
-     */
-    public function setType($type)
-    {
-        if ($type == TicketType::PURCHASED || $type == TicketType::RESERVED) {
-            $this->_type = $type;
-        } else {
-            //TODO exception
-            //throw new
-        }
-    }
-}
+class TicketException extends Exception{}
 
 class Ticket {
     private $_event;
@@ -37,6 +12,9 @@ class Ticket {
     private $_type;
     private $_reserve;
     private $_price;
+
+    const TYPE_PURCHASED = 'purchased';
+    const TYPE_RESERVED = 'reserved';
 
     /**
      * @return Event
@@ -72,17 +50,28 @@ class Ticket {
 
     /**
      * @return float
+     * @throws TicketException
      */
     public function getPrice()
     {
+        if (!isset($this->_price)) {
+            throw new TicketException('Undefined property price');
+        }
         return $this->_price;
     }
 
     /**
      * @param float $price
+     * @throws TicketException
      */
     public function setPrice($price)
     {
+        if (!is_float($price)) {
+            throw new TicketException('Expected Argument 1 (price) to be Float');
+        }
+        if ($price < 0) {
+            throw new TicketException('Цена не может быть отрицательной');
+        }
         $this->_price = $price;
     }
 
@@ -103,7 +92,7 @@ class Ticket {
     }
 
     /**
-     * @return TicketType
+     * @return string
      */
     public function getType()
     {
@@ -111,10 +100,15 @@ class Ticket {
     }
 
     /**
-     * @param TicketType $type
+     * @param string $type
+     * @throws TicketException
      */
-    public function setType(TicketType $type)
+    public function setType($type)
     {
+        if ($type != self::TYPE_PURCHASED || $type != self::TYPE_RESERVED)
+        {
+            throw new TicketException('Неверный тип билета');
+        }
         $this->_type = $type;
     }
 
